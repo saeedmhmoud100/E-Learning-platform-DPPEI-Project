@@ -1,4 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import '@popperjs/core'
+import '@fortawesome/fontawesome-free/css/all.css';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import {Register} from "./Pages/Register";

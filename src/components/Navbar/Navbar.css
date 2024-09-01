@@ -1,0 +1,9 @@
+.navbar{
+    background-color: var(--mainColor);
+}
+.nav-link:hover{
+    color: var(--thirdColor) !important;
+}
+.dropdown-toggle:after{
+    display: none;
+}

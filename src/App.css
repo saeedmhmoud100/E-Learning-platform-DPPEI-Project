@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --mainColor: #0F1035;
+    --secondaryColor: #365486;
+    --thirdColor: #7FC7D9;
+    --backgroundColor: #DCF2F1;
+}
+body{
+    font-family: "Chivo", sans-serif;
+    background-color: var(--backgroundColor);
+}
