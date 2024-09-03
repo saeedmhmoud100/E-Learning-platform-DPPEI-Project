@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {Link} from "react-router-dom";
 import './Navbar.css';
 
@@ -19,6 +18,9 @@ export const Navbar = () => {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link active" to="/courses">Courses</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/admin">Admin</Link>
                         </li>
 
                         {/*Categories dropdown menu not working*/}
