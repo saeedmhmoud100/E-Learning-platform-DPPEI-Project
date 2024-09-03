@@ -20,6 +20,10 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" to="/courses">Courses</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/inst-profile">inst profile</Link>
+                        </li>
+        
 
                         {/*Categories dropdown menu not working*/}
                         <li className="nav-item dropdown">
@@ -53,7 +57,7 @@ export const Navbar = () => {
                         {/*Notification dropdown menu not working*/}
                         <li className="nav-item dropdown ms-3">
                             <Link className="nav-link active dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" to="">
-                                <i className="fa-regular fa-bell"></i>
+                                <i className=" fa-regular fa-bell"></i>
                             </Link>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <Link className="dropdown-item" href="#">notification</Link>

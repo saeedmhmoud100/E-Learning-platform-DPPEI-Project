@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import insPhoto from './images/instractorPhoto.png'
-import '@fortawesome/fontawesome-free/css/all.css';
+
 
 import './style.css'
+import { Link } from 'react-router-dom'
 const open = {
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     textOverflow: 'ellipsis',
+
 }
 
 export default function InstProfile() {
@@ -24,15 +26,17 @@ export default function InstProfile() {
                         <h1>Maximilian Schwarzmüller</h1>
                         <h2 className=''>AWS certified, Professional Web Developer and Instructor
                         </h2>
-                        <div className='  '>
-                            <div className="container-fluide ">
-                                <div className='mt-3  fs-14 mb-4   p-1 row w-50 '>
-                                    <p className='ins col-sm-12'>
+
+                        <div className="container-fluide ">
+                            <div className="row">
+                                <div className='mt-3 col-sm-12 fs-14 mb-4  d-flex '>
+                                    <p className='ins   flex-shrink-0 '>
                                         Udemy Instractor Partener
                                     </p>
                                 </div>
                             </div>
                         </div>
+
                         <div className="ins-statistics d-flex gap-5">
                             <div className="total  ">
                                 <h4 className='fw-bold '>Total Students</h4>
@@ -45,9 +49,9 @@ export default function InstProfile() {
                         </div>
                         <div className="details">
                             <h2 className='mb-4'>About me</h2>
-                            <div className="about "  >
+                            <div className="about " style={isOpen ? null : open} >
                                 <p className='fs-12 fw-bold' >Experience as (Web) Developer</p>
-                                <p style={isOpen ? null : open} className='ins-info'>
+                                <p className='ins-info'>
                                     Starting out at the age of 12 I never stopped learning new programming skills and languages.
                                     Early I started creating websites for friends and just for fun as well
                                     . Besides web development I also explored Python and other non-web-only languages.
@@ -79,7 +83,7 @@ export default function InstProfile() {
                                     The success and fun I have in this job is immense and really keeps that passion burningly alive.
 
                                 </p>
-                                <button className='btn btn-info mb-5' onClick={() => { setIsOpen(!isOpen) }}>{isOpen ? "read less..." : "read more.."}</button>
+                                <button className='btn btn-info mb-5' onClick={() => { setIsOpen(!isOpen); }}>{isOpen ? "read less..." : "read more.."}</button>
 
                             </div>
 
@@ -94,39 +98,39 @@ export default function InstProfile() {
                     </div>
                     <div className="social-btn d-flex flex-wrap  ">
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2   ">
-                            <button className='btn  btn-outline-secondary w-50'>
-                                <i class="fa-regular fa-link-simple"></i>
+                            <Link to="#" className='btn  btn-outline-secondary w-50'>
+                                <i className="fa-solid fa-link me-2"></i>
                                 Website
-                            </button>
+                            </Link>
                         </div>
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <button className='btn  btn-outline-secondary w-50'>
-                                <i class="fa-regular fa-link-simple"></i>
+                            <Link to="#" className='btn  btn-outline-secondary w-50'>
+                                <i class="fa-brands fa-twitter me-3"></i>
                                 Twitter
-                            </button>
+                            </Link>
                         </div>
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <button className='btn  btn-outline-secondary w-50'>
-                                <i class="fa-regular fa-link-simple"></i>
+                            <Link to="#" className='btn  btn-outline-secondary w-50'>
+                                <i class="fa-brands fa-facebook me-3"></i>
                                 Facebook
-                            </button>
+                            </Link>
                         </div>
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <button className='btn  btn-outline-secondary w-50'>
-                                <i class="fa-regular fa-link-simple"></i>
+                            <Link to="#" className='btn  btn-outline-secondary w-50'>
+                                <i class="fa-brands fa-linkedin me-3"></i>
                                 Linkedin
-                            </button>
+                            </Link>
                         </div>
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <button className='btn  btn-outline-secondary w-50'>
-                                <i class="fa-regular fa-link-simple"></i>
+                            <Link to="#" className='btn  btn-outline-secondary w-50'>
+                                <i class="fa-brands fa-youtube me-3"></i>
+
                                 Youtube
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
+       </div>
     )
 }
