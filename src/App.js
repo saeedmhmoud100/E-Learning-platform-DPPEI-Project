@@ -8,7 +8,7 @@ import {Register} from "./Pages/Register";
 import {Login} from "./Pages/Login";
 import {Home} from "./Pages/Home";
 import {Navbar} from "./components/Navbar/Navbar";
-import {AdminDashboard} from "./Pages/Admin";
+import {AdminPage} from "./Pages/AdminPage";
 function App() {
   return (
     <div className="App">
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/admin/*' element={<AdminDashboard/> } />
+        <Route path='/admin/*' element={<AdminPage/> } />
       </Routes>
     </div>
   );
