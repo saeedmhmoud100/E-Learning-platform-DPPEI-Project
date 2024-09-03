@@ -2,7 +2,7 @@ export const CourseAnalysis = () => {
     return (
         <div className='w-100 overflow-x-auto'>
             <h4>Course Analysis</h4>
-            <table className='table table-light'>
+            <table className='table table-striped'>
                 <thead>
                 <tr>
                     <th scope='col'>#</th>
