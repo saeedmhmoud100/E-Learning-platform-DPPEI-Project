@@ -8,6 +8,7 @@ import {AdminSidebar} from "../../components/Admin/AdminSidebar";
 export const AdminDashboard = () => {
     return (
         <div className='container pt-4'>
+            <h1 className={'text-center mb-3'}>Admin Dashboard</h1>
             <div className="row">
                 <div className="col-md-3">
                     <div className="">
@@ -16,8 +17,6 @@ export const AdminDashboard = () => {
                 </div>
 
                 <div className="col-md-9">
-                <h1 className='text-center'>Admin Dashboard</h1>
-                    <div className="">
                         <Routes>
                             <Route path="/profile" element={<Profile />} />
                             <Route path="*" element={<></>} />
@@ -25,7 +24,6 @@ export const AdminDashboard = () => {
                             <Route path="published-courses" element={<PublishedCourses />} />
                             <Route path="course-analysis" element={<CourseAnalysis />} />
                         </Routes>
-                    </div>
                 </div>
             </div>
 

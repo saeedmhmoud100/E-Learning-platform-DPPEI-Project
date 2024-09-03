@@ -1,7 +1,7 @@
 export const CoursesOrdered = () => {
     return (
         <div>
-            <h1>Courses Ordered</h1>
+            <h4 >Courses Ordered:</h4>
         </div>
     )
 }

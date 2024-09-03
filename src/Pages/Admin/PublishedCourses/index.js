@@ -1,7 +1,7 @@
 export const PublishedCourses = () => {
     return (
         <div>
-            <h1>Published Courses</h1>
+            <h4>Published Courses</h4>
         </div>
     )
 }
