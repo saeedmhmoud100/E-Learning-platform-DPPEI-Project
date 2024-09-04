@@ -10,8 +10,8 @@ export const AdminPage = () => {
         <div className='container pt-4'>
             <h1 className={'text-center mb-3'}>Admin Dashboard</h1>
             <div className="row">
-                <div className="col-md-3">
-                    <div className="">
+                <div className="col-md-3 mb-3">
+                    <div className="position-sticky" style={{top:'10px'}}>
                         <AdminSidebar />
                     </div>
                 </div>

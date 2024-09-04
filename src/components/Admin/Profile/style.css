@@ -1,0 +1,11 @@
+
+
+.cart{
+    height: 250px;
+}
+
+.h-line{
+    width: 1px;
+    height: 100%;
+    background-color: #f0f0f0;
+}
