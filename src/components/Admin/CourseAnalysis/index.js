@@ -10,8 +10,9 @@ export const CourseAnalysis = () => {
             .then(data => setData(data))
     }, [])
     return (
-        <div className='w-100 overflow-x-auto' style={{maxHeight:'800px'}}>
+        <div className='w-100'>
             <h4>Course Analysis</h4>
+            <div className="overflow-auto" style={{maxHeight:'800px'}}>
             <table className='table table-striped'>
                 <thead>
                 <tr>
@@ -67,9 +68,9 @@ export const CourseAnalysis = () => {
 
                 </tbody>
             </table>
+            </div>
 
-
-            <div className="col-12">
+            <div className="col-12 mt-5">
                 <h3>Courses Analysis</h3>
                 <LineChart data={data}/>
             </div>

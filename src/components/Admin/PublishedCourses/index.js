@@ -14,8 +14,9 @@ export const PublishedCourses = () => {
 
     return (
         <>
-            <div className='w-100 overflow-auto col-12' style={{maxHeight:"800px"}}>
+            <div className='w-100  col-12'>
                 <h4>Published Courses</h4>
+                <div className="overflow-auto" style={{maxHeight:'800px'}}>
                 <table className="table table-striped">
                     <thead>
                     <tr>
@@ -46,11 +47,12 @@ export const PublishedCourses = () => {
                     </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
 
 
-            <div className="col-12">
-                <h2 className='mt-5'>Published Courses Analysis</h2>
+            <div className="col-12 mt-5">
+                <h2>Published Courses Analysis</h2>
                     <BarChart data={barChartData}/>
             </div>
         </>

@@ -11,8 +11,9 @@ export const CoursesOrdered = () => {
     }, [])
 
     return (
-        <div className={'w-100 overflow-auto'} style={{maxHeight:'800px'}}>
+        <div className={'w-100 '}>
             <h4 >Courses Ordered:</h4>
+            <div className="overflow-auto" style={{maxHeight:'800px'}}>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -47,9 +48,10 @@ export const CoursesOrdered = () => {
                     </tr>
                 </tbody>
             </table>
+            </div>
 
 
-            <div className="col-12">
+            <div className="col-12 mt-5">
                 <h4>Orders Analysis</h4>
                 <BarChart data={data}/>
             </div>
