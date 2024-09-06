@@ -24,7 +24,7 @@
             return (
                 <div key={course.id} className="w-50 mb-2 ">
                 <div className="card">
-                    <img src={course.imgPath} className="card-img-top" alt="" />
+                    <img src={course.imgPath} className="card-img-top h-75" alt="" />
                     <div className="card-body">
                         <h5 className="card-title">{course.courseName}</h5>
                         <p className="card-text">{course.courseDesc}</p>

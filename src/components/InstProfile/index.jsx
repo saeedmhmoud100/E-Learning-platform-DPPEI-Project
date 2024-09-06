@@ -50,7 +50,7 @@
                 <h2 className="mb-4">About me</h2>
                 <div className="about " style={isOpen ? null : open}>
                     <p className="fs-12 fw-bold">Experience as (Web) Developer</p>
-                    <p className="ins-info">
+                    <p className={!isOpen && `ins-info`}>
                     Starting out at the age of 12 I never stopped learning new
                     programming skills and languages. Early I started creating
                     websites for friends and just for fun as well . Besides web
