@@ -3,12 +3,14 @@ import {ProfileCard} from "./ProfileCard";
 import {useEffect, useState} from "react";
 import {PieChart} from "../../Charts/PieChart";
 import {PolarChart} from "../../Charts/PolarChart";
+import {LineChart} from "../../Charts/LineChart";
 
 export const Profile = () => {
 
     const [ProfileData, setProfileData] = useState([])
     const [pieChartData, setPieChartData] = useState({})
     const [polarChartData, setPolarChartData] = useState({})
+    const [lineChartData, setLineChartData] = useState({})
     useEffect(() => {
         fetch('/data/admin/profile.json')
             .then(response => response.json())
@@ -28,6 +30,12 @@ export const Profile = () => {
                 setPolarChartData(data)
             })
 
+        fetch('/data/admin/lineChartData.json')
+            .then(response => response.json())
+            .then(data => {
+                setLineChartData(data)
+            })
+
     },[])
 
     return (
@@ -40,16 +48,20 @@ export const Profile = () => {
                 ))
             }
 
-            <h2>Analysis</h2>
 
+            <h2 className='mt-5'>Material Analysis</h2>
             <div className="col-6">
+
                 <PieChart data={pieChartData}/>
             </div>
             <div className="col-6">
                 <PolarChart data={polarChartData}/>
             </div>
 
-
+            <h3 className=' mt-5'>Revenue Analysis</h3>
+            <div className="col-12">
+                <LineChart data={lineChartData} />
+            </div>
         </div>
     )
 }
