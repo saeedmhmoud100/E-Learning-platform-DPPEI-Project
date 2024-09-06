@@ -26,7 +26,6 @@ export const LineChart = ({data}) => {
     });
 
     useEffect(() => {
-        console.log(data)
         setChartData(data)
     }, [data])
 
