@@ -1,6 +1,17 @@
+import {useEffect, useState} from "react";
+import {BarChart} from "../../Charts/barChart";
+
 export const CoursesOrdered = () => {
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetch('/data/admin/barChartData.json')
+            .then(response => response.json())
+            .then(data => setData(data))
+    }, [])
+
     return (
-        <div className={'w-100 overflow-x-auto'}>
+        <div className={'w-100 overflow-auto'} style={{maxHeight:'800px'}}>
             <h4 >Courses Ordered:</h4>
             <table className="table table-striped">
                 <thead>
@@ -36,6 +47,13 @@ export const CoursesOrdered = () => {
                     </tr>
                 </tbody>
             </table>
+
+
+            <div className="col-12">
+                <h4>Orders Analysis</h4>
+                <BarChart data={data}/>
+            </div>
+
         </div>
     )
 }

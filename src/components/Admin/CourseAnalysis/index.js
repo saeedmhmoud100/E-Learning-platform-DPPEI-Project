@@ -1,6 +1,16 @@
+import {LineChart} from "../../Charts/LineChart";
+import {useEffect, useState} from "react";
+
 export const CourseAnalysis = () => {
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetch('/data/admin/lineChartData.json')
+            .then(response => response.json())
+            .then(data => setData(data))
+    }, [])
     return (
-        <div className='w-100 overflow-x-auto'>
+        <div className='w-100 overflow-x-auto' style={{maxHeight:'800px'}}>
             <h4>Course Analysis</h4>
             <table className='table table-striped'>
                 <thead>
@@ -57,6 +67,12 @@ export const CourseAnalysis = () => {
 
                 </tbody>
             </table>
+
+
+            <div className="col-12">
+                <h3>Courses Analysis</h3>
+                <LineChart data={data}/>
+            </div>
         </div>
     )
 }
