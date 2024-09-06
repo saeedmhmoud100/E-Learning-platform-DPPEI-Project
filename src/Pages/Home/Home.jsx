@@ -1,10 +1,12 @@
 import React from 'react';
 import CourseCards from '../../components/CourseCards';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/index.jsx';
 import './Home.css'
 
 export default function Home() {
   return (
+    
+    <>
     <div className='container my-5'>
 
         {/* START - FIRST SECTION WITH IMAGES AND WELCOME MESSAGE */}
@@ -105,9 +107,10 @@ export default function Home() {
         </div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
 
-        <Footer />
-
     </div>
+
+    <Footer />
+    </>
   )
 }
 
