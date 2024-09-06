@@ -4,11 +4,12 @@ import '@popperjs/core'
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
-import {Register} from "./Pages/Register";
-import {Login} from "./Pages/Login";
-import {Home} from "./Pages/Home";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
+import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
 import {AdminPage} from "./Pages/AdminPage";
+import NotFound from './Pages/NotFound/NotFound';
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path='/admin/*' element={<AdminPage/> } />
+        <Route path='/*' element={<NotFound /> } />
       </Routes>
     </div>
   );
