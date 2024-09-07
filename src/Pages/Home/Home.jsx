@@ -1,6 +1,7 @@
 import React from 'react';
 import CourseCards from '../../components/CourseCards';
 import Footer from '../../components/Footer/index.jsx';
+import { Link } from 'react-router-dom';
 import './Home.css'
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
             </div>
             <div className="text-cont ps-4">
                 <h2>Welcome back, User!</h2>
-                <a href='#'>add occupations and interest</a>
+                <Link to=''>add occupations and interest</Link>
             </div>
         </div>
 
@@ -40,8 +41,8 @@ export default function Home() {
             <div className="container-fluid p-0">
                 <div className="row g-3">
 
-                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100">
+                    <div className="col-lg-4 col-md-6 custom-dimensions">
+                        <div className="d-flex justify-content-between align-items-center h-100" role='button'>
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -57,8 +58,8 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100">
+                    <div className="col-lg-4 col-md-6 custom-dimensions">
+                        <div className="d-flex justify-content-between align-items-center h-100" role='button'>
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -74,8 +75,8 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100">
+                    <div className="col-lg-4 col-md-6 custom-dimensions">
+                        <div className="d-flex justify-content-between align-items-center h-100" role='button'>
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
