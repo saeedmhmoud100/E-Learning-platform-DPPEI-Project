@@ -96,15 +96,16 @@
                     consultant. The success and fun I have in this job is immense
                     and really keeps that passion burningly alive.
                     </p>
-                    <button
-                    className="btn btn-info mb-5"
+             
+                </div>
+                <button
+                    className="btn btn-link fs-5"
                     onClick={() => {
                         setIsOpen(!isOpen);
                     }}
                     >
                     {isOpen ? "read less..." : "read more.."}
                     </button>
-                </div>
                 </div>
              {<Courses />}
             </div>
