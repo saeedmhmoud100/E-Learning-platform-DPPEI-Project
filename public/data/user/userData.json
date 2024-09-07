@@ -2,8 +2,8 @@
 {
   "isLogged": "false",
   "isAdmin": "false",
-  "username": "null",
-  "email": "null",
-  "password": "null",
-  "id": "null"
+  "username": "user",
+  "email": "email@gmail.ocm",
+  "password": "12345678",
+  "id": "5"
 }

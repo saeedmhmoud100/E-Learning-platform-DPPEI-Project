@@ -1,31 +1,9 @@
 import {Link} from "react-router-dom";
 import './Navbar.css';
-import {useEffect, useState} from "react";
 
-export const Navbar = () => {
-
+export const Navbar = ({login, logout, changeAdmin, userData}) => {
 
 
-    const [userData, setUserData] = useState({});
-
-    useEffect(() => {
-        fetch('/data/user/userData.json').then(response => response.json()).then(data => setUserData(data));
-    },[]);
-
-
-    function logout() {
-        setUserData({...userData, loggedIn: false, isAdmin: false})
-    }
-
-    function login() {
-        setUserData({...userData, loggedIn: true, isAdmin: false})
-    }
-
-    function changeAdmin() {
-        setUserData({...userData, loggedIn: true, isAdmin: !userData.isAdmin})
-    }
-
-    
     return (
         <nav className="navbar navbar-expand-lg navbar-dark p-3 position-relative">
             <div className="container-fluid">
@@ -50,11 +28,12 @@ export const Navbar = () => {
                                     <li className="nav-item">
                                         <Link className="nav-link active" to="/courses">Courses</Link>
                                     </li>
-                            ):null
+                            ) : null
                         }
 
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle active" role="button" to="" id="navbarDropdown" data-bs-toggle="dropdown">
+                            <Link className="nav-link dropdown-toggle active" role="button" to="" id="navbarDropdown"
+                                  data-bs-toggle="dropdown">
                                 Categories
                             </Link>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -68,47 +47,59 @@ export const Navbar = () => {
                     <ul className="navbar-nav w-50">
                         <li className="nav-item ms-md-3 ms-auto w-100">
                             <form className="form-inline my-2 my-lg-0">
-                                <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search" aria-label="Search"/>
+                                <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search"
+                                       aria-label="Search"/>
                             </form>
                         </li>
                     </ul>
 
                     <ul className="navbar-nav flex-row ms-auto">
-                        <li className="nav-item me-3 ms-md-3">
-                            <Link className="nav-link active" aria-current="page" to="/"><i className="fa-regular fa-heart"></i></Link>
-                        </li>
-                        <li className="nav-item me-3 ">
-                            <Link className="nav-link active" to="/courses"><i className="fa-solid fa-cart-shopping"></i></Link>
-                        </li>
-
                         {
-                            userData.loggedIn ? <li className="nav-item dropdown me-3 ">
-                                <Link className="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" to="">
-                                    <i className="fa-regular fa-bell"></i>
-                                </Link>
-                                <div className="dropdown-menu nav-dropdown-absolute">
-                                    <Link className="dropdown-item" href="#">notification</Link>
-                                </div>
-                            </li> : null
+                            userData.loggedIn ?
+                                <>
+                                    <li className="nav-item me-3 ms-md-3">
+                                        <Link className="nav-link active" aria-current="page" to="/"><i
+                                            className="fa-regular fa-heart"></i></Link>
+                                    </li>
+                                    <li className="nav-item me-3 ">
+                                        <Link className="nav-link active" to="/courses"><i
+                                            className="fa-solid fa-cart-shopping"></i></Link>
+                                    </li>
+                                    <li className="nav-item dropdown me-3 ">
+                                        <Link className="nav-link active dropdown-toggle" role="button"
+                                              data-bs-toggle="dropdown" to="">
+                                            <i className="fa-regular fa-bell"></i>
+                                        </Link>
+                                        <div className="dropdown-menu nav-dropdown-absolute">
+                                            <Link className="dropdown-item" href="#">notification</Link>
+                                        </div>
+                                    </li>
+
+                                </> : null
                         }
 
                         <li className="nav-item dropdown me-3   ">
-                            <Link className="nav-link active dropdown-toggle"role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                            <Link className="nav-link active dropdown-toggle" role="button" to=''
+                                  data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa-regular fa-user"></i>
                             </Link>
                             <ul className="dropdown-menu nav-dropdown-absolute">
                                 {
                                     userData.loggedIn ? (
-                                        <>
-                                            <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                                            <li><Link className="dropdown-item" to="#">My Courses</Link></li>
-                                            <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
-                                            <li onClick={changeAdmin}><Link className="dropdown-item" to="#">{userData.isAdmin ? "make user" : 'make admin'}</Link></li>
-                                            <li onClick={logout}><Link className="dropdown-item" to="#">logout</Link></li>
-                                        </> )
+                                            <>
+                                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                                                <li><Link className="dropdown-item" to="#">My Courses</Link></li>
+                                                <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
+                                                <li onClick={changeAdmin}><Link className="dropdown-item"
+                                                                                to="#">{userData.isAdmin ? "make user" : 'make admin'}</Link>
+                                                </li>
+                                                <li onClick={logout}><Link className="dropdown-item" to="#">logout</Link>
+                                                </li>
+                                            </>)
                                         : (
                                             <>
-                                                <li onClick={login}><Link className="dropdown-item" to="/login">Login</Link></li>
+                                                <li onClick={login}><Link className="dropdown-item" to="/login">Login</Link>
+                                                </li>
                                                 <li><Link className="dropdown-item" to="/register">Register</Link></li>
                                             </>)
                                 }

@@ -11,13 +11,38 @@ import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
 import {AdminPage} from "./Pages/AdminPage";
 import NotFound from './Pages/NotFound/NotFound';
+import {useEffect, useState} from "react";
 function App() {
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        fetch('/data/user/userData.json').then(response => response.json()).then(data => setUserData(data));
+    },[]);
+
+
+    function logout() {
+        setUserData({...userData, loggedIn: false, isAdmin: false})
+    }
+
+    function login() {
+        setUserData({...userData, loggedIn: true, isAdmin: false})
+    }
+
+    function changeAdmin() {
+        setUserData({...userData, loggedIn: true, isAdmin: !userData.isAdmin})
+    }
+
+    function handleRegister(data){
+        console.log(data)
+        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
+    }
+
   return (
     <div className="App">
-        <Navbar/>
+        <Navbar changeAdmin={changeAdmin} login={login} logout={logout} userData={userData}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
         <Route path="/login" element={<Login />} />
         <Route path='/admin/*' element={<AdminPage/> } />
         <Route path='/*' element={<NotFound /> } />
