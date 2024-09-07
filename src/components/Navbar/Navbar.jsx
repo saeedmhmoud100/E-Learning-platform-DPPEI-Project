@@ -36,22 +36,22 @@ export const Navbar = () => {
                     </ul>
 
                     <ul className="navbar-nav w-50">
-                        <li className="nav-item ms-3 w-100">
+                        <li className="nav-item ms-md-3 ms-auto w-100">
                             <form className="form-inline my-2 my-lg-0">
                                 <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search" aria-label="Search"/>
                             </form>
                         </li>
                     </ul>
 
-                    <ul className="navbar-nav ms-auto">
-                        <li className="nav-item ms-3">
+                    <ul className="navbar-nav flex-row ms-auto">
+                        <li className="nav-item me-3 ms-md-3">
                             <Link className="nav-link active" aria-current="page" to="/"><i className="fa-regular fa-heart"></i></Link>
                         </li>
-                        <li className="nav-item ms-3">
+                        <li className="nav-item me-3 ">
                             <Link className="nav-link active" to="/courses"><i className="fa-solid fa-cart-shopping"></i></Link>
                         </li>
 
-                        <li className="nav-item dropdown ms-3">
+                        <li className="nav-item dropdown me-3 ">
                             <Link className="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" to="">
                                 <i className="fa-regular fa-bell"></i>
                             </Link>
@@ -60,7 +60,7 @@ export const Navbar = () => {
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown ms-3">
+                        <li class="nav-item dropdown me-3   ">
                             <Link className="nav-link active dropdown-toggle"role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa-regular fa-user"></i>
                             </Link>
