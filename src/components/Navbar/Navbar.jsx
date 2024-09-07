@@ -36,7 +36,7 @@ export const Navbar = ({logout, changeAdmin, userData}) => {
                                   data-bs-toggle="dropdown">
                                 Categories
                             </Link>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div className="dropdown-menu nav-dropdown-absolute" aria-labelledby="navbarDropdown">
                                 <Link className="dropdown-item" href="#">Web Development</Link>
                                 <Link className="dropdown-item" href="#">CyberSecurity</Link>
                                 <Link className="dropdown-item" href="#">Machine Learning</Link>
@@ -67,7 +67,7 @@ export const Navbar = ({logout, changeAdmin, userData}) => {
                                     </li>
                                     <li className="nav-item dropdown me-3 ">
                                         <Link className="nav-link active dropdown-toggle" role="button"
-                                              data-bs-toggle="dropdown" to="">
+                                              data-bs-toggle="dropdown" to="" aria-expanded="false">
                                             <i className="fa-regular fa-bell"></i>
                                         </Link>
                                         <div className="dropdown-menu nav-dropdown-absolute">
@@ -78,15 +78,15 @@ export const Navbar = ({logout, changeAdmin, userData}) => {
                                 </> : null
                         }
                         <li class="nav-item dropdown ms-3">
-                            <Link className="nav-link active dropdown-toggle" role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fa-regular fa-bell"></i>
+                            <Link className="nav-link active dropdown-toggle " role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                                <i className="fa-regular fa-bell"></i>
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li><Link className="dropdown-item" to="#">Notification</Link></li>
                             </ul>
                         </li>
 
-                        <li className="nav-item dropdown me-3   ">
+                        <li className="nav-item dropdown me-3">
                             <Link className="nav-link active dropdown-toggle" role="button" to=''
                                   data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa-regular fa-user"></i>
