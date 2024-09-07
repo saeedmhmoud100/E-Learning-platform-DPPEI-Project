@@ -13,6 +13,9 @@ import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
 import Courses from './Pages/Courses/index';
 import {AdminPage} from "./Pages/Admin/AdminPage";
+import CourseDetails from './Pages/CourseDetails/index';
+import Checkout from './Pages/Checkout/index';
+import Cart from './Pages/Cart/index';
 import NotFound from './Pages/NotFound/NotFound';
 import {useEffect, useState} from "react";
 function App() {
@@ -48,6 +51,9 @@ function App() {
         <Route path="/login" element={<Login handleLogin={login} />} />
         <Route path='/admin/*' element={<AdminPage/> } />
         <Route path='/courses' element={<Courses />}/>
+        <Route path='/course-details' element={<CourseDetails />}/>
+        <Route path='/cart' element={<Cart />}/>
+        <Route path='/checkout' element={<Checkout />}/>
         <Route path='/*' element={<NotFound /> } />
       </Routes>
         <ToastContainer />
