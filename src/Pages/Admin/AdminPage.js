@@ -1,9 +1,9 @@
-import {AdminSidebar} from "../components/Admin/AdminSidebar";
+import {AdminSidebar} from "../../components/Admin/AdminSidebar";
 import {Route, Routes} from "react-router-dom";
-import {Profile} from "../components/Admin/Profile";
-import {CoursesOrdered} from "../components/Admin/CoursesOrdered";
-import {PublishedCourses} from "../components/Admin/PublishedCourses";
-import {CourseAnalysis} from "../components/Admin/CourseAnalysis";
+import {Profile} from "../../components/Admin/Profile";
+import {CoursesOrdered} from "../../components/Admin/CoursesOrdered";
+import {PublishedCourses} from "../../components/Admin/PublishedCourses";
+import {CourseAnalysis} from "../../components/Admin/CourseAnalysis";
 
 export const AdminPage = () => {
     return (

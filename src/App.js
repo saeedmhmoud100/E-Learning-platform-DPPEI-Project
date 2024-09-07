@@ -11,7 +11,7 @@ import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
-import {AdminPage} from "./Pages/AdminPage";
+import {AdminPage} from "./Pages/Admin/AdminPage";
 import NotFound from './Pages/NotFound/NotFound';
 import {useEffect, useState} from "react";
 function App() {
@@ -26,8 +26,8 @@ function App() {
         setUserData({...userData, loggedIn: false, isAdmin: false})
     }
 
-    function login() {
-        setUserData({...userData, loggedIn: true, isAdmin: false})
+    function login(data) {
+        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
     }
 
     function changeAdmin() {
@@ -44,7 +44,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register handleRegister={handleRegister} />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login handleLogin={login} />} />
         <Route path='/admin/*' element={<AdminPage/> } />
         <Route path='/*' element={<NotFound /> } />
       </Routes>

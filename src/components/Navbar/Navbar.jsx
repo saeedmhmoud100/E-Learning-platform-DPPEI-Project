@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import './Navbar.css';
 
-export const Navbar = ({login, logout, changeAdmin, userData}) => {
+export const Navbar = ({logout, changeAdmin, userData}) => {
 
 
     return (
@@ -98,7 +98,7 @@ export const Navbar = ({login, logout, changeAdmin, userData}) => {
                                             </>)
                                         : (
                                             <>
-                                                <li onClick={login}><Link className="dropdown-item" to="/login">Login</Link>
+                                                <li><Link className="dropdown-item" to="/login">Login</Link>
                                                 </li>
                                                 <li><Link className="dropdown-item" to="/register">Register</Link></li>
                                             </>)
