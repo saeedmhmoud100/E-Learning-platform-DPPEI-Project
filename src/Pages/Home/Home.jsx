@@ -101,7 +101,7 @@ export default function Home() {
             <h2 className='fw-bold'>What to learn next</h2>
         </div>
         {/* END - HEADER */}
-
+        
         {/* START - THIRD SECTION WITH COURSE CARDS */}
         <div className="container p-0">
             <CourseCards />

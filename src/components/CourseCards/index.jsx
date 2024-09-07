@@ -4,7 +4,6 @@ import './index.css';
 export default function CourseCards() {
   return (
     <div className='row'>
-    <h2 className='py-3'>Recomended for you</h2>
       <div className="col-lg-3 col-sm-6">
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100" role='button'>
             <div className="position-relative w-100 h-50">

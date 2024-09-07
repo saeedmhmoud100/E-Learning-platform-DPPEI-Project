@@ -61,8 +61,8 @@ function App() {
         <Route path="/register" element={<Register handleRegister={handleRegister} />} />
         <Route path="/login" element={<Login handleLogin={login} />} />
         <Route path='/admin/*' element={<AdminPage/> } />
-          <Route path="/inst-profile" element={<InstProfile />} />
-          <Route path='add-course' element={<AddCourseForm />} />
+        <Route path="/inst-profile" element={<InstProfile />} />
+        <Route path='add-course' element={<AddCourseForm />} />
         <Route path='/courses' element={<Courses />}/>
         <Route path='/course-details' element={<CourseDetails />}/>
         <Route path='/cart' element={<Cart />}/>
@@ -70,7 +70,7 @@ function App() {
           <Route path='/wishlist' element={<Wishlist /> } />
         <Route path='/*' element={<NotFound /> } />
       </Routes>
-        <Footer />
+        {/* <Footer /> */}
 
         <ToastContainer />
     </div>

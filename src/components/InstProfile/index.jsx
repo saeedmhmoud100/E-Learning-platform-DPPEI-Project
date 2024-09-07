@@ -21,8 +21,8 @@
             <div className="col-md-8  vh-100 ">
             <div className="">
                 <h5>Instructor</h5>
-                <h1>Maximilian Schwarzmüller</h1>
-                <h2 className="">
+                <h1 className="font-size-40">Maximilian Schwarzmüller</h1>
+                <h2 className="font-size-20">
                 AWS certified, Professional Web Developer and Instructor
                 </h2>
 
@@ -47,7 +47,7 @@
                 </div>
                 </div>
                 <div className="details">
-                <h2 className="mb-4">About me</h2>
+                <h2 className="mb-4 font-size-20">About me</h2>
                 <div className="about " style={isOpen ? null : open}>
                     <p className="fs-12 fw-bold">Experience as (Web) Developer</p>
                     <p className={!isOpen && `ins-info`}>
