@@ -27,3 +27,7 @@
         border-bottom-color: white;
     }
 }
+.dropdown-menu{
+    transform: translateY(0.9rem);
+    border-radius: 0;
+}

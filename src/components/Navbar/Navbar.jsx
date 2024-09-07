@@ -87,6 +87,14 @@ export const Navbar = ({logout, changeRule, userData}) => {
 
                                 </> : null
                         }
+                        <li class="nav-item dropdown ms-3">
+                            <Link className="nav-link active dropdown-toggle" role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className="fa-regular fa-bell"></i>
+                            </Link>
+                            <ul className="dropdown-menu dropdown-menu-end">
+                                <li><Link className="dropdown-item" to="#">Notification</Link></li>
+                            </ul>
+                        </li>
 
                         <li className="nav-item dropdown me-3   ">
                             <Link className="nav-link active dropdown-toggle" role="button" to=''
