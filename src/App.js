@@ -33,7 +33,6 @@ function App() {
     }
 
     function handleRegister(data){
-        console.log(data)
         setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
     }
 
