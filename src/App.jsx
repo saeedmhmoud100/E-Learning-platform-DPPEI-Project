@@ -11,11 +11,16 @@ import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
+import Courses from './Pages/Courses/index';
 import {AdminPage} from "./Pages/Admin/AdminPage";
+import CourseDetails from './Pages/CourseDetails/index';
+import Checkout from './Pages/Checkout/index';
+import Cart from './Pages/Cart/index';
 import NotFound from './Pages/NotFound/NotFound';
 import {useEffect, useState} from "react";
 import InstProfile from "./components/InstProfile";
 import AddCourseForm from "./components/AddCourseForm";
+
 function App() {
     const [userData, setUserData] = useState({});
 
@@ -56,6 +61,10 @@ function App() {
         <Route path='/admin/*' element={<AdminPage/> } />
           <Route path="/inst-profile" element={<InstProfile />} />
           <Route path='add-course' element={<AddCourseForm />} />
+        <Route path='/courses' element={<Courses />}/>
+        <Route path='/course-details' element={<CourseDetails />}/>
+        <Route path='/cart' element={<Cart />}/>
+        <Route path='/checkout' element={<Checkout />}/>
         <Route path='/*' element={<NotFound /> } />
       </Routes>
         <ToastContainer />
