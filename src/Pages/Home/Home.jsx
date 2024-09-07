@@ -38,9 +38,9 @@ export default function Home() {
                 <a href="">My learning</a>
             </div>
             <div className="container-fluid p-0">
-                <div className="row">
+                <div className="row g-3">
 
-                    <div className="col-4 custom-dimensions">
+                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
@@ -57,7 +57,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="col-4 custom-dimensions">
+                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
@@ -74,7 +74,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="col-4 custom-dimensions">
+                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
