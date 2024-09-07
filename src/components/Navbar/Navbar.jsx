@@ -55,16 +55,16 @@ export const Navbar = () => {
                             <Link className="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" to="">
                                 <i className="fa-regular fa-bell"></i>
                             </Link>
-                            <div className="dropdown-menu">
+                            <div className="dropdown-menu nav-dropdown-absolute">
                                 <Link className="dropdown-item" href="#">notification</Link>
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown me-3   ">
+                        <li className="nav-item dropdown me-3   ">
                             <Link className="nav-link active dropdown-toggle"role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa-regular fa-user"></i>
                             </Link>
-                            <ul class="dropdown-menu">
+                            <ul className="dropdown-menu nav-dropdown-absolute">
                                 <li><Link className="dropdown-item" to="#">Profile</Link></li>
                                 <li><Link className="dropdown-item" to="#">My Courses</Link></li>
                                 <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
