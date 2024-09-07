@@ -75,25 +75,18 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                         <Link className="nav-link active" to="/courses"><i
                                             className="fa-solid fa-cart-shopping"></i></Link>
                                     </li>
-                                    <li className="nav-item dropdown me-3 ">
-                                        <Link className="nav-link active dropdown-toggle" role="button"
-                                              data-bs-toggle="dropdown" to="" aria-expanded="false">
-                                            <i className="fa-regular fa-bell"></i>
-                                        </Link>
-                                        <div className="dropdown-menu nav-dropdown-absolute">
-                                            <Link className="dropdown-item" href="#">notification</Link>
-                                        </div>
-                                    </li>
+
 
                                 </> : null
                         }
-                        <li class="nav-item dropdown ms-3">
-                            <Link className="nav-link active dropdown-toggle " role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="nav-item dropdown me-3 ">
+                            <Link className="nav-link active dropdown-toggle" role="button"
+                                  data-bs-toggle="dropdown" to="" aria-expanded="false">
                                 <i className="fa-regular fa-bell"></i>
                             </Link>
-                            <ul className="dropdown-menu dropdown-menu-end">
-                                <li><Link className="dropdown-item" to="#">Notification</Link></li>
-                            </ul>
+                            <div className="dropdown-menu nav-dropdown-absolute">
+                                <Link className="dropdown-item" href="#">notification</Link>
+                            </div>
                         </li>
 
                         <li className="nav-item dropdown me-3">
