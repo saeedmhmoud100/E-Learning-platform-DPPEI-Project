@@ -51,20 +51,22 @@ export const Navbar = () => {
                             <Link className="nav-link active" to="/courses"><i className="fa-solid fa-cart-shopping"></i></Link>
                         </li>
 
-                        <li className="nav-item dropdown ms-3">
-                            <Link className="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" to="">
-                                <i className="fa-regular fa-bell"></i>
+                        <li class="nav-item dropdown ms-3">
+                            <Link className="nav-link active dropdown-toggle" role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className="fa-regular fa-user"></i>
                             </Link>
-                            <div className="dropdown-menu">
-                                <Link className="dropdown-item" href="#">notification</Link>
-                            </div>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                                <li><Link className="dropdown-item" to="#">My Courses</Link></li>
+                                <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
+                            </ul>
                         </li>
 
                         <li class="nav-item dropdown ms-3">
-                            <Link className="nav-link active dropdown-toggle"role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                            <Link className="nav-link active dropdown-toggle" role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa-regular fa-user"></i>
                             </Link>
-                            <ul class="dropdown-menu">
+                            <ul className="dropdown-menu right-0">
                                 <li><Link className="dropdown-item" to="#">Profile</Link></li>
                                 <li><Link className="dropdown-item" to="#">My Courses</Link></li>
                                 <li><Link className="dropdown-item" to="#">Purchase History</Link></li>

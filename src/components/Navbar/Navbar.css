@@ -7,3 +7,10 @@
 .dropdown-toggle:after{
     display: none;
 }
+.dropdown-menu{
+    transform: translateY(11%);
+    border-radius: 0;
+}
+.right-0{
+    left:-120px!important;
+}

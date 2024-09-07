@@ -1,9 +1,26 @@
+import Joi from 'joi';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import './Register.css'
 
 export default function Register() {
+
+    //JOI FUNCTION
+    function validation(){
+        let schema = Joi.object({
+            name : Joi.string().pattern(new RegExp('[a-zA-Z]{3,30} [a-zA-Z]{3,30}')).required(),
+            email : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+        })
+        return schema.validate()
+    }
+
+    //HANLDE FORM SUBMIT FUNCTION
+    function handleSubmit(e){
+        e.preventDefault();
+    }
+
   return (
       <>
       <div className='container p-5 my-5'>
@@ -19,7 +36,7 @@ export default function Register() {
             <div className="col-lg-6 d-flex align-items-center px-3">
                 <div className="w-100">
                     <h1 className='py-4 text-center fw-bold'>Register</h1>
-                    <form action="">
+                    <form onSubmit={handleSubmit} action="">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"/>
                             <label for="floatingInput">Full name</label>
@@ -32,7 +49,7 @@ export default function Register() {
                             <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com"/>
                             <label for="floatingInput">Password</label>
                         </div>
-                        <button className='sign-btn-style mb-3'>Sign up</button>
+                        <button type='submit' className='sign-btn-style mb-3'>Sign up</button>
                     </form>
                     <span className=''>Already have an account? <Link to='/login' className='btn-custom-style'><u>Login</u></Link></span> 
                 </div>
