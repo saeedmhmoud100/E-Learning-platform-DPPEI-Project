@@ -1,6 +1,6 @@
     import React, { useState } from "react";
     import insPhoto from "./images/instractorPhoto.png";
-    import Courses from "../Courses";
+    import Courses from "./Courses";
 
     import "./style.css";
     import { Link } from "react-router-dom";
