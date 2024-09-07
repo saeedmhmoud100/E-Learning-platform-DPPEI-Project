@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import './Navbar.css';
 
-export const Navbar = ({logout, changeAdmin, userData}) => {
+export const Navbar = ({logout, changeRule, userData}) => {
 
 
     return (
@@ -24,7 +24,17 @@ export const Navbar = ({logout, changeAdmin, userData}) => {
                                     <li className="nav-item">
                                         <Link className="nav-link active" to="/admin">Admin</Link>
                                     </li>
-                                    :
+                                    : userData.isInstructor ?
+
+                                        <>
+                                            <li className="nav-item">
+                                                <Link className="nav-link active" to="/courses">Courses</Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link className="nav-link active" to="/inst-profile">inst profile</Link>
+                                            </li>
+                                        </>
+                                        :
                                     <li className="nav-item">
                                         <Link className="nav-link active" to="/courses">Courses</Link>
                                     </li>
@@ -87,11 +97,32 @@ export const Navbar = ({logout, changeAdmin, userData}) => {
                                 {
                                     userData.loggedIn ? (
                                             <>
-                                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                                                <li><Link className="dropdown-item" to="#">My Courses</Link></li>
-                                                <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
-                                                <li onClick={changeAdmin}><Link className="dropdown-item"
-                                                                                to="#">{userData.isAdmin ? "make user" : 'make admin'}</Link>
+
+                                                {
+                                                    userData.isInstructor ?
+                                                        (
+                                                            <>
+                                                                <li className="">
+                                                                    <Link className="dropdown-item" to="/add-course">Add Course</Link>
+                                                                </li>
+                                                                <li className="">
+                                                                    <Link className="dropdown-item" to="/inst-profile">inst profile</Link>
+                                                                </li>
+                                                            </>
+                                                        ):
+                                                        (
+                                                            <>
+                                                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                                                                <li><Link className="dropdown-item" to="#">My Courses</Link></li>
+                                                                <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
+                                                            </>
+                                                        )
+                                                }
+
+
+                                                <li onClick={changeRule}><Link className="dropdown-item" to="#">
+                                                    {userData.isAdmin ? "make instructor":userData.isInstructor ? 'make user' : 'make admin'}
+                                                </Link>
                                                 </li>
                                                 <li onClick={logout}><Link className="dropdown-item" to="#">logout</Link>
                                                 </li>

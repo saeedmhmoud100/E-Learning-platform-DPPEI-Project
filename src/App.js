@@ -14,6 +14,8 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {AdminPage} from "./Pages/Admin/AdminPage";
 import NotFound from './Pages/NotFound/NotFound';
 import {useEffect, useState} from "react";
+import InstProfile from "./components/InstProfile";
+import AddCourseForm from "./components/AddCourseForm";
 function App() {
     const [userData, setUserData] = useState({});
 
@@ -30,8 +32,14 @@ function App() {
         setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
     }
 
-    function changeAdmin() {
-        setUserData({...userData, loggedIn: true, isAdmin: !userData.isAdmin})
+    function changeRule() {
+        if (userData.isAdmin) {
+            setUserData({...userData, loggedIn: true, isAdmin: false,isInstructor: true})
+        } else if(userData.isInstructor){
+            setUserData({...userData, loggedIn: true, isAdmin: false,isInstructor: false})
+        }else{
+            setUserData({...userData, loggedIn: true, isAdmin: true,isInstructor: false})
+        }
     }
 
     function handleRegister(data){
@@ -40,12 +48,14 @@ function App() {
 
   return (
     <div className="App">
-        <Navbar changeAdmin={changeAdmin} login={login} logout={logout} userData={userData}/>
+        <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register handleRegister={handleRegister} />} />
         <Route path="/login" element={<Login handleLogin={login} />} />
         <Route path='/admin/*' element={<AdminPage/> } />
+          <Route path="/inst-profile" element={<InstProfile />} />
+          <Route path='add-course' element={<AddCourseForm />} />
         <Route path='/*' element={<NotFound /> } />
       </Routes>
         <ToastContainer />
