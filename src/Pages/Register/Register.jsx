@@ -3,6 +3,7 @@ import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import './Register.css'
+import {errorNotification} from "../../hooks/Notification";
 
 export default function Register({handleRegister}) {
     const navigate = useNavigate()
@@ -27,7 +28,9 @@ export default function Register({handleRegister}) {
             password: e.target.password.value
         }
         if(validation(data).error){
-            // notifications
+            for(let err of validation(data).error.details){
+                errorNotification(err.message)
+            }
         }else{
             handleRegister({name:e.target.name.value, email:e.target.email.value, password:e.target.password.value})
             navigate('/home')

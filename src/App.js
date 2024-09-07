@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import {Route, Routes} from "react-router-dom";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
@@ -46,6 +48,7 @@ function App() {
         <Route path='/admin/*' element={<AdminPage/> } />
         <Route path='/*' element={<NotFound /> } />
       </Routes>
+        <ToastContainer />
     </div>
   );
 }
