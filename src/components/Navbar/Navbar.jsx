@@ -23,15 +23,14 @@ export const Navbar = () => {
                             <Link className="nav-link active" to="/admin">Admin</Link>
                         </li>
 
-                        {/*Categories dropdown menu not working*/}
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
+                            <Link className="nav-link dropdown-toggle active" role="button" to="" id="navbarDropdown" data-bs-toggle="dropdown">
+                                Categories
                             </Link>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <Link className="dropdown-item" href="#">Web Development</Link>
-                            <Link className="dropdown-item" href="#">CyberSecurity</Link>
-                            <Link className="dropdown-item" href="#">Machine Learning</Link>
+                                <Link className="dropdown-item" href="#">Web Development</Link>
+                                <Link className="dropdown-item" href="#">CyberSecurity</Link>
+                                <Link className="dropdown-item" href="#">Machine Learning</Link>
                             </div>
                         </li>
                     </ul>
@@ -52,27 +51,24 @@ export const Navbar = () => {
                             <Link className="nav-link active" to="/courses"><i className="fa-solid fa-cart-shopping"></i></Link>
                         </li>
 
-                        {/*Notification dropdown menu not working*/}
                         <li className="nav-item dropdown ms-3">
-                            <Link className="nav-link active dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" to="">
+                            <Link className="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" to="">
                                 <i className="fa-regular fa-bell"></i>
                             </Link>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div className="dropdown-menu">
                                 <Link className="dropdown-item" href="#">notification</Link>
                             </div>
                         </li>
 
-                        {/*Profile dropdown menu not working*/}
-                        <li className="nav-item dropdown ms-3">
-                            <Link className="nav-link active dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" to="">
-                            <i className="fa-regular fa-user"></i>
+                        <li class="nav-item dropdown ms-3">
+                            <Link className="nav-link active dropdown-toggle"role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
+                                <i className="fa-regular fa-user"></i>
                             </Link>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" href="#">Profile</Link>
-                                <Link className="dropdown-item" href="#">My Courses</Link>
-                                <Link className="dropdown-item" href="#">Purchase History</Link>
-                                <Link className="dropdown-item" href="#">LogOut</Link>
-                            </div>
+                            <ul class="dropdown-menu">
+                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                                <li><Link className="dropdown-item" to="#">My Courses</Link></li>
+                                <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
