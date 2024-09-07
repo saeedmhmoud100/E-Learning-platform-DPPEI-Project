@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
-import Register from "./Pages/Register";
+import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
