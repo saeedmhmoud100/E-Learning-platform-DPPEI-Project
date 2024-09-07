@@ -1,6 +1,6 @@
 export const ProfileCard = ({backgroundColor, title, data}) => {
     return (
-        <div className={`cart bg-${backgroundColor || 'success'} d-flex flex-column justify-content-around rounded-5 p-4`}>
+        <div className={`cartt bg-${backgroundColor || 'success'} d-flex flex-column justify-content-around rounded-5 p-4`}>
             <div className="cart-header fw-bold fs-1">
                 {title}
             </div>

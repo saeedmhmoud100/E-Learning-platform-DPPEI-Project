@@ -41,7 +41,7 @@ export default function Home() {
             <div className="container-fluid p-0">
                 <div className="row g-3">
 
-                    <div className="col-lg-4 col-md-6 custom-dimensions">
+                    <Link to='/course-details' className="col-lg-4 col-md-6 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100" role='button'>
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
@@ -56,9 +56,9 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
-                    <div className="col-lg-4 col-md-6 custom-dimensions">
+                    <Link to='/course-details' className="col-lg-4 col-md-6 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100" role='button'>
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
@@ -73,9 +73,9 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
-                    <div className="col-lg-4 col-md-6 custom-dimensions">
+                    <Link to='/course-details' className="col-lg-4 col-md-6 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100" role='button'>
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
@@ -90,7 +90,7 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>
@@ -109,8 +109,6 @@ export default function Home() {
         {/* END - THIRD SECTION WITH COURSE CARDS */}
 
     </div>
-
-    <Footer />
     </>
   )
 }

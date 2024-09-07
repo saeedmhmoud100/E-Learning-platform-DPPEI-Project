@@ -49,7 +49,6 @@ export default function Login({handleLogin}) {
 
         
         </div>
-        <Footer />
       </>
   )
 }

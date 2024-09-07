@@ -7,7 +7,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark p-3 position-relative">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">EduVerse</a> {/*will be replaced with a logo*/}
+                <Link className="navbar-brand" to="/">EduVerse</Link> {/*will be replaced with a logo*/}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"/>
@@ -35,23 +35,26 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                             </li>
                                         </>
                                         :
-                                    <li className="nav-item">
-                                        <Link className="nav-link active" to="/courses">Courses</Link>
-                                    </li>
+                                        <>
+                                            <li className="nav-item">
+                                                <Link className="nav-link active" to="/courses">Courses</Link>
+                                            </li>
+                                            <li className="nav-item dropdown">
+                                                <Link className="nav-link dropdown-toggle active" role="button" to=""
+                                                      id="navbarDropdown"
+                                                      data-bs-toggle="dropdown">
+                                                    Categories
+                                                </Link>
+                                                <div className="dropdown-menu nav-dropdown-absolute"
+                                                     aria-labelledby="navbarDropdown">
+                                                    <Link className="dropdown-item" href="#">Web Development</Link>
+                                                    <Link className="dropdown-item" href="#">CyberSecurity</Link>
+                                                    <Link className="dropdown-item" href="#">Machine Learning</Link>
+                                                </div>
+                                            </li>
+                                        </>
                             ) : null
                         }
-
-                        <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle active" role="button" to="" id="navbarDropdown"
-                                  data-bs-toggle="dropdown">
-                                Categories
-                            </Link>
-                            <div className="dropdown-menu nav-dropdown-absolute" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" href="#">Web Development</Link>
-                                <Link className="dropdown-item" href="#">CyberSecurity</Link>
-                                <Link className="dropdown-item" href="#">Machine Learning</Link>
-                            </div>
-                        </li>
                     </ul>
 
                     <ul className="navbar-nav w-50">
@@ -72,7 +75,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                             className="fa-regular fa-heart"></i></Link>
                                     </li>
                                     <li className="nav-item me-3 ">
-                                        <Link className="nav-link active" to="/courses"><i
+                                        <Link className="nav-link active" to="/cart"><i
                                             className="fa-solid fa-cart-shopping"></i></Link>
                                     </li>
 
@@ -104,25 +107,30 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                         (
                                                             <>
                                                                 <li className="">
-                                                                    <Link className="dropdown-item" to="/add-course">Add Course</Link>
+                                                                    <Link className="dropdown-item" to="/add-course">Add
+                                                                        Course</Link>
                                                                 </li>
                                                                 <li className="">
-                                                                    <Link className="dropdown-item" to="/inst-profile">inst profile</Link>
+                                                                    <Link className="dropdown-item" to="/inst-profile">inst
+                                                                        profile</Link>
                                                                 </li>
                                                             </>
-                                                        ):
+                                                        ) :
                                                         (
                                                             <>
-                                                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                                                                <li><Link className="dropdown-item" to="#">My Courses</Link></li>
-                                                                <li><Link className="dropdown-item" to="#">Purchase History</Link></li>
+                                                                <li><Link className="dropdown-item" to="#">Profile</Link>
+                                                                </li>
+                                                                <li><Link className="dropdown-item" to="#">My Courses</Link>
+                                                                </li>
+                                                                <li><Link className="dropdown-item" to="#">Purchase
+                                                                    History</Link></li>
                                                             </>
                                                         )
                                                 }
 
 
                                                 <li onClick={changeRule}><Link className="dropdown-item" to="#">
-                                                    {userData.isAdmin ? "make instructor":userData.isInstructor ? 'make user' : 'make admin'}
+                                                    {userData.isAdmin ? "make instructor" : userData.isInstructor ? 'make user' : 'make admin'}
                                                 </Link>
                                                 </li>
                                                 <li onClick={logout}><Link className="dropdown-item" to="#">logout</Link>

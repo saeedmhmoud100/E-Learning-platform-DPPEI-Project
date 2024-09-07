@@ -66,6 +66,10 @@ export default function Register({handleRegister}) {
                             <input type="password" className="form-control" id="floatingInput" placeholder="name@example.com" name='password'/>
                             <label htmlFor="floatingInput">Password</label>
                         </div>
+                        <input type='radio' id='rule1' name='rule'/>
+                        <label htmlFor='rule1' className='me-5'> I am a student</label>
+                        <input type='radio' id='rule2' name='rule'/>
+                        <label htmlFor='rule2'> I am an instructor</label>
                         <button type='submit' className='sign-btn-style mb-3'>Sign up</button>
                     </form>
                     <span className=''>Already have an account? <Link to='/login' className='btn-custom-style'><u>Login</u></Link></span> 
@@ -75,7 +79,6 @@ export default function Register({handleRegister}) {
 
         
         </div>
-        <Footer />
       </>
     
   )
