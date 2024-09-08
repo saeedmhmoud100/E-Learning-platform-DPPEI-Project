@@ -1,7 +1,6 @@
 import React from 'react';
 import CourseCards from '../../components/CourseCards';
 import Footer from '../../components/Footer/index.jsx';
-import { Link } from 'react-router-dom';
 import './Home.css'
 
 export default function Home() {
@@ -17,7 +16,7 @@ export default function Home() {
             </div>
             <div className="text-cont ps-4">
                 <h2>Welcome back, User!</h2>
-                <Link to=''>add occupations and interest</Link>
+                <a href='#'>add occupations and interest</a>
             </div>
         </div>
 
@@ -41,8 +40,8 @@ export default function Home() {
             <div className="container-fluid p-0">
                 <div className="row g-3">
 
-                    <Link to='/course-details' className="col-lg-4 col-md-6 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100" role='button'>
+                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
+                        <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -56,10 +55,10 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </Link>
+                    </div>
 
-                    <Link to='/course-details' className="col-lg-4 col-md-6 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100" role='button'>
+                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
+                        <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -73,10 +72,10 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </Link>
+                    </div>
 
-                    <Link to='/course-details' className="col-lg-4 col-md-6 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100" role='button'>
+                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
+                        <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -90,7 +89,7 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,7 +100,7 @@ export default function Home() {
             <h2 className='fw-bold'>What to learn next</h2>
         </div>
         {/* END - HEADER */}
-        
+
         {/* START - THIRD SECTION WITH COURSE CARDS */}
         <div className="container p-0">
             <CourseCards />
@@ -109,6 +108,8 @@ export default function Home() {
         {/* END - THIRD SECTION WITH COURSE CARDS */}
 
     </div>
+
+    <Footer />
     </>
   )
 }

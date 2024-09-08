@@ -1,0 +1,50 @@
+[
+    {
+        "courseName": "React Basics",
+        "instructorName": "John Doe",
+        "progress": 20,
+        "image": "https://example.com/react-basics.jpg"
+    },
+    {
+        "courseName": "Advanced React",
+        "instructorName": "Jane Smith",
+        "progress": 50,
+        "image": "https://example.com/advanced-react.jpg"
+    },
+    {
+        "courseName": "JavaScript Essentials",
+        "instructorName": "Mark Lee",
+        "progress": 80,
+        "image": "https://example.com/javascript-essentials.jpg"
+    },
+    {
+        "courseName": "CSS Mastery",
+        "instructorName": "Sarah Jones",
+        "progress": 95,
+        "image": "https://example.com/css-mastery.jpg"
+    },
+    {
+        "courseName": "HTML for Beginners",
+        "instructorName": "Emily White",
+        "progress": 40,
+        "image": "https://example.com/html-beginners.jpg"
+    },
+    {
+        "courseName": "Bootstrap Basics",
+        "instructorName": "Chris Brown",
+        "progress": 60,
+        "image": "https://example.com/bootstrap-basics.jpg"
+    },
+    {
+        "courseName": "Node.js Fundamentals",
+        "instructorName": "Michael King",
+        "progress": 70,
+        "image": "https://example.com/nodejs-fundamentals.jpg"
+    },
+    {
+        "courseName": "Python for Data Science",
+        "instructorName": "Emma Wilson",
+        "progress": 30,
+        "image": "https://example.com/python-data-science.jpg"
+    }
+]

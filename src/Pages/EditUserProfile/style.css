@@ -1,0 +1,12 @@
+
+.safeBtn .btn ,.sendBtn .btn{
+    align-self: center;
+    background-color: var(--secondaryColor);
+    color: white;
+    padding: 10px 40px;
+    font-weight: bold;
+}
+.safeBtn .btn:hover, .sendBtn .btn:hover{
+    background-color: var(--mainColor);
+    color: white;
+}
