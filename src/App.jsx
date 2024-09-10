@@ -20,7 +20,6 @@ import NotFound from './Pages/NotFound/NotFound';
 import {useEffect, useState} from "react";
 import InstProfile from "./components/InstProfile";
 import AddCourseForm from "./components/AddCourseForm";
-import Wishlist from "./Pages/Wishlist";
 import Footer from "./components/Footer";
 import {MyCourses} from "./Pages/MyCourses";
 
@@ -67,7 +66,6 @@ function App() {
                 <Route path='/course-details' element={<CourseDetails/>}/>
                 <Route path='/cart' element={<Cart/>}/>
                 <Route path='/checkout' element={<Checkout/>}/>
-                <Route path='/wishlist' element={<Wishlist/>}/>
                 <Route path='/my-courses/*' element={<MyCourses />}/>
                 <Route path='/*' element={<NotFound/>}/>
             </Routes>
