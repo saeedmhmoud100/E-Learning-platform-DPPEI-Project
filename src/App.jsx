@@ -22,6 +22,7 @@ import InstProfile from "./components/InstProfile";
 import AddCourseForm from "./components/AddCourseForm";
 import Wishlist from "./Pages/Wishlist";
 import Footer from "./components/Footer";
+import {MyCourses} from "./Pages/MyCourses";
 
 function App() {
     const [userData, setUserData] = useState({});
@@ -41,40 +42,39 @@ function App() {
 
     function changeRule() {
         if (userData.isAdmin) {
-            setUserData({...userData, loggedIn: true, isAdmin: false,isInstructor: true})
-        } else if(userData.isInstructor){
-            setUserData({...userData, loggedIn: true, isAdmin: false,isInstructor: false})
-        }else{
-            setUserData({...userData, loggedIn: true, isAdmin: true,isInstructor: false})
+            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: true})
+        } else if (userData.isInstructor) {
+            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: false})
+        } else {
+            setUserData({...userData, loggedIn: true, isAdmin: true, isInstructor: false})
         }
     }
 
-    function handleRegister(data){
+    function handleRegister(data) {
         setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
     }
 
-  return (
-    <div className="App">
-        <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
-        <Route path="/login" element={<Login handleLogin={login} />} />
-        <Route path='/admin/*' element={<AdminPage/> } />
-        <Route path="/inst-profile" element={<InstProfile />} />
-        <Route path='add-course' element={<AddCourseForm />} />
-        <Route path='/courses' element={<Courses />}/>
-        <Route path='/course-details' element={<CourseDetails />}/>
-        <Route path='/cart' element={<Cart />}/>
-        <Route path='/checkout' element={<Checkout />}/>
-          <Route path='/wishlist' element={<Wishlist /> } />
-        <Route path='/*' element={<NotFound /> } />
-      </Routes>
-        {/* <Footer /> */}
+    return (<div className="App">
+            <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/register" element={<Register handleRegister={handleRegister}/>}/>
+                <Route path="/login" element={<Login handleLogin={login}/>}/>
+                <Route path='/admin/*' element={<AdminPage/>}/>
+                <Route path="/inst-profile" element={<InstProfile/>}/>
+                <Route path='add-course' element={<AddCourseForm/>}/>
+                <Route path='/courses' element={<Courses/>}/>
+                <Route path='/course-details' element={<CourseDetails/>}/>
+                <Route path='/cart' element={<Cart/>}/>
+                <Route path='/checkout' element={<Checkout/>}/>
+                <Route path='/wishlist' element={<Wishlist/>}/>
+                <Route path='/my-courses/*' element={<MyCourses />}/>
+                <Route path='/*' element={<NotFound/>}/>
+            </Routes>
+             {/*<Footer />*/}
 
-        <ToastContainer />
-    </div>
-  );
+            <ToastContainer/>
+        </div>);
 }
 
 export default App;
