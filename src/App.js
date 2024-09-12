@@ -72,14 +72,13 @@ function App() {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/my-courses/*' element={<MyCourses />}/>
-            <Route path="/profile" element={<UserProfile/>} />
             <Route path="/profile/edit" element={<EditUserProfile/>}/>
             <Route path="/profile/courses" element={<UserCourses/>}/>
             <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
             <Route path="/help-and-support" element={<HelpSupport/>}/>
             <Route path='/*' element={<NotFound/>}/>
         </Routes>
-        {/*<Footer />*/}
+        <Footer />
 
         <ToastContainer/>
     </div>);

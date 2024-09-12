@@ -5,6 +5,7 @@ import {MyList} from "../../components/MyCourses/MyList";
 import {Wishlist} from "../../components/MyCourses/Wishlist";
 import {Archived} from "../../components/MyCourses/Archived";
 import {LearningTools} from "../../components/MyCourses/LearningTools";
+import UserCourses from "../UserCourses/UserCourses";
 
 export const MyCourses = () => {
     const {pathname} = useLocation();
@@ -16,7 +17,7 @@ export const MyCourses = () => {
             title: 'All Courses',
             path: 'all-courses',
             fullPath: '/my-courses/all-courses',
-            component: AllCourses
+            component: UserCourses
         },
         {
             title: 'My List',
