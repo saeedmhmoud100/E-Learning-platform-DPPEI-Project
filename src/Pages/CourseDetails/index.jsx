@@ -112,7 +112,7 @@ export default function CourseDetails() {
               <div className="d-flex align-items-start">
                 {/* Resource lists */}
                 <div className="first-resources me-4 ms-0">
-                  <ul className="p-0 m-0">
+                  <ul className=" list-unstyled">
                     <li className="my-2">
                       <i className="fa-solid fa-video me-2 fs-5"></i>
                       3 hours on-demand video
