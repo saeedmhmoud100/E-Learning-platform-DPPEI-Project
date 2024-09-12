@@ -13,6 +13,7 @@ import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
 import {AdminPage} from "./Pages/Admin/AdminPage";
 import NotFound from './Pages/NotFound/NotFound';
+
 import {useEffect, useState} from "react";
 function App() {
     const [userData, setUserData] = useState({});
