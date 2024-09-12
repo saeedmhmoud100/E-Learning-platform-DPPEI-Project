@@ -77,7 +77,7 @@ export const Navbar = ({logout, changeAdmin, userData}) => {
 
                                 </> : null
                         }
-                        <li class="nav-item dropdown ms-3">
+                        <li className="nav-item dropdown ms-3">
                             <Link className="nav-link active dropdown-toggle " role="button" to='' data-bs-toggle="dropdown" aria-expanded="false">
                                 <i className="fa-regular fa-bell"></i>
                             </Link>
