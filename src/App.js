@@ -27,6 +27,7 @@ import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
 import UserCourses from "./Pages/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./HelpSupport/HelpSupport";
+import  Wishlist   from '../src/components/MyCourses/Wishlist/index.jsx';
 
 function App() {
     const [userData, setUserData] = useState({});
@@ -71,7 +72,9 @@ function App() {
             <Route path='/course-details' element={<CourseDetails/>}/>
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
+            <Route path='/wishlist' element={<Wishlist/>}/>
             <Route path='/my-courses/*' element={<MyCourses />}/>
+            <Route path="/profile" element={<UserProfile/>} />
             <Route path="/profile/edit" element={<EditUserProfile/>}/>
             <Route path="/profile/courses" element={<UserCourses/>}/>
             <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>

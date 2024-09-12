@@ -15,10 +15,10 @@ export default function CourseCards() {
                 <h4 className='text-muted h6 mb-2'>Course instructor</h4>
                 <div className="d-flex flex-row mb-2 align-items-center">
                     <span className='pe-1'>5</span>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
+                    <i className="fa-solid fa-star star-icon"></i>
+                    <i className="fa-solid fa-star star-icon"></i>
+                    <i className="fa-solid fa-star star-icon"></i>
+                    <i className="fa-solid fa-star star-icon"></i>
                     <span className='ps-1'>(1,200)</span>
                 </div>
                 <h5 className='mb-2'>1500 L.E.</h5>

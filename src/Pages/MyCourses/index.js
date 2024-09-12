@@ -2,7 +2,7 @@ import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {AllCourses} from "../../components/MyCourses/AllCourses";
 import {MyList} from "../../components/MyCourses/MyList";
-import {Wishlist} from "../../components/MyCourses/Wishlist";
+import Wishlist from "../../components/MyCourses/Wishlist";
 import {Archived} from "../../components/MyCourses/Archived";
 import {LearningTools} from "../../components/MyCourses/LearningTools";
 import UserCourses from "../UserCourses/UserCourses";
