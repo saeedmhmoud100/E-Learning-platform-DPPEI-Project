@@ -3,7 +3,7 @@ import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import './Register.css'
-import {errorNotification, successNotification} from "../../hooks/Notification";
+import {errorNotification} from "../../hooks/Notification";
 
 export default function Register({handleRegister}) {
     const navigate = useNavigate()
@@ -33,8 +33,7 @@ export default function Register({handleRegister}) {
             }
         }else{
             handleRegister({name:e.target.name.value, email:e.target.email.value, password:e.target.password.value})
-            successNotification('Registration successful')
-            navigate('/')
+            navigate('/home')
         }
     }
 
@@ -54,17 +53,17 @@ export default function Register({handleRegister}) {
                 <div className="w-100">
                     <h1 className='py-4 text-center fw-bold'>Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" name='name'/>
-                            <label htmlFor="floatingInput">Full name</label>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name='name'/>
+                            <label for="floatingInput">Full name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" name='email'/>
-                            <label htmlFor="floatingInput">Email</label>
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name='email'/>
+                            <label for="floatingInput">Email</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="password" className="form-control" id="floatingInput" placeholder="name@example.com" name='password'/>
-                            <label htmlFor="floatingInput">Password</label>
+                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" name='password'/>
+                            <label for="floatingInput">Password</label>
                         </div>
                         <button type='submit' className='sign-btn-style mb-3'>Sign up</button>
                     </form>

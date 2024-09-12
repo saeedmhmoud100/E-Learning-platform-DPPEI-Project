@@ -3,16 +3,13 @@ import Footer from '../../components/Footer';
 import {Link, useNavigate} from 'react-router-dom';
 
 export default function Login({handleLogin}) {
+
     const navigate = useNavigate()
   //HANLDE FORM SUBMIT FUNCTION
   function handleSubmit(e){
     e.preventDefault();
-    const data = {
-        email: e.target.email.value,
-        password: e.target.password.value
-    }
-    handleLogin(data)
-    navigate('/')
+      handleLogin();
+      navigate('/profile')
   }
   return (
       <>
@@ -31,12 +28,12 @@ export default function Login({handleLogin}) {
                     <h1 className='py-4 text-center fw-bold'>Login</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" name={'email'}/>
-                            <label htmlFor="floatingInput">Email</label>
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
+                            <label for="floatingInput">Email</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="password" className="form-control" id="floatingInput" placeholder="name@example.com" name={'password'}/>
-                            <label htmlFor="floatingInput">Password</label>
+                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com"/>
+                            <label for="floatingInput">Password</label>
                         </div>
                         <button type='submit' className='sign-btn-style mb-3'>Login</button>
                     </form>

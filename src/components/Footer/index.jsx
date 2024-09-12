@@ -29,6 +29,10 @@ export default function Footer() {
 
               <div className="">
                 <h1>Contact Us</h1>
+
+                <ul>
+                  <li><Link to="/help-and-support" className='text-white'>Support</Link></li>
+                </ul>
               </div>
 
             </div>

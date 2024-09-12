@@ -1,0 +1,16 @@
+/* .listLink{
+    color: var(--secondaryColor) !important;
+}
+.active{
+    color: var(--mainColor) !important;
+    cursor: default;
+}
+.active:hover{
+    color: black !important;
+}*/
+table tr td, table tr th{
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+tr{
+    border-bottom: 1px !important;
+} 

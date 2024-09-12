@@ -1,0 +1,15 @@
+.dropdown-style{
+    background-color: white;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:105%;
+}
+.dropdown-style:hover{
+    background-color: var(--thirdColor);
+}
