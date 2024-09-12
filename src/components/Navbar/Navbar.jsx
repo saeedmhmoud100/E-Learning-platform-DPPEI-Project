@@ -118,12 +118,10 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                         ) :
                                                         (
                                                             <>
-                                                                <li><Link className="dropdown-item" to="#">Profile</Link>
+                                                                <li><Link className="dropdown-item" to="/profile">Profile</Link>
                                                                 </li>
-                                                                <li><Link className="dropdown-item" to="/my-courses">My Courses</Link>
-                                                                </li>
-                                                                <li><Link className="dropdown-item" to="#">Purchase
-                                                                    History</Link></li>
+                                                                <li><Link className="dropdown-item" to="/profile/courses">My Courses</Link></li>
+                                                                <li><Link className="dropdown-item" to="/profile/purchase-history">Purchase History</Link></li>
                                                             </>
                                                         )
                                                 }
