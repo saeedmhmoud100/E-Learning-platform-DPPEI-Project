@@ -10,11 +10,24 @@ import { Login } from "./Pages/Login";
 import { Home } from "./Pages/Home";
 import { Navbar } from "./components/Navbar/Navbar";
 import InstProfile from "./components/InstProfile";
+<<<<<<< Updated upstream
+=======
+import AddCourseForm from "./components/AddCourseForm";
+import Wishlist from "./Pages/Wishlist";
+import Footer from "./components/Footer";
+import VedioPage from './components/VedioPage';
+
+>>>>>>> Stashed changes
 function App() {
   return (
    
     <div className="App">
+<<<<<<< Updated upstream
       <Navbar />
+=======
+        <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
+        <VedioPage />
+>>>>>>> Stashed changes
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Form />} />
