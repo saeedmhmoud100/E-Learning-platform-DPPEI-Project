@@ -23,6 +23,9 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" to="/inst-profile">inst profile</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/videopage">videopage</Link>
+                        </li>
         
 
                         {/*Categories dropdown menu not working*/}

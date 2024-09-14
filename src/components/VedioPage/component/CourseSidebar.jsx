@@ -2,7 +2,7 @@
     import  "./style.css"
     import 'bootstrap/dist/css/bootstrap.min.css';
 
-    // Course data
+    
     const courseData = [
     {
         title: 'Section 1: Installing Vue.JS',
@@ -13,7 +13,52 @@
         'Introduction to VueJS'
         ]
     },
-    // ... other sections
+    {
+        title: 'Section 2: Installing Vue.JS',
+        progress: '0/3',
+        duration: '15min',
+        items: [
+        'What is VueJS',
+        'Introduction to VueJS'
+        ]
+    },
+    {
+        title: 'Section 3: Installing Vue.JS',
+        progress: '0/3',
+        duration: '15min',
+        items: [
+        'What is VueJS',
+        'Introduction to VueJS'
+        ]
+    },
+    {
+        title: 'Section 4: Installing Vue.JS',
+        progress: '0/3',
+        duration: '15min',
+        items: [
+        'What is VueJS',
+        'Introduction to VueJS'
+        ]
+    },
+    {
+        title: 'Section 5: Installing Vue.JS',
+        progress: '0/3',
+        duration: '15min',
+        items: [
+        'What is VueJS',
+        'Introduction to VueJS'
+        ]
+    },
+    {
+        title: 'Section 6: Installing Vue.JS',
+        progress: '0/3',
+        duration: '15min',
+        items: [
+        'What is VueJS',
+        'Introduction to VueJS'
+        ]
+    },
+    
     ];
 
     function CourseSidebar() {
@@ -45,20 +90,19 @@
     }
 
     function Dropdown({ items }) {
-    return (
-        <ul className="section-items dropdown bg-light">
-            <li>lesson 1</li>
-            <li>lesson 2</li>
-            <li>lesson 3</li>
-  {/*       {items.map((item, index) => (
-            <SectionItem key={index}>{item}</SectionItem>
-        )) */}
-        </ul>
-    );
-    }
+        return (
+          <ul className="section-items dropdown bg-light">
+            {items.map((item, index) => (
+              <SectionItem key={index}>{item}</SectionItem>
+            ))}
+          </ul>
+        );
+      }
+      
 
-  /*   function SectionItem({ title }) {
-    return <li className="section-item">{title}</li>;
-    } */
+    function SectionItem({ children }) {
+        return <li className="section-item">{children}</li>;
+      }
+      
 
     export default CourseSidebar;
