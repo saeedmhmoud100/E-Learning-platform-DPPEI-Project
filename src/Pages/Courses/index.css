@@ -26,3 +26,32 @@
     color: white;
     transition: 0.3s all;
 }
+
+.overlay{
+    background-color: rgba(0,0,0,0.5);
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.show-filter-menu-to-side{
+    background-color: var(--backgroundColor);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    height: 100%;
+    width: 17rem;
+}
+
+
+@media (width <= 992px) and (width >= 768px){
+
+}
+
+@media (width <= 370px){
+    .show-filter-menu-to-side{
+        width: 12rem;
+    }
+}
