@@ -96,7 +96,7 @@ export default function Courses() {
         (
             <div className="row">
                {windowWidth > 992 && (
-                   <div className='col-lg-4 p-0'>
+                   <div className='col-lg-3 p-0'>
                     <div className="container-fluid">
                        <FilterCourseSection filterType={'Ratings'}/>
                        <hr className='m-0'/>
@@ -110,7 +110,7 @@ export default function Courses() {
                    </div>
                )}
 
-              <div className="col-lg-8 py-4">
+              <div className="col-lg-9 py-4">
                   <div className="container-fluid">
                         <CourseCards />
                     </div>
