@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CourseCards from '../../components/CourseCards';
 import FilterCourseSection from '../../components/FilterCourseSection';
 
@@ -9,7 +9,20 @@ export default function Courses() {
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  // EVENT LISTENER THAT DYNAMICALLY LISTENS TO WINDOW WIDTH AND ADJUSTS windowWidth
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // FUNCTION HANDLES CLOSING OF FILTER MENU
   function handleFilterMenuClose(){
       setDisplayFilterMenu(false);
   }
@@ -51,55 +64,59 @@ export default function Courses() {
             </ul>)}
         </div>
         <hr />
-        {window.innerWidth <= 992 ? (<>
-        {console.log('Window width:', window.innerWidth)}
-        <div className={`overlay ${displayFilterMenu ? 'd-block' : 'd-none'}`} onClick={()=>{
+
+        {windowWidth <= 992 ? (
+            <>
+            <div className={`overlay-for-courses ${displayFilterMenu ? 'd-block' : 'd-none'}`} onClick={()=>{
             handleFilterMenuClose()
-        }}></div>
-        <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
-            <div className="container-fluid">
-                      <FilterCourseSection filterType={'Ratings'}/>
-                      <hr className='m-0'/>
-                      <FilterCourseSection filterType={'Price'}/>
-                      <hr className='m-0'/>
-                      <FilterCourseSection filterType={'Categories'}/>
-                      <hr className='m-0'/>
-                      <FilterCourseSection filterType={'Video Duration'}/>
-                      <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
-                        handleFilterMenuClose()
-                        }}>Done</button>
+            }}></div>
+            <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
+                <div className="container-fluid">
+                        <FilterCourseSection filterType={'Ratings'}/>
+                        <hr className='m-0'/>
+                        <FilterCourseSection filterType={'Price'}/>
+                        <hr className='m-0'/>
+                        <FilterCourseSection filterType={'Categories'}/>
+                        <hr className='m-0'/>
+                        <FilterCourseSection filterType={'Video Duration'}/>
+                        <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
+                            handleFilterMenuClose()
+                            }}>Done</button>
+                </div>
             </div>
-        </div>
-        <div className='row'>
-            <div className="col-lg-8 py-4">
-                  <div className="container-fluid">
-                        <CourseCards />
+            <div className="row">
+                <div className="col-lg-8 py-4">
+                    <div className="container-fluid">
+                            <CourseCards />
+                        </div>
+                </div>
+            </div>
+            </>
+        ):
+        (
+            <div className="row">
+               {windowWidth > 992 && (
+                   <div className='col-lg-4 p-0'>
+                    <div className="container-fluid">
+                       <FilterCourseSection filterType={'Ratings'}/>
+                       <hr className='m-0'/>
+                       <FilterCourseSection filterType={'Price'}/>
+                       <hr className='m-0'/>
+                       <FilterCourseSection filterType={'Categories'}/>
+                       <hr className='m-0'/>
+                       <FilterCourseSection filterType={'Video Duration'}/>
+                       <hr className='m-0'/>
                     </div>
-            </div>
-        </div>
-        </>
-        ): 
-        (<div className="row">
-            {console.log('Window width:', window.innerWidth)}
-              <div className='col-lg-4 p-0'>
-                  <div className="container-fluid">
-                      <FilterCourseSection filterType={'Ratings'}/>
-                      <hr className='m-0'/>
-                      <FilterCourseSection filterType={'Price'}/>
-                      <hr className='m-0'/>
-                      <FilterCourseSection filterType={'Categories'}/>
-                      <hr className='m-0'/>
-                      <FilterCourseSection filterType={'Video Duration'}/>
-                      <hr className='m-0'/>
-                  </div>
-              </div>
+                   </div>
+               )}
 
               <div className="col-lg-8 py-4">
                   <div className="container-fluid">
                         <CourseCards />
                     </div>
               </div>
-          </div>)}
+          </div>
+        )}
         
       </div>
     </div>
