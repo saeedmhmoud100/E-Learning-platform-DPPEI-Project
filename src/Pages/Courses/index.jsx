@@ -1,6 +1,7 @@
 import React from 'react'
 import './index.css';
 import { useState } from 'react';
+import CourseCards from '../../components/CourseCards';
 
 export default function Courses() {
 
@@ -47,12 +48,8 @@ export default function Courses() {
 
               <div className="col-lg-6">
                   <div className="container-fluid">
-                      <div className="row">
-                          <div className="col-lg-4">
-                              
-                          </div>
-                      </div>
-                  </div>
+                        <CourseCards />
+                    </div>
               </div>
           </div>
       </div>
