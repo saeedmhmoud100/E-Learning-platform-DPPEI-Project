@@ -30,9 +30,11 @@
 .overlay{
     background-color: rgba(0,0,0,0.5);
     z-index: 3;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .show-filter-menu-to-side{
@@ -43,6 +45,12 @@
     z-index: 4;
     height: 100%;
     width: 17rem;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.show-filter-menu-to-side::-webkit-scrollbar {
+    display: none; 
 }
 
 

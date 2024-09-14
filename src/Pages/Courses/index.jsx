@@ -29,19 +29,19 @@ export default function Courses() {
             
             {/* DISPLAY DROPDOWN CONDITION */}
             {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none p-2 text-center mw-100' onClick={()=>{
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
                     setSortType('Most relevant');
                     setDisplayDropdown(!displayDropdown);
                     }}>Most relevant</li>                                                                                                                                                                                                                                      
-                <li className='list-style-none p-2 text-center mw-100' onClick={()=>{
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
                     setSortType('Most viewed');
                     setDisplayDropdown(!displayDropdown);
                     }}>Most viewed</li>
-                <li className='list-style-none p-2 text-center mw-100' onClick={()=>{
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
                     setSortType('Highest rated');
                     setDisplayDropdown(!displayDropdown);
                     }}>Highest rated</li>
-                <li className='list-style-none p-2 text-center mw-100' onClick={()=>
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>
                     {setSortType('Newest');
                     setDisplayDropdown(!displayDropdown);
                     }}>Newest</li>
@@ -49,10 +49,11 @@ export default function Courses() {
         </div>
         <hr />
         {window.innerWidth <= 992 ? (<>
+        {console.log('Window width:', window.innerWidth)}
         <div className={`overlay ${displayFilterMenu ? 'd-block' : 'd-none'}`} onClick={()=>{
             handleFilterMenuClose()
         }}></div>
-        <div className={`show-filter-menu-to-side ${displayFilterMenu ? 'd-block' : 'd-none'}`}>
+        <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
             <div className="container-fluid">
                       <FilterCourseSection filterType={'Ratings'}/>
                       <hr className='m-0'/>
@@ -76,6 +77,7 @@ export default function Courses() {
         </>
         ): 
         (<div className="row">
+            {console.log('Window width:', window.innerWidth)}
               <div className='col-lg-4 p-0'>
                   <div className="container-fluid">
                       <FilterCourseSection filterType={'Ratings'}/>
