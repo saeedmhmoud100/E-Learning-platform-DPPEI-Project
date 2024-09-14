@@ -7,17 +7,36 @@ import FilterCourseSection from '../../components/FilterCourseSection';
 export default function Courses() {
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
+  const [sortType, setSortType] = useState('Most Relevant');
+
   return (
     <div className='mt-5 mb-5'>
       <div className="container">
         <h1 className='py-4 text-center'>1,000 Results for 'search term'</h1>
         <div className='position-relative'>
-            <button className='btn btn-outline-dark p-3 w-25 btn-hover-style' onClick={()=>{setDisplayDropdown(!displayDropdown)}}>Sort by Most Relevant <i class="fa-solid fa-chevron-down ms-2"></i></button>
+            <button className={`button-style p-3 w-25 ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
+                setDisplayDropdown(!displayDropdown)}}>
+                    Sort by {sortType}
+                    <i class="fa-solid fa-chevron-down ms-2"></i></button>
+            
+            {/* DISPLAY DROPDOWN CONDITION */}
             {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none py-1'>Most relevant</li>                                                                                                                                                                                                                                      
-                <li className='list-style-none py-1'>Most viewed</li>
-                <li className='list-style-none py-1'>Highest rated</li>
-                <li className='list-style-none py-1'>Newest</li>
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
+                    setSortType('Most relevant');
+                    setDisplayDropdown(!displayDropdown);
+                    }}>Most relevant</li>                                                                                                                                                                                                                                      
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
+                    setSortType('Most viewed');
+                    setDisplayDropdown(!displayDropdown);
+                    }}>Most viewed</li>
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
+                    setSortType('Highest rated');
+                    setDisplayDropdown(!displayDropdown);
+                    }}>Highest rated</li>
+                <li className='list-style-none p-2 text-center w-100' onClick={()=>
+                    {setSortType('Newest');
+                    setDisplayDropdown(!displayDropdown);
+                    }}>Newest</li>
             </ul>)}
         </div>
         <hr />

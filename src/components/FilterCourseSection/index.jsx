@@ -18,6 +18,8 @@ export default function FilterCourseSection({filterType}) {
                 <i class={`fa-solid fa-angle-up ${arrowRotate ? 'rotate-animation': 'rotate-back'}`}></i>
             </div>
         </div>
+
+        {/* FILTER DROPDOWN CONDITION */}
         {filterDropdown && 
 
         // RATINGS DROPDOWN

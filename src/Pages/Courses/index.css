@@ -1,7 +1,7 @@
 .dropdown-style{
     background-color: white;
     width: 25%;
-    padding: 10px;
+    padding: 0;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -11,10 +11,18 @@
     top:105%;
     z-index: 2;
 }
-.dropdown-style:hover{
+.dropdown-style li:hover{
     background-color: var(--thirdColor);
 }
 
-.btn-hover-style:hover{
+.button-style{
+    border: 1px solid black;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.change-btn-style{
     background-color: var(--mainColor);
+    color: white;
+    transition: 0.3s all;
 }
