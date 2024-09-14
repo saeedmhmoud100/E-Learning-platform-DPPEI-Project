@@ -65,7 +65,7 @@ export default function Courses() {
                       <FilterCourseSection filterType={'Categories'}/>
                       <hr className='m-0'/>
                       <FilterCourseSection filterType={'Video Duration'}/>
-                      <button className='btn btn-dark p-3 w-100 align-self-center' onClick={()=>{
+                      <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
                         handleFilterMenuClose()
                         }}>Done</button>
             </div>
