@@ -73,7 +73,7 @@ function App() {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/wishlist' element={<Wishlist/>}/>
-            <Route path='/my-courses/*' element={<MyCourses />}/>
+            <Route path='/my-courses/*' element={<MyCourses  />}/>
             <Route path="/profile" element={<UserProfile/>} />
             <Route path="/profile/edit" element={<EditUserProfile/>}/>
             <Route path="/profile/courses" element={<UserCourses/>}/>

@@ -45,7 +45,7 @@ export default function Cart(){
           <CourseItem/>
     </div>          
    <div className="col-lg-3 col-sm-12 ">
-           <CheckoutSummary/>
+           <CheckoutSummary />
   </div>
   
            
