@@ -65,7 +65,7 @@ export const MyCourses = () => {
                             {
                                 sections.map((section, index) => (
                                     <div key={index} className="w-fit-content px-2">
-                                        <Link className={`text-white pb-2 fs-5 fw-bold ${pathname === section.fullPath ? 'border-4 border-bottom' : '' }  d-inline`} to={section.fullPath}> {section.title}</Link>
+                                        <Link className={`text-white pb-2 fs-5 text-decoration-none fw-bold ${pathname === section.fullPath ? 'border-4 border-bottom' : '' }  d-inline`} to={section.fullPath}> {section.title}</Link>
                                     </div>
                                 ))
                             }

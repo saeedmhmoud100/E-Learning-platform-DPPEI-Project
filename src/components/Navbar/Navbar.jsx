@@ -37,7 +37,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                         :
                                         <>
                                             <li className="nav-item">
-                                                <Link className="nav-link active" to="/courses">Courses</Link>
+                                                <Link className="nav-link active" to="/my-courses">Courses</Link>
                                             </li>
                                             <li className="nav-item dropdown">
                                                 <Link className="nav-link dropdown-toggle active" role="button" to=""
@@ -120,7 +120,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                             <>
                                                                 <li><Link className="dropdown-item" to="/profile">Profile</Link>
                                                                 </li>
-                                                                <li><Link className="dropdown-item" to="/profile/courses">My Courses</Link></li>
+                                                                <li><Link className="dropdown-item" to="/my-courses">My Courses</Link></li>
                                                                 <li><Link className="dropdown-item" to="/profile/purchase-history">Purchase History</Link></li>
                                                             </>
                                                         )
