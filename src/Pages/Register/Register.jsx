@@ -74,7 +74,6 @@ export default function Register({handleRegister}) {
 
         
         </div>
-        <Footer />
       </>
     
   )

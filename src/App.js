@@ -79,7 +79,7 @@ function App() {
             <Route path='/courses' element={<Courses />}/>
             <Route path='/*' element={<NotFound/>}/>
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
 
         <ToastContainer/>
     </div>);
