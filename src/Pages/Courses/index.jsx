@@ -22,12 +22,16 @@ export default function Courses() {
         </div>
         <hr />
         <div className="row">
-              <div className="col-lg-4">
-                  <div className="container">
+              <div className="col-lg-4 p-0">
+                  <div className="container-fluid">
                       <FilterCourseSection filterType={'Ratings'}/>
+                      <hr className='m-0'/>
                       <FilterCourseSection filterType={'Price'}/>
+                      <hr className='m-0'/>
                       <FilterCourseSection filterType={'Categories'}/>
-                      <FilterCourseSection filterType={'Video Duartion'}/>
+                      <hr className='m-0'/>
+                      <FilterCourseSection filterType={'Video Duration'}/>
+                      <hr className='m-0'/>
                   </div>
               </div>
 
