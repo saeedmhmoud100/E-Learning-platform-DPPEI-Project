@@ -22,7 +22,7 @@ export default function FilterCourseSection({filterType}) {
         {filterDropdown && 
 
         // RATINGS DROPDOWN
-        (filterType === 'Ratings' ? (<div className='pb-3 px-0 d-flex flex-column justify-content-center form-check'>
+        (filterType === 'Ratings' ? (<form className='pb-3 px-0 d-flex flex-column justify-content-center form-check'>
             <div className="py-2 form-check">
                 <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
@@ -67,10 +67,10 @@ export default function FilterCourseSection({filterType}) {
                 </label>
             </div>
             
-        </div>):
+        </form>):
 
         // PRICE DROPDOWN
-        filterType === 'Price' ? (<div className='pb-3 px-0 d-flex flex-column justify-content-center form-check'>
+        filterType === 'Price' ? (<form className='pb-3 px-0 d-flex flex-column justify-content-center form-check'>
             <div className="py-2 form-check">
                 <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
@@ -83,10 +83,10 @@ export default function FilterCourseSection({filterType}) {
                     Free
                 </label>
             </div>
-        </div>):
+        </form>):
 
         // CATEGORIES DROPDOWN
-        filterType === 'Categories' ? (<div className='pb-3 px-0 d-flex flex-column justify-content-center'>
+        filterType === 'Categories' ? (<form className='pb-3 px-0 d-flex flex-column justify-content-center'>
             <div className="py-2 form-check">
                 <input class="form-check-input radio-style" type="checkbox" value="" id="flexCheckDefault"/>
                 <label class="form-check-label" for="flexCheckDefault">
@@ -108,10 +108,10 @@ export default function FilterCourseSection({filterType}) {
                 </label>
             </div>
             
-        </div>):
+        </form>):
 
         // VIDEO DURATION DROPDOWN
-        filterType === 'Video Duration' && (<div className='pb-3 px-0 d-flex flex-column justify-content-center'>
+        filterType === 'Video Duration' && (<form className='pb-3 px-0 d-flex flex-column justify-content-center'>
             <div className="py-2 form-check">
                 <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
@@ -139,7 +139,7 @@ export default function FilterCourseSection({filterType}) {
                     6+ Hours
                 </label>
             </div>
-        </div>))}
+        </form>))}
 
     </div>
   )

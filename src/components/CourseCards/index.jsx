@@ -9,7 +9,7 @@ export default function CourseCards() {
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <div className='overlay-for-course-cards'></div>
-                <i class="fa-solid fa-heart add-to-wishlist-icon"></i>
+                <i class="fa-regular fa-heart add-to-wishlist-icon"></i>
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
             </div>
             <div className="course-card">
@@ -33,7 +33,7 @@ export default function CourseCards() {
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <div className='overlay-for-course-cards'></div>
-                <i class="fa-solid fa-heart add-to-wishlist-icon"></i>
+                <i class="fa-regular fa-heart add-to-wishlist-icon"></i>
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
             </div>
             <div className="course-card">
@@ -57,7 +57,7 @@ export default function CourseCards() {
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <div className='overlay-for-course-cards'></div>
-                <i class="fa-solid fa-heart add-to-wishlist-icon"></i>
+                <i class="fa-regular fa-heart add-to-wishlist-icon"></i>
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
             </div>
             <div className="course-card">
@@ -81,7 +81,7 @@ export default function CourseCards() {
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <div className='overlay-for-course-cards'></div>
-                <i class="fa-solid fa-heart add-to-wishlist-icon"></i>
+                <i class="fa-regular fa-heart add-to-wishlist-icon"></i>
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
             </div>
             <div className="course-card">
