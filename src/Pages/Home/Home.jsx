@@ -43,7 +43,7 @@ export default function Home() {
                     <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
-                                <div className="overlay"></div>
+                                <div className="overlay-for-home"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
                                 <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
                             </div>
@@ -60,7 +60,7 @@ export default function Home() {
                     <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
-                                <div className="overlay"></div>
+                                <div className="overlay-for-home"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
                                 <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
                             </div>
@@ -77,7 +77,7 @@ export default function Home() {
                     <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
-                                <div className="overlay"></div>
+                                <div className="overlay-for-home"></div>
                                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
                                 <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
                             </div>

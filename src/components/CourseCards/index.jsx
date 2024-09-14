@@ -5,7 +5,7 @@ export default function CourseCards() {
   return (
     <div className='row'>
 
-      <div className="col-12 col-md-6 col-lg-4">
+      <div className="col-12 col-sm-6 col-lg-4">
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -27,7 +27,7 @@ export default function CourseCards() {
         </div>
       </div>
 
-      <div className="col-12 col-md-6 col-lg-4">
+      <div className="col-12 col-sm-6 col-lg-4">
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -49,7 +49,7 @@ export default function CourseCards() {
         </div>
       </div>
 
-      <div className="col-12 col-md-6 col-lg-4">
+      <div className="col-12 col-sm-6 col-lg-4">
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
@@ -71,7 +71,7 @@ export default function CourseCards() {
         </div>
       </div>
 
-      <div className="col-12 col-md-6 col-lg-4">
+      <div className="col-12 col-sm-6 col-lg-4">
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
                 <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>

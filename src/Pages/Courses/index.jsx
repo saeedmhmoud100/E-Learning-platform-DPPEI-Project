@@ -19,13 +19,16 @@ export default function Courses() {
       <div className="container">
         <h1 className='py-4 text-center'>1,000 Results for 'search term'</h1>
         <div className='position-relative'>
-            <button className={`button-style p-3 mw-50 ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
-                setDisplayDropdown(!displayDropdown)}}>
-                    Sort by {sortType}
-                    <i class="fa-solid fa-chevron-down ms-2"></i></button>
-            <button className={`button-style p-3 mw-50 ms-2 d-lg-none ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
-                setDisplayFilterMenu(!displayFilterMenu)}}>
-                    Filter</button>
+            <div className='d-flex align-items-center'>
+                <button className={`sort-button-style ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
+                    setDisplayDropdown(!displayDropdown)}}>
+                        Sort by {sortType}
+                        <i class="fa-solid fa-chevron-down ms-2"></i></button>
+                <button className={`filter-button-style d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
+                    setDisplayFilterMenu(!displayFilterMenu)}}>
+                        Filter</button>
+            </div>
+            
             
             {/* DISPLAY DROPDOWN CONDITION */}
             {displayDropdown && (<ul className='dropdown-style'>

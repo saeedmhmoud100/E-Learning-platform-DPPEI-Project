@@ -1,7 +1,7 @@
 .dropdown-style{
     background-color: white;
-    width: 25%;
     padding: 0;
+    width: 15rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -15,19 +15,30 @@
     background-color: var(--thirdColor);
 }
 
-.button-style{
+.sort-button-style{
     border: 1px solid black;
     background-color: transparent;
     border-radius: 10px;
+    padding: 1rem;
+    width: 15rem;
 }
 
+.filter-button-style{
+    border: 1px solid black;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 1rem;
+    min-width: 5rem;
+    padding: 1rem;
+    margin-left: 0.5rem;
+}
 .change-btn-style{
     background-color: var(--mainColor);
     color: white;
     transition: 0.3s all;
 }
 
-.overlay{
+.overlay-for-courses{
     background-color: rgba(0,0,0,0.5);
     z-index: 3;
     position: fixed;
@@ -53,10 +64,6 @@
     display: none; 
 }
 
-
-@media (width <= 992px) and (width >= 768px){
-
-}
 
 @media (width <= 370px){
     .show-filter-menu-to-side{
