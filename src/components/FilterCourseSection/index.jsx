@@ -6,7 +6,6 @@ export default function FilterCourseSection({filterType}) {
 
   const [filterDropdown, setFilterDropdown] = useState(false);
   const [arrowRotate, setArrorRotate] = useState(false);
-
   return (
     <div className="row px-3">
 
@@ -25,7 +24,7 @@ export default function FilterCourseSection({filterType}) {
         // RATINGS DROPDOWN
         (filterType === 'Ratings' ? (<div className='pb-3 px-0 d-flex flex-column justify-content-center form-check'>
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
@@ -36,7 +35,7 @@ export default function FilterCourseSection({filterType}) {
             </div>
 
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
@@ -47,7 +46,7 @@ export default function FilterCourseSection({filterType}) {
             </div>
 
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star-half-stroke"></i>
@@ -58,7 +57,7 @@ export default function FilterCourseSection({filterType}) {
             </div>
 
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-solid fa-star"></i>
                 <i class="text-warning  ms-2 fa-regular fa-star"></i>
@@ -73,13 +72,13 @@ export default function FilterCourseSection({filterType}) {
         // PRICE DROPDOWN
         filterType === 'Price' ? (<div className='pb-3 px-0 d-flex flex-column justify-content-center form-check'>
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
                     Paid
                 </label>
             </div>
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
                     Free
                 </label>
@@ -89,21 +88,21 @@ export default function FilterCourseSection({filterType}) {
         // CATEGORIES DROPDOWN
         filterType === 'Categories' ? (<div className='pb-3 px-0 d-flex flex-column justify-content-center'>
             <div className="py-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                <input class="form-check-input radio-style" type="checkbox" value="" id="flexCheckDefault"/>
                 <label class="form-check-label" for="flexCheckDefault">
                     Java
                 </label>
             </div>
 
             <div className="py-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                <input class="form-check-input radio-style" type="checkbox" value="" id="flexCheckDefault"/>
                 <label class="form-check-label" for="flexCheckDefault">
                     Python
                 </label>
             </div>
 
             <div className="py-2 form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                <input class="form-check-input radio-style" type="checkbox" value="" id="flexCheckDefault"/>
                 <label class="form-check-label" for="flexCheckDefault">
                     JavaScript
                 </label>
@@ -114,28 +113,28 @@ export default function FilterCourseSection({filterType}) {
         // VIDEO DURATION DROPDOWN
         filterType === 'Video Duration' && (<div className='pb-3 px-0 d-flex flex-column justify-content-center'>
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
                     0-1 Hour
                 </label>
             </div>
 
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
                     1-3 Hours
                 </label>
             </div>
 
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
                     3-6 Hours
                 </label>
             </div>
 
             <div className="py-2 form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input className="form-check-input radio-style" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 <label className="form-check-label ms-2" for="flexRadioDefault1">
                     6+ Hours
                 </label>
