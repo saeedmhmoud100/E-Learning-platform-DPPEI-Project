@@ -27,6 +27,7 @@ import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
 import UserCourses from "./Pages/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./HelpSupport/HelpSupport";
+import InsCourses from "./Pages/InsCourses";
 
 function App() {
     const [userData, setUserData] = useState({});
@@ -66,6 +67,7 @@ function App() {
             <Route path="/login" element={<Login handleLogin={login}/>}/>
             <Route path='/admin/*' element={<AdminPage/>}/>
             <Route path="/inst-profile" element={<InstProfile/>}/>
+            <Route path="/inst-profile/all-courses" element={<InsCourses/>}/>
             <Route path='add-course' element={<AddCourseForm/>}/>
             <Route path='/course-details' element={<CourseDetails/>}/>
             <Route path='/cart' element={<Cart/>}/>
