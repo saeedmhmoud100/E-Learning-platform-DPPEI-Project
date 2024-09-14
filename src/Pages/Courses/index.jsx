@@ -2,6 +2,7 @@ import React from 'react'
 import './index.css';
 import { useState } from 'react';
 import CourseCards from '../../components/CourseCards';
+import FilterCourseSection from '../../components/FilterCourseSection';
 
 export default function Courses() {
 
@@ -13,37 +14,24 @@ export default function Courses() {
         <div className='position-relative'>
             <button className='btn btn-outline-dark p-3 w-25 btn-hover-style' onClick={()=>{setDisplayDropdown(!displayDropdown)}}>Sort by Most Relevant <i class="fa-solid fa-chevron-down ms-2"></i></button>
             {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none'>Most relevant</li>                                                                                                                                                                                                                                      
-                <li className='list-style-none'>Most viewed</li>
-                <li className='list-style-none'>Highest rated</li>
-                <li className='list-style-none'>Newest</li>
+                <li className='list-style-none py-1'>Most relevant</li>                                                                                                                                                                                                                                      
+                <li className='list-style-none py-1'>Most viewed</li>
+                <li className='list-style-none py-1'>Highest rated</li>
+                <li className='list-style-none py-1'>Newest</li>
             </ul>)}
         </div>
         <hr />
-        <div className="row py-5">
+        <div className="row">
               <div className="col-lg-4">
                   <div className="container">
-                      <div className="row">
-
-                          <div className="col-12">
-                              <div className="">
-                                  <h2>Rating</h2>
-                              </div>
-                          </div>
-                          <div className="col-12">
-
-                          </div>
-                          <div className="col-12">
-
-                          </div>
-                          <div className="col-12">
-
-                          </div>
-                      </div>
+                      <FilterCourseSection filterType={'Ratings'}/>
+                      <FilterCourseSection filterType={'Price'}/>
+                      <FilterCourseSection filterType={'Categories'}/>
+                      <FilterCourseSection filterType={'Video Duartion'}/>
                   </div>
               </div>
 
-              <div className="col-lg-8">
+              <div className="col-lg-8 py-4">
                   <div className="container-fluid">
                         <CourseCards />
                     </div>
