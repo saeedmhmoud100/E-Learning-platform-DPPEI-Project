@@ -1,6 +1,6 @@
 .dropdown-style{
     background-color: white;
-    width: 50%;
+    width: 25%;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -9,7 +9,12 @@
     align-items: center;
     position: absolute;
     top:105%;
+    z-index: 2;
 }
 .dropdown-style:hover{
     background-color: var(--thirdColor);
+}
+
+.btn-hover-style:hover{
+    background-color: var(--mainColor);
 }

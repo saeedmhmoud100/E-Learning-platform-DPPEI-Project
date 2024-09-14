@@ -7,27 +7,24 @@ export default function Courses() {
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
   return (
-    <div className='mt-5'>
+    <div className='mt-5 mb-5'>
       <div className="container">
-        <h1 className='py-3'>1,000 Results for 'search term'</h1>
-          <div className="row">
-              <div className="col-lg-6 ">
+        <h1 className='py-4 text-center'>1,000 Results for 'search term'</h1>
+        <div className='position-relative'>
+            <button className='btn btn-outline-dark p-3 w-25 btn-hover-style' onClick={()=>{setDisplayDropdown(!displayDropdown)}}>Sort by Most Relevant <i class="fa-solid fa-chevron-down ms-2"></i></button>
+            {displayDropdown && (<ul className='dropdown-style'>
+                <li className='list-style-none'>Most relevant</li>                                                                                                                                                                                                                                      
+                <li className='list-style-none'>Most viewed</li>
+                <li className='list-style-none'>Highest rated</li>
+                <li className='list-style-none'>Newest</li>
+            </ul>)}
+        </div>
+        <hr />
+        <div className="row py-5">
+              <div className="col-lg-4">
                   <div className="container">
                       <div className="row">
 
-                          <div className="col-12 p-0 mb-3">
-                              <div className='position-relative'>
-                                <button className='btn btn-outline-dark p-3 w-50' onClick={()=>{setDisplayDropdown(!displayDropdown)}}>Sort by Most Relevant <i class="fa-solid fa-chevron-down ms-2"></i></button>
-                                {displayDropdown && (<ul className='dropdown-style'>
-                                    <li>Most relevant</li>                                                                                                                                                                                                                                      
-                                    <li>Most viewed</li>
-                                    <li>Highest rated</li>
-                                    <li>Newest</li>
-                                </ul>)}
-                              </div>
-                          </div>
-
-                          <hr />
                           <div className="col-12">
                               <div className="">
                                   <h2>Rating</h2>
@@ -46,7 +43,7 @@ export default function Courses() {
                   </div>
               </div>
 
-              <div className="col-lg-6">
+              <div className="col-lg-8">
                   <div className="container-fluid">
                         <CourseCards />
                     </div>
