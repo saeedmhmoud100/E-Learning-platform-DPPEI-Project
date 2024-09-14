@@ -61,11 +61,11 @@ export const MyCourses = () => {
                         <div className="col-12">
                             <h1 className='fw-bold mb-5'>My Courses</h1>
                         </div>
-                        <div className="row px-0">
+                        <div className="row px-0 gy-3">
                             {
                                 sections.map((section, index) => (
                                     <div key={index} className="w-fit-content px-2">
-                                        <Link className={`text-white pb-2 fs-5 text-decoration-none fw-bold ${pathname === section.fullPath ? 'border-4 border-bottom' : '' }  d-inline`} to={section.fullPath}> {section.title}</Link>
+                                        <Link className={`text-white pb-2 fs-6 text-decoration-none fw-bold ${pathname === section.fullPath ? 'border-4 border-bottom' : '' }  d-inline`} to={section.fullPath}> {section.title}</Link>
                                     </div>
                                 ))
                             }
