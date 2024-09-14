@@ -1,8 +1,16 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './Navbar.css';
 
 export const Navbar = ({logout, changeRule, userData}) => {
+    const navigate = useNavigate()
 
+
+
+
+    const handleSubmit = e =>{
+        e.preventDefault()
+        navigate('/courses')
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark p-3 position-relative">
@@ -37,7 +45,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                         :
                                         <>
                                             <li className="nav-item">
-                                                <Link className="nav-link active" to="/courses">Courses</Link>
+                                                <Link className="nav-link active" to="/my-courses">Courses</Link>
                                             </li>
                                             <li className="nav-item dropdown">
                                                 <Link className="nav-link dropdown-toggle active" role="button" to=""
@@ -59,7 +67,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
 
                     <ul className="navbar-nav w-50">
                         <li className="nav-item ms-md-3 ms-auto w-100">
-                            <form className="form-inline my-2 my-lg-0">
+                            <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
                                 <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search"
                                        aria-label="Search"/>
                             </form>
@@ -120,7 +128,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                             <>
                                                                 <li><Link className="dropdown-item" to="/profile">Profile</Link>
                                                                 </li>
-                                                                <li><Link className="dropdown-item" to="/profile/courses">My Courses</Link></li>
+                                                                <li><Link className="dropdown-item" to="/my-courses">My Courses</Link></li>
                                                                 <li><Link className="dropdown-item" to="/profile/purchase-history">Purchase History</Link></li>
                                                             </>
                                                         )

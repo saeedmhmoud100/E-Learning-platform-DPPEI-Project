@@ -5,6 +5,7 @@ import {MyList} from "../../components/MyCourses/MyList";
 import Wishlist from "../../components/MyCourses/Wishlist";
 import {Archived} from "../../components/MyCourses/Archived";
 import {LearningTools} from "../../components/MyCourses/LearningTools";
+import UserCourses from "../UserCourses/UserCourses";
 
 export const MyCourses = () => {
     const {pathname} = useLocation();
@@ -16,7 +17,7 @@ export const MyCourses = () => {
             title: 'All Courses',
             path: 'all-courses',
             fullPath: '/my-courses/all-courses',
-            component: AllCourses
+            component: UserCourses
         },
         {
             title: 'My List',
@@ -60,11 +61,11 @@ export const MyCourses = () => {
                         <div className="col-12">
                             <h1 className='fw-bold mb-5'>My Courses</h1>
                         </div>
-                        <div className="row px-0">
+                        <div className="row px-0 gy-3">
                             {
                                 sections.map((section, index) => (
                                     <div key={index} className="w-fit-content px-2">
-                                        <Link className={`text-white pb-2 fs-5 fw-bold ${pathname === section.fullPath ? 'border-4 border-bottom' : '' }  d-inline`} to={section.fullPath}> {section.title}</Link>
+                                        <Link className={`text-white pb-2 fs-6 text-decoration-none fw-bold ${pathname === section.fullPath ? 'border-4 border-bottom' : '' }  d-inline`} to={section.fullPath}> {section.title}</Link>
                                     </div>
                                 ))
                             }

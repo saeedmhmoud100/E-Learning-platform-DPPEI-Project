@@ -16,13 +16,13 @@
     
 
     return (
-        <div className="container vh-100 mt-5  ">
-        <div className="container d-flex ">
+        <div className="container w-85 vh-100 mt-5  ">
+        <div className="container w-85 d-flex ">
             <div className="col-md-8  vh-100 ">
             <div className="">
                 <h5>Instructor</h5>
                 <h1 className="font-size-40">Maximilian Schwarzmüller</h1>
-                <h2 className="font-size-20">
+                <h2 className="font-size-16">
                 AWS certified, Professional Web Developer and Instructor
                 </h2>
 
@@ -38,16 +38,16 @@
 
                 <div className="ins-statistics d-flex gap-5">
                 <div className="total  ">
-                    <h4 className="fw-bold ">Total Students</h4>
+                    <h4 className="fw-bold h4-style">Total Students</h4>
                     <p className="fs-3 fw-bold"> 3,081,162 </p>
                 </div>
                 <div className="review ">
-                    <h4 className="fw-bold">Reviews</h4>
+                    <h4 className="fw-bold h4-style">Reviews</h4>
                     <p className="fs-3 fw-bold">1,136,952</p>
                 </div>
                 </div>
                 <div className="details">
-                <h2 className="mb-4 font-size-20">About me</h2>
+                <h2 className="mb-4 font-size-16">About me</h2>
                 <div className="about " style={isOpen ? null : open}>
                     <p className="fs-12 fw-bold">Experience as (Web) Developer</p>
                     <p className={!isOpen && `ins-info`}>
