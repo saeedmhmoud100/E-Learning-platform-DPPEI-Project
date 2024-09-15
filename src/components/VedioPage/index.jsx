@@ -1,8 +1,10 @@
     import React, { useState } from "react";
     import myVideo from "./images/video1.mp4";
     import CourseSidebar from "./component/CourseSidebar";
-    /*     import "./vedio.sass";
-    */ export default function VideoPage() {
+    import { LearningTools } from "./component/LearningTools";
+    import Overview from "./component/OverView";
+    import Questions from "./component/Questions";
+    export default function VideoPage() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isOverViewOpen, setIsOverViewOpen] = useState(false);
     const [isQ_A_Open, setIsQ_A_Open] = useState(false);
@@ -12,7 +14,7 @@
     const [isLearningToolOpen, setIsLearningToolOpen] = useState(false);
     return (
         <>
-        <div className="container-fluide">
+        <div className="container-fluide mb-5">
             <div className="row ">
             <div className="col-8 ">
                 <div>
@@ -52,7 +54,20 @@
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button className="nav-link">Q&A</button>
+                    <button
+                    className="nav-link"
+                    onClick={() => {
+                        setIsAnnouncementsOpen(false);
+                        setIsSearchOpen(false);
+                        setIsLearningToolOpen(false);
+                        setIsNotesOpen(false);
+                        setIsQ_A_Open(true);
+                        setIsOverViewOpen(false);
+                        setIsReviewOpen(false);
+                    }}
+                    >
+                    Q&A
+                    </button>
                 </li>
                 <li className="nav-item">
                     <button className="nav-link">Notes</button>
@@ -77,32 +92,48 @@
                     <button className="nav-link">Reviews</button>
                 </li>
                 <li className="nav-item">
-                    <button className="nav-link">Learning Tools</button>
+                    <button
+                    className="nav-link"
+                    onClick={() => {
+                        setIsAnnouncementsOpen(false);
+                        setIsSearchOpen(false);
+                        setIsLearningToolOpen(true);
+                        setIsNotesOpen(false);
+                        setIsQ_A_Open(false);
+                        setIsOverViewOpen(false);
+                        setIsReviewOpen(false);
+                    }}
+                    >
+                    Learning Tools
+                    </button>
                 </li>
                 </ul>
-                <div >
+                <div>
+                {isQ_A_Open && <Questions />}
                 {isSearchOpen && (
                     <>
                     <div className="d-flex justify-content-center">
-                    <form class="d-flex mt-5 w-75 ">
-                    <input
-                        className="form-control me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <button className="btn btn-outline-success" type="submit">
-                        Search
-                    </button>
-                    
-                    </form>
+                        <form class="d-flex mt-5 w-75 ">
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                        />
+                        <button className="btn btn-outline-success" type="submit">
+                            Search
+                        </button>
+                        </form>
                     </div>
-                   <div className="mt-5">
-                   <p className="h4 fw-bold text-center">Start a new search</p>
-                   <p className=" text-center">To find captions, lectures or resources</p>
-                   </div>
+                    <div className="mt-5">
+                        <p className="h4 fw-bold text-center">Start a new search</p>
+                        <p className=" text-center">
+                        To find captions, lectures or resources
+                        </p>
+                    </div>
                     </>
                 )}
+                {isOverViewOpen && <Overview />}
                 {isAnnouncementsOpen && (
                     <div className="text-center">
                     <p className="h2 mt-5">No announcements posted yet</p>
@@ -113,10 +144,10 @@
                     </p>
                     </div>
                 )}
-                {isOverViewOpen && (
-                    <div>
-                    <p className=" mt-3 ms-5 fs-5">A super pack course for JavaScript enthusiast who wants to learn the whole process of <br/> building your Apps with Vue</p>
-                    <hr/>
+
+                {isLearningToolOpen && (
+                    <div className="mt-5">
+                    <LearningTools />
                     </div>
                 )}
                 </div>

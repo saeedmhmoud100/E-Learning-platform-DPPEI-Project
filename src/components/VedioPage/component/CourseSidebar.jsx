@@ -18,8 +18,9 @@
         progress: '0/3',
         duration: '15min',
         items: [
-        'What is VueJS',
-        'Introduction to VueJS'
+        'Using VueJS without installation',
+        'Installing and running VueJS',
+        'File and Folder overview'
         ]
     },
     {
