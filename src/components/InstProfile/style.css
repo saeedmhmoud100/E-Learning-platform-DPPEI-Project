@@ -1,17 +1,17 @@
 
-h1{
+.font-size-40{
     font-size: 40px;
 }
-h2{
+.font-size-16{
     font-size: 16px;
 }
-h4{
+.h4-style{
     font-size: 15px;
     color: #6a6f73;
     margin-bottom: .8rem;
 }
 
-.container{
+.w-85{
     width: 85% !important;
 }
 .ins{

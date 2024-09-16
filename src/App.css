@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
     --mainColor: #0F1035;
@@ -8,4 +9,16 @@
 body{
     font-family: "Chivo", sans-serif;
     background-color: var(--backgroundColor);
+}
+
+.text-decoration-none{
+    text-decoration: none;
+}
+.list-style-none{
+    list-style: none;
+}
+
+.w-fit-content{
+    width: fit-content;
+   
 }

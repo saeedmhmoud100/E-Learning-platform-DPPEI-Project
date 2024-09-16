@@ -11,14 +11,23 @@ import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
 import {Navbar} from "./components/Navbar/Navbar";
-import {AdminPage} from "./Pages/AdminPage";
+import Courses from './Pages/Courses/index';
+import {AdminPage} from "./Pages/Admin/AdminPage";
+import CourseDetails from './Pages/CourseDetails/index';
+import Checkout from './Pages/Checkout/index';
+import Cart from './Pages/Cart/index';
 import NotFound from './Pages/NotFound/NotFound';
 import {useEffect, useState} from "react";
-import UserProfile from './Pages/UserProfile/UserProfile';
-import EditUserProfile from './Pages/EditUserProfile/EditUserProfile';
-import UserCourses from './Pages/UserCourses/UserCourses';
-import PurchaseHistory from './Pages/PurchaseHistory/PurchaseHistory';
-import HelpSupport from './HelpSupport/HelpSupport';
+import InstProfile from "./components/InstProfile";
+import AddCourseForm from "./components/AddCourseForm";
+import Footer from "./components/Footer";
+import {MyCourses} from "./Pages/MyCourses";
+import UserProfile from "./Pages/UserProfile/UserProfile";
+import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
+import UserCourses from "./Pages/UserCourses/UserCourses";
+import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
+import HelpSupport from "./HelpSupport/HelpSupport";
+import InsCourses from "./Pages/InsCourses";
 
 function App() {
     const [userData, setUserData] = useState({});
@@ -32,36 +41,49 @@ function App() {
         setUserData({...userData, loggedIn: false, isAdmin: false})
     }
 
-    function login() {
-        setUserData({...userData, loggedIn: true, isAdmin: false})
-    }
-
-    function changeAdmin() {
-        setUserData({...userData, loggedIn: true, isAdmin: !userData.isAdmin})
-    }
-
-    function handleRegister(data){
+    function login(data) {
         setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
     }
 
-  return (
-    <div className="App">
-        <Navbar changeAdmin={changeAdmin} login={login} logout={logout} userData={userData}/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path='/admin/*' element={<AdminPage/> } />
-        <Route path='/*' element={<NotFound /> } />
-        <Route path="/profile"element={<UserProfile/>} />
-        <Route path="/profile/edit" element={<EditUserProfile/>}/>
-        <Route path="/profile/courses" element={<UserCourses/>}/>
-        <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
-        <Route path="/help-and-support" element={<HelpSupport/>}/>
-      </Routes>
-        <ToastContainer />
-    </div>
-  );
+    function changeRule() {
+        if (userData.isAdmin) {
+            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: true})
+        } else if (userData.isInstructor) {
+            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: false})
+        } else {
+            setUserData({...userData, loggedIn: true, isAdmin: true, isInstructor: false})
+        }
+    }
+
+    function handleRegister(data) {
+        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
+    }
+
+    return (<div className="App">
+        <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/register" element={<Register handleRegister={handleRegister}/>}/>
+            <Route path="/login" element={<Login handleLogin={login}/>}/>
+            <Route path='/admin/*' element={<AdminPage/>}/>
+            <Route path="/inst-profile" element={<InstProfile/>}/>
+            <Route path="/inst-profile/all-courses" element={<InsCourses/>}/>
+            <Route path='add-course' element={<AddCourseForm/>}/>
+            <Route path='/course-details' element={<CourseDetails/>}/>
+            <Route path='/cart' element={<Cart/>}/>
+            <Route path='/checkout' element={<Checkout/>}/>
+            <Route path='/my-courses/*' element={<MyCourses />}/>
+            <Route path="/profile" element={<UserProfile/>} />
+            <Route path="/profile/edit" element={<EditUserProfile/>}/>
+            <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
+            <Route path="/help-and-support" element={<HelpSupport/>}/>
+            <Route path='/courses' element={<Courses />}/>
+            <Route path='/*' element={<NotFound/>}/>
+        </Routes>
+        <Footer />
+
+        <ToastContainer/>
+    </div>);
 }
 
 export default App;

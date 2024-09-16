@@ -21,14 +21,18 @@ export default function Footer() {
               <div className="">
                 <h1>Useful Links</h1>
                 <ul>
-                  <li><Link to="/" className='text-white'>Home</Link></li>
-                  <li><Link to="/courses" className='text-white'>Courses</Link></li>
-                  <li><Link to="/profile" className='text-white'>Profile</Link></li>
+                  <li className='.list-style-none'><Link to="/" className='text-white text-decoration-none'>Home</Link></li>
+                  <li className='.list-style-none'><Link to="/courses" className='text-white text-decoration-none'>Courses</Link></li>
+                  <li className='.list-style-none'><Link to="/profile" className='text-white text-decoration-none'>Profile</Link></li>
                 </ul>
               </div>
 
               <div className="">
                 <h1>Contact Us</h1>
+
+                <ul>
+                  <li className='.list-style-none'><Link to="/help-and-support" className='text-white text-decoration-none'>Support</Link></li>
+                </ul>
               </div>
 
             </div>

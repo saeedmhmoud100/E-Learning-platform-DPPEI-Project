@@ -1,0 +1,49 @@
+
+.custom-card {
+    width: 14rem;
+    min-height: 15rem;
+    position: relative;
+  }
+  
+  .custom-card-img {
+    height: 120px;
+    object-fit: cover;
+  }
+  
+  .custom-card-title {
+    font-size: 0.9rem;
+  }
+  
+  .custom-card-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .custom-card-text-muted {
+    font-size: 0.8rem;
+  }
+  
+  
+  .custom-price {
+    color: #6c757d; 
+    text-decoration: line-through;
+  }
+  .wishlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white; 
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .wishlist-icon i {
+    color: black;
+    font-size: 1.5rem;
+  }
+  
+ 
+  
+  

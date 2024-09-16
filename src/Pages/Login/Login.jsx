@@ -1,11 +1,15 @@
 import React from 'react'
 import Footer from '../../components/Footer';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-export default function Login() {
+export default function Login({handleLogin}) {
+
+    const navigate = useNavigate()
   //HANLDE FORM SUBMIT FUNCTION
   function handleSubmit(e){
     e.preventDefault();
+      handleLogin();
+      navigate('/profile')
   }
   return (
       <>
@@ -42,7 +46,6 @@ export default function Login() {
 
         
         </div>
-        <Footer />
       </>
   )
 }
