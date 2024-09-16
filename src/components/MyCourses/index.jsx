@@ -2,8 +2,8 @@ import './style.css';
 
 function MyCourses({ courseName, instructorName, progress }) {
     return (
-        <div className="col-md-3">
-            <div className="card bg-transparent">
+        <div className="col-sm-6 col-md-4 col-lg-3">
+            <div className="card bg-transparent h-100" style={{width:90+'%'}}>
                 <div className="img">
                     <img src="/images/coursePhoto.jpg" className="w-100" alt="Course" />
                 </div>
