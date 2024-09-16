@@ -45,19 +45,19 @@ export default function Courses() {
             
             {/* DISPLAY DROPDOWN CONDITION */}
             {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
+                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
                     setSortType('Most relevant');
                     setDisplayDropdown(!displayDropdown);
                     }}>Most relevant</li>                                                                                                                                                                                                                                      
-                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
+                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
                     setSortType('Most viewed');
                     setDisplayDropdown(!displayDropdown);
                     }}>Most viewed</li>
-                <li className='list-style-none p-2 text-center w-100' onClick={()=>{
+                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
                     setSortType('Highest rated');
                     setDisplayDropdown(!displayDropdown);
                     }}>Highest rated</li>
-                <li className='list-style-none p-2 text-center w-100' onClick={()=>
+                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>
                     {setSortType('Newest');
                     setDisplayDropdown(!displayDropdown);
                     }}>Newest</li>
