@@ -24,7 +24,7 @@ import Footer from "./components/Footer";
 import {MyCourses} from "./Pages/MyCourses";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
-import UserCourses from "./Pages/UserCourses/UserCourses";
+import UserCourses from "./components/MyCourses/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";

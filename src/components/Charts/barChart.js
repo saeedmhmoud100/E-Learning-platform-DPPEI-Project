@@ -17,7 +17,6 @@ export const BarChart = ({data}) => {
         labels: [],
         datasets: []
     })
-    console.log(chartData)
 
 
     useEffect(() => {
