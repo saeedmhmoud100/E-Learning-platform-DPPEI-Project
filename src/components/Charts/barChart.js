@@ -24,7 +24,7 @@ export const BarChart = ({data}) => {
     }, [data])
     return (
         <>
-            <Bar
+            <Bar style={{maxWidth:"100%"}}
                 data={chartData}
             />
         </>
