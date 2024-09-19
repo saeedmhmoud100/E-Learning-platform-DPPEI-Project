@@ -404,7 +404,7 @@ export default function CourseDetails() {
         </header>
       </div>
 
-      <div className="container my-5 ">
+      <div className="container my-5  position-relative">
         <div className="row">
           <div className="col-md-8 col-sm-12 ">
           {/* what you will learn */}
@@ -615,11 +615,9 @@ export default function CourseDetails() {
 
             <div className='end-of-sidebar'></div>
           </div>
-
-
  
-          <div className="col-lg-4 col-md-12 sidebar  ">
-<div className="p-3 border rounded bg-light " 
+          <div className="col-lg-4 col-md-12   ">
+<div className="p-3 border rounded bg-light sidebar" 
    >
   <img
     src="https://via.placeholder.com/350x150"
@@ -645,7 +643,7 @@ export default function CourseDetails() {
    
   </div>
 </div>
-</div>
+           </div>
         </div>
       </div>
     </>
