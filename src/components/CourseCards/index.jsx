@@ -11,8 +11,7 @@ export default function CourseCards() {
     }
 
   return (
-    <div className='row'>
-
+      <>
       <div className="col-12 col-sm-6 col-lg-4 card-hover" role='button'>
             <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
                 <div className="position-relative w-100 h-50">
@@ -38,7 +37,8 @@ export default function CourseCards() {
                 </div>
             </div>
       </div>
+      </>
 
-    </div>
+      
   )
 }
