@@ -290,15 +290,15 @@ export default function CourseDetails() {
              {/* moreCourses by instructor */}
 
              <h6 className='fs-4 fw-bolder my-3'> More Courses by <Link to="/inst-profile" className='text-decoration-none'> SkillSprints Inc.</Link></h6>       
-            <div className="instructor-course">
-              <CourseCards/>
-           </div>
+          <CourseCards/>
+       
+
 
             <div className='end-of-sidebar'></div>
           </div>
 
 
-
+ 
           <div className="col-lg-4 col-md-12 sidebar  ">
 <div className="p-3 border rounded bg-light " 
    >
