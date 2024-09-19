@@ -1,0 +1,52 @@
+.course-card{
+    padding: 10px 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.star-icon{
+    font-size: 15px;
+    color: rgb(211, 178, 106);
+    padding: 0 2px;
+}
+
+.card-hover img {
+    transition: filter 0.3s ease-in-out;
+}
+  
+.card-hover:hover img{
+    filter: blur(1px); 
+}
+
+.card-hover:hover .overlay-for-course-cards{
+    display: block;
+}
+
+.card-hover:hover .add-to-wishlist-icon{
+    opacity: 1;
+}
+
+.overlay-for-course-cards{
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    position: absolute;
+    display: none;
+    transition:0.3s ease-in-out;
+}
+
+.add-to-wishlist-icon{
+    border: 2px solid white;
+    color: white;
+    font-size: 1.5rem;
+    padding: 13px;
+    border-radius: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}

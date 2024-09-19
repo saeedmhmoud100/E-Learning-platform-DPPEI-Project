@@ -7,3 +7,23 @@
 .dropdown-toggle:after{
     display: none;
 }
+
+
+
+
+
+@media (min-width: 992px){
+    .nav-dropdown-absolute{
+        position: absolute;
+        left: -121px !important;
+    }
+    .nav-dropdown-absolute::before{
+        content: "";
+        position: absolute;
+        top: -17px;
+        left: 136px;
+        transform: translateX(-50%);
+        border: 10px solid transparent;
+        border-bottom-color: white;
+    }
+}

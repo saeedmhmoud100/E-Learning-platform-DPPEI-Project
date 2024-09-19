@@ -1,0 +1,38 @@
+[
+  {
+    "title":"Courses Count",
+    "data":[
+      {"label":"Total", "value":50},
+      {"label":"Last Year", "value":30},
+      {"label":"Last Month", "value":20}
+    ],
+    "bgColor":"success"
+  },
+  {
+    "title":"Orders Count",
+    "data":[
+      {"label":"Total", "value":50},
+      {"label":"Last Year", "value":30},
+      {"label":"Last Month", "value":20}
+    ],
+    "bgColor":"primary"
+  },
+  {
+    "title":"Users Count",
+    "data":[
+      {"label":"Total", "value":50},
+      {"label":"Last Year", "value":30},
+      {"label":"Last Month", "value":20}
+    ],
+    "bgColor":"danger"
+  },
+  {
+    "title":"Instructors Count",
+    "data":[
+      {"label":"Total", "value":50},
+      {"label":"Last Year", "value":30},
+      {"label":"Last Month", "value":20}
+    ],
+    "bgColor":"info"
+  }
+]

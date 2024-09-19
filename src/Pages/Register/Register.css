@@ -1,0 +1,11 @@
+.sign-btn-style{
+    background-color: var(--thirdColor);
+    border: transparent;
+    color:white;
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+}
+.btn-custom-style{
+    color: var(--thirdColor);
+}
