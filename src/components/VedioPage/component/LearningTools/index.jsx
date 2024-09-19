@@ -1,6 +1,6 @@
 export const LearningTools = () => {
     return (
-        <div className='container'>
+        <div className='container mt-5'>
             <h3 className='fw-bold'>
                 Learning reminders
             </h3>

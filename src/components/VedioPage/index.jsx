@@ -1,12 +1,15 @@
     import React, { useState } from "react";
     import myVideo from "./images/video1.mp4";
-    import CourseSidebar from "./component/CourseSidebar";
+    import CourseSidebar from "./component/CourseSidebar/CourseSidebar";
     import { LearningTools } from "./component/LearningTools";
     import Overview from "./component/OverView";
     import Questions from "./component/Questions";
+    import Search from "./component/Search";
+import Announcements from "./component/Announcement";
+import Review from "./component/Review";
     export default function VideoPage() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [isOverViewOpen, setIsOverViewOpen] = useState(false);
+    const [isOverViewOpen, setIsOverViewOpen] = useState(true);
     const [isQ_A_Open, setIsQ_A_Open] = useState(false);
     const [isNotesOpen, setIsNotesOpen] = useState(false);
     const [isAnnouncementsOpen, setIsAnnouncementsOpen] = useState(false);
@@ -89,7 +92,15 @@
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button className="nav-link">Reviews</button>
+                    <button className="nav-link" onClick={() => {
+                        setIsAnnouncementsOpen(false);
+                        setIsSearchOpen(false);
+                        setIsLearningToolOpen(false);
+                        setIsNotesOpen(false);
+                        setIsQ_A_Open(false);
+                        setIsOverViewOpen(false);
+                        setIsReviewOpen(true);
+                    }}>Reviews</button>
                 </li>
                 <li className="nav-item">
                     <button
@@ -109,47 +120,12 @@
                 </li>
                 </ul>
                 <div>
-                {isQ_A_Open && <Questions />}
-                {isSearchOpen && (
-                    <>
-                    <div className="d-flex justify-content-center">
-                        <form class="d-flex mt-5 w-75 ">
-                        <input
-                            className="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <button className="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                        </form>
-                    </div>
-                    <div className="mt-5">
-                        <p className="h4 fw-bold text-center">Start a new search</p>
-                        <p className=" text-center">
-                        To find captions, lectures or resources
-                        </p>
-                    </div>
-                    </>
-                )}
-                {isOverViewOpen && <Overview />}
-                {isAnnouncementsOpen && (
-                    <div className="text-center">
-                    <p className="h2 mt-5">No announcements posted yet</p>
-                    <p className=" mt-2">
-                        The instructor hasn’t added any announcements to this course
-                        yet. Announcements <br /> are used to inform you of updates
-                        or additions to the course.
-                    </p>
-                    </div>
-                )}
-
-                {isLearningToolOpen && (
-                    <div className="mt-5">
-                    <LearningTools />
-                    </div>
-                )}
+                    {isQ_A_Open && <Questions />}
+                    {isSearchOpen && <Search />}
+                    {isOverViewOpen && <Overview />}
+                    {isAnnouncementsOpen && <Announcements />}
+                    {isLearningToolOpen && <LearningTools />}
+                    {isReviewOpen && <></>}
                 </div>
             </div>
             <div className="col-4  mt-2 vh-100">
