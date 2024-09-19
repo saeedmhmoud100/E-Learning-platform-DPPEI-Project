@@ -1,15 +1,45 @@
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import "./style.css"
+import InstructorSection from './components/InstructorSection';
+import  CourseCards from '../../components/CourseCards/index.jsx'
+import CourseReviewCard from './components/CourseReviewCard';
+import   StudentAlsoBoughtCard from "./components/StudentsAlsoBoughtCard/index.jsx"
+
 
 export default function CourseDetails() {
   const [showFullDescription, setShowFullDescription] = useState(false);
-
+ 
+  
   // Function to handle "Show More" and "Show Less" button clicks
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
+
+  // const handleScroll = () => {
+  //   const scrollY = window.scrollY;
+  //   console.log('Handle Scroll:', scrollY);
+  //   const endOfSidebarElement = document.querySelector('.end-of-sidebar');
+  //   const threshold = endOfSidebarElement ? endOfSidebarElement.offsetTop -300 : 0;
+  //   console.log('thresholsScroll:', threshold);
+    
+  //   if (scrollY >= threshold) {
+  //    console.log("done")
+    
+  //   } else {
+    
+  //   }
+  
+  // };
+  
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
+
+
 
   return (
     <>
@@ -39,7 +69,7 @@ export default function CourseDetails() {
               </div>
             </div>
             <p>
-              Created By: <Link className='me-1' to="admin-profile">Mark Lassof</Link>, <Link to="admin-profile">SprintsInc</Link>
+              Created By: <Link className='me-1 text-info' to="admin-profile">SprintsInc</Link>
             </p>
             <div className='d-flex gap-3'>
               <div className="last-update">
@@ -59,7 +89,7 @@ export default function CourseDetails() {
         </header>
       </div>
 
-      <div className="container ">
+      <div className="container my-5 ">
         <div className="row">
           <div className="col-md-8 col-sm-12 ">
           {/* what you will learn */}
@@ -87,7 +117,7 @@ export default function CourseDetails() {
       </ul>
     </div>
     <div className="col-md-6">
-      <ul className="">
+      <ul className="list-unstyled">
         <li className="mb-2">
           <i className="fa-solid fa-check"></i> To Understand and use the XMLHttpRequest() object in Javascript
         </li>
@@ -129,7 +159,7 @@ export default function CourseDetails() {
                 </div>
 
                 <div className="second-resources">
-                  <ul className="p-0 m-0">
+                  <ul className=" list-unstyled">
                     <li className="my-2">
                       <i className="fa-solid fa-file-arrow-down me-2 fs-5"></i>
                       24 downloadable resources
@@ -214,7 +244,61 @@ export default function CourseDetails() {
                 </ul>
               </div>
             )}
+            {/* students also bought section */}
+            <h4 className="mb-4 fw-bold">Students also bought</h4>
+               <StudentAlsoBoughtCard/>
+               <StudentAlsoBoughtCard/>
+               <StudentAlsoBoughtCard/>
+               <StudentAlsoBoughtCard/>         
+
+            
+            {/* instructor section */}
+
+            <InstructorSection/>
+            {/* course Review */}
+         
+            <div className="row g-3">
+<div className=' fw-bolder d-flex '>
+  <div className="course-ratings">
+  <i className="fa-solid fa-star text-warning me-2" ></i>
+  <span className='fs-4 me-3'>4.5 course rating
+  </span>
+  </div>
+  <div className="overall-ratings">
+  <i className="fa-solid fa-circle fa-xs text-secondary"></i> 
+  <span className='fs-4'> 1K ratings
+
+  </span>
+  </div>
+  </div>     
+    <div className="col-md-6">
+   <CourseReviewCard/>
+    </div>
+    <div className="col-md-6 ">
+    <CourseReviewCard/>
+    </div>
+    <div className="col-md-6">
+   <CourseReviewCard/>
+    </div>
+    <div className="col-md-6">
+   <CourseReviewCard/>
+    </div>
+             </div>
+              <button className="btn btn-info my-2 ">Show All Reviews</button>
+
+     
+             {/* moreCourses by instructor */}
+
+             <h6 className='fs-4 fw-bolder my-3'> More Courses by <Link to="/inst-profile" className='text-decoration-none'> SkillSprints Inc.</Link></h6>       
+            <div className="instructor-course">
+              <CourseCards/>
+           </div>
+
+            <div className='end-of-sidebar'></div>
           </div>
+
+
+
           <div className="col-lg-4 col-md-12 sidebar  ">
 <div className="p-3 border rounded bg-light " 
    >
@@ -247,11 +331,6 @@ export default function CourseDetails() {
       </div>
     </>
   );
+
+
 }
-
-   
-
- 
-
-
-

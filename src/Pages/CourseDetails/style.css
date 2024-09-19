@@ -5,6 +5,8 @@
       top: 75px; 
        right:40px;
       max-width: 350px; 
+      bottom: 500px; /* Ensures the sidebar is always 500px from the bottom */
+      height: calc(100vh - 75px - 500px); /* Adjusts height to fit the viewport between top and bottom */
       
     }
   }

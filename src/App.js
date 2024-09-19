@@ -27,6 +27,7 @@ import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
 import UserCourses from "./Pages/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./HelpSupport/HelpSupport";
+import Wishlist from './components/MyCourses/Wishlist';
 
 function App() {
     const [userData, setUserData] = useState({});
@@ -77,6 +78,7 @@ function App() {
             <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
             <Route path="/help-and-support" element={<HelpSupport/>}/>
             <Route path='/courses' element={<Courses />}/>
+            <Route path='/wishlist' element={<Wishlist />}/>
             <Route path='/*' element={<NotFound/>}/>
         </Routes>
         <Footer />

@@ -76,7 +76,7 @@ export default function CourseCards() {
             </div>
         </div>
       </div>
-
+{/* 
       <div className="col-12 col-sm-6 col-lg-4 card-hover" role='button'>
         <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
             <div className="position-relative w-100 h-50">
@@ -99,7 +99,7 @@ export default function CourseCards() {
                 <h6 className='mb-2 bg-warning text-white w-auto p-2'>Bestseller</h6>
             </div>
         </div>
-      </div>
+      </div> */}
 
     </div>
   )
