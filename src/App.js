@@ -24,10 +24,10 @@ import Footer from "./components/Footer";
 import {MyCourses} from "./Pages/MyCourses";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
-import UserCourses from "./Pages/UserCourses/UserCourses";
+import UserCourses from "./components/MyCourses/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./HelpSupport/HelpSupport";
-import Wishlist from './components/MyCourses/Wishlist';
+import InsCourses from "./Pages/InsCourses";
 
 function App() {
     const [userData, setUserData] = useState({});
@@ -67,6 +67,7 @@ function App() {
             <Route path="/login" element={<Login handleLogin={login}/>}/>
             <Route path='/admin/*' element={<AdminPage/>}/>
             <Route path="/inst-profile" element={<InstProfile/>}/>
+            <Route path="/inst-profile/all-courses" element={<InsCourses/>}/>
             <Route path='add-course' element={<AddCourseForm/>}/>
             <Route path='/course-details' element={<CourseDetails/>}/>
             <Route path='/cart' element={<Cart/>}/>
@@ -74,7 +75,6 @@ function App() {
             <Route path='/my-courses/*' element={<MyCourses />}/>
             <Route path="/profile" element={<UserProfile/>} />
             <Route path="/profile/edit" element={<EditUserProfile/>}/>
-            <Route path="/profile/courses" element={<UserCourses/>}/>
             <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
             <Route path="/help-and-support" element={<HelpSupport/>}/>
             <Route path='/courses' element={<Courses />}/>

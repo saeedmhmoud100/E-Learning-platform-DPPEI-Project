@@ -1,4 +1,5 @@
-import MyCourses from "../index";
+import CourseProgressCard from "../Cards/CourseProgressCard";
+import {MyListItem} from "./MyListItem";
 
 export const MyList = () => {
 
@@ -13,28 +14,8 @@ export const MyList = () => {
 
     return (
         <div className='container'>
-            <div className="row my-3 g-3">
-                <h2 className='text-dark fs-3 fw-bold mb-0'>Ethical Hacking</h2>
-                <p className="my-0">
-                    To learn ethical hacking
-                </p>
-                {
-                    courses.map((course, index) => (
-                        <MyCourses courseName={course.courseName} instructorName={course.instructorName} progress={course.progress} />
-                    ))
-                }
-            </div>
-            <div className="row my-3 g-3">
-                <h2 className='text-dark fs-3 fw-bold mb-0'>My python course</h2>
-                <p className="my-0">
-                    To become a python developer
-                </p>
-                {
-                    courses.map((course, index) => (
-                        <MyCourses courseName={course.courseName} instructorName={course.instructorName} progress={course.progress} />
-                    ))
-                }
-            </div>
+            <MyListItem title='Ethical Hacking' title2='To learn ethical hacking' courses={courses} />
+            <MyListItem title='My python course' title2='To become a python developer' courses={courses} />
         </div>
     )
 }

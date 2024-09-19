@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function PurchaseHistory() {
     return (
         <div className="container my-5">
-            <h1>My Courses</h1>
+            <h1>Purchase History</h1>
             <div className="row">
                 <ul className="nav nav-underline">
                     <li className="me-2 nav-item">

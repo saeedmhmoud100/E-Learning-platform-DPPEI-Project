@@ -17,7 +17,6 @@ export const BarChart = ({data}) => {
         labels: [],
         datasets: []
     })
-    console.log(chartData)
 
 
     useEffect(() => {
@@ -25,7 +24,7 @@ export const BarChart = ({data}) => {
     }, [data])
     return (
         <>
-            <Bar
+            <Bar style={{maxWidth:"100%"}}
                 data={chartData}
             />
         </>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import MyCourses from '../../components/MyCourses';
+import CourseProgressCard from '../../components/MyCourses/Cards/CourseProgressCard';
 import './style.css'
 import ImageSlider from '../../components/ImageSlider';
 function UserProfile() {
@@ -48,10 +48,10 @@ function UserProfile() {
                     <h1 className='text-center mb-4'>My Courses</h1>
                     <Link className='seeAll' to={'/profile/courses'}>See All<i className="fa-solid fa-chevron-right fs-6"></i></Link>
                 </div>
-                <MyCourses courseName={'React Basics'} instructorName={'John Doe'} progress={20} />
-                <MyCourses courseName={'Advanced React'} instructorName={'Jane Smith'} progress={50} />
-                <MyCourses courseName={'JavaScript Essentials'} instructorName={'Mark Lee'} progress={80} />
-                <MyCourses courseName={'CSS Mastery'} instructorName={'Sarah Jones'} progress={95} />
+                <CourseProgressCard courseName={'React Basics'} instructorName={'John Doe'} progress={20} />
+                <CourseProgressCard courseName={'Advanced React'} instructorName={'Jane Smith'} progress={50} />
+                <CourseProgressCard courseName={'JavaScript Essentials'} instructorName={'Mark Lee'} progress={80} />
+                <CourseProgressCard courseName={'CSS Mastery'} instructorName={'Sarah Jones'} progress={95} />
             </div>
             <div className="row g-4 mt-5">
                 <h1 className='mb-4'>My Certificates</h1>

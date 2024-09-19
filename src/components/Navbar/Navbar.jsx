@@ -4,9 +4,6 @@ import './Navbar.css';
 export const Navbar = ({logout, changeRule, userData}) => {
     const navigate = useNavigate()
 
-
-
-
     const handleSubmit = e =>{
         e.preventDefault()
         navigate('/courses')
@@ -48,7 +45,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                 <Link className="nav-link active" to="/my-courses">Courses</Link>
                                             </li>
                                             <li className="nav-item dropdown">
-                                                <Link className="nav-link dropdown-toggle active" role="button" to=""
+                                                <Link className="nav-link dropdown-toggle active" role="button" to="/courses"
                                                       id="navbarDropdown"
                                                       data-bs-toggle="dropdown">
                                                     Categories
