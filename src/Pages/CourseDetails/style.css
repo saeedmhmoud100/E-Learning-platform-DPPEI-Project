@@ -1,7 +1,7 @@
 /* Large screens (lg and above) */
 @media (min-width: 992px) {
     .sidebar {
-      position: fixed;
+      position: sticky;
       top: 75px; 
        right:40px;
       max-width: 350px; 

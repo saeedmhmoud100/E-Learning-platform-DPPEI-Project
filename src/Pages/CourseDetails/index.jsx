@@ -17,28 +17,7 @@ export default function CourseDetails() {
     setShowFullDescription(!showFullDescription);
   };
 
-  // const handleScroll = () => {
-  //   const scrollY = window.scrollY;
-  //   console.log('Handle Scroll:', scrollY);
-  //   const endOfSidebarElement = document.querySelector('.end-of-sidebar');
-  //   const threshold = endOfSidebarElement ? endOfSidebarElement.offsetTop -300 : 0;
-  //   console.log('thresholsScroll:', threshold);
-    
-  //   if (scrollY >= threshold) {
-  //    console.log("done")
-    
-  //   } else {
-    
-  //   }
-  
-  // };
-  
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
-
+ 
 
 
   return (
