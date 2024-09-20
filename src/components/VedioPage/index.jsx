@@ -7,6 +7,7 @@
     import Search from "./component/Search";
 import Announcements from "./component/Announcement";
 import Review from "./component/Review";
+
     export default function VideoPage() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isOverViewOpen, setIsOverViewOpen] = useState(true);
@@ -19,7 +20,7 @@ import Review from "./component/Review";
         <>
         <div className="container-fluide mb-5">
             <div className="row ">
-            <div className="col-8 ">
+            <div className="col-md-8 col-sm-12 ">
                 <div>
                 <video className=" mt-2 w-100" controls src={myVideo}></video>
                 </div>
@@ -125,10 +126,10 @@ import Review from "./component/Review";
                     {isOverViewOpen && <Overview />}
                     {isAnnouncementsOpen && <Announcements />}
                     {isLearningToolOpen && <LearningTools />}
-                    {isReviewOpen && <></>}
+                    {isReviewOpen &&<Review />}
                 </div>
             </div>
-            <div className="col-4  mt-2 vh-100">
+            <div className="col-md-4 col-sm-12 mt-2 vh-100">
                 <CourseSidebar />
             </div>
             </div>

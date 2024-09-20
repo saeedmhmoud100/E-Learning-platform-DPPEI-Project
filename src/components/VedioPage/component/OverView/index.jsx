@@ -38,10 +38,10 @@
         <div className="d-flex">
         <div className="container-flouid">
             <div className="row g-5">
-            <div className="col-4 ">
+            <div className="col-12 col-md-4  ">
             <p className="me-5">By the numbers</p>
             </div>
-            <div className="col-4">
+            <div className="col-12 col-md-4  ">
             <p className="">
             Skill level: Beginner Level <br />
             Students: 45342 <br />
@@ -49,7 +49,7 @@
             Captions: Yes <br />
             </p>
             </div>
-            <div className="col-4">
+            <div className="col-12 col-md-4  ">
             <p >
             Lectures: 42 <br />
             Video: 4 total hours <br />
@@ -63,10 +63,10 @@
         <hr />
         <div className="container-flouid">
             <div className="row">
-            <div className="col-4">
+            <div className="col-md-4 col-12 ">
                 <p>Certificates</p>
             </div>
-            <div className="col-8">
+            <div className="col-md-8 col-12 ">
                 <p className="ms-5">
                 Get Udemy certificate by completing entire course
                 </p>
@@ -79,10 +79,10 @@
         <hr />
         <div className="container-flouid">
             <div className="row">
-            <div className="col-4">
+            <div className="col-12  col-md-4">
                 <p>Features</p>
             </div>
-            <div className="col-8">
+            <div className="col-12  col-md-8">
                 <p className="ms-5">Available on iOS and Android</p>
             </div>
             </div>
@@ -90,10 +90,10 @@
         <hr />
         <div className="container-flouid">
             <div className="row">
-            <div className="col-4">
+            <div className="col-12  col-md-4">
                 <p>Description</p>
             </div>
-            <div className="col-8">
+            <div className="col-12  col-md-8">
                 <p className="ms-5">
                 <span className="fw-bold">**A super pack course for JavaScript enthusiast who wants to learn
                 the whole process of building your Apps with Vue** </span> <br /> <br /> Vue has swiftly
