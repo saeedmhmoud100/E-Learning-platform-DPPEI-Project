@@ -78,6 +78,7 @@ function App() {
             <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
             <Route path="/help-and-support" element={<HelpSupport/>}/>
             <Route path='/courses' element={<Courses />}/>
+         
             <Route path='/*' element={<NotFound/>}/>
         </Routes>
         <Footer />

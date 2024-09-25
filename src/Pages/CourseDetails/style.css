@@ -1,11 +1,13 @@
 /* Large screens (lg and above) */
 @media (min-width: 992px) {
     .sidebar {
-      position: fixed;
+      position: sticky;
       top: 75px; 
        right:40px;
       max-width: 350px; 
       
+
+
     }
   }
   
@@ -13,7 +15,7 @@
   @media (max-width: 991.98px) {
     .sidebar {
       width: 100%; 
-      margin-top: 20px; /* Optional: add some spacing */
+      margin-top: 20px; 
     }
   }
  

@@ -122,7 +122,9 @@ export default function Home() {
         
         {/* START - THIRD SECTION WITH COURSE CARDS */}
         <div className="container p-0">
-            <CourseCards />
+            <div className="row">
+                <CourseCards />
+            </div>
         </div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
 

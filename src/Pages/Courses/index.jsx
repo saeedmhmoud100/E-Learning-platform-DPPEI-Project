@@ -87,8 +87,10 @@ export default function Courses() {
             <div className="row">
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
+                        <div className="row">
                             <CourseCards />
-                        </div>
+                        </div>  
+                    </div>
                 </div>
             </div>
             </>
@@ -111,8 +113,10 @@ export default function Courses() {
                )}
 
               <div className="col-lg-9 py-4">
-                  <div className="container-fluid">
-                        <CourseCards />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <CourseCards />
+                        </div>  
                     </div>
               </div>
           </div>

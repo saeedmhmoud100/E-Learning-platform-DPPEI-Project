@@ -4,7 +4,7 @@ import './index.css'
 
 export default function Footer() {
   return (
-    <div className='bg-dark text-white p-5'>
+    <div className='bg-dark text-white p-5 footer'>
       <div className="container-fluid">
         <div className="row">
 
