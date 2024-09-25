@@ -23,13 +23,16 @@ export const Navbar = ({logout, changeRule, userData}) => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
-                        {
-                            userData.loggedIn ? (
-                                userData.isAdmin ?
-                                    <li className="nav-item">
-                                        <Link className="nav-link active" to="/admin">Admin</Link>
-                                    </li>
-                                    : userData.isInstructor ?
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/courses">Courses</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/inst-profile">inst profile</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/videopage">videopage</Link>
+                        </li>
+        
 
                                         <>
                                             <li className="nav-item">
