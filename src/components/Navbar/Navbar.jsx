@@ -33,16 +33,17 @@ export const Navbar = ({logout, changeRule, userData}) => {
 
                                         <>
                                             <li className="nav-item">
-                                                <Link className="nav-link active" to="/courses">Courses</Link>
-                                            </li>
-                                            <li className="nav-item">
                                                 <Link className="nav-link active" to="/inst-profile">inst profile</Link>
                                             </li>
                                         </>
                                         :
                                         <>
                                             <li className="nav-item">
-                                                <Link className="nav-link active" to="/my-courses">Courses</Link>
+                                                <Link className="nav-link active" to="/my-courses">My Courses</Link>
+                                            </li>
+
+                                            <li className="nav-item">
+                                                <Link className="nav-link active" to="/courses">Courses</Link>
                                             </li>
                                             <li className="nav-item dropdown">
                                                 <Link className="nav-link dropdown-toggle active" role="button" to="/courses"
@@ -52,9 +53,9 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                 </Link>
                                                 <div className="dropdown-menu nav-dropdown-absolute"
                                                      aria-labelledby="navbarDropdown">
-                                                    <Link className="dropdown-item" href="#">Web Development</Link>
-                                                    <Link className="dropdown-item" href="#">CyberSecurity</Link>
-                                                    <Link className="dropdown-item" href="#">Machine Learning</Link>
+                                                    <Link to={'/courses?cat=web'} className="dropdown-item" href="#">Web Development</Link>
+                                                    <Link to={'/courses?cat=cyber'}  className="dropdown-item" href="#">CyberSecurity</Link>
+                                                    <Link to={'/courses?cat=machine'}  className="dropdown-item" href="#">Machine Learning</Link>
                                                 </div>
                                             </li>
                                         </>

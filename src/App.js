@@ -26,7 +26,7 @@ import UserProfile from "./Pages/UserProfile/UserProfile";
 import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
 import UserCourses from "./components/MyCourses/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
-import HelpSupport from "./HelpSupport/HelpSupport";
+import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
 
 function App() {

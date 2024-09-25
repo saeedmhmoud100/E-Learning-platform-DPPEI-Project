@@ -45,7 +45,13 @@ export default function Home() {
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay-for-home"></div>
-                                <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
+                                <Link to={'/course-details'}>
+                                    <img
+                                        src="/images/coursePhoto.jpg"
+                                        className="w-100 h-100"
+                                        alt="React - The Complete Guide"
+                                    />
+                                </Link>
                                 <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
                             </div>
                             <div className="course-text-cont">
@@ -62,7 +68,13 @@ export default function Home() {
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay-for-home"></div>
-                                <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
+                                <Link to={'/course-details'}>
+                                    <img
+                                        src="/images/coursePhoto.jpg"
+                                        className="w-100 h-100"
+                                        alt="React - The Complete Guide"
+                                    />
+                                </Link>
                                 <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
                             </div>
                             <div className="course-text-cont">
@@ -79,7 +91,13 @@ export default function Home() {
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
                                 <div className="overlay-for-home"></div>
-                                <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
+                                <Link to={'/course-details'}>
+                                    <img
+                                        src="/images/coursePhoto.jpg"
+                                        className="w-100 h-100"
+                                        alt="React - The Complete Guide"
+                                    />
+                                </Link>
                                 <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
                             </div>
                             <div className="course-text-cont">
