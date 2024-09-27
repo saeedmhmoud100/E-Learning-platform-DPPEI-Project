@@ -17,7 +17,13 @@ export default function CourseCards() {
                 <div className="position-relative w-100 h-50">
                     <div className='overlay-for-course-cards'></div>
                     <i class={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart add-to-wishlist-icon`} onClick={addToWishlist}></i>
-                    <img src="/images/coursePhoto.jpg" alt="EduVerse frontend course" className='w-100 h-100'/>
+                    <Link to={'/course-details'}>
+                        <img
+                            src="/images/coursePhoto.jpg"
+                            className="w-100 h-100"
+                            alt="EduVerse frontend course"
+                        />
+                    </Link>
                 </div>
                 <div className="course-card">
                     <Link className='text-decoration-none text-dark' to='/course-details'>

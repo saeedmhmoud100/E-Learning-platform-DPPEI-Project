@@ -17,6 +17,7 @@ import CourseDetails from './Pages/CourseDetails/index';
 import Checkout from './Pages/Checkout/index';
 import Cart from './Pages/Cart/index';
 import NotFound from './Pages/NotFound/NotFound';
+import VedioPage from './components/VedioPage'
 import {useEffect, useState} from "react";
 import InstProfile from "./components/InstProfile";
 import AddCourseForm from "./components/AddCourseForm";
@@ -26,7 +27,7 @@ import UserProfile from "./Pages/UserProfile/UserProfile";
 import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
 import UserCourses from "./components/MyCourses/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
-import HelpSupport from "./HelpSupport/HelpSupport";
+import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
             <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/my-courses/*' element={<MyCourses />}/>
             <Route path="/profile" element={<UserProfile/>} />
+            <Route path="videopage" element={<VedioPage/>} />
             <Route path="/profile/edit" element={<EditUserProfile/>}/>
             <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
             <Route path="/help-and-support" element={<HelpSupport/>}/>

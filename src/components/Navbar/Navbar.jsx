@@ -4,7 +4,7 @@ import './Navbar.css';
 export const Navbar = ({logout, changeRule, userData}) => {
     const navigate = useNavigate()
 
-    const handleSubmit = e =>{
+    const handleSubmit = e => {
         e.preventDefault()
         navigate('/courses')
     }
@@ -38,28 +38,39 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                             <li className="nav-item">
                                                 <Link className="nav-link active" to="/inst-profile">inst profile</Link>
                                             </li>
-                                        </>
-                                        :
-                                        <>
                                             <li className="nav-item">
-                                                <Link className="nav-link active" to="/my-courses">Courses</Link>
+                                                <Link className="nav-link active" to="/videopage">videopage</Link>
                                             </li>
-                                            <li className="nav-item dropdown">
-                                                <Link className="nav-link dropdown-toggle active" role="button" to="/courses"
-                                                      id="navbarDropdown"
-                                                      data-bs-toggle="dropdown">
-                                                    Categories
-                                                </Link>
-                                                <div className="dropdown-menu nav-dropdown-absolute"
-                                                     aria-labelledby="navbarDropdown">
-                                                    <Link className="dropdown-item" href="#">Web Development</Link>
-                                                    <Link className="dropdown-item" href="#">CyberSecurity</Link>
-                                                    <Link className="dropdown-item" href="#">Machine Learning</Link>
-                                                </div>
-                                            </li>
-                                        </>
-                            ) : null
-                        }
+                                            </>
+                                            :
+                                            <>
+                                                <li className="nav-item">
+                                                    <Link className="nav-link active" to="/my-courses">My Courses</Link>
+                                                </li>
+
+                                                <li className="nav-item">
+                                                    <Link className="nav-link active" to="/courses">Courses</Link>
+                                                </li>
+                                                <li className="nav-item dropdown">
+                                                    <Link className="nav-link dropdown-toggle active" role="button"
+                                                          to="/courses"
+                                                          id="navbarDropdown"
+                                                          data-bs-toggle="dropdown">
+                                                        Categories
+                                                    </Link>
+                                                    <div className="dropdown-menu nav-dropdown-absolute"
+                                                         aria-labelledby="navbarDropdown">
+                                                        <Link to={'/courses?cat=web'} className="dropdown-item" href="#">Web
+                                                            Development</Link>
+                                                        <Link to={'/courses?cat=cyber'} className="dropdown-item"
+                                                              href="#">CyberSecurity</Link>
+                                                        <Link to={'/courses?cat=machine'} className="dropdown-item"
+                                                              href="#">Machine Learning</Link>
+                                                    </div>
+                                                </li>
+                                            </>
+                                            ) : null
+                                            }
                     </ul>
 
                     <ul className="navbar-nav w-50">
@@ -123,10 +134,14 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                         ) :
                                                         (
                                                             <>
-                                                                <li><Link className="dropdown-item" to="/profile">Profile</Link>
+                                                                <li><Link className="dropdown-item"
+                                                                          to="/profile">Profile</Link>
                                                                 </li>
-                                                                <li><Link className="dropdown-item" to="/my-courses">My Courses</Link></li>
-                                                                <li><Link className="dropdown-item" to="/profile/purchase-history">Purchase History</Link></li>
+                                                                <li><Link className="dropdown-item" to="/my-courses">My
+                                                                    Courses</Link></li>
+                                                                <li><Link className="dropdown-item"
+                                                                          to="/profile/purchase-history">Purchase
+                                                                    History</Link></li>
                                                             </>
                                                         )
                                                 }
