@@ -32,7 +32,7 @@ export default function Cart(){
 //4) Proceed to Checkout
 
 
-    <div className="container">
+    <div className="container my-5">
       <div className="cart text-dark">
             <h1>Shopping Cart</h1>
             <h6>1 Course in Cart</h6>
