@@ -29,12 +29,15 @@ import UserCourses from "./components/MyCourses/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
+import axios from "axios";
+import {getAllCourses} from "./store/actions/coursesAction";
+import {useDispatch} from "react-redux";
 
 function App() {
     const [userData, setUserData] = useState({});
-
+    const dispatch = useDispatch()
     useEffect(() => {
-        fetch('/data/user/userData.json').then(response => response.json()).then(data => setUserData(data));
+        dispatch(getAllCourses())
     },[]);
 
 
