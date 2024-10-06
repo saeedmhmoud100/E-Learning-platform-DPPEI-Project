@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-export default function CourseCards() {
+export default function CourseCards({course}) {
 
     const [addedToWishlist, setAddToWishlist] = useState(false);
-
+    console.log(course)
     function addToWishlist(){
         setAddToWishlist(!addedToWishlist);
     }
@@ -17,7 +17,7 @@ export default function CourseCards() {
                 <div className="position-relative w-100 h-50">
                     <div className='overlay-for-course-cards'></div>
                     <i class={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart add-to-wishlist-icon`} onClick={addToWishlist}></i>
-                    <Link to={'/course-details'}>
+                    <Link to={`/course-details/`}>
                         <img
                             src="/images/coursePhoto.jpg"
                             className="w-100 h-100"

@@ -1,8 +1,10 @@
-import { GET_ALL_Courses, GET_ERROR, CREATE_Course } from '../type'
+import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN} from '../type'
 
 const inital = {
     courses: [],
+    course_what_you_will_learn: [],
     loading: true,
+    course:[]
 }
 const coursesReducer = (state = inital, action) => {
     switch (action.type) {
@@ -20,6 +22,11 @@ const coursesReducer = (state = inital, action) => {
         case GET_ERROR:
             return {
                 loading: true,
+            }
+        case GET_ALL_WHAT_YOU_WILL_LEARN:
+            return {
+                course_what_you_will_learn: action.payload.results,
+                loading: false
             }
         default:
             return state;
