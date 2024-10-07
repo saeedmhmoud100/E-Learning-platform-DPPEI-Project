@@ -3,15 +3,25 @@ import './index.css';
 import { useState, useEffect } from 'react';
 import CourseCards from '../../components/CourseCards';
 import FilterCourseSection from '../../components/FilterCourseSection';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { getCourseDetails } from '../../store/actions/coursesAction';
 
 export default function Courses() {
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
+  const [filterTypes, setFilterTypes] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const {courses} = useSelector(state => state.allCourses);
+  const {courses, course, loading} = useSelector(state => state.allCourses);
+
+  const dispatch = useDispatch();
+
+  // FUNCTION THAT ADDS FILTER TYPE WHEN USE CHOOSES FILTER
+  const addFilterType = ()=>{
+    
+  }
+
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
   const handleResize = () => {
@@ -90,7 +100,11 @@ export default function Courses() {
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
                         <div className="row">
-                            <CourseCards />
+                        {
+                            courses.map((course, index) => {
+                                return <CourseCards key={index} course={course} />
+                            })
+                        }
                         </div>  
                     </div>
                 </div>

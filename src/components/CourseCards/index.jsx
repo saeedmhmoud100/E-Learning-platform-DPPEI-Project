@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllCourses } from '../../store/actions/coursesAction';
 
 export default function CourseCards({course}) {
 

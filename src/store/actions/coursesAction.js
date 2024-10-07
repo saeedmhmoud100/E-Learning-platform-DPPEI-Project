@@ -1,4 +1,4 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN} from '../type'
+import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS} from '../type'
 import useGetData from '../../ApiHooks/useGetData'
 import usePostData from "../../ApiHooks/usePostData";
 
@@ -25,6 +25,23 @@ export const getAllCoursesPage = (page) => async (dispatch) => {
         const response = await useGetData(`courses/?limit=6&page=${page}`);
         dispatch({
             type: GET_ALL_Courses,
+            payload: response,
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + e,
+        })
+    }
+}
+
+//get course details
+export const getCourseDetails = (id) => async (dispatch) => {
+    try {
+        const response = await useGetData(`courses/${id}`);
+        dispatch({
+            type: GET_COURSE_DETAILS,
             payload: response,
         })
 
