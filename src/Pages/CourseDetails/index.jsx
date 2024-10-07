@@ -321,6 +321,8 @@ import InstructorSection from './components/InstructorSection';
 import  CourseCards from '../../components/CourseCards/index.jsx'
 import CourseReviewCard from './components/CourseReviewCard';
 import   StudentAlsoBoughtCard from "./components/StudentsAlsoBoughtCard/index.jsx"
+import {useDispatch, useSelector} from "react-redux";
+import {getCourseWhatYouWillLearn} from "../../store/actions/coursesAction";
 
 
 export default function CourseDetails() {
@@ -332,7 +334,33 @@ export default function CourseDetails() {
     setShowFullDescription(!showFullDescription);
   };
 
- 
+  // const handleScroll = () => {
+  //   const scrollY = window.scrollY;
+  //   console.log('Handle Scroll:', scrollY);
+  //   const endOfSidebarElement = document.querySelector('.end-of-sidebar');
+  //   const threshold = endOfSidebarElement ? endOfSidebarElement.offsetTop -300 : 0;
+  //   console.log('thresholsScroll:', threshold);
+    
+  //   if (scrollY >= threshold) {
+  //    console.log("done")
+    
+  //   } else {
+    
+  //   }
+  
+  // };
+  
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
+    const dispatch = useDispatch()
+  const {course_what_you_will_learn} = useSelector(state => state.allCourses)
+
+    useEffect(() => {
+        dispatch(getCourseWhatYouWillLearn(2))
+    },[])
   return (
     <>
       <div className="container-fluid bg-dark py-5">
@@ -391,21 +419,15 @@ export default function CourseDetails() {
   <div className="row">
     <div className="col-md-6">
       <ul className="list-unstyled">
-        <li className="mb-2">
-          <i className="fa-solid fa-check"></i> Understand the basics of Ajax interactions
-        </li>
-        <li className="mb-2">
-          <i className="fa-solid fa-check"></i> To Update the Browser Window's HTML content dynamically through the DOM
-        </li>
-        <li className="mb-2">
-          <i className="fa-solid fa-check"></i> To Monitor Server Response for Process Completion
-        </li>
-        <li className="mb-2">
-          <i className="fa-solid fa-check"></i> To Receive and Process XML Objects in the DOM
-        </li>
-        <li className="mb-2">
-          <i className="fa-solid fa-check"></i> To Understand the Role of a Web Server in Ajax
-        </li>
+        {
+            course_what_you_will_learn?.map((item,index)=>(
+              <li className="mb-2">
+                <i className="fa-solid fa-check"></i> {item.description}
+              </li>
+            ))
+        }
+
+
       </ul>
     </div>
     <div className="col-md-6">

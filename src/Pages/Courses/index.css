@@ -53,7 +53,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 4;
+    z-index: 5;
     height: 100%;
     width: 17rem;
     overflow: auto;

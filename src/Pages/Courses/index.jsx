@@ -3,6 +3,7 @@ import './index.css';
 import { useState, useEffect } from 'react';
 import CourseCards from '../../components/CourseCards';
 import FilterCourseSection from '../../components/FilterCourseSection';
+import {useSelector} from "react-redux";
 
 export default function Courses() {
 
@@ -10,6 +11,26 @@ export default function Courses() {
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [filterTypes, setFilterTypes] = useState([])
+  const {courses, course, loading} = useSelector(state => state.allCourses);
+
+  const filters = [
+    {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up']},
+    {type:'radio',label:'Price',options:['400 & Up','300 & Up']},
+    {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript']},
+    {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours']}
+  ]
+
+  // FUNCTION THAT ADDS FILTERS CHOSEN BY USER TO ARRAY OF FILTERS
+  const handleUserFilterInput = (option)=>{
+    setFilterTypes(prev => {
+        if (prev.includes(option)) {
+            return prev.filter(filter => filter !== option);
+        } else {
+            return [...prev, option];
+        }
+    });
+  }
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
   const handleResize = () => {
@@ -72,13 +93,7 @@ export default function Courses() {
             }}></div>
             <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
                 <div className="container-fluid">
-                        <FilterCourseSection filterType={'Ratings'}/>
-                        <hr className='m-0'/>
-                        <FilterCourseSection filterType={'Price'}/>
-                        <hr className='m-0'/>
-                        <FilterCourseSection filterType={'Categories'}/>
-                        <hr className='m-0'/>
-                        <FilterCourseSection filterType={'Video Duration'}/>
+                        <FilterCourseSection filterType={'Ratings'} filters={filters} handleUserFilterInput={handleUserFilterInput}/>
                         <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
                             handleFilterMenuClose()
                             }}>Done</button>
@@ -88,7 +103,11 @@ export default function Courses() {
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
                         <div className="row">
-                            <CourseCards />
+                        {
+                            courses.map((course, index) => {
+                                return <CourseCards key={index} course={course} />
+                            })
+                        }
                         </div>  
                     </div>
                 </div>
@@ -100,14 +119,7 @@ export default function Courses() {
                {windowWidth > 992 && (
                    <div className='col-lg-3 p-0'>
                     <div className="container-fluid">
-                       <FilterCourseSection filterType={'Ratings'}/>
-                       <hr className='m-0'/>
-                       <FilterCourseSection filterType={'Price'}/>
-                       <hr className='m-0'/>
-                       <FilterCourseSection filterType={'Categories'}/>
-                       <hr className='m-0'/>
-                       <FilterCourseSection filterType={'Video Duration'}/>
-                       <hr className='m-0'/>
+                       <FilterCourseSection filterType={'Ratings'} filters={filters} handleUserFilterInput={handleUserFilterInput}/>
                     </div>
                    </div>
                )}
@@ -115,8 +127,12 @@ export default function Courses() {
               <div className="col-lg-9 py-4">
                     <div className="container-fluid">
                         <div className="row">
-                            <CourseCards />
-                        </div>  
+                            {
+                                courses.map((course, index) => {
+                                    return <CourseCards key={index} course={course} />
+                                })
+                            }
+                        </div>
                     </div>
               </div>
           </div>

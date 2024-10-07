@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CourseCards from '../../components/CourseCards';
 import Footer from '../../components/Footer/index.jsx';
 import './Home.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
 
 export default function Home() {
+
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getAllCoursesPage(1))
+    },[])
+    const { courses, loading } = useSelector((state) => state.allCourses);
+    
   return (
     
     <>
@@ -121,9 +130,15 @@ export default function Home() {
         {/* END - HEADER */}
         
         {/* START - THIRD SECTION WITH COURSE CARDS */}
-        <div className="container p-0">
+        <div className="container position-relative px-3">
+            <i class="fa-solid fa-circle-chevron-right position-absolute top-50 end-0 fs-2 z-3" role='button'></i>
+            <i class="fa-solid fa-circle-chevron-left position-absolute top-50 start-0 fs-2 z-3" role='button'></i>
             <div className="row">
-                <CourseCards />
+                {
+                    courses.map((course, index) => {
+                        return <CourseCards key={index} course={course} />
+                    })
+                }
             </div>
         </div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
