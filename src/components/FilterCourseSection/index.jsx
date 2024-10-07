@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.css'
 
-export default function FilterCourseSection({filterType, filters, updateCheckOfFilter}) {
+export default function FilterCourseSection({filterType, filters, handleUserFilterInput}) {
 
   const [openDropdowns, setOpenDropdowns] = useState({});
 
@@ -14,7 +14,7 @@ export default function FilterCourseSection({filterType, filters, updateCheckOfF
 
 
   return (
-    <div className="row px-3">
+    <div className="row px-3 z-3">
       {filters.map((filter, i) => (
         <>
         <div key={i} className="col-12 px-0 py-4">
@@ -42,7 +42,7 @@ export default function FilterCourseSection({filterType, filters, updateCheckOfF
                       type={filter.type}
                       name="flexRadioDefault"
                       id={`flexRadioDefault${j}`}
-                      onChange={()=>updateCheckOfFilter(i)}
+                      onChange={()=>handleUserFilterInput(option)}
                     />
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
@@ -61,7 +61,7 @@ export default function FilterCourseSection({filterType, filters, updateCheckOfF
                       type={filter.type}
                       name={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j}`}
                       id={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j}`}
-                      onChange={()=>updateCheckOfFilter(i)}
+                      onChange={()=>handleUserFilterInput(option)}
                     />
                     <label
                       className="form-check-label ms-2"

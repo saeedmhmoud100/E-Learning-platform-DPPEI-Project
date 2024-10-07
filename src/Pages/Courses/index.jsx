@@ -3,37 +3,34 @@ import './index.css';
 import { useState, useEffect } from 'react';
 import CourseCards from '../../components/CourseCards';
 import FilterCourseSection from '../../components/FilterCourseSection';
-import {useDispatch, useSelector} from "react-redux";
-import { getCourseDetails } from '../../store/actions/coursesAction';
+import {useSelector} from "react-redux";
 
 export default function Courses() {
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
-  const [filterTypes, setFilterTypes] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [filterTypes, setFilterTypes] = useState([])
   const {courses, course, loading} = useSelector(state => state.allCourses);
 
   const filters = [
-    {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up'], checked:false},
-    {type:'radio',label:'Price',options:['400 & Up','300 & Up'], checked:false},
-    {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript'], checked:false},
-    {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours'], checked:false}
+    {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up']},
+    {type:'radio',label:'Price',options:['400 & Up','300 & Up']},
+    {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript']},
+    {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours']}
   ]
 
-  const dispatch = useDispatch();
-
-  // FUNCTION THAT CHANGES KEY CHECKED IN FILTERS
-  const updateCheckOfFilter = (index)=>{
-    if(filters[index].checked){
-        filters[index].checked = false
-    }else{
-        filters[index].checked = true
-    }
-    console.log(filters);
+  // FUNCTION THAT ADDS FILTERS CHOSEN BY USER TO ARRAY OF FILTERS
+  const handleUserFilterInput = (option)=>{
+    setFilterTypes(prev => {
+        if (prev.includes(option)) {
+            return prev.filter(filter => filter !== option);
+        } else {
+            return [...prev, option];
+        }
+    });
   }
-
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
   const handleResize = () => {
@@ -96,7 +93,7 @@ export default function Courses() {
             }}></div>
             <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
                 <div className="container-fluid">
-                        <FilterCourseSection filterType={'Ratings'} filters={filters} updateCheckOfFilter={updateCheckOfFilter}/>
+                        <FilterCourseSection filterType={'Ratings'} filters={filters} handleUserFilterInput={handleUserFilterInput}/>
                         <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
                             handleFilterMenuClose()
                             }}>Done</button>
@@ -122,7 +119,7 @@ export default function Courses() {
                {windowWidth > 992 && (
                    <div className='col-lg-3 p-0'>
                     <div className="container-fluid">
-                       <FilterCourseSection filterType={'Ratings'} filters={filters} updateCheckOfFilter={updateCheckOfFilter}/>
+                       <FilterCourseSection filterType={'Ratings'} filters={filters} handleUserFilterInput={handleUserFilterInput}/>
                     </div>
                    </div>
                )}
