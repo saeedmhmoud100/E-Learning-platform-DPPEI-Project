@@ -9,32 +9,43 @@ export default function Courses() {
 
     // FADEL:
     // 1- displaying courses according to filters
-    // 2- fixing radio in FilterCourseSection
+    // 2- adding clear filters option - done
     // 3- implementing search
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [filterTypes, setFilterTypes] = useState([])
+  const [filtersCleared, setFiltersCleared] = useState(false);
   const {courses, course, loading} = useSelector(state => state.allCourses);
 
-  const filters = [
-    {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up']},
-    {type:'radio',label:'Price',options:['400 & Up','300 & Up']},
-    {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript']},
-    {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours']}
-  ]
+  const [filters, setFilters] = useState([
+    {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up'], selectedFilter:''},
+    {type:'radio',label:'Price',options:['400 & Up','300 & Up'], selectedFilter:''},
+    {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript'], selectedFilter:[]},
+    {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours'], selectedFilter:''}
+  ])
 
   // FUNCTION THAT ADDS FILTERS CHOSEN BY USER TO ARRAY OF FILTERS
-  const handleUserFilterInput = (option)=>{
-    setFilterTypes(prev => {
-        if (prev.includes(option)) {
-            return prev.filter(filter => filter !== option);
-        } else {
-            return [...prev, option];
+  const handleUserFilterInput = (option, label, index)=>{
+    setFilters((prev)=>{
+        const updatedFilters = [...prev];
+        const typeOfFilter = {...updatedFilters[index]};
+        if(label!='Categories'){
+            typeOfFilter.selectedFilter = option;
+        }else{
+            if(typeOfFilter.selectedFilter.includes(option)){
+                console.log(label,index,option)
+                typeOfFilter.selectedFilter = typeOfFilter.selectedFilter.filter((filter)=>filter!==option);
+            }
+            else{
+                typeOfFilter.selectedFilter = [...typeOfFilter.selectedFilter,option];
+            }
         }
-    });
+
+        updatedFilters[index] = typeOfFilter;
+        return updatedFilters
+    })
   }
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
@@ -53,19 +64,35 @@ export default function Courses() {
       setDisplayFilterMenu(false);
   }
 
+  // FUNCTION THAT CLEARS FILTERS
+  function handleClearFilters(){
+    setFilters((prev)=>{
+        return prev.map((filter)=>{
+            if(filter.label == 'Categories'){
+                return {...filter,selectedFilter:[]};
+            }else{
+                return {...filter,selectedFilter:''};
+            }
+        })
+    })
+    setFiltersCleared(!filtersCleared);
+  }
+
   return (
     <div className='mt-5 mb-5'>
       <div className="container">
         <h1 className='py-4 text-center'>1,000 Results for 'search term'</h1>
         <div className='position-relative'>
-            <div className='d-flex align-items-center'>
-                <button className={`sort-button-style ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
+            <div className='d-flex flex-wrap align-items-center'>
+                <button className={`sort-button-style mb-2 ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
                     setDisplayDropdown(!displayDropdown)}}>
                         Sort by {sortType}
                         <i class="fa-solid fa-chevron-down ms-2"></i></button>
-                <button className={`filter-button-style d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
+                <button className={`filter-button-style mb-2 d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
                     setDisplayFilterMenu(!displayFilterMenu)}}>
-                        Filter</button>
+                        Filters</button>
+                <button className='text-dark btn mb-2' onClick={()=>{handleClearFilters()}}>
+                        Clear filters</button>
             </div>
             
             
@@ -98,7 +125,7 @@ export default function Courses() {
             }}></div>
             <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
                 <div className="container-fluid">
-                        <FilterCourseSection filterType={'Ratings'} filters={filters} handleUserFilterInput={handleUserFilterInput}/>
+                        <FilterCourseSection filters={filters} handleUserFilterInput={handleUserFilterInput} filtersCleared={filtersCleared}/>
                         <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
                             handleFilterMenuClose()
                             }}>Done</button>
@@ -124,7 +151,7 @@ export default function Courses() {
                {windowWidth > 992 && (
                    <div className='col-lg-3 p-0'>
                     <div className="container-fluid">
-                       <FilterCourseSection filterType={'Ratings'} filters={filters} handleUserFilterInput={handleUserFilterInput}/>
+                       <FilterCourseSection filters={filters} handleUserFilterInput={handleUserFilterInput} filtersCleared={filtersCleared}/>
                     </div>
                    </div>
                )}

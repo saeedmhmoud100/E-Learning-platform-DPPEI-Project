@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css'
 
-export default function FilterCourseSection({filterType, filters, handleUserFilterInput}) {
+export default function FilterCourseSection({ filters, handleUserFilterInput, filtersCleared}) {
 
   const [openDropdowns, setOpenDropdowns] = useState({});
 
@@ -12,12 +12,25 @@ export default function FilterCourseSection({filterType, filters, handleUserFilt
     }));
   };
 
+  // FUNCTION OT RESET RADIO BUTTONS
+  const resetRadio = ()=>{
+    if(filtersCleared){
+      const radios = document.querySelectorAll('.radio-style');
+      radios.forEach((radio) => {
+        radio.checked = false;
+      });
+    }
+  }
+
+  useEffect(()=>{
+    resetRadio();
+  },[filtersCleared])
 
   return (
     <div className="row px-3 z-3">
       {filters.map((filter, i) => (
-        <>
-        <div key={i} className="col-12 px-0 py-4">
+        <div key={i}>
+        <div className="col-12 px-0 py-4">
           <div
             role="button"
             onClick={() => toggleDropdown(filter.label)} 
@@ -41,14 +54,14 @@ export default function FilterCourseSection({filterType, filters, handleUserFilt
                       className="form-check-input radio-style"
                       type={filter.type}
                       name="flexRadioDefault"
-                      id={`flexRadioDefault${j}`}
-                      onChange={()=>handleUserFilterInput(option)}
+                      id={`flexRadioDefault${j+1}`}
+                      onChange={()=>handleUserFilterInput(option, filter.label, i)}
                     />
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
                     <i className="text-warning ms-2 fa-solid fa-star-half-stroke"></i>
-                    <label className="form-check-label ms-2" htmlFor={`flexRadioDefault${j}`}>
+                    <label className="form-check-label ms-2" htmlFor={`flexRadioDefault${j+1}`}>
                       {option}
                     </label>
                   </div>
@@ -59,13 +72,13 @@ export default function FilterCourseSection({filterType, filters, handleUserFilt
                     <input
                       className="form-check-input radio-style"
                       type={filter.type}
-                      name={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j}`}
-                      id={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j}`}
-                      onChange={()=>handleUserFilterInput(option)}
+                      name={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault`}
+                      id={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j+1}`}
+                      onChange={()=>handleUserFilterInput(option, filter.label, i)}
                     />
                     <label
                       className="form-check-label ms-2"
-                      htmlFor={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j}`}
+                      htmlFor={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j+1}`}
                     >
                       {option}
                     </label>
@@ -76,7 +89,7 @@ export default function FilterCourseSection({filterType, filters, handleUserFilt
           )}
         </div>
         {i!=filters.length-1 && (<hr className='m-0'/>)}
-        </>
+        </div>
         
       ))}
     </div>
