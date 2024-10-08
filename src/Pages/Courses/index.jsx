@@ -10,7 +10,9 @@ export default function Courses() {
 
     // FADEL:
     // 1- displaying courses according to filters
-    // 3- implementing search
+
+  const {searchTerm} = useSelector(state => state.searchTerm);
+  const {courses, course, loading} = useSelector(state => state.allCourses);
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
@@ -24,9 +26,20 @@ export default function Courses() {
     {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours'], selectedFilter:''}
   ]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const {courses, course, loading} = useSelector(state => state.allCourses);
 
   // FUNCTION TO UPDATE FILTEREDCOURSES ARRAY
+  const updateFilteredArray = ()=>{
+    setFilteredCourses((prev)=>{
+        return courses.filter((course)=>
+            course.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    })
+  }
+
+  useEffect(()=>{
+    updateFilteredArray()
+  },[searchTerm])
+
 //   const updateFilteredArray = ()=>{
 //     setFilteredCourses((prev)=>{
 //         courses.map((course)=>{
@@ -150,11 +163,21 @@ export default function Courses() {
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
                         <div className="row">
-                        {
-                            courses.map((course, index) => {
-                                return <CourseCards key={index} course={course} />
-                            })
-                        }
+                            {
+                                filteredCourses.length === 0 ? (
+                                    searchTerm !== '' ? (
+                                      <div>Course not found</div>
+                                    ) : (
+                                      courses.map((course, index) => {
+                                        return <CourseCards key={index} course={course} />;
+                                      })
+                                    )
+                                  ) : (
+                                    filteredCourses.map((course, index) => {
+                                      return <CourseCards key={index} course={course} />;
+                                    })
+                                  )
+                            }
                         </div>  
                     </div>
                 </div>
@@ -174,11 +197,21 @@ export default function Courses() {
               <div className="col-lg-9 py-4">
                     <div className="container-fluid">
                         <div className="row">
-                            {
-                                courses.map((course, index) => {
-                                    return <CourseCards key={index} course={course} />
+                        {
+                            filteredCourses.length === 0 ? (
+                                searchTerm !== '' ? (
+                                    <div>Course not found</div>
+                                ) : (
+                                    courses.map((course, index) => {
+                                        return <CourseCards key={index} course={course} />;
+                                    })
+                                )
+                                ) : (
+                                    filteredCourses.map((course, index) => {
+                                      return <CourseCards key={index} course={course} />;
                                 })
-                            }
+                            )
+                        }
                         </div>
                     </div>
               </div>
