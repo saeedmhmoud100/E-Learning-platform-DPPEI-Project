@@ -7,6 +7,11 @@ import {useSelector} from "react-redux";
 
 export default function Courses() {
 
+    // FADEL:
+    // 1- displaying courses according to filters
+    // 2- fixing radio in FilterCourseSection
+    // 3- implementing search
+
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);

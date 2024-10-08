@@ -8,12 +8,16 @@ import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
 
 export default function Home() {
 
+    // FADEL:
+    // 1- Pagination
+    // 2- Implementing my learnings logic
+
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getAllCoursesPage(1))
     },[])
     const { courses, loading } = useSelector((state) => state.allCourses);
-    
+
   return (
     
     <>
