@@ -1,4 +1,4 @@
-import { GET_SEARCH_TERM } from "../type";
+import { GET_SEARCH_TERM, UPDATE_SARCH_TERM } from "../type";
 
 let initialState = {
     searchTerm : ''
@@ -9,7 +9,12 @@ const searchReducer = (state = initialState, action)=>{
         case GET_SEARCH_TERM:
             return{
                 ...state,
-                state : action.info,
+                searchTerm : action.info,
+            }
+        case UPDATE_SARCH_TERM:
+            return{
+                ...state,
+                searchTerm : action.info,
             }
         default: return state
     }

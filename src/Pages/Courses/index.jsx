@@ -26,9 +26,6 @@ export default function Courses() {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const {courses, course, loading} = useSelector(state => state.allCourses);
 
-  console.log(courses)
-  const dispatch = useDispatch()
-
   // FUNCTION TO UPDATE FILTEREDCOURSES ARRAY
 //   const updateFilteredArray = ()=>{
 //     setFilteredCourses((prev)=>{
