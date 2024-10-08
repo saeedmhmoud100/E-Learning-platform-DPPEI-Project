@@ -1,0 +1,8 @@
+import { GET_SEARCH_TERM } from "../type"
+
+export const getsearchTerm = (searchTerm)=>{
+    return{
+        type: GET_SEARCH_TERM,
+        info: searchTerm
+    }
+}
