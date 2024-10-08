@@ -3,13 +3,13 @@ import './index.css';
 import { useState, useEffect } from 'react';
 import CourseCards from '../../components/CourseCards';
 import FilterCourseSection from '../../components/FilterCourseSection';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { getCourseDetails } from '../../store/actions/coursesAction';
 
 export default function Courses() {
 
     // FADEL:
     // 1- displaying courses according to filters
-    // 2- adding clear filters option - done
     // 3- implementing search
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
@@ -17,14 +17,32 @@ export default function Courses() {
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filtersCleared, setFiltersCleared] = useState(false);
-  const {courses, course, loading} = useSelector(state => state.allCourses);
-
   const [filters, setFilters] = useState([
     {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up'], selectedFilter:''},
     {type:'radio',label:'Price',options:['400 & Up','300 & Up'], selectedFilter:''},
     {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript'], selectedFilter:[]},
     {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours'], selectedFilter:''}
-  ])
+  ]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const {courses, course, loading} = useSelector(state => state.allCourses);
+
+  console.log(courses)
+  const dispatch = useDispatch()
+
+  // FUNCTION TO UPDATE FILTEREDCOURSES ARRAY
+//   const updateFilteredArray = ()=>{
+//     setFilteredCourses((prev)=>{
+//         courses.map((course)=>{
+//             if((filters[0].selectedFilter && course.price === filters[0].selectedFilter) &
+//                (filters[2].selectedFilter && course. === filters[2].selectedFilter) ){
+//                 console.log('yes')
+//             }
+//         })
+//         courses.filter((course)=>{
+
+//         })
+//     })
+//   }
 
   // FUNCTION THAT ADDS FILTERS CHOSEN BY USER TO ARRAY OF FILTERS
   const handleUserFilterInput = (option, label, index)=>{
@@ -91,7 +109,7 @@ export default function Courses() {
                 <button className={`filter-button-style mb-2 d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
                     setDisplayFilterMenu(!displayFilterMenu)}}>
                         Filters</button>
-                <button className='text-dark btn mb-2' onClick={()=>{handleClearFilters()}}>
+                <button className='clear-filter-btn' onClick={()=>{handleClearFilters()}}>
                         Clear filters</button>
             </div>
             
