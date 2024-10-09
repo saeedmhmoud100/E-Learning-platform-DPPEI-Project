@@ -9,7 +9,7 @@
     align-items: center;
     position: absolute;
     top:105%;
-    z-index: 2;
+    z-index: 5;
 }
 .dropdown-style li:hover{
     background-color: var(--thirdColor);
@@ -40,7 +40,7 @@
 
 .overlay-for-courses{
     background-color: rgba(0,0,0,0.5);
-    z-index: 3;
+    z-index: 6;
     position: fixed;
     top: 0;
     right: 0;
@@ -53,7 +53,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 5;
+    z-index: 7;
     height: 100%;
     width: 17rem;
     overflow: auto;
@@ -62,6 +62,17 @@
 
 .show-filter-menu-to-side::-webkit-scrollbar {
     display: none; 
+}
+
+.clear-filter-btn{
+    border: transparent;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.clear-filter-btn:hover{
+    color: var(--thirdColor);
 }
 
 
