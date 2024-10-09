@@ -1,8 +1,20 @@
 import {Link, useNavigate} from "react-router-dom";
 import './Navbar.css';
+import { useDispatch, useSelector } from "react-redux";
+import { updatesearchTerm } from "../../store/actions/searchActions.js";
+import { useEffect } from "react";
+
 
 export const Navbar = ({logout, changeRule, userData}) => {
     const navigate = useNavigate()
+
+    const {searchTerm} = useSelector((state)=>state.searchTerm);
+    const dispatch = useDispatch();
+    
+    // FUNCTION TO HANDLE SEARCH INPUT
+    const handleSearchInput = (e)=>{
+        dispatch(updatesearchTerm(e.target.value))
+    }
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -77,7 +89,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                         <li className="nav-item ms-md-3 ms-auto w-100">
                             <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
                                 <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search"
-                                       aria-label="Search"/>
+                                       aria-label="Search" onChange={handleSearchInput}/>
                             </form>
                         </li>
                     </ul>

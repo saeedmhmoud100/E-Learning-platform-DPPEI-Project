@@ -5,5 +5,5 @@ import searchReducer from './searchReducer'
 
 export default combineReducers ({
     allCourses:coursesReducer,
-
+    searchTerm:searchReducer,
 })
