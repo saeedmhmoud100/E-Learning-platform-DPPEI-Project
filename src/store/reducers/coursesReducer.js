@@ -1,6 +1,7 @@
 import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_INCLUDES, GET_THIS_COURSE_REQUIRMENTS} from '../type'
 
 const inital = {
+   
     courses: [],
     courseIncludesData: [],
     loading: true,

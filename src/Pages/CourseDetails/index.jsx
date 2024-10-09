@@ -166,7 +166,7 @@ export default function CourseDetails() {
             <div className="requirements  my-5 p-2">
               <h3 className="mb-4">Requirements</h3>
               <ul>
-                {requirments?.map((requirment,i)=>(<li className="mb-2">{requirment.description}</li>))}
+                {requirments?.map((requirment,i)=>(<li className="mb-2"key={i}>{requirment.description} </li>))}
               
               </ul>
             </div>
