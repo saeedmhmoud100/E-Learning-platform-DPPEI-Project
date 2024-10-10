@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CourseCards from '../../components/CourseCards';
 import Footer from '../../components/Footer/index.jsx';
 import './Home.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
+import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
 
 export default function Home() {
 
@@ -13,9 +14,7 @@ export default function Home() {
     // 2- Implementing my learnings logic
 
     const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(getAllCoursesPage(1))
-    },[])
+
     const { courses, loading } = useSelector((state) => state.allCourses);
 
   return (
@@ -139,9 +138,9 @@ export default function Home() {
             <i class="fa-solid fa-circle-chevron-left position-absolute top-50 start-0 fs-2 z-3" role='button'></i>
             <div className="row">
                 {
-                    courses.map((course, index) => {
+                    (loading ? (<CourseCardsLoading/>):(courses.map((course, index) => {
                         return <CourseCards key={index} course={course} />
-                    })
+                    })))
                 }
             </div>
         </div>

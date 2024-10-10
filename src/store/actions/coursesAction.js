@@ -21,9 +21,9 @@ export const getAllCourses = (limit) => async (dispatch) => {
 }
 
 //get all category with pagination
-export const getAllCoursesPage = (page) => async (dispatch) => {
+export const getAllCoursesPage = (page, page_size = null) => async (dispatch) => {
     try {
-        const response = await useGetData(`courses/?limit=6&page=${page}`);
+        const response = await useGetData(`courses/?limit=6&page=${page}${page_size ? `&page_size=${page_size}` : ''}`);
         dispatch({
             type: GET_ALL_Courses,
             payload: response,
