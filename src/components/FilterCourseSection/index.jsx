@@ -6,8 +6,8 @@ export default function FilterCourseSection({handleUserFilterInput, filtersClear
   const [openDropdowns, setOpenDropdowns] = useState({});
   const filters = [
     {label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up']},
-    {label:'Price',options:['400 & Up','300 & Up']},
-    {label:'Categories',options:['Java','Python','JavaScript']},
+    {label:'Price',options:['1000-1500','500-1000','100-500']},
+    {label:'Categories',options:['Java','Python','JavaScript','C++', 'Web Development']},
     {label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6-8 Hours']}
   ]
 

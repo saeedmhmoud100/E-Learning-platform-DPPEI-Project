@@ -20,7 +20,7 @@ export default function Courses() {
   const [filtersCleared, setFiltersCleared] = useState(false);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [ratings, setRatings] = useState(0);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState([]);
   const [categories, setCategories] = useState('');
   const [video_Duration, setVideo_Duration] = useState([]);
 
@@ -31,7 +31,9 @@ export default function Courses() {
         setRatings(Number(option.substring(0,2)));
         break;
       case 'Price':
-        setPrice(Number(option));
+        let newPrice = [...price];
+        newPrice = option.match(/\d+/g);
+        setPrice(newPrice);
         break;
       case 'Categories':
         setCategories(option);
@@ -73,20 +75,28 @@ export default function Courses() {
         course.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    if (ratings || price || categories || video_Duration.length > 0) {
-      console.log(video_Duration[0],video_Duration[1])
+    if (ratings || price.length > 0 || categories || video_Duration.length > 0) {
+      console.log(categories)
       updatedArray = updatedArray.filter(course => {
-        let matchesFilters = false;
-        if(ratings){
+        let matchesFilters = true;
+        if(ratings && matchesFilters){
+          console.log(":)")
           matchesFilters = course.rating >= ratings;
-        }else if(price){
-          matchesFilters = course.price === price;
-        }else if(categories){
-          matchesFilters = course.categories.includes(categories);
-        }else if (video_Duration.length){
+        }
+        if(price.length>0 && matchesFilters){
+          console.log(":)")
+          console.log(price)
+          matchesFilters = course.price >= price[0] && course.price <= price[1];
+        }
+        if(categories && matchesFilters){
+          console.log(":)")
+          const courseCategory = course.categories.map((cat)=>{return cat.name.toLowerCase()});
+          console.log(courseCategory);
+          matchesFilters = courseCategory.includes(categories.toLowerCase());
+        }
+        if (video_Duration.length && matchesFilters){
           matchesFilters = course.total_duration >= video_Duration[0] && course.total_duration <= video_Duration[1]
         }
-        console.log(course.total_duration)
         return matchesFilters;
       });
     }
@@ -104,7 +114,7 @@ export default function Courses() {
   const handleClearFilters = ()=>{
     setFiltersCleared(!filtersCleared);
     setRatings(0);
-    setPrice(0);
+    setPrice([]);
     setCategories('');
     setVideo_Duration([]);
     updateFilteredCourses();
@@ -182,9 +192,9 @@ export default function Courses() {
             <div className="row">
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row row gy-2">
                         {
-                          loading || filteredCourses==0 ? (
+                          loading  ? (
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
@@ -214,9 +224,9 @@ export default function Courses() {
 
               <div className="col-lg-9 py-4">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row gy-2">
                         {
-                          loading  || filteredCourses==0 ? (
+                          loading ? (
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (

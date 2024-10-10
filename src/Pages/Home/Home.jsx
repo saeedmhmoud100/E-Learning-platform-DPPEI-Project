@@ -17,6 +17,8 @@ export default function Home() {
 
     const dispatch = useDispatch()
     const { courses, loading } = useSelector((state) => state.allCourses);
+    const {userData} = useSelector(state=>state.user);
+
 
   return (
     
@@ -29,7 +31,7 @@ export default function Home() {
                 <img src="/images/pfp.png" alt="profile picture EduVerse" className='w-100 h-100'/>
             </div>
             <div className="text-cont ps-4">
-                <h2>Welcome back, User!</h2>
+                <h2>Welcome back, {userData.username}</h2>
                 {/* <a href='#'>add occupations and interest</a> */}
             </div>
         </div>
@@ -53,7 +55,6 @@ export default function Home() {
             </div>
             <div className="container-fluid p-0">
                 <div className="row g-3">
-
                     <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
                         <div className="d-flex justify-content-between align-items-center h-100">
                             <div className="position-relative w-75 h-100">
@@ -75,53 +76,8 @@ export default function Home() {
                                 <h5 className='h6 text-muted'>Lecture . 6m</h5>
                             </div>
                         </div>
-                    </div>
+                    </div>  
 
-                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100">
-                            <div className="position-relative w-75 h-100">
-                                <div className="overlay-for-home"></div>
-                                <Link to={'/course-details'}>
-                                    <img
-                                        src="/images/coursePhoto.jpg"
-                                        className="w-100 h-100"
-                                        alt="React - The Complete Guide"
-                                    />
-                                </Link>
-                                <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
-                            </div>
-                            <div className="course-text-cont">
-                                <div className="">
-                                    <h3 className='h6 text-muted'>CourseName</h3>
-                                    <h4>1. Chapter</h4>
-                                </div>
-                                <h5 className='h6 text-muted'>Lecture . 6m</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100">
-                            <div className="position-relative w-75 h-100">
-                                <div className="overlay-for-home"></div>
-                                <Link to={'/course-details'}>
-                                    <img
-                                        src="/images/coursePhoto.jpg"
-                                        className="w-100 h-100"
-                                        alt="React - The Complete Guide"
-                                    />
-                                </Link>
-                                <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
-                            </div>
-                            <div className="course-text-cont">
-                                <div className="">
-                                    <h3 className='h6 text-muted'>CourseName</h3>
-                                    <h4>1. Chapter</h4>
-                                </div>
-                                <h5 className='h6 text-muted'>Lecture . 6m</h5>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
