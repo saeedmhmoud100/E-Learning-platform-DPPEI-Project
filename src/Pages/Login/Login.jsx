@@ -1,16 +1,86 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../../components/Footer';
 import {Link, useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from '../../hooks/myToken';
+import usePostData from '../../ApiHooks/usePostData';
+import { errorNotification } from '../../hooks/Notification';
+import Joi, { valid } from 'joi';
+import { getUserData } from '../../store/actions/userActions';
 
-export default function Login({handleLogin}) {
+export default function Login({saveUserData}) {
+    const dispatch = useDispatch();
+    const [userData, setUserData] = useState({
+        email : '',
+        password : ''
+    })
+    const {error, token} = useSelector(state=>state.user)
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    //JOI FUNCTION
+    function validation(data){
+        let schema = Joi.object({
+            email : Joi.alternatives().try(
+                Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+                Joi.string().pattern(new RegExp('[a-zA-Z0-9]{3,30}'))
+            ).required().messages({
+                'string.empty':'Email required',
+            }),
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().messages({
+                'string.empty':'Password required',
+            }),
+        })
+        return schema.validate(data, {abortEarly: false})
+    }
+
+    // STORE USER DATA INPUT
+    function getData(e){
+        let data = {...userData};
+        data[e.target.name] = e.target.value;
+        setUserData(data)
+    }
+
+    // COMPONENT FOR AUTHENTICATION
+    // async function AuthenticateUser(data){
+    //     try{
+    //         const response = await usePostData('auth/login/',data);
+    //         setToken(response.access)
+    //         saveUserData();
+    //         navigate('/');
+    //     }catch(error){
+    //         console.log(error)
+    //         errorNotification(error.response.data.detail);
+    //     }
+    // }
+
   //HANLDE FORM SUBMIT FUNCTION
   function handleSubmit(e){
     e.preventDefault();
-      handleLogin();
-      navigate('/profile')
+    if(validation(userData).error){
+        for(let err of validation(userData).error.details){
+            errorNotification(err.message);
+        }
+    }else{
+        dispatch(getUserData(userData));
+    }
   }
+
+  // STORING TOKEN IN LOCAL STORAGE ONCE RETURNED, OR DISPLAYING ERROR IF EXISTS
+  useEffect(()=>{
+    if(!token & !error){
+        return
+    }else{
+        if(error){
+            errorNotification(error.response.data.detail);
+        }else{
+            setToken(token);
+            navigate('/')
+        }
+    }
+  },[token, error])
+
+
   return (
       <>
       <div className='container p-5 my-5'>
@@ -28,11 +98,11 @@ export default function Login({handleLogin}) {
                     <h1 className='py-4 text-center fw-bold'>Login</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-                            <label for="floatingInput">Email</label>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name='email' onChange={getData}/>
+                            <label for="floatingInput">Username/Email</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com"/>
+                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" name='password' onChange={getData}/>
                             <label for="floatingInput">Password</label>
                         </div>
                         <button type='submit' className='sign-btn-style mb-3'>Login</button>

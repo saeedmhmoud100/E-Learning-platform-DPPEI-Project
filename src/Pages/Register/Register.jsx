@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import './Register.css'
 import {errorNotification} from "../../hooks/Notification";
+import usePostData from '../../ApiHooks/usePostData';
 
 export default function Register({handleRegister}) {
     const navigate = useNavigate()
@@ -12,18 +13,44 @@ export default function Register({handleRegister}) {
     //JOI FUNCTION
     function validation(data){
         let schema = Joi.object({
-            name : Joi.string().pattern(new RegExp('[a-zA-Z]{3,30} [a-zA-Z]{3,30}')).required(),
-            email : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+            username : Joi.string().pattern(new RegExp('[a-zA-Z0-9]{3,30}')).required().messages({
+                'string.pattern.base': `Username should be atleast 3 alphabetical characters and atmost 30 characters`,
+                'string.empty':'Username required',
+            }),
+            email : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required().messages({
+                'string.pattern.base': `Email invalid`,
+                'string.empty':'Email required',
+            }),
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().messages({
+                'string.pattern.base': `Password is not strong enough`,
+                'string.empty':'Password required',
+            }),
         })
         return schema.validate(data, {abortEarly: false})
+    }
+
+    // COMPONENT THAT REGISTERS NEW ACCOUNT
+    async function HandleUser(data){
+        try{
+            const response = await usePostData('auth/register/',data);
+            navigate('/login')
+        }catch(error){
+            const emailError = error.response.data.email;
+            const usernameError = error.response.data.username;
+            if(emailError){
+                emailError.forEach((err)=>errorNotification(err))
+            }
+            if(usernameError){
+                usernameError.forEach((err)=>errorNotification(err))
+            }
+        }
     }
 
     //HANLDE FORM SUBMIT FUNCTION
     function handleSubmit(e){
         e.preventDefault();
         const data = {
-            name: e.target.name.value,
+            username: e.target.username.value,
             email: e.target.email.value,
             password: e.target.password.value
         }
@@ -32,8 +59,7 @@ export default function Register({handleRegister}) {
                 errorNotification(err.message)
             }
         }else{
-            handleRegister({name:e.target.name.value, email:e.target.email.value, password:e.target.password.value})
-            navigate('/home')
+            HandleUser(data)
         }
     }
 
@@ -54,8 +80,8 @@ export default function Register({handleRegister}) {
                     <h1 className='py-4 text-center fw-bold'>Register</h1>
                     <form onSubmit={handleSubmit}>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name='name'/>
-                            <label for="floatingInput">Full name</label>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name='username'/>
+                            <label for="floatingInput">Username</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name='email'/>
@@ -65,6 +91,18 @@ export default function Register({handleRegister}) {
                             <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" name='password'/>
                             <label for="floatingInput">Password</label>
                         </div>
+                        <input
+                        className="form-check-input radio-style"
+                        type="radio"
+                        name='flexRadioDefault'
+                        id='flexRadioDefault1'
+                        />
+                        <label
+                        className="form-check-label ms-2"
+                        htmlFor='flexRadioDefault1'
+                        >
+                        Admin
+                        </label>
                         <button type='submit' className='sign-btn-style mb-3'>Sign up</button>
                     </form>
                     <span className=''>Already have an account? <Link to='/login' className='btn-custom-style'><u>Login</u></Link></span> 

@@ -7,7 +7,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
@@ -32,44 +32,39 @@ import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
 import axios from "axios";
 import {getAllCourses} from "./store/actions/coursesAction";
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
+import CourseCardsLoading from './components/Loading/CourseCardsLoading/CourseCardsLoading';
+import { getToken, setToken } from './hooks/myToken';
+import useGetData from './ApiHooks/useGetData';
+import { getLoggedUserData } from './store/actions/userActions';
 
 function App() {
-    const [userData, setUserData] = useState({});
-    const dispatch = useDispatch()
+    const {userData, logged_in} = useSelector(state=>state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+
+    // FUNCTION THAT SAVES USER DATA FOR ANY COMPONENT TO USE
+    function saveUserData(){
+        const token = getToken();
+        console.log(token);
+    }
+
     useEffect(() => {
-        dispatch(getAllCourses())
+        dispatch(getAllCourses());
+        if(getToken()){
+            dispatch(getLoggedUserData(getToken()))
+        }else{
+            navigate('/login');
+        }
     },[]);
 
-
-    function logout() {
-        setUserData({...userData, loggedIn: false, isAdmin: false})
-    }
-
-    function login(data) {
-        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
-    }
-
-    function changeRule() {
-        if (userData.isAdmin) {
-            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: true})
-        } else if (userData.isInstructor) {
-            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: false})
-        } else {
-            setUserData({...userData, loggedIn: true, isAdmin: true, isInstructor: false})
-        }
-    }
-
-    function handleRegister(data) {
-        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
-    }
-
     return (<div className="App">
-        <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
+        <Navbar/>
         <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/register" element={<Register handleRegister={handleRegister}/>}/>
-            <Route path="/login" element={<Login handleLogin={login}/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login saveUserData={saveUserData}/>}/>
             <Route path='/admin/*' element={<AdminPage/>}/>
             <Route path="/inst-profile" element={<InstProfile/>}/>
             <Route path="/inst-profile/all-courses" element={<InsCourses/>}/>
