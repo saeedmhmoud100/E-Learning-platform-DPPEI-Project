@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState ,useEffect} from "react";
 import insPhoto from "./images/instractorPhoto.png";
 import Courses from "./Courses";
+import axios from "axios";
 
 import "./style.css";
 import {Link} from "react-router-dom";
@@ -15,7 +16,16 @@ const open = {
 export default function InstProfile() {
     let [isOpen, setIsOpen] = useState(false);
 
-
+    const getData = async () => {
+        try {
+            const response = await axios.get('https://e-learning-platform-dppei-project-backend.vercel.app/api/instructor-profile/1');
+            console.log( response.data); 
+        } catch (error) {
+            console.error( error); 
+        }
+    };
+    useEffect(()=>{getData()},[])
+    
     return (
         <div className="container w-85 mt-5  ">
             <div className="container w-85 d-flex ">
