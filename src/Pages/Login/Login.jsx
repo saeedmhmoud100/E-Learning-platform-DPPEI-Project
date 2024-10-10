@@ -8,7 +8,7 @@ import { errorNotification } from '../../hooks/Notification';
 import Joi, { valid } from 'joi';
 import { getUserData } from '../../store/actions/userActions';
 
-export default function Login({saveUserData}) {
+export default function Login() {
     const dispatch = useDispatch();
     const [userData, setUserData] = useState({
         email : '',
