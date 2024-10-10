@@ -5,76 +5,110 @@ import CourseCards from '../../components/CourseCards';
 import FilterCourseSection from '../../components/FilterCourseSection';
 import {useDispatch, useSelector} from "react-redux";
 import { getCourseDetails } from '../../store/actions/coursesAction';
+import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
 
 export default function Courses() {
-
-    // FADEL:
-    // 1- displaying courses according to filters
-
-    // 1- add a json filters to filter course section where it creates each section from that json object
-    // 2- create states for each category
-    // 3- callback function that updates input of each category from filtercoursesection to courses, this callback function takes two params
-    //    the input and a callback function to its respective set state
-    // 4- an array of courses that satisfy search term and filters
-    // 5- this array is updated everytime a category state changes or search term is updated (useEffect)
-    // 6- every time this array of
-    // 7- updatedarray = courses.map().filter
 
   const dispatch = useDispatch();
   const {searchTerm} = useSelector(state => state.searchTerm);
   const {courses, loading} = useSelector(state => state.allCourses);
-
+  const [coursesWithDetails,setCoursesWithDetails] = useState([])
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filtersCleared, setFiltersCleared] = useState(false);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [ratings, setRatings] = useState('');
-  const [price, setPrice] = useState('');
+  const [ratings, setRatings] = useState(0);
+  const [price, setPrice] = useState(0);
   const [categories, setCategories] = useState('');
-  const [video_Duration, setVideo_Duration] = useState('');
+  const [video_Duration, setVideo_Duration] = useState([]);
 
 
-  const handleUserFilterInput = (option, callback, index)=>{
-    console.log(callback);
+  const handleUserFilterInput = (option, filterName, index)=>{
+    switch(filterName){
+      case 'Ratings':
+        setRatings(Number(option.substring(0,2)));
+        break;
+      case 'Price':
+        setPrice(Number(option));
+        break;
+      case 'Categories':
+        setCategories(option);
+        break;
+      case 'Video Duration':
+        const updatedVideoDuration = [...video_Duration];
+        updatedVideoDuration[0] = option.substring(0,1);
+        updatedVideoDuration[1] = option.substring(2,3);
+        setVideo_Duration(updatedVideoDuration);
+        break;
+      default:
+        return
+    }
   }
 
+  // WHEN COMPONENT FIRST MOUNTS, FOR EACH COURSE IT GETS ITS DETAILS AND STORES IT IN ARRAY
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      if (courses.length > 0) {
+        const promises = courses.map(async (item) => {
+          const courseDetails = await dispatch(getCourseDetails(item.id));
+          return courseDetails;
+        });
+        const updatedCourses = await Promise.all(promises);
+        setCoursesWithDetails(updatedCourses);
+      }
+    };
+    fetchCourseDetails();
+  }, [courses, dispatch]);
+
+  // FUNCTION THAT FILTERS COURSES WHEN DATA IS LOADED
+  const updateFilteredCourses = () => {
+    if (loading || coursesWithDetails.length === 0) {
+      return;
+    }
+    let updatedArray = [...coursesWithDetails];
+    if (searchTerm) {
+      updatedArray = updatedArray.filter(course =>
+        course.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    if (ratings || price || categories || video_Duration.length > 0) {
+      console.log(video_Duration[0],video_Duration[1])
+      updatedArray = updatedArray.filter(course => {
+        let matchesFilters = false;
+        if(ratings){
+          matchesFilters = course.rating >= ratings;
+        }else if(price){
+          matchesFilters = course.price === price;
+        }else if(categories){
+          matchesFilters = course.categories.includes(categories);
+        }else if (video_Duration.length){
+          matchesFilters = course.total_duration >= video_Duration[0] && course.total_duration <= video_Duration[1]
+        }
+        console.log(course.total_duration)
+        return matchesFilters;
+      });
+    }
+    setFilteredCourses(updatedArray);
+  };
+
+  // FILTERED COURSES ARRAY ALWAYS UPDATES WHENEVER FILTERS ARE TRIGGERED OR LOADING STATE CHANGES
+  useEffect(() => {
+    if (!loading && coursesWithDetails.length > 0) {
+      updateFilteredCourses();
+    }
+  }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails]);
+  
+  // FUNCTION THAT CLEARS FILTERS
   const handleClearFilters = ()=>{
     setFiltersCleared(!filtersCleared);
-    if(searchTerm){
-      let updatedArray = [...filteredCourses];
-      updatedArray = updatedArray.filter((course)=>{return course.title == searchTerm});
-      setFilteredCourses(updatedArray);
-    }else{
-      setFilteredCourses([]);
-    }
-    
-  }
-
-  const updateFilteredCourses = ()=>{
-    let updatedArray = [...filteredCourses];
-    const Rating = Number(ratings.substring(0,2));
-    const Price = Number(price);
-    const videoDurationInterval1 = Number(video_Duration.substring(0,1));
-    const videoDurationInterval2 = Number(video_Duration.substring(2,3));
-    const coursesWithDetails = courses.map((course)=>{
-      dispatch(getCourseDetails(course.id));
-      return course;
-    })
-    updatedArray = coursesWithDetails.filter((item)=>{
-       return item.title.includes(searchTerm) &&
-      (Rating && item.rating>=Rating) && 
-      (Price && item.price == Number(Price)) && 
-      (categories && item.categories.includes(categories)) && 
-      (video_Duration && (item.total_duration>=videoDurationInterval1 || item.total_duration<=videoDurationInterval2))
-    });
-    setFilteredCourses(updatedArray);
-    }
-
-  useEffect(()=>{
+    setRatings(0);
+    setPrice(0);
+    setCategories('');
+    setVideo_Duration([]);
     updateFilteredCourses();
-  },[ratings,price,categories,video_Duration,searchTerm])
+  }
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
   const handleResize = () => {
@@ -149,21 +183,19 @@ export default function Courses() {
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
                         <div className="row">
-                            {
-                                filteredCourses.length === 0 ? (
-                                    searchTerm !== '' ? (
-                                      <div>Course not found</div>
-                                    ) : (
-                                      courses.map((course, index) => {
-                                        return <CourseCards key={index} course={course} />;
-                                      })
-                                    )
-                                  ) : (
-                                    filteredCourses.map((course, index) => {
-                                      return <CourseCards key={index} course={course} />;
-                                    })
-                                  )
-                            }
+                        {
+                          loading || filteredCourses==0 ? (
+                            <CourseCardsLoading />
+                          ) : (
+                            filteredCourses.length > 0 ? (
+                              filteredCourses.map((course, index) => {
+                                return <CourseCards key={index} course={course} />;
+                              })
+                            ) : (
+                              <div>Course not Found</div>
+                            )
+                          )
+                        }
                         </div>  
                     </div>
                 </div>
@@ -184,19 +216,17 @@ export default function Courses() {
                     <div className="container-fluid">
                         <div className="row">
                         {
-                            filteredCourses.length === 0 ? (
-                                searchTerm !== '' ? (
-                                    <div>Course not found</div>
-                                ) : (
-                                    courses.map((course, index) => {
-                                        return <CourseCards key={index} course={course} />;
-                                    })
-                                )
-                                ) : (
-                                    filteredCourses.map((course, index) => {
-                                      return <CourseCards key={index} course={course} />;
-                                })
+                          loading  || filteredCourses==0 ? (
+                            <CourseCardsLoading />
+                          ) : (
+                            filteredCourses.length > 0 ? (
+                              filteredCourses.map((course, index) => {
+                                return <CourseCards key={index} course={course} />;
+                              })
+                            ) : (
+                              <div>Course not Found</div>
                             )
+                          )
                         }
                         </div>
                     </div>

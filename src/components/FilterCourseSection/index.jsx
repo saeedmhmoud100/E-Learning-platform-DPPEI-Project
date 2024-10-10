@@ -8,7 +8,7 @@ export default function FilterCourseSection({handleUserFilterInput, filtersClear
     {label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up']},
     {label:'Price',options:['400 & Up','300 & Up']},
     {label:'Categories',options:['Java','Python','JavaScript']},
-    {label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours']}
+    {label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6-8 Hours']}
   ]
 
   const toggleDropdown = (filterLabel) => {
@@ -61,7 +61,7 @@ export default function FilterCourseSection({handleUserFilterInput, filtersClear
                       type='radio'
                       name="flexRadioDefault"
                       id={`flexRadioDefault${j+1}`}
-                      onChange={()=>handleUserFilterInput(option, 'set'+filter.label.replace(' ','_'), i)}
+                      onChange={()=>handleUserFilterInput(option, filter.label, i)}
                     />
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
@@ -80,7 +80,7 @@ export default function FilterCourseSection({handleUserFilterInput, filtersClear
                       type='radio'
                       name='flexRadioDefault'
                       id={`flexRadioDefault${j+1}`}
-                      onChange={()=>handleUserFilterInput(option, 'set'+filter.label.replace(' ','_'), i)}
+                      onChange={()=>handleUserFilterInput(option, filter.label, i)}
                     />
                     <label
                       className="form-check-label ms-2"

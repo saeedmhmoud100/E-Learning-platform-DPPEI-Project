@@ -2,23 +2,27 @@ import {Link, useNavigate} from "react-router-dom";
 import './Navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import { updatesearchTerm } from "../../store/actions/searchActions.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 export const Navbar = ({logout, changeRule, userData}) => {
     const navigate = useNavigate()
 
-    const {searchTerm} = useSelector((state)=>state.searchTerm);
+    const [searchTerm,setSearchTerm] = useState('');
     const dispatch = useDispatch();
     
     // FUNCTION TO HANDLE SEARCH INPUT
     const handleSearchInput = (e)=>{
-        dispatch(updatesearchTerm(e.target.value))
+        setSearchTerm(e.target.value)
     }
 
     const handleSubmit = e => {
         e.preventDefault()
-        navigate('/courses')
+        if(!searchTerm){
+            return
+        }
+        dispatch(updatesearchTerm(searchTerm));
+        navigate('/courses');
     }
 
     return (

@@ -44,7 +44,7 @@ export default function SliderForCourseCards() {
                     loading 
                     ? <CourseCardsLoading /> 
                     : courses.map((course, index) => (
-                        <div className={`d-flex justify-content-center align-items-center flex-column w-100 h-100 px-4`}>
+                        <div key={index} className={`d-flex justify-content-center align-items-center flex-column w-100 h-100 px-4`}>
                         <div className="position-relative w-100 h-50">
                             <div className='overlay-for-course-cards'></div>
                             <i class={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart add-to-wishlist-icon`} onClick={addToWishlist}></i>

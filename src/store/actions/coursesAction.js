@@ -45,6 +45,7 @@ export const getCourseDetails = (id) => async (dispatch) => {
             type: GET_COURSE_DETAILS,
             payload: response,
         })
+        return response;
 
     } catch (e) {
         dispatch({
