@@ -1,4 +1,4 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_REQUIRMENTS} from '../type'
+import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
 import useGetData from '../../ApiHooks/useGetData'
 import usePostData from "../../ApiHooks/usePostData";
 import { GET_THIS_COURSE_INCLUDES } from '../type';
@@ -43,6 +43,22 @@ export const getCourseDetails = (id) => async (dispatch) => {
         const response = await useGetData(`courses/${id}`);
         dispatch({
             type: GET_COURSE_DETAILS,
+            payload: response,
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + e,
+        })
+    }
+}
+//get course details
+export const getCourseReviews = (id) => async (dispatch) => {
+    try {
+        const response = await useGetData(`courses/${id}/reviews`);
+        dispatch({
+            type: GET_COURSE_REVIEWS,
             payload: response,
         })
 

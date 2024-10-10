@@ -7,7 +7,8 @@ import  CourseCards from '../../components/CourseCards/index.jsx'
 import CourseReviewCard from './components/CourseReviewCard';
 import   StudentAlsoBoughtCard from "./components/StudentsAlsoBoughtCard/index.jsx"
 import {useDispatch, useSelector} from "react-redux";
-import { getCourseWhatYouWillLearn,getCourseIncludes,getCourseDetails,getCourseRequirments,getAllCourses} from '../../store/actions/coursesAction.js';
+import { getCourseWhatYouWillLearn,getCourseIncludes,getCourseDetails,getCourseRequirments,getAllCourses,getCourseReviews} from '../../store/actions/coursesAction.js';
+import { getInstructorProfile } from '../../store/actions/instructorAction.js';
 
 export default function CourseDetails() {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -26,18 +27,31 @@ export default function CourseDetails() {
     courses,
     whatYouWillLearnData,
     courseIncludesData,
-    requirments
+    requirments,reviews
   } = useSelector(state => state.allCourses);
+  const{instructor}=useSelector(state => state.instructor)
   let courseRating = course?.rating_count || 0;
   let starsCount = new Array(courseRating).fill(0);
+ //to use in this-course-includes-section
+  const iconArray = [
+    "fa-solid fa-file",
+    "fa-solid fa-mobile-screen",
  
- 
+    "fa-solid fa-video",
+    "fa-solid fa-file-arrow-down",
+    "fa-solid fa-code",
+    "fa-solid fa-trophy"
+  ];
+  const firstResources = courseIncludesData?.slice(0, 3); // First 3 items
+  const secondResources = courseIncludesData?.slice(3,6);   // Remaining items
     useEffect(() => {
       dispatch (getAllCourses(1))
       dispatch(getCourseWhatYouWillLearn(6));
       dispatch(getCourseIncludes(6));
       dispatch(getCourseDetails(6));
       dispatch(getCourseRequirments(6));
+      dispatch(getCourseReviews(6));
+      dispatch(getInstructorProfile(1));
       
         
   },[])
@@ -122,41 +136,24 @@ export default function CourseDetails() {
                 {/* Resource lists */}
                 <div className="first-resources me-4 ms-0">
                   <ul className=" list-unstyled">
-                 { courseIncludesData?.map((item,i)=>(
+                 { firstResources ?.map((item,i)=>(
                   <li className="my-2" key={i}>
-                  <i className="fa-solid fa-video me-2 fs-5"></i>
+                  <i className={`${iconArray[i]} me-2 fs-5`}></i>
                  {item.description}
                 </li>
                  ))} 
                   </ul>
                 </div>
-                {/* <li className="my-2">
-                      <i className="fa-solid fa-video me-2 fs-5"></i>
-                      3 hours on-demand video
-                    </li>
-                    <li className="my-2">
-                      <i className="fa-solid fa-mobile-screen me-2 fs-5"></i>
-                      Access on mobile and TV
-                    </li>
-                    <li className="my-2">
-                      <i className="fa-solid fa-file me-2 fs-5"></i>
-                      1 article
-                    </li> */}
+               
 
                 <div className="second-resources">
                   <ul className=" list-unstyled">
-                    <li className="my-2">
-                      <i className="fa-solid fa-file-arrow-down me-2 fs-5"></i>
-                      24 downloadable resources
-                    </li>
-                    <li className="my-2">
-                      <i className="fa-solid fa-code me-2 fs-5"></i>
-                      6 coding exercises
-                    </li>
-                    <li className="my-2">
-                      <i className="fa-solid fa-trophy me-2 fs-5"></i>
-                      Certificate of completion
-                    </li>
+                   {secondResources?.map((item,i)=>(
+                  <li className="my-2" key={i + firstResources.length}>
+                  <i className={`${iconArray[i + firstResources.length]} me-2 fs-5`}></i>
+                 {item.description}
+                </li>
+                 ))}
                   </ul>
                 </div>
               </div>
@@ -212,7 +209,7 @@ export default function CourseDetails() {
             )}
             {/* students also bought section */}
             <h4 className="mb-4 fw-bold">Students also bought</h4>
-            {courses?.map((course) => (
+            {courses.slice(0,3)?.map((course) => (
             <div  key={course.id}>
               <StudentAlsoBoughtCard
                 title={course?.title}
@@ -236,28 +233,25 @@ export default function CourseDetails() {
 <div className=' fw-bolder d-flex '>
   <div className="course-ratings">
   <i className="fa-solid fa-star text-warning me-2" ></i>
-  <span className='fs-4 me-3'>4.5 course rating
+  <span className='fs-4 me-3'>{course?.rating_avg}course rating
   </span>
   </div>
   <div className="overall-ratings">
   <i className="fa-solid fa-circle fa-xs text-secondary"></i> 
-  <span className='fs-4'> 1K ratings
+  <span className='fs-4'> {course?.rating} ratings
 
   </span>
   </div>
-  </div>     
+  </div>   
+  <div className="conatiner">
+  <div className="row">
+  {reviews.map((review,i)=>(
     <div className="col-md-6">
-   <CourseReviewCard/>
+    <CourseReviewCard review={review} key={i} className/>
     </div>
-    <div className="col-md-6 ">
-    <CourseReviewCard/>
-    </div>
-    <div className="col-md-6">
-   <CourseReviewCard/>
-    </div>
-    <div className="col-md-6">
-   <CourseReviewCard/>
-    </div>
+   ))}
+   </div>  
+   </div>
              </div>
               <button className="btn btn-info my-2 ">Show All Reviews</button>
 
@@ -268,7 +262,10 @@ export default function CourseDetails() {
              
              <div className="container">
                <div className="row">
-                  <CourseCards/>
+               {courses?.slice(0,3).map((course, index) => {
+                 return <CourseCards key={index} course={course} />;//we should display courses to that specific instructor (ageb el coursses array beta3 el constructor we howa da ely a3mel map 3aleh)
+            })}
+                  
                </div>  
              </div>      
 
