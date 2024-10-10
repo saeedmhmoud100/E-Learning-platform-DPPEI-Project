@@ -91,18 +91,6 @@ export default function Register({handleRegister}) {
                             <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" name='password'/>
                             <label for="floatingInput">Password</label>
                         </div>
-                        <input
-                        className="form-check-input radio-style"
-                        type="radio"
-                        name='flexRadioDefault'
-                        id='flexRadioDefault1'
-                        />
-                        <label
-                        className="form-check-label ms-2"
-                        htmlFor='flexRadioDefault1'
-                        >
-                        Admin
-                        </label>
                         <button type='submit' className='sign-btn-style mb-3'>Sign up</button>
                     </form>
                     <span className=''>Already have an account? <Link to='/login' className='btn-custom-style'><u>Login</u></Link></span> 

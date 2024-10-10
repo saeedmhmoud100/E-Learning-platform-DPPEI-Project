@@ -41,20 +41,7 @@ export default function Login({saveUserData}) {
         setUserData(data)
     }
 
-    // COMPONENT FOR AUTHENTICATION
-    // async function AuthenticateUser(data){
-    //     try{
-    //         const response = await usePostData('auth/login/',data);
-    //         setToken(response.access)
-    //         saveUserData();
-    //         navigate('/');
-    //     }catch(error){
-    //         console.log(error)
-    //         errorNotification(error.response.data.detail);
-    //     }
-    // }
-
-  //HANLDE FORM SUBMIT FUNCTION
+  //HANDLE FORM SUBMIT FUNCTION
   function handleSubmit(e){
     e.preventDefault();
     if(validation(userData).error){
