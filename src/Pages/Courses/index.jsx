@@ -11,70 +11,70 @@ export default function Courses() {
     // FADEL:
     // 1- displaying courses according to filters
 
+    // 1- add a json filters to filter course section where it creates each section from that json object
+    // 2- create states for each category
+    // 3- callback function that updates input of each category from filtercoursesection to courses, this callback function takes two params
+    //    the input and a callback function to its respective set state
+    // 4- an array of courses that satisfy search term and filters
+    // 5- this array is updated everytime a category state changes or search term is updated (useEffect)
+    // 6- every time this array of
+    // 7- updatedarray = courses.map().filter
+
+  const dispatch = useDispatch();
   const {searchTerm} = useSelector(state => state.searchTerm);
-  const {courses, course, loading} = useSelector(state => state.allCourses);
+  const {courses, loading} = useSelector(state => state.allCourses);
 
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filtersCleared, setFiltersCleared] = useState(false);
-  const [filters, setFilters] = useState([
-    {type:'radio',label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up'], selectedFilter:''},
-    {type:'radio',label:'Price',options:['400 & Up','300 & Up'], selectedFilter:''},
-    {type:'checkbox',label:'Categories',options:['Java','Python','JavaScript'], selectedFilter:[]},
-    {type:'radio',label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours'], selectedFilter:''}
-  ]);
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [ratings, setRatings] = useState('');
+  const [price, setPrice] = useState('');
+  const [categories, setCategories] = useState('');
+  const [video_Duration, setVideo_Duration] = useState('');
 
-  // FUNCTION TO UPDATE FILTEREDCOURSES ARRAY
-  const updateFilteredArray = ()=>{
-    setFilteredCourses((prev)=>{
-        return courses.filter((course)=>
-            course.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    })
+
+  const handleUserFilterInput = (option, callback, index)=>{
+    console.log(callback);
   }
+
+  const handleClearFilters = ()=>{
+    setFiltersCleared(!filtersCleared);
+    if(searchTerm){
+      let updatedArray = [...filteredCourses];
+      updatedArray = updatedArray.filter((course)=>{return course.title == searchTerm});
+      setFilteredCourses(updatedArray);
+    }else{
+      setFilteredCourses([]);
+    }
+    
+  }
+
+  const updateFilteredCourses = ()=>{
+    let updatedArray = [...filteredCourses];
+    const Rating = Number(ratings.substring(0,2));
+    const Price = Number(price);
+    const videoDurationInterval1 = Number(video_Duration.substring(0,1));
+    const videoDurationInterval2 = Number(video_Duration.substring(2,3));
+    const coursesWithDetails = courses.map((course)=>{
+      dispatch(getCourseDetails(course.id));
+      return course;
+    })
+    updatedArray = coursesWithDetails.filter((item)=>{
+       return item.title.includes(searchTerm) &&
+      (Rating && item.rating>=Rating) && 
+      (Price && item.price == Number(Price)) && 
+      (categories && item.categories.includes(categories)) && 
+      (video_Duration && (item.total_duration>=videoDurationInterval1 || item.total_duration<=videoDurationInterval2))
+    });
+    setFilteredCourses(updatedArray);
+    }
 
   useEffect(()=>{
-    updateFilteredArray()
-  },[searchTerm])
-
-//   const updateFilteredArray = ()=>{
-//     setFilteredCourses((prev)=>{
-//         courses.map((course)=>{
-//             if((filters[0].selectedFilter && course.price === filters[0].selectedFilter) &
-//                (filters[2].selectedFilter && course. === filters[2].selectedFilter) ){
-//                 console.log('yes')
-//             }
-//         })
-//         courses.filter((course)=>{
-
-//         })
-//     })
-//   }
-
-  // FUNCTION THAT ADDS FILTERS CHOSEN BY USER TO ARRAY OF FILTERS
-  const handleUserFilterInput = (option, label, index)=>{
-    setFilters((prev)=>{
-        const updatedFilters = [...prev];
-        const typeOfFilter = {...updatedFilters[index]};
-        if(label!='Categories'){
-            typeOfFilter.selectedFilter = option;
-        }else{
-            if(typeOfFilter.selectedFilter.includes(option)){
-                console.log(label,index,option)
-                typeOfFilter.selectedFilter = typeOfFilter.selectedFilter.filter((filter)=>filter!==option);
-            }
-            else{
-                typeOfFilter.selectedFilter = [...typeOfFilter.selectedFilter,option];
-            }
-        }
-
-        updatedFilters[index] = typeOfFilter;
-        return updatedFilters
-    })
-  }
+    updateFilteredCourses();
+  },[ratings,price,categories,video_Duration,searchTerm])
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
   const handleResize = () => {
@@ -90,20 +90,6 @@ export default function Courses() {
   // FUNCTION HANDLES CLOSING OF FILTER MENU
   function handleFilterMenuClose(){
       setDisplayFilterMenu(false);
-  }
-
-  // FUNCTION THAT CLEARS FILTERS
-  function handleClearFilters(){
-    setFilters((prev)=>{
-        return prev.map((filter)=>{
-            if(filter.label == 'Categories'){
-                return {...filter,selectedFilter:[]};
-            }else{
-                return {...filter,selectedFilter:''};
-            }
-        })
-    })
-    setFiltersCleared(!filtersCleared);
   }
 
   return (
@@ -153,7 +139,7 @@ export default function Courses() {
             }}></div>
             <div className={` ${displayFilterMenu ? 'show-filter-menu-to-side' : 'd-none'}`}>
                 <div className="container-fluid">
-                        <FilterCourseSection filters={filters} handleUserFilterInput={handleUserFilterInput} filtersCleared={filtersCleared}/>
+                        <FilterCourseSection handleUserFilterInput={handleUserFilterInput} filtersCleared={filtersCleared}/>
                         <button className='btn btn-dark p-3 w-100 mb-3 align-self-center' onClick={()=>{
                             handleFilterMenuClose()
                             }}>Done</button>
@@ -189,7 +175,7 @@ export default function Courses() {
                {windowWidth > 992 && (
                    <div className='col-lg-3 p-0'>
                     <div className="container-fluid">
-                       <FilterCourseSection filters={filters} handleUserFilterInput={handleUserFilterInput} filtersCleared={filtersCleared}/>
+                       <FilterCourseSection handleUserFilterInput={handleUserFilterInput} filtersCleared={filtersCleared}/>
                     </div>
                    </div>
                )}

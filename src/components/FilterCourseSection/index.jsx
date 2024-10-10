@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './index.css'
 
-export default function FilterCourseSection({ filters, handleUserFilterInput, filtersCleared}) {
+export default function FilterCourseSection({handleUserFilterInput, filtersCleared}) {
 
   const [openDropdowns, setOpenDropdowns] = useState({});
+  const filters = [
+    {label:'Ratings',options:['4.5','4.0 & Up','3.5 & Up','3.0 & Up']},
+    {label:'Price',options:['400 & Up','300 & Up']},
+    {label:'Categories',options:['Java','Python','JavaScript']},
+    {label:'Video Duration',options:['0-1 Hour','1-3 Hours','3-6 Hours','6+ Hours']}
+  ]
 
   const toggleDropdown = (filterLabel) => {
     setOpenDropdowns((prev) => ({
@@ -52,10 +58,10 @@ export default function FilterCourseSection({ filters, handleUserFilterInput, fi
                   <div className="py-2 form-check" key={j}>
                     <input
                       className="form-check-input radio-style"
-                      type={filter.type}
+                      type='radio'
                       name="flexRadioDefault"
                       id={`flexRadioDefault${j+1}`}
-                      onChange={()=>handleUserFilterInput(option, filter.label, i)}
+                      onChange={()=>handleUserFilterInput(option, 'set'+filter.label.replace(' ','_'), i)}
                     />
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
                     <i className="text-warning ms-2 fa-solid fa-star"></i>
@@ -71,14 +77,14 @@ export default function FilterCourseSection({ filters, handleUserFilterInput, fi
                   <div className="py-2 form-check" key={j}>
                     <input
                       className="form-check-input radio-style"
-                      type={filter.type}
-                      name={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault`}
-                      id={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j+1}`}
-                      onChange={()=>handleUserFilterInput(option, filter.label, i)}
+                      type='radio'
+                      name='flexRadioDefault'
+                      id={`flexRadioDefault${j+1}`}
+                      onChange={()=>handleUserFilterInput(option, 'set'+filter.label.replace(' ','_'), i)}
                     />
                     <label
                       className="form-check-label ms-2"
-                      htmlFor={filter.type === 'checkbox' ? 'flexCheckDefault' : `flexRadioDefault${j+1}`}
+                      htmlFor={`flexRadioDefault${j+1}`}
                     >
                       {option}
                     </label>
