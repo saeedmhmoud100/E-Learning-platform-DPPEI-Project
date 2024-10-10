@@ -26,7 +26,7 @@ export default function CourseCards({course}) {
                 </div>
                 <div className="course-card">
                     <Link className='text-decoration-none text-dark' to='/course-details'>
-                        <h3 className='mb-2 text-truncate'>{course.title}</h3>
+                        <h3 className='mb-2 text-truncate'>{course?.title}</h3>
                         <h4 className='text-muted h6 mb-2 text-truncate'>Course instructor</h4>
                         <div className="d-flex flex-row mb-2 align-items-center">
                             <span className='pe-1'>5</span>
@@ -36,7 +36,7 @@ export default function CourseCards({course}) {
                             <i className="fa-solid fa-star star-icon"></i>
                             <span className='ps-1'>(1,200)</span>
                         </div>
-                        <h5 className='mb-2'>{course.price} L.E.</h5>
+                        <h5 className='mb-2'>{course?.price} L.E.</h5>
                         <h6 className='mb-2 bg-warning text-white w-auto p-2'>Bestseller</h6>
                     </Link>
                 </div>

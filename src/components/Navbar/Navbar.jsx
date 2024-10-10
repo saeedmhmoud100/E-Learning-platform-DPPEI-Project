@@ -4,18 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatesearchTerm } from "../../store/actions/searchActions.js";
 import { useEffect } from "react";
 
+
 export const Navbar = ({logout, changeRule, userData}) => {
+    const navigate = useNavigate()
+
     const {searchTerm} = useSelector((state)=>state.searchTerm);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     
     // FUNCTION TO HANDLE SEARCH INPUT
     const handleSearchInput = (e)=>{
         dispatch(updatesearchTerm(e.target.value))
     }
 
-    // FUNCTION TO HANDLE SUBMIT FORM
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault()
         navigate('/courses')
     }

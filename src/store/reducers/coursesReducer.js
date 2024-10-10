@@ -1,10 +1,14 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS} from '../type'
+import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_INCLUDES, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
 
 const inital = {
+   
     courses: [],
-    course_what_you_will_learn: [],
+    courseIncludesData: [],
     loading: true,
-    course:[]
+    whatYouWillLearnData: [],
+    course:[],
+    requirments:[],
+    reviews:[]
 }
 const coursesReducer = (state = inital, action) => {
     switch (action.type) {
@@ -20,6 +24,12 @@ const coursesReducer = (state = inital, action) => {
                 course: action.payload,
                 loading:false,
             }
+            case GET_COURSE_REVIEWS:
+                return{
+                    ...state,
+                    reviews: action.payload.results,
+                    loading:false,
+                }
         case CREATE_Course:
             return {
                 courses: action.payload.results,
@@ -31,9 +41,23 @@ const coursesReducer = (state = inital, action) => {
             }
         case GET_ALL_WHAT_YOU_WILL_LEARN:
             return {
-                course_what_you_will_learn: action.payload.results,
+                ...state,
+             whatYouWillLearnData: action.payload.results,
                 loading: false
             }
+        case GET_THIS_COURSE_INCLUDES:
+            return {
+                ...state,
+                courseIncludesData: action.payload.results,
+                loading: false
+            }
+        case  GET_THIS_COURSE_REQUIRMENTS:
+            return {
+                ...state,
+               requirments: action.payload.results,
+                loading: false
+            }
+
         default:
             return state;
     }
