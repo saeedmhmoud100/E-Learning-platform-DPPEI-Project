@@ -1,14 +1,11 @@
 import {useEffect, useState} from "react";
 import {BarChart} from "../../Charts/barChart";
-import {useDispatch, useSelector} from "react-redux";
-import {getAllOrders} from "../../../store/actions/adminActions";
+import {useSelector} from "react-redux";
 
 export const CoursesOrdered = () => {
     const [data, setData] = useState([])
-    const dispatch = useDispatch()
     const {orders} = useSelector(state => state.admin)
     useEffect(() => {
-        dispatch(getAllOrders())
         fetch('/data/admin/barChartData.json')
             .then(response => response.json())
             .then(data => setData(data))

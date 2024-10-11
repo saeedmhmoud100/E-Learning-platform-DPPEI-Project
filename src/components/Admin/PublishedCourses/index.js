@@ -1,11 +1,9 @@
 import {BarChart} from "../../Charts/barChart";
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getAllCourses} from "../../../store/actions/adminActions";
+import {useSelector} from "react-redux";
 
 export const PublishedCourses = () => {
     const [barChartData, setBarChartData] = useState({})
-    const dispatch = useDispatch()
     const {loading, courses} = useSelector(state => state.admin)
     useEffect(() => {
         fetch('/data/admin/barChartData.json')
@@ -14,7 +12,6 @@ export const PublishedCourses = () => {
                 setBarChartData(data)
             })
 
-        dispatch(getAllCourses())
     },[])
 
     return (
