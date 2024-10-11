@@ -226,7 +226,7 @@ export default function CourseDetails() {
             
             {/* instructor section */}
 
-            <InstructorSection/>
+            <InstructorSection instructor={instructor}/>
             {/* course Review */}
          
             <div className="row g-3">
