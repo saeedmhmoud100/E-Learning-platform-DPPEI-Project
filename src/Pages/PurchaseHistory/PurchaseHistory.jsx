@@ -1,8 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
 import PurchseRow from '../../components/PurchaseRow';
 import './style.css'
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { getOrders } from '../../store/actions/orderAction';
 
 function PurchaseHistory() {
+
+    const dispatch = useDispatch();
+    const {orders} = useSelector((state)=>state.orders);
+
+    // useEffect(()=>{
+    //     dispatch(getOrders());
+    //     },[dispatch])
+
     return (
         <div className="container my-5">
             <h1>Purchase History</h1>
@@ -32,7 +43,20 @@ function PurchaseHistory() {
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <PurchseRow/>
+                    {/* <PurchseRow/> */}
+                    <tbody>
+            {/* {orders.results.map((course,i)=>(
+                <tr key={i}>
+                <th scope="row"><i className="fa-solid fa-cart-shopping"></i></th>
+                <td>{course.courseName}</td>
+                <td>Aug 11, 2024</td>
+                <td>0.00EGP</td>
+                <td>Free Coupon</td>
+                <td><button className="btn btn-light">Receipt</button></td>
+                <td>Invoice unavailable</td>
+            </tr>
+            ))} */}
+        </tbody>
                 </table>
             </div>
         </div>
