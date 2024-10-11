@@ -18,7 +18,7 @@ export default function CourseCards({course}) {
                     <i class={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart add-to-wishlist-icon`} onClick={addToWishlist}></i>
                     <Link to={`/course-details/`}>
                         <img
-                            src="/images/coursePhoto.jpg"
+                            src={course?.thumbnail_link}
                             className="w-100 h-100"
                             alt="EduVerse frontend course"
                         />

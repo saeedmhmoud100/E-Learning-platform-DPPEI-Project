@@ -262,7 +262,7 @@ export default function CourseDetails() {
              
              <div className="container">
                <div className="row">
-               {courses?.slice(0,3).map((course, index) => {
+               {courses?.slice(0,5).map((course, index) => {
                  return <CourseCards key={index} course={course} />;//we should display courses to that specific instructor (ageb el coursses array beta3 el constructor we howa da ely a3mel map 3aleh)
             })}
                   
