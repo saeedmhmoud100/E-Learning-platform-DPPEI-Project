@@ -3,12 +3,15 @@ import './Navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import { updatesearchTerm } from "../../store/actions/searchActions.js";
 import { useEffect } from "react";
+import { getToken, removeToken } from "../../hooks/myToken.js";
+import { logOut } from "../../store/actions/userActions.js";
 
 
-export const Navbar = ({logout, changeRule, userData}) => {
+export const Navbar = () => {
     const navigate = useNavigate()
 
     const {searchTerm} = useSelector((state)=>state.searchTerm);
+    const {userData, logged_in} = useSelector((state)=>state.user);
     const dispatch = useDispatch();
     
     // FUNCTION TO HANDLE SEARCH INPUT
@@ -19,6 +22,11 @@ export const Navbar = ({logout, changeRule, userData}) => {
     const handleSubmit = e => {
         e.preventDefault()
         navigate('/courses')
+    }
+
+    const logout = ()=>{
+        dispatch(logOut());
+        removeToken();
     }
 
     return (
@@ -35,54 +43,34 @@ export const Navbar = ({logout, changeRule, userData}) => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
-                        {
-                            userData.loggedIn ? (
-                                userData.isAdmin ?
-                                    <li className="nav-item">
-                                        <Link className="nav-link active" to="/admin">Admin</Link>
-                                    </li>
-                                    : userData.isInstructor ?
+                        {getToken() && (
+                            <>
+                            <li className="nav-item">
+                                <Link className="nav-link active" to="/my-courses">My Courses</Link>
+                            </li>
 
-                                        <>
-                                            <li className="nav-item">
-                                                <Link className="nav-link active" to="/courses">Courses</Link>
-                                            </li>
-                                            <li className="nav-item">
-                                                <Link className="nav-link active" to="/inst-profile">inst profile</Link>
-                                            </li>
-                                            <li className="nav-item">
-                                                <Link className="nav-link active" to="/videopage">videopage</Link>
-                                            </li>
-                                            </>
-                                            :
-                                            <>
-                                                <li className="nav-item">
-                                                    <Link className="nav-link active" to="/my-courses">My Courses</Link>
-                                                </li>
-
-                                                <li className="nav-item">
-                                                    <Link className="nav-link active" to="/courses">Courses</Link>
-                                                </li>
-                                                <li className="nav-item dropdown">
-                                                    <Link className="nav-link dropdown-toggle active" role="button"
-                                                          to="/courses"
-                                                          id="navbarDropdown"
-                                                          data-bs-toggle="dropdown">
-                                                        Categories
-                                                    </Link>
-                                                    <div className="dropdown-menu nav-dropdown-absolute"
-                                                         aria-labelledby="navbarDropdown">
-                                                        <Link to={'/courses?cat=web'} className="dropdown-item" href="#">Web
-                                                            Development</Link>
-                                                        <Link to={'/courses?cat=cyber'} className="dropdown-item"
-                                                              href="#">CyberSecurity</Link>
-                                                        <Link to={'/courses?cat=machine'} className="dropdown-item"
-                                                              href="#">Machine Learning</Link>
-                                                    </div>
-                                                </li>
-                                            </>
-                                            ) : null
-                                            }
+                            <li className="nav-item">
+                                <Link className="nav-link active" to="/courses">Courses</Link>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <Link className="nav-link dropdown-toggle active" role="button"
+                                      to="/courses"
+                                      id="navbarDropdown"
+                                      data-bs-toggle="dropdown">
+                                    Categories
+                                </Link>
+                                <div className="dropdown-menu nav-dropdown-absolute"
+                                     aria-labelledby="navbarDropdown">
+                                    <Link to={'/courses?cat=web'} className="dropdown-item" href="#">Web
+                                        Development</Link>
+                                    <Link to={'/courses?cat=cyber'} className="dropdown-item"
+                                          href="#">CyberSecurity</Link>
+                                    <Link to={'/courses?cat=machine'} className="dropdown-item"
+                                          href="#">Machine Learning</Link>
+                                </div>
+                            </li>
+                            </>
+                        )}
                     </ul>
 
                     <ul className="navbar-nav w-50">
@@ -95,21 +83,18 @@ export const Navbar = ({logout, changeRule, userData}) => {
                     </ul>
 
                     <ul className="navbar-nav flex-row ms-auto">
-                        {
-                            userData.loggedIn ?
-                                <>
-                                    <li className="nav-item me-3 ms-md-3">
-                                        <Link className="nav-link active" aria-current="page" to="/"><i
-                                            className="fa-regular fa-heart"></i></Link>
-                                    </li>
-                                    <li className="nav-item me-3 ">
-                                        <Link className="nav-link active" to="/cart"><i
-                                            className="fa-solid fa-cart-shopping"></i></Link>
-                                    </li>
-
-
-                                </> : null
-                        }
+                        {getToken() && (
+                            <>
+                            <li className="nav-item me-3 ms-md-3">
+                                <Link className="nav-link active" aria-current="page" to="/"><i
+                                    className="fa-regular fa-heart"></i></Link>
+                            </li>
+                            <li className="nav-item me-3 ">
+                                <Link className="nav-link active" to="/cart"><i
+                                    className="fa-solid fa-cart-shopping"></i></Link>
+                            </li>
+                            </> 
+                        )}
                         <li className="nav-item dropdown me-3 ">
                             <Link className="nav-link active dropdown-toggle" role="button"
                                   data-bs-toggle="dropdown" to="" aria-expanded="false">
@@ -126,7 +111,25 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                 <i className="fa-regular fa-user"></i>
                             </Link>
                             <ul className="dropdown-menu nav-dropdown-absolute">
-                                {
+                                {logged_in ? (
+                                    <>
+                                    <li><Link className="dropdown-item"
+                                              to="/profile">Profile</Link>
+                                    </li>
+                                    <li><Link className="dropdown-item" to="/my-courses">My
+                                        Courses</Link></li>
+                                    <li><Link className="dropdown-item"
+                                              to="/profile/purchase-history">Purchase History</Link></li>
+                                    <li onClick={logout}><Link className="dropdown-item" to="/login">Logout</Link></li>
+                                    </>
+                                ):(
+                                    <>
+                                    <li><Link className="dropdown-item" to="/login">Login</Link></li>
+                                    <li><Link className="dropdown-item" to="/register">Register</Link></li>
+                                    </>
+                                )}
+                                
+                                {/* {
                                     userData.loggedIn ? (
                                             <>
 
@@ -145,16 +148,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                             </>
                                                         ) :
                                                         (
-                                                            <>
-                                                                <li><Link className="dropdown-item"
-                                                                          to="/profile">Profile</Link>
-                                                                </li>
-                                                                <li><Link className="dropdown-item" to="/my-courses">My
-                                                                    Courses</Link></li>
-                                                                <li><Link className="dropdown-item"
-                                                                          to="/profile/purchase-history">Purchase
-                                                                    History</Link></li>
-                                                            </>
+                                                            
                                                         )
                                                 }
 
@@ -172,7 +166,7 @@ export const Navbar = ({logout, changeRule, userData}) => {
                                                 </li>
                                                 <li><Link className="dropdown-item" to="/register">Register</Link></li>
                                             </>)
-                                }
+                                } */}
                             </ul>
                         </li>
                     </ul>

@@ -9,7 +9,7 @@ export const MyListItem = ({title, title2, courses}) => {
             </p>
             {
                 courses.map((course, index) => (
-                    <CourseProgressCard courseName={course.courseName} instructorName={course.instructorName} progress={course.progress} />
+                    <CourseProgressCard course={course} progress={Math.trunc(Math.random() *101)} />
                 ))
             }
         </div>

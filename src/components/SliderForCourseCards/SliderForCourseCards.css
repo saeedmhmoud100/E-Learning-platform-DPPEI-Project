@@ -1,0 +1,72 @@
+.carousel-container .react-multiple-carousel__arrow  {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust position */
+    z-index: 10; /* Bring the arrows above other elements */
+}
+
+.react-multiple-carousel__arrow--right{
+    right:0;
+}
+
+.react-multiple-carousel__arrow--left{
+    left:0;
+}
+
+.course-card{
+    padding: 10px 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.star-icon{
+    font-size: 15px;
+    color: rgb(211, 178, 106);
+    padding: 0 2px;
+}
+
+.card-hover img {
+    transition: filter 5s ease-in-out;
+}
+
+.react-multi-carousel-item{
+    cursor: pointer;
+}
+  
+.react-multi-carousel-item:hover img{
+    filter: blur(1px); 
+}
+
+.react-multi-carousel-item:hover .overlay-for-course-cards{
+    display: block;
+}
+
+.react-multi-carousel-item:hover .add-to-wishlist-icon{
+    opacity: 1;
+}
+
+.overlay-for-course-cards{
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    position: absolute;
+    display: none;
+    transition:0.3s ease-in-out;
+}
+
+.add-to-wishlist-icon{
+    border: 2px solid white;
+    color: white;
+    font-size: 1.5rem;
+    padding: 13px;
+    border-radius: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
