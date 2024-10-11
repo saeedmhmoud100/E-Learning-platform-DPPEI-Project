@@ -1,9 +1,10 @@
-import {GET_ALL_ORDERS, GET_ERROR_ORDERS, SET_ADMIN_LOADING} from "../type";
+import {GET_ALL_COURSES, GET_ALL_ORDERS, GET_ERROR_ORDERS, SET_ADMIN_LOADING} from "../type";
 
 const initialState = {
     error : '',
     loading: false,
-    orders : []
+    orders : [],
+    courses : []
 }
 
 export const adminReducer = (state = initialState, action)=>{
@@ -17,6 +18,11 @@ export const adminReducer = (state = initialState, action)=>{
             return{
                 ...state,
                 orders : action.payload
+            }
+        case GET_ALL_COURSES:
+            return{
+                ...state,
+                courses : action.payload
             }
         case GET_ERROR_ORDERS:
             return{
