@@ -3,7 +3,7 @@ import './Navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import { updatesearchTerm } from "../../store/actions/searchActions.js";
 import { useEffect } from "react";
-import { removeToken } from "../../hooks/myToken.js";
+import { getToken, removeToken } from "../../hooks/myToken.js";
 import { logOut } from "../../store/actions/userActions.js";
 
 
@@ -43,7 +43,7 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
-                        {logged_in && (
+                        {getToken() && (
                             <>
                             <li className="nav-item">
                                 <Link className="nav-link active" to="/my-courses">My Courses</Link>
@@ -71,29 +71,6 @@ export const Navbar = () => {
                             </li>
                             </>
                         )}
-                        {/* {
-                            userData.loggedIn ? (
-                                userData.isAdmin ?
-                                    <li className="nav-item">
-                                        <Link className="nav-link active" to="/admin">Admin</Link>
-                                    </li>
-                                    : userData.isInstructor ?
-
-                                        <>
-                                            <li className="nav-item">
-                                                <Link className="nav-link active" to="/courses">Courses</Link>
-                                            </li>
-                                            <li className="nav-item">
-                                                <Link className="nav-link active" to="/inst-profile">inst profile</Link>
-                                            </li>
-                                            <li className="nav-item">
-                                                <Link className="nav-link active" to="/videopage">videopage</Link>
-                                            </li>
-                                            </>
-                                            :
-                                            
-                                            ) : null
-                                            } */}
                     </ul>
 
                     <ul className="navbar-nav w-50">
@@ -106,7 +83,7 @@ export const Navbar = () => {
                     </ul>
 
                     <ul className="navbar-nav flex-row ms-auto">
-                        {logged_in && (
+                        {getToken() && (
                             <>
                             <li className="nav-item me-3 ms-md-3">
                                 <Link className="nav-link active" aria-current="page" to="/"><i
