@@ -14,6 +14,7 @@ function CourseProgressCard({ course, progress }) {
                 </Link>
                 <div className="content p-2">
                     <h5>{course.title}</h5>
+                    <h6>{course.instructor_data.user.username}</h6>
                     <div className="progress mt-2" role="progressbar" aria-label="Progress" aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100" style={{ height: '5px' }}>
                         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                     </div>
