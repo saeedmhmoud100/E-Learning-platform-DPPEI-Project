@@ -2,7 +2,15 @@ import { Link } from 'react-router-dom';
 import CourseProgressCard from '../../components/MyCourses/Cards/CourseProgressCard';
 import './style.css'
 import ImageSlider from '../../components/ImageSlider';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getProfileData } from '../../store/actions/profileAction';
+import GeneralLoading from '../../components/Loading/GeneralLoading/GeneralLoading';
 function UserProfile() {
+
+    const dispatch = useDispatch();
+    const {profile,loading} = useSelector((state)=>state.profile);
+
     const images = [
         '/images/certificate.png',
         '/images/certificate.png',
@@ -16,8 +24,12 @@ function UserProfile() {
         '/images/certificate.png',
         '/images/certificate.png',
     ]
+    useEffect(()=>{
+        dispatch(getProfileData(16));
+        console.log(profile);
+    },[])
     return (
-        <div className="container my-5">
+        <>{loading == false?<><div className="container my-5">
             <div className="header d-flex justify-content-between align-items-center">
                 <h1 className='text-center mb-4'>Public Profile</h1>
                 <div className="edit">
@@ -26,15 +38,14 @@ function UserProfile() {
             </div>
             <div className="row justify-content-center align-items-center border-bottom border-black pb-5">
                 <div className="col-md-3">
-                    <div className="img">
-                        <img src="/images/pfp.png" alt="user picture" className='w-75' />
+                    <div className="img rounded-pill">
+                        <img src={profile.profile_image} alt="user picture" className='w-100 rounded-pill ' />
                     </div>
                 </div>
                 <div className="col-md-4">
                     <div className="userName">
-                        <h2>John Doe</h2>
-                        <h3>Software Engineer</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorum consequuntur aliquid architecto culpa beatae.</p>
+                        <h2>{profile.username}</h2>
+                        <p>{profile.description}</p>
                         <div className='socialLinks'>
                             <i className="socialIcon fa-brands fa-linkedin"></i>
                             <i className="socialIcon fa-brands fa-github"></i>
@@ -48,10 +59,10 @@ function UserProfile() {
                     <h1 className='text-center mb-4'>My Courses</h1>
                     <Link className='seeAll' to={'/profile/courses'}>See All<i className="fa-solid fa-chevron-right fs-6"></i></Link>
                 </div>
-                <CourseProgressCard courseName={'React Basics'} instructorName={'John Doe'} progress={20} />
-                <CourseProgressCard courseName={'Advanced React'} instructorName={'Jane Smith'} progress={50} />
+                {profile.courses_enrolled.map((course,i)=>(<CourseProgressCard key={i} course={course} progress={30} />))}
+                {/* <CourseProgressCard courseName={'Advanced React'} instructorName={'Jane Smith'} progress={50} />
                 <CourseProgressCard courseName={'JavaScript Essentials'} instructorName={'Mark Lee'} progress={80} />
-                <CourseProgressCard courseName={'CSS Mastery'} instructorName={'Sarah Jones'} progress={95} />
+                <CourseProgressCard courseName={'CSS Mastery'} instructorName={'Sarah Jones'} progress={95} /> */}
             </div>
             <div className="row g-4 mt-5">
                 <h1 className='mb-4'>My Certificates</h1>
@@ -59,7 +70,7 @@ function UserProfile() {
                     <ImageSlider images={images} />
                 </div>
             </div>
-        </div>
+        </div></>:<GeneralLoading/>}</>
     );
 }
 
