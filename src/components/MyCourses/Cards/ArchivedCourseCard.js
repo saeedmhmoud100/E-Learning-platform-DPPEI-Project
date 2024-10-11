@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
-export const ArchivedCourseCard = () => {
+export const ArchivedCourseCard = ({course,progress}) => {
 
     const [addedToWishlist, setAddToWishlist] = useState(false);
 
@@ -15,20 +15,20 @@ export const ArchivedCourseCard = () => {
                 <div className="wishlist-icon" onClick={addToWishlist}>
                     <i className={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart`}></i>
                 </div>
-                <Link to={'/course-details'}>
+                <Link to={'/course-details/' + course.id}>
                 <img
-                    src="/images/coursePhoto.jpg"
+                    src={course.thumbnail_link}
                     className="card-img-top custom-card-img"
-                    alt="React - The Complete Guide"
+                    alt={course.title}
                 />
                 </Link>
                 <div className="card-body lh-sm p-2">
-                    <h6 className="card-title lh-sm custom-card-title">React - The Complete Guide 2024 (incl. Next.js, Redux)</h6>
-                    <p className="card-text lh-sm custom-card-text">Academind by Maximilian Schwarzmüller</p>
-                    <div className="progress mt-2" role="progressbar" aria-label="Progress" aria-valuenow={0} aria-valuemin="0" aria-valuemax="100" style={{ height: '5px' }}>
-                        <div className="progress-bar" style={{ width: `${0}%` }}></div>
+                    <h6 className="card-title lh-sm custom-card-title">{course.title}</h6>
+                    <p className="card-text lh-sm custom-card-text">{course.instructor_data.user.username}</p>
+                    <div className="progress mt-2" role="progressbar" aria-label="Progress" aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100" style={{ height: '5px' }}>
+                        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                     </div>
-                    <p>Start Course</p>
+                    <p>Continue Course</p>
                 </div>
             </div>
         </div>
