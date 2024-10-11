@@ -20,3 +20,6 @@ export const GET_LOGGED_USER_DATA = "GET_LOGGED_USER_DATA"
 export const LOGOUT = "LOGOUT"
 
 export const SET_USER_LOADING = "SET_USER_LOADING"
+
+export const GET_PROFILE_DATA = "GET_PROFILE_DATA"
+export const GET_ORDERS = "GET_ORDERS"

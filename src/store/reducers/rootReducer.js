@@ -3,6 +3,8 @@ import coursesReducer from './coursesReducer'
 import searchReducer from './searchReducer'
 import instructorReducer from './instructorReducer'
 import userReducer from './userReducer'
+import profileReducer from './profileReducer'
+import ordersReducer from './orderReducer'
 
 
 export default combineReducers ({
@@ -10,4 +12,6 @@ export default combineReducers ({
     searchTerm:searchReducer,
     instructor:instructorReducer,
     user:userReducer,
+    profile:profileReducer,
+    orders:ordersReducer,
 })
