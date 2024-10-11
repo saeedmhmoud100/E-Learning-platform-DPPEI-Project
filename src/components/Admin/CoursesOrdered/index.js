@@ -1,13 +1,18 @@
 import {useEffect, useState} from "react";
 import {BarChart} from "../../Charts/barChart";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllOrders} from "../../../store/actions/adminActions";
 
 export const CoursesOrdered = () => {
     const [data, setData] = useState([])
-
+    const dispatch = useDispatch()
+    const {orders} = useSelector(state => state.admin)
     useEffect(() => {
+        dispatch(getAllOrders())
         fetch('/data/admin/barChartData.json')
             .then(response => response.json())
             .then(data => setData(data))
+
     }, [])
 
     return (
@@ -25,27 +30,18 @@ export const CoursesOrdered = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>React</td>
-                        <td>100</td>
-                        <td>2021-09-01</td>
-                        <td>Delivered</td>
-                        <td>John Doe</td>
-                    </tr>
-                    <tr>
-                        <td>Angular</td>
-                        <td>150</td>
-                        <td>2021-09-01</td>
-                        <td>Delivered</td>
-                        <td>John Doe</td>
-                    </tr>
-                    <tr>
-                        <td>Vue</td>
-                        <td>200</td>
-                        <td>2021-09-01</td>
-                        <td>Delivered</td>
-                        <td>John Doe</td>
-                    </tr>
+                {
+                    orders?.results?.map((order, index) => (
+                        <tr key={index}>
+                            <td>{order.course.title}</td>
+                            <td>{order.price}</td>
+                            <td>{order.created_at}</td>
+                            <td>{order.orderStatus}</td>
+                            <td>{order.user}</td>
+                        </tr>
+                    ))
+                }
+
                 </tbody>
             </table>
             </div>
