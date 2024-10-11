@@ -1,14 +1,20 @@
-import { GET_ERROR, GET_LOGGED_USER_DATA, GET_USER_DATA, LOGOUT } from "../type";
+import {GET_ERROR, GET_LOGGED_USER_DATA, GET_USER_DATA, LOGOUT, SET_USER_LOADING} from "../type";
 
 const initialState = {
     userData : {},
     logged_in: false,
     token : '',
     error : '',
+    loading: false,
 }
 
 export const userReducer = (state = initialState, action)=>{
     switch(action.type){
+        case SET_USER_LOADING:
+            return{
+                ...state,
+                loading : action.payload
+            }
         case GET_USER_DATA:
             return{
                 ...state,

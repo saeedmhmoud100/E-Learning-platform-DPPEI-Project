@@ -27,7 +27,7 @@ export default function Login() {
             ).required().messages({
                 'string.empty':'Email required',
             }),
-            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().messages({
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9@+$#]{3,30}$')).required().messages({
                 'string.empty':'Password required',
             }),
         })

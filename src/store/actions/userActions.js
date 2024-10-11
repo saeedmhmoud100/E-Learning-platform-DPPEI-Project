@@ -1,9 +1,9 @@
 import usePostData from "../../ApiHooks/usePostData";
-import { GET_USER_DATA, GET_ERROR, GET_LOGGED_USER_DATA, LOGOUT } from "../type";
+import { GET_USER_DATA, GET_ERROR, GET_LOGGED_USER_DATA, LOGOUT,SET_USER_LOADING } from "../type";
 import useGetData from "../../ApiHooks/useGetData";
-import { type } from "@testing-library/user-event/dist/type";
 
 export const getUserData = (data) => async(dispatch) =>{
+    dispatch({ type: SET_USER_LOADING, payload: true });
     try {
         const response = await usePostData('auth/login/',data);
         dispatch({
@@ -16,10 +16,13 @@ export const getUserData = (data) => async(dispatch) =>{
             type: GET_ERROR,
             payload: e,
         })
+    }finally {
+        dispatch({ type: SET_USER_LOADING, payload: false });
     }
 }
 
 export const getLoggedUserData = (token) => async(dispatch) =>{
+    dispatch({ type: SET_USER_LOADING, payload: true });
     try {
         const response = await useGetData('users');
         dispatch({
@@ -32,6 +35,8 @@ export const getLoggedUserData = (token) => async(dispatch) =>{
             type: GET_ERROR,
             payload: e,
         })
+    }finally {
+        dispatch({ type: SET_USER_LOADING, payload: false });
     }
 }
 
