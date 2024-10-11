@@ -37,28 +37,31 @@ import CourseCardsLoading from './components/Loading/CourseCardsLoading/CourseCa
 import { getToken, setToken } from './hooks/myToken';
 import useGetData from './ApiHooks/useGetData';
 import { getLoggedUserData } from './store/actions/userActions';
+import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 
 function App() {
     const {userData, logged_in} = useSelector(state=>state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
     
 
     useEffect(() => {
-        dispatch(getAllCourses());
         if(getToken()){
             dispatch(getLoggedUserData(getToken()))
+            dispatch(getAllCourses());
+            setLoading(false)
         }else{
             navigate('/login');
+            setLoading(false)
         }
     },[]);
 
     function ProtectedRoute ({children}){
-        if(logged_in){
-            return children
-        }else{
-            return <Navigate to={'/login'}/>
+        if(loading){
+            return <GeneralLoading />
         }
+        return getToken() ? children : <Navigate to={'/login'}/>
     }
 
     return (<div className="App">
