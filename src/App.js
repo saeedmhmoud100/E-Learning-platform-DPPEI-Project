@@ -31,7 +31,7 @@ import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
 import axios from "axios";
-import {getAllCourses} from "./store/actions/coursesAction";
+import {getAllCourses, getCourseDetails} from "./store/actions/coursesAction";
 import {useDispatch,useSelector} from "react-redux";
 import CourseCardsLoading from './components/Loading/CourseCardsLoading/CourseCardsLoading';
 import { getToken, setToken } from './hooks/myToken';
@@ -41,16 +41,31 @@ import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 
 function App() {
     const {userData, logged_in} = useSelector(state=>state.user);
+    const {courses} = useSelector(state=>state.allCourses);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [coursesWithDetails,setCoursesWithDetails] = useState([]);
+
+
+    const fetchCourseDetails = async () => {
+        if (courses?.length > 0) {
+          const promises = courses.map(async (item) => {
+            const courseDetails = await dispatch(getCourseDetails(item.id));
+            return courseDetails;
+          });
+          const updatedCourses = await Promise.all(promises);
+          setCoursesWithDetails(updatedCourses);
+        }
+    };
     
 
     useEffect(() => {
         if(getToken()){
             dispatch(getLoggedUserData(getToken()))
             dispatch(getAllCourses());
-            setLoading(false)
+            fetchCourseDetails();
+            setLoading(false);
         }else{
             navigate('/login');
             setLoading(false)
@@ -141,7 +156,7 @@ function App() {
             }/>
             <Route path='/courses' element={
                 <ProtectedRoute>
-                    <Courses />
+                    <Courses coursesWithDetails={coursesWithDetails}/>
                 </ProtectedRoute>
             }/>
          

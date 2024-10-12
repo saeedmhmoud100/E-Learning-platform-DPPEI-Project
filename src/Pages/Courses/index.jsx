@@ -7,12 +7,11 @@ import {useDispatch, useSelector} from "react-redux";
 import { getCourseDetails } from '../../store/actions/coursesAction';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
 
-export default function Courses() {
+export default function Courses({coursesWithDetails}) {
 
   const dispatch = useDispatch();
   const {searchTerm} = useSelector(state => state.searchTerm);
   const {courses, loading} = useSelector(state => state.allCourses);
-  const [coursesWithDetails,setCoursesWithDetails] = useState([])
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
@@ -51,17 +50,7 @@ export default function Courses() {
 
   // WHEN COMPONENT FIRST MOUNTS, FOR EACH COURSE IT GETS ITS DETAILS AND STORES IT IN ARRAY
   useEffect(() => {
-    const fetchCourseDetails = async () => {
-      if (courses?.length > 0) {
-        const promises = courses.map(async (item) => {
-          const courseDetails = await dispatch(getCourseDetails(item.id));
-          return courseDetails;
-        });
-        const updatedCourses = await Promise.all(promises);
-        setCoursesWithDetails(updatedCourses);
-      }
-    };
-    fetchCourseDetails();
+    
   }, [courses, dispatch]);
 
   // FUNCTION THAT FILTERS COURSES WHEN DATA IS LOADED
