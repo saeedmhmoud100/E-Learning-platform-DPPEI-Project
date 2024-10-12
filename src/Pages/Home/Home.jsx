@@ -28,7 +28,7 @@ export default function Home() {
         {/* START - FIRST SECTION WITH IMAGES AND WELCOME MESSAGE */}
         <div className="d-flex justify-content-start align-items-center py-3">
             <div className="img-cont">
-                <img src="/images/pfp.png" alt="profile picture EduVerse" className='w-100 h-100'/>
+            <img src={userData.profile_image} alt="user picture" className='w-100 h-100 rounded-pill ' />
             </div>
             <div className="text-cont ps-4">
                 <h2>Welcome back, {userData.username}</h2>

@@ -14,7 +14,7 @@ export default combineReducers ({
     instructor:instructorReducer,
     user:userReducer,
     profile:profileReducer,
-    orders:ordersReducer,
+    orders:orderReducer,
     cart:cartReducer,
     admin:adminReducer,
 })
