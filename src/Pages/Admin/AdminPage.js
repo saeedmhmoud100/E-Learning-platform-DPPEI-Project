@@ -4,8 +4,19 @@ import {Profile} from "../../components/Admin/Profile";
 import {CoursesOrdered} from "../../components/Admin/CoursesOrdered";
 import {PublishedCourses} from "../../components/Admin/PublishedCourses";
 import {CourseAnalysis} from "../../components/Admin/CourseAnalysis";
+import {useEffect} from "react";
+import {getAllCourses, getAllOrders} from "../../store/actions/adminActions";
+import {useDispatch} from "react-redux";
 
 export const AdminPage = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllCourses())
+        dispatch(getAllOrders())
+
+    },[])
+
+
     return (
         <div className='container pt-4'>
             <h1 className={'text-center mb-3'}>Admin Dashboard</h1>
