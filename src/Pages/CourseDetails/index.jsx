@@ -19,7 +19,7 @@ export default function CourseDetails() {
     setShowFullDescription(!showFullDescription);
 
   };
-
+  
     const dispatch = useDispatch()
   
   const {
@@ -32,7 +32,19 @@ export default function CourseDetails() {
   const{instructor}=useSelector(state => state.instructor)
   let courseRating = course?.rating_count || 0;
   let starsCount = new Array(courseRating).fill(0);
+//state to handle reviews button
+const [showAllReviews, setShowAllReviews] = useState(false)
+  const handleReviewsButton=()=>{
+    setShowAllReviews(!showAllReviews)
+ 
+  }
+  
+
+  const visibleReviews = showAllReviews ? reviews : reviews?.slice(0, 4);
+
+
  //to use in this-course-includes-section
+
   const iconArray = [
     "fa-solid fa-file",
     "fa-solid fa-mobile-screen",
@@ -53,7 +65,7 @@ export default function CourseDetails() {
       dispatch(getCourseReviews(6));
       dispatch(getInstructorProfile(1));
       
-        
+     
   },[])
   return (
     <>
@@ -209,7 +221,7 @@ export default function CourseDetails() {
             )}
             {/* students also bought section */}
             <h4 className="mb-4 fw-bold">Students also bought</h4>
-            {courses.slice(0,3)?.map((course) => (
+            {courses?.slice(0,3)?.map((course) => (
             <div  key={course.id}>
               <StudentAlsoBoughtCard
                 title={course?.title}
@@ -245,7 +257,7 @@ export default function CourseDetails() {
   </div>   
   <div className="conatiner">
   <div className="row">
-  {reviews.map((review,i)=>(
+  {visibleReviews?.map((review,i)=>(
     <div className="col-md-6">
     <CourseReviewCard review={review} key={i} className/>
     </div>
@@ -253,7 +265,11 @@ export default function CourseDetails() {
    </div>  
    </div>
              </div>
-              <button className="btn btn-info my-2 ">Show All Reviews</button>
+   {reviews?.length > 4 && (
+      <button className="btn btn-info my-2" onClick={handleReviewsButton}>
+        {showAllReviews ? "Show Less" : "Show All Reviews"}
+      </button>
+    )}
 
      
              {/* moreCourses by instructor */}
@@ -262,7 +278,7 @@ export default function CourseDetails() {
              
              <div className="container">
                <div className="row">
-               {courses?.slice(0,5).map((course, index) => {
+               {courses?.slice(0,3).map((course, index) => {
                  return <CourseCards key={index} course={course} />;//we should display courses to that specific instructor (ageb el coursses array beta3 el constructor we howa da ely a3mel map 3aleh)
             })}
                   
