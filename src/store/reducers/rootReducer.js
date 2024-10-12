@@ -3,9 +3,10 @@ import coursesReducer from './coursesReducer'
 import searchReducer from './searchReducer'
 import instructorReducer from './instructorReducer'
 import userReducer from './userReducer'
+import cartReducer from './cartReducer'
+import adminReducer from './adminReducer'
+import orderReducer from './orderReducer'
 import profileReducer from './profileReducer'
-import ordersReducer from './orderReducer'
-
 
 export default combineReducers ({
     allCourses:coursesReducer,
@@ -14,4 +15,6 @@ export default combineReducers ({
     user:userReducer,
     profile:profileReducer,
     orders:ordersReducer,
+    cart:cartReducer,
+    admin:adminReducer,
 })

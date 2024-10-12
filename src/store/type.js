@@ -21,5 +21,11 @@ export const LOGOUT = "LOGOUT"
 
 export const SET_USER_LOADING = "SET_USER_LOADING"
 
+export const SET_ADMIN_LOADING = "SET_ADMIN_LOADING"
+
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
+export const GET_ALL_COURSES = "GET_ALL_COURSES"
+export const GET_ERROR_ORDERS = "GET_ERROR_ORDERS"
+
 export const GET_PROFILE_DATA = "GET_PROFILE_DATA"
 export const GET_ORDERS = "GET_ORDERS"
