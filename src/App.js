@@ -94,7 +94,7 @@ function App() {
                     <AddCourseForm/>
                 </ProtectedRoute>
             }/>
-            <Route path='/course-details' element={
+            <Route path='/course-details/:id' element={
                 <ProtectedRoute>
                     <CourseDetails/>
                 </ProtectedRoute>

@@ -52,7 +52,7 @@ export default function Courses() {
   // WHEN COMPONENT FIRST MOUNTS, FOR EACH COURSE IT GETS ITS DETAILS AND STORES IT IN ARRAY
   useEffect(() => {
     const fetchCourseDetails = async () => {
-      if (courses.length > 0) {
+      if (courses?.length > 0) {
         const promises = courses.map(async (item) => {
           const courseDetails = await dispatch(getCourseDetails(item.id));
           return courseDetails;

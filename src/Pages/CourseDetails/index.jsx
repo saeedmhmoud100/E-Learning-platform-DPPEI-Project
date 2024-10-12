@@ -1,7 +1,8 @@
 
 import React, { useState ,useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useParams} from 'react-router-dom';
 import "./style.css"
+import GeneralLoading from "../../components/Loading/GeneralLoading/GeneralLoading.jsx"
 import InstructorSection from './components/InstructorSection';
 import  CourseCards from '../../components/CourseCards/index.jsx'
 import CourseReviewCard from './components/CourseReviewCard';
@@ -11,6 +12,9 @@ import { getCourseWhatYouWillLearn,getCourseIncludes,getCourseDetails,getCourseR
 import { getInstructorProfile } from '../../store/actions/instructorAction.js';
 
 export default function CourseDetails() {
+
+  let {id}=useParams();
+  
   const [showFullDescription, setShowFullDescription] = useState(false);
  
   
@@ -27,8 +31,10 @@ export default function CourseDetails() {
     courses,
     whatYouWillLearnData,
     courseIncludesData,
-    requirments,reviews
+    requirments,reviews,loading
+    
   } = useSelector(state => state.allCourses);
+
   const{instructor}=useSelector(state => state.instructor)
   let courseRating = course?.rating_count || 0;
   let starsCount = new Array(courseRating).fill(0);
@@ -38,7 +44,6 @@ const [showAllReviews, setShowAllReviews] = useState(false)
     setShowAllReviews(!showAllReviews)
  
   }
-  
 
   const visibleReviews = showAllReviews ? reviews : reviews?.slice(0, 4);
 
@@ -56,19 +61,44 @@ const [showAllReviews, setShowAllReviews] = useState(false)
   ];
   const firstResources = courseIncludesData?.slice(0, 3); // First 3 items
   const secondResources = courseIncludesData?.slice(3,6);   // Remaining items
-    useEffect(() => {
-      dispatch (getAllCourses(1))
-      dispatch(getCourseWhatYouWillLearn(6));
-      dispatch(getCourseIncludes(6));
-      dispatch(getCourseDetails(6));
-      dispatch(getCourseRequirments(6));
-      dispatch(getCourseReviews(6));
-      dispatch(getInstructorProfile(1));
-      
-     
-  },[])
+  const instructorId=course?.instructor
+  console.log('Instructor ID:', instructorId, 'Course ID:', id);
+ 
+
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      if (id) {
+        // Fetch course details first
+        await dispatch(getCourseDetails(id));
+  
+        // After fetching course details, get the instructorId
+       
+        const instructorId = course?.instructor; 
+  
+        if (instructorId) {
+          // Now that you have the instructorId, fetch all related data
+          await Promise.all([
+            dispatch(getAllCourses(instructorId)),
+            dispatch(getInstructorProfile(instructorId)),
+            dispatch(getCourseWhatYouWillLearn(id)),
+            dispatch(getCourseIncludes(id)),
+            dispatch(getCourseRequirments(id)),
+            dispatch(getCourseReviews(id)),
+          ]);
+        }
+      }
+    };
+  
+    fetchCourseDetails();
+  }, [id, dispatch]);
+  
+
   return (
+    (loading ) ? (
+      <GeneralLoading />
+    ) :
     <>
+  
       <div className="container-fluid bg-dark py-5">
         <header className="row">
           <div className="col-lg-8 col-md-10 col-sm-12 text-white p-4">
