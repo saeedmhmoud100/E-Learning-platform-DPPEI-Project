@@ -1,17 +1,10 @@
 import {Link, useNavigate} from "react-router-dom";
 import './Navbar.css';
-import { useDispatch, useSelector } from "react-redux";
 import { updatesearchTerm } from "../../store/actions/searchActions.js";
 import { useEffect } from "react";
-import { getToken, removeToken } from "../../hooks/myToken.js";
 import { logOut } from "../../store/actions/userActions.js";
-
 import { useDispatch, useSelector } from "react-redux";
-import { updatesearchTerm } from "../../store/actions/searchActions.js";
-import { useEffect } from "react";
 import { getToken, removeToken } from "../../hooks/myToken.js";
-import { logOut } from "../../store/actions/userActions.js";
-
 
 export const Navbar = ({updateCategory}) => {
     const navigate = useNavigate()

@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CourseCards from '../../components/CourseCards';
 import Footer from '../../components/Footer/index.jsx';
 import './Home.css'
-import { useDispatch, useSelector } from 'react-redux';
 import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
 import { Slide } from 'react-toastify';
 import SliderForCourseCards from '../../components/SliderForCourseCards/SliderForCourseCards.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
-import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
-import { Slide } from 'react-toastify';
-import SliderForCourseCards from '../../components/SliderForCourseCards/SliderForCourseCards.jsx';
+
 
 export default function Home() {
 

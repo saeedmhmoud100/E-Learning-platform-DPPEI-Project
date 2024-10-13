@@ -3,10 +3,8 @@ import insPhoto from "./images/instractorPhoto.png";
 import Courses from "./Courses";
 import { useSelector , useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import axios from "axios";
 import {getInstructorProfile} from '../../store/actions/instructorAction'
-/* import axios from "axios";
- */
 
 import "./style.css";
 import {Link} from "react-router-dom";

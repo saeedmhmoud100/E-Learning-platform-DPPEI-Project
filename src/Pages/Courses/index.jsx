@@ -9,16 +9,9 @@ import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/Cour
 
 export default function Courses({coursesWithDetails, categoryInput, updateCategory}) {
 
-<<<<<<< HEAD
   const {searchTerm} = useSelector(state => state.searchTerm);
   const {userData} = useSelector(state=>state.user);
   const {courses, loading} = useSelector(state => state.allCourses);
-=======
-  const dispatch = useDispatch();
-  const {searchTerm} = useSelector(state => state.searchTerm);
-  const {courses, loading} = useSelector(state => state.allCourses);
-  const [coursesWithDetails,setCoursesWithDetails] = useState([])
->>>>>>> origin/instructor-information
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
@@ -30,11 +23,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
   const [categories, setCategories] = useState('');
   const [video_Duration, setVideo_Duration] = useState([]);
 
-<<<<<<< HEAD
   // HANDLING WHEN USER CHOOSES FILTER
-=======
-
->>>>>>> origin/instructor-information
   const handleUserFilterInput = (option, filterName, index)=>{
     switch(filterName){
       case 'Ratings':
@@ -59,24 +48,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
     }
   }
 
-<<<<<<< HEAD
-=======
-  // WHEN COMPONENT FIRST MOUNTS, FOR EACH COURSE IT GETS ITS DETAILS AND STORES IT IN ARRAY
-  useEffect(() => {
-    const fetchCourseDetails = async () => {
-      if (courses?.length > 0) {
-        const promises = courses.map(async (item) => {
-          const courseDetails = await dispatch(getCourseDetails(item.id));
-          return courseDetails;
-        });
-        const updatedCourses = await Promise.all(promises);
-        setCoursesWithDetails(updatedCourses);
-      }
-    };
-    fetchCourseDetails();
-  }, [courses, dispatch]);
-
->>>>>>> origin/instructor-information
   // FUNCTION THAT FILTERS COURSES WHEN DATA IS LOADED
   const updateFilteredCourses = () => {
     if (loading || coursesWithDetails.length === 0) {
@@ -89,7 +60,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
       );
     }
     if (ratings || price.length > 0 || categories || video_Duration.length > 0) {
-<<<<<<< HEAD
       updatedArray = updatedArray.filter(course => {
         let matchesFilters = true;
         if(ratings && matchesFilters){
@@ -100,24 +70,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
         }
         if(categories && matchesFilters){
           const courseCategory = course.categories.map((cat)=>{return cat.name.toLowerCase()});
-=======
-      console.log(categories)
-      updatedArray = updatedArray.filter(course => {
-        let matchesFilters = true;
-        if(ratings && matchesFilters){
-          console.log(":)")
-          matchesFilters = course.rating >= ratings;
-        }
-        if(price.length>0 && matchesFilters){
-          console.log(":)")
-          console.log(price)
-          matchesFilters = course.price >= price[0] && course.price <= price[1];
-        }
-        if(categories && matchesFilters){
-          console.log(":)")
-          const courseCategory = course.categories.map((cat)=>{return cat.name.toLowerCase()});
-          console.log(courseCategory);
->>>>>>> origin/instructor-information
           matchesFilters = courseCategory.includes(categories.toLowerCase());
         }
         if (video_Duration.length && matchesFilters){
@@ -131,7 +83,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
 
   // FILTERED COURSES ARRAY ALWAYS UPDATES WHENEVER FILTERS ARE TRIGGERED OR LOADING STATE CHANGES
   useEffect(() => {
-<<<<<<< HEAD
     if (!loading && coursesWithDetails?.length == courses?.length) {
       if(categoryInput){
         setCategories(categoryInput.toLowerCase());
@@ -141,12 +92,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
       }
     }
   }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails,categoryInput]);
-=======
-    if (!loading && coursesWithDetails.length > 0) {
-      updateFilteredCourses();
-    }
-  }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails]);
->>>>>>> origin/instructor-information
   
   // FUNCTION THAT CLEARS FILTERS
   const handleClearFilters = ()=>{
@@ -156,10 +101,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
     setCategories('');
     setVideo_Duration([]);
     updateFilteredCourses();
-<<<<<<< HEAD
     updateCategory('');
-=======
->>>>>>> origin/instructor-information
   }
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
@@ -230,11 +172,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                     <div className="container-fluid">
                         <div className="row row gy-2">
                         {
-<<<<<<< HEAD
                           loading || coursesWithDetails.length == 0 ? (
-=======
-                          loading  ? (
->>>>>>> origin/instructor-information
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
@@ -266,11 +204,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                     <div className="container-fluid">
                         <div className="row gy-2">
                         {
-<<<<<<< HEAD
                           loading || coursesWithDetails.length == 0 ? (
-=======
-                          loading ? (
->>>>>>> origin/instructor-information
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
