@@ -21,9 +21,7 @@ export default function Home() {
     const {courses} = useSelector((state) => state.allCourses);
     const {userData} = useSelector(state=>state.user);
 
-  return (
-    
-    <>
+  return (<>
     <div className='container my-5'>
 
         {/* START - FIRST SECTION WITH IMAGES AND WELCOME MESSAGE */}
@@ -109,6 +107,7 @@ export default function Home() {
         </div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
 
+    </div>
     </div>
 
     </>

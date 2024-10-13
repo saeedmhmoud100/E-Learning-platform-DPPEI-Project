@@ -20,9 +20,6 @@ export default function CourseDetails() {
 
   let {id}=useParams();
   
-
-  let {id}=useParams();
-  
   const [showFullDescription, setShowFullDescription] = useState(false);
  
   
@@ -426,12 +423,10 @@ const [showAllReviews, setShowAllReviews] = useState(false)
   <div className="course-ratings">
   <i className="fa-solid fa-star text-warning me-2" ></i>
   <span className='fs-4 me-3'>{course?.rating_avg}course rating
-  <span className='fs-4 me-3'>{course?.rating_avg}course rating
   </span>
   </div>
   <div className="overall-ratings">
   <i className="fa-solid fa-circle fa-xs text-secondary"></i> 
-  <span className='fs-4'> {course?.rating} ratings
   <span className='fs-4'> {course?.rating} ratings
 
   </span>
@@ -445,7 +440,6 @@ const [showAllReviews, setShowAllReviews] = useState(false)
   <div className="row">
   {visibleReviews?.map((review,i)=>(
     <div className="col-md-6">
-    <CourseReviewCard review={review} key={i} className/>
     <CourseReviewCard review={review} key={i} className/>
     </div>
    ))}
@@ -497,12 +491,6 @@ const [showAllReviews, setShowAllReviews] = useState(false)
   className="w-100 mb-3"
 />
 <hr />
-
-  
-  src={course?.thumbnail_link}
-  alt="Course Preview"
-  className="w-100 mb-3"
-/>
 <hr />
 
   
