@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {BarChart} from "../../Charts/barChart";
 import {useSelector} from "react-redux";
-
+import {motion} from "framer-motion";
 export const CoursesOrdered = () => {
     const [data, setData] = useState([])
     const {orders} = useSelector(state => state.admin)
@@ -13,7 +13,12 @@ export const CoursesOrdered = () => {
     }, [])
 
     return (
-        <div className={'w-100 '}>
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+         className={'w-100 '}>
             <h4 >Courses Ordered:</h4>
             <div className="overflow-auto" style={{maxHeight:'800px'}}>
             <table className="table table-striped">
@@ -49,6 +54,6 @@ export const CoursesOrdered = () => {
                 <BarChart data={data}/>
             </div>
 
-        </div>
+        </motion.div>
     )
 }

@@ -7,6 +7,7 @@ import {CourseAnalysis} from "../../components/Admin/CourseAnalysis";
 import {useEffect} from "react";
 import {getAllCourses, getAllOrders} from "../../store/actions/adminActions";
 import {useDispatch} from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const AdminPage = () => {
     const dispatch = useDispatch()
@@ -28,13 +29,16 @@ export const AdminPage = () => {
                 </div>
 
                 <div className="col-md-9">
-                    <Routes>
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="*" element={<></>} />
-                        <Route path="courses-ordered" element={<CoursesOrdered />} />
-                        <Route path="published-courses" element={<PublishedCourses />} />
-                        <Route path="course-analysis" element={<CourseAnalysis />} />
-                    </Routes>
+                    <AnimatePresence mode="wait">
+                            <Routes>
+                                <Route path="/profile" element={<Profile />} />
+                                <Route path="*" element={<></>} />
+                                <Route path="courses-ordered" element={<CoursesOrdered />} />
+                                <Route path="published-courses" element={<PublishedCourses />} />
+                                <Route path="course-analysis" element={<CourseAnalysis />} />
+                            </Routes>
+                    </AnimatePresence>
+
                 </div>
             </div>
 

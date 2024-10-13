@@ -1,6 +1,6 @@
 import {LineChart} from "../../Charts/LineChart";
 import {useEffect, useState} from "react";
-
+import {motion} from "framer-motion";
 export const CourseAnalysis = () => {
     const [data, setData] = useState([])
 
@@ -10,7 +10,25 @@ export const CourseAnalysis = () => {
             .then(data => setData(data))
     }, [])
     return (
-        <div className='w-100'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <motion.div initial={{ y: 10, opacity: 0 }}
+                 animate={{ y: 0, opacity: 1 }}
+                 exit={{ y: -10, opacity: 0 }}
+                 transition={{ duration: 0.2 }}
+                 className='w-100'>
             <h4>Course Analysis</h4>
             <div className="overflow-auto" style={{maxHeight:'800px'}}>
             <table className='table table-striped'>
@@ -74,6 +92,8 @@ export const CourseAnalysis = () => {
                 <h3>Courses Analysis</h3>
                 <LineChart data={data}/>
             </div>
-        </div>
+
+
+        </motion.div>
     )
 }

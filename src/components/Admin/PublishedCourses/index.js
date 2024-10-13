@@ -1,7 +1,7 @@
 import {BarChart} from "../../Charts/barChart";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-
+import {motion} from "framer-motion";
 export const PublishedCourses = () => {
     const [barChartData, setBarChartData] = useState({})
     const {loading, courses} = useSelector(state => state.admin)
@@ -15,7 +15,18 @@ export const PublishedCourses = () => {
     },[])
 
     return (
-        <>
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className='row g-3'
+        >
+
+
+
+
+
             <div className='w-100  col-12'>
                 <h4>Published Courses</h4>
                 <div className="overflow-auto" style={{maxHeight:'800px'}}>
@@ -50,7 +61,10 @@ export const PublishedCourses = () => {
                 <h2>Published Courses Analysis</h2>
                     <BarChart data={barChartData}/>
             </div>
-        </>
+
+
+
+        </motion.div>
 
     )
 }

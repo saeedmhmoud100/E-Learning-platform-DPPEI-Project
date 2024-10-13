@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {PieChart} from "../../Charts/PieChart";
 import {PolarChart} from "../../Charts/PolarChart";
 import {LineChart} from "../../Charts/LineChart";
-
+import {motion} from "framer-motion";
 export const Profile = () => {
 
     const [ProfileData, setProfileData] = useState([])
@@ -39,7 +39,13 @@ export const Profile = () => {
     },[])
 
     return (
-        <div className='row g-3'>
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className='row g-3'
+        >
 
             {ProfileData?.map((item, index) => (
                 <div key={index} className="col-lg-6 col-12 text-white">
@@ -62,6 +68,6 @@ export const Profile = () => {
             <div className="col-12">
                 <LineChart data={lineChartData} />
             </div>
-        </div>
+        </motion.div>
     )
 }
