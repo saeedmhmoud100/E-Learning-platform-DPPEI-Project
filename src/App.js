@@ -44,7 +44,7 @@ function App() {
     const {courses, loading} = useSelector(state=>state.allCourses);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [pageLoading, setPageLoading] = useState(true);
+    const [pageLoading, setPageLoading] = useState(false);
     const [coursesWithDetails,setCoursesWithDetails] = useState([]);
     const [categoryInput,setCategoryInput] = useState('');
 
@@ -155,7 +155,7 @@ function App() {
                         <UserProfile/>
                     </ProtectedRoute>
                 } />
-                <Route path="videopage" element={
+                <Route path="videopage/:id" element={
                     <ProtectedRoute>
                         <VedioPage/>
                     </ProtectedRoute>

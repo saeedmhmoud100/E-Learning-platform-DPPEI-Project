@@ -1,4 +1,4 @@
-import { GET_COURSE_SECTIONS } from "../type";
+import {GET_COURSE_SECTIONS, GET_VIDEO_ERROR} from "../type";
 
 const initialstate = {
     pagenation :{},
@@ -11,6 +11,11 @@ const courseSectionReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 sections: action.payload, // Update the section array with the data from the action
+            };
+        case GET_VIDEO_ERROR:
+            return {
+                ...state,
+                error: action.payload,
             };
         default:
             return state;

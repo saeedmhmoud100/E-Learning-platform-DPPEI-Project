@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CourseSidebar({ courseId }) {
     const dispatch = useDispatch();
-    const sections = useSelector((state) => state.sections.sections || []);
-    console.log(sections);
+    const {results:sections} = useSelector((state) => state.sections.sections || []);
 
     useEffect(() => {
         const fetchSections = async () => {
