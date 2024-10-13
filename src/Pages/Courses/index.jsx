@@ -10,6 +10,7 @@ import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/Cour
 export default function Courses({coursesWithDetails, categoryInput, updateCategory}) {
 
   const {searchTerm} = useSelector(state => state.searchTerm);
+  const {userData} = useSelector(state=>state.user);
   const {courses, loading} = useSelector(state => state.allCourses);
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
@@ -122,7 +123,9 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
   return (
     <div className='mt-5 mb-5'>
       <div className="container">
-        <h1 className='py-4 text-center'>1,000 Results for 'search term'</h1>
+        {
+          searchTerm && (<h1 className='py-4'>{filteredCourses.length} results for {searchTerm}</h1> )
+        }
         <div className='position-relative'>
             <div className='d-flex flex-wrap align-items-center'>
                 <button className={`sort-button-style mb-2 ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
