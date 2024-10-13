@@ -7,7 +7,7 @@ import { getToken, removeToken } from "../../hooks/myToken.js";
 import { logOut } from "../../store/actions/userActions.js";
 
 
-export const Navbar = () => {
+export const Navbar = ({updateCategory}) => {
     const navigate = useNavigate()
 
     const {searchTerm} = useSelector((state)=>state.searchTerm);
@@ -19,11 +19,13 @@ export const Navbar = () => {
         dispatch(updatesearchTerm(e.target.value))
     }
 
+    // FUNCTION TO HANDLE SEARCH FORM SUBMIT
     const handleSubmit = e => {
         e.preventDefault()
         navigate('/courses')
     }
 
+    // LOGOUT FUNCTION
     const logout = ()=>{
         dispatch(logOut());
         removeToken();
@@ -61,12 +63,11 @@ export const Navbar = () => {
                                 </Link>
                                 <div className="dropdown-menu nav-dropdown-absolute"
                                      aria-labelledby="navbarDropdown">
-                                    <Link to={'/courses?cat=web'} className="dropdown-item" href="#">Web
-                                        Development</Link>
-                                    <Link to={'/courses?cat=cyber'} className="dropdown-item"
-                                          href="#">CyberSecurity</Link>
-                                    <Link to={'/courses?cat=machine'} className="dropdown-item"
-                                          href="#">Machine Learning</Link>
+                                    <button onClick={(e)=>updateCategory(e.target.textContent)} className="dropdown-item">Web Development</button>
+                                    <button onClick={(e)=>updateCategory(e.target.textContent)} className="dropdown-item">Java</button>
+                                    <button onClick={(e)=>updateCategory(e.target.textContent)} className="dropdown-item">Python</button>
+                                    <button onClick={(e)=>updateCategory(e.target.textContent)} className="dropdown-item">C++</button>
+                                    <button onClick={(e)=>updateCategory(e.target.textContent)} className="dropdown-item">JavaScript</button>
                                 </div>
                             </li>
                             </>
@@ -128,45 +129,6 @@ export const Navbar = () => {
                                     <li><Link className="dropdown-item" to="/register">Register</Link></li>
                                     </>
                                 )}
-                                
-                                {/* {
-                                    userData.loggedIn ? (
-                                            <>
-
-                                                {
-                                                    userData.isInstructor ?
-                                                        (
-                                                            <>
-                                                                <li className="">
-                                                                    <Link className="dropdown-item" to="/add-course">Add
-                                                                        Course</Link>
-                                                                </li>
-                                                                <li className="">
-                                                                    <Link className="dropdown-item" to="/inst-profile">inst
-                                                                        profile</Link>
-                                                                </li>
-                                                            </>
-                                                        ) :
-                                                        (
-                                                            
-                                                        )
-                                                }
-
-
-                                                <li onClick={changeRule}><Link className="dropdown-item" to="#">
-                                                    {userData.isAdmin ? "make instructor" : userData.isInstructor ? 'make user' : 'make admin'}
-                                                </Link>
-                                                </li>
-                                                <li onClick={logout}><Link className="dropdown-item" to="#">logout</Link>
-                                                </li>
-                                            </>)
-                                        : (
-                                            <>
-                                                <li><Link className="dropdown-item" to="/login">Login</Link>
-                                                </li>
-                                                <li><Link className="dropdown-item" to="/register">Register</Link></li>
-                                            </>)
-                                } */}
                             </ul>
                         </li>
                     </ul>

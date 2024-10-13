@@ -41,24 +41,33 @@ import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 
 function App() {
     const {userData, logged_in} = useSelector(state=>state.user);
-    const {courses} = useSelector(state=>state.allCourses);
+    const {courses, loading} = useSelector(state=>state.allCourses);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const [pageLoading, setPageLoading] = useState(true);
     const [coursesWithDetails,setCoursesWithDetails] = useState([]);
+    const [categoryInput,setCategoryInput] = useState('');
 
+    //FUNCTION TO SET CATEGORY USER INPUT FROM NAVBAR TO BE PASSED ON TO COURSES PAGE
+    const updateCategory = (category)=>{
+        setCategoryInput(category);
+        navigate('/courses');
+    }
 
+    // FUNCTION THAT FETCHES COURSE DETAILS FOR EACH COURSE TO BE USED IN COURSES PAGE
     const fetchCourseDetails = async () => {
         if (courses?.length > 0) {
-          const promises = courses.map(async (item) => {
-            const courseDetails = await dispatch(getCourseDetails(item.id));
-            return courseDetails;
-          });
-          const updatedCourses = await Promise.all(promises);
-          setCoursesWithDetails(updatedCourses);
+            try {
+                const promises = courses.map(item => dispatch(getCourseDetails(item.id)));
+                const updatedCourses = await Promise.all(promises);
+                setCoursesWithDetails(updatedCourses);
+              } catch (error) {
+                console.error('Error fetching course details:', error);
+              }
         }
     };
-    
+
+    // WHEN COMPONENT FIRST RENDERS, CHECK FOR TOKEN AND GET USER DATA AND COURSES
     useEffect(() => {
         if(getToken()){
             dispatch(getLoggedUserData(getToken()))
@@ -68,21 +77,29 @@ function App() {
         }
     },[]);
 
+    // WHEN ALL COURSES FETCHED AND USER DATA, GET DETAILS FOR EACH COURSE AND SET LOADING FALSE
     useEffect(()=>{
-        if(courses?.length > 0 && userData){
-            setLoading(false);
-            fetchCourseDetails()
+        if(!loading && courses?.length > 0){
+            fetchCourseDetails();
         }
-    },[courses, userData])
+    },[loading])
 
+    // SETTING LOADING AFTER ALL NEEDED DATA HAS BEEN FETCHED
+    useEffect(()=>{
+        if(courses.length>0 && userData){
+            setPageLoading(false);
+        }
+    },[courses,userData])
+
+    // PROTECTED-ROUTE FOR AUTHORIZATION
     function ProtectedRoute ({children}){
         return getToken() ? children : <Navigate to={'/login'}/>
     }
 
     return (<div className="App">
-        <Navbar/>
+        <Navbar updateCategory={updateCategory}/>
         {
-            loading ? (
+            pageLoading ? (
                 <GeneralLoading takeHeight={'vh-100'}/>
             ):(
                 <Routes>
@@ -160,7 +177,7 @@ function App() {
                 }/>
                 <Route path='/courses' element={
                     <ProtectedRoute>
-                        <Courses coursesWithDetails={coursesWithDetails}/>
+                        <Courses coursesWithDetails={coursesWithDetails} categoryInput={categoryInput} updateCategory={updateCategory}/>
                     </ProtectedRoute>
                 }/>
              

@@ -63,12 +63,16 @@ export default function SliderForCourseCards() {
                                 <h3 className='mb-2 text-truncate'>{course?.title}</h3>
                                 <h4 className='text-muted h6 mb-2 text-truncate'>{course?.instructor_data?.title}</h4>
                                 <div className="d-flex flex-row mb-2 align-items-center">
-                                    <span className='pe-1'>5</span>
-                                    <i className="fa-solid fa-star star-icon"></i>
-                                    <i className="fa-solid fa-star star-icon"></i>
-                                    <i className="fa-solid fa-star star-icon"></i>
-                                    <i className="fa-solid fa-star star-icon"></i>
-                                    <span className='ps-1'>(1,200)</span>
+                                    <span className='pe-1'>{course.rating_avg ? course.rating_avg : 0}</span>
+                                    {Array(5).fill(0).map((star, index) => {
+                                        if (index < Math.floor(course?.rating_avg)) {
+                                            return <i key={index} className="fa-solid fa-star star-icon"></i>;
+                                        } else if (index < course?.rating_avg) {
+                                            return <i key={index} className="fa-regular fa-star-half-stroke star-icon"></i>;
+                                        } else {
+                                            return <i key={index} className="fa-regular fa-star star-icon"></i>; // Empty star
+                                        }
+                                    })}
                                 </div>
                                 <h5 className='mb-2'>{course?.price} L.E.</h5>
                                 <h6 className='mb-2 bg-warning text-white w-auto p-2'>Bestseller</h6>

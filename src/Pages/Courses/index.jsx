@@ -7,9 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import { getCourseDetails } from '../../store/actions/coursesAction';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
 
-export default function Courses({coursesWithDetails}) {
+export default function Courses({coursesWithDetails, categoryInput, updateCategory}) {
 
-  const dispatch = useDispatch();
   const {searchTerm} = useSelector(state => state.searchTerm);
   const {courses, loading} = useSelector(state => state.allCourses);
   const [displayDropdown, setDisplayDropdown] = useState(false);
@@ -23,7 +22,7 @@ export default function Courses({coursesWithDetails}) {
   const [categories, setCategories] = useState('');
   const [video_Duration, setVideo_Duration] = useState([]);
 
-
+  // HANDLING WHEN USER CHOOSES FILTER
   const handleUserFilterInput = (option, filterName, index)=>{
     switch(filterName){
       case 'Ratings':
@@ -83,10 +82,15 @@ export default function Courses({coursesWithDetails}) {
 
   // FILTERED COURSES ARRAY ALWAYS UPDATES WHENEVER FILTERS ARE TRIGGERED OR LOADING STATE CHANGES
   useEffect(() => {
-    if (!loading && coursesWithDetails.length > 0) {
-      updateFilteredCourses();
+    if (!loading && coursesWithDetails?.length == courses?.length) {
+      if(categoryInput){
+        setCategories(categoryInput.toLowerCase());
+        updateFilteredCourses();
+      }else{
+        updateFilteredCourses();
+      }
     }
-  }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails]);
+  }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails,categoryInput]);
   
   // FUNCTION THAT CLEARS FILTERS
   const handleClearFilters = ()=>{
@@ -96,6 +100,7 @@ export default function Courses({coursesWithDetails}) {
     setCategories('');
     setVideo_Duration([]);
     updateFilteredCourses();
+    updateCategory('');
   }
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
@@ -134,14 +139,6 @@ export default function Courses({coursesWithDetails}) {
             
             {/* DISPLAY DROPDOWN CONDITION */}
             {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
-                    setSortType('Most relevant');
-                    setDisplayDropdown(!displayDropdown);
-                    }}>Most relevant</li>                                                                                                                                                                                                                                      
-                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
-                    setSortType('Most viewed');
-                    setDisplayDropdown(!displayDropdown);
-                    }}>Most viewed</li>
                 <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
                     setSortType('Highest rated');
                     setDisplayDropdown(!displayDropdown);

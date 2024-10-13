@@ -44,16 +44,18 @@ export default function Home() {
 
         {/* START - SECOND SECTION WITH MY LEARNINGS */}
         <div className="">
-            <div className="d-flex justify-content-between align-items-center py-5">
-                <h2 className='fw-bold'>Resume your learning!</h2>
-                <Link to='/my-courses/*'>My learning</Link>
-            </div>
-            <div className="container-fluid p-0">
-                <div className="row g-3">
                     {
-                        userData.courses_enrolled.length > 0 ? (
+                        userData?.courses_enrolled?.length > 0 ? (
                             userData.courses_enrolled.map((course)=>{
-                                return <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
+                                return(
+                                <>
+                                <div className="d-flex justify-content-between align-items-center py-5">
+                                    <h2 className='fw-bold'>Resume your learning!</h2>
+                                    <Link to='/my-courses/*'>My learning</Link>
+                                </div>
+                                <div className="container-fluid p-0">
+                                <div className="row g-3">
+                                <div key={course.id} className="col-12 col-md-6 col-lg-4 custom-dimensions">
                                     <div className="d-flex justify-content-between align-items-center h-100">
                                         <div className="position-relative w-75 h-100">
                                             <div className="overlay-for-home"></div>
@@ -74,16 +76,15 @@ export default function Home() {
                                             <h5 className='h6 text-muted'>Lecture . 6m</h5>
                                         </div>
                                     </div>
-                                </div>  
-                            })
+                                </div>
+                                </div>
+                                </div>
+                                </>  
+                            )})
                         ):(
-                            <h3>No courses enrolled.<Link to='/courses'> Start learning</Link></h3>
+                            <h3 className='text-center p-4'>It seems you have yet to explore our courses.<Link to='/courses' className='my-learning-btn'> Start learning!</Link></h3>
                         )
                     }
-                    
-
-                </div>
-            </div>
         </div>
         {/* END - SECOND SECTION WITH MY LEARNINGS */}
 
