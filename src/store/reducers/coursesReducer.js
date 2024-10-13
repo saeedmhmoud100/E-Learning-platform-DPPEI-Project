@@ -1,4 +1,4 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_INCLUDES, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
+import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_INCLUDES, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS, ADD_TO_WISHLIST, GET_WISHLIST, REMOVE_FROM_WISHLIST} from '../type'
 
 const inital = {
    
@@ -8,7 +8,8 @@ const inital = {
     whatYouWillLearnData: [],
     course:[],
     requirments:[],
-    reviews:[]
+    reviews:[],
+    wishlist : [],
 }
 const coursesReducer = (state = inital, action) => {
     switch (action.type) {
@@ -57,7 +58,20 @@ const coursesReducer = (state = inital, action) => {
                requirments: action.payload.results,
                 loading: false
             }
-
+        case GET_WISHLIST:
+            return{
+                ...state
+            }
+        case ADD_TO_WISHLIST:
+            return{
+                ...state,
+                wishlist : action.payload,
+            }
+        case REMOVE_FROM_WISHLIST:
+            return{
+                ...state,
+                wishlist : action.payload,
+            }
         default:
             return state;
     }
