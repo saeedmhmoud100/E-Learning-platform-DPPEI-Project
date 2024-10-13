@@ -1,7 +1,10 @@
 import React, {useState ,useEffect} from "react";
 import insPhoto from "./images/instractorPhoto.png";
 import Courses from "./Courses";
+import { useSelector , useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import {getInstructorProfile} from '../../store/actions/instructorAction'
 
 import "./style.css";
 import {Link} from "react-router-dom";
@@ -12,9 +15,32 @@ const open = {
     flexDirection: "column",
     textOverflow: "ellipsis",
 };
+const imageStyle = {
+    width: '150px',
+    height: '150px',
+    objectFit: 'cover',
+  };
 
 export default function InstProfile() {
+    const {id} = useParams();
     let [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const {instructor} = useSelector(state => state.instructor)
+    useEffect(() => {
+        const fetchData = async () => {
+          if (id) {           
+             await dispatch(getInstructorProfile(id)); 
+    
+            
+        }
+        };
+        fetchData();
+}, [id, dispatch]);
+
+
+
+
+
 
     const getData = async () => {
         try {
@@ -32,7 +58,7 @@ export default function InstProfile() {
                 <div className="col-md-8  ">
                     <div className="">
                         <h5>Instructor</h5>
-                        <h1 className="font-size-40">Maximilian Schwarzmüller</h1>
+                        <h1 className="font-size-40">{instructor?.user?.username}</h1>
                         <h2 className="font-size-16">
                             AWS certified, Professional Web Developer and Instructor
                         </h2>
@@ -62,50 +88,7 @@ export default function InstProfile() {
                             <div className="about " style={isOpen ? null : open}>
                                 <p className="fs-12 fw-bold">Experience as (Web) Developer</p>
                                 <p className={!isOpen && `ins-info`}>
-                                    Starting out at the age of 12 I never stopped learning new
-                                    programming skills and languages. Early I started creating
-                                    websites for friends and just for fun as well . Besides web
-                                    development I also explored Python and other non-web-only
-                                    languages. This passion has since lasted and lead to my
-                                    decision of working as a freelance web developer and
-                                    consultant. The success and fun I have in this job is immense
-                                    and really keeps that passion burningly alive.
-                                    <br/>
-                                    Starting out at the age of 12 I never stopped learning new
-                                    programming skills and languages. Early I started creating
-                                    websites for friends and just for fun as well . Besides web
-                                    development I also explored Python and other non-web-only
-                                    languages. This passion has since lasted and lead to my
-                                    decision of working as a freelance web developer and
-                                    consultant. The success and fun I have in this job is immense
-                                    and really keeps that passion burningly alive.
-                                    <br/>
-                                    Starting out at the age of 12 I never stopped learning new
-                                    programming skills and languages. Early I started creating
-                                    websites for friends and just for fun as well . Besides web
-                                    development I also explored Python and other non-web-only
-                                    languages. This passion has since lasted and lead to my
-                                    decision of working as a freelance web developer and
-                                    consultant. The success and fun I have in this job is immense
-                                    and really keeps that passion burningly alive.
-                                    <br/>
-                                    Starting out at the age of 12 I never stopped learning new
-                                    programming skills and languages. Early I started creating
-                                    websites for friends and just for fun as well . Besides web
-                                    development I also explored Python and other non-web-only
-                                    languages. This passion has since lasted and lead to my
-                                    decision of working as a freelance web developer and
-                                    consultant. The success and fun I have in this job is immense
-                                    and really keeps that passion burningly alive.
-                                    <br/>
-                                    Starting out at the age of 12 I never stopped learning new
-                                    programming skills and languages. Early I started creating
-                                    websites for friends and just for fun as well . Besides web
-                                    development I also explored Python and other non-web-only
-                                    languages. This passion has since lasted and lead to my
-                                    decision of working as a freelance web developer and
-                                    consultant. The success and fun I have in this job is immense
-                                    and really keeps that passion burningly alive.
+                                    {instructor?.user?.description}
                                 </p>
 
                             </div>
@@ -118,7 +101,7 @@ export default function InstProfile() {
                                 {isOpen ? "read less..." : "read more.."}
                             </button>
                         </div>
-                        {<Courses/>}
+                        {}
                         <Link to='/inst-profile/all-courses' className='text-decoration-none'>
                             <button  className='btn btn-dark m-auto d-block my-4'>All Courses</button>
                         </Link>
@@ -127,7 +110,7 @@ export default function InstProfile() {
 
                 <div className="col-md-4  ">
                     <div className="">
-                        <img src={insPhoto} className=" rounded-circle" alt="ins-photo"/>
+                        <img src={instructor?.user?.profile_image} className="rounded-circle" style={imageStyle} alt="ins-photo"/>
                     </div>
                     <div className="social-btn d-flex flex-wrap  ">
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2   ">

@@ -120,7 +120,10 @@ const [showAllReviews, setShowAllReviews] = useState(false)
               </div>
             </div>
             <p>
-              Created By: <Link className='me-1 text-info' to="admin-profile">{}</Link>
+              Created By: <Link className='me-1 text-info' to={{
+                  pathname: '/inst-profile',
+                  search: `?id=${instructor.id}`,
+                }} >{instructor?.title}</Link>
             </p>
             <div className='d-flex gap-3'>
               <div className="last-update">

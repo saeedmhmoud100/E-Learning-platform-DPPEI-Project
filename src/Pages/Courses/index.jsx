@@ -7,10 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import { getCourseDetails } from '../../store/actions/coursesAction';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
 
-export default function Courses({coursesWithDetails}) {
+export default function Courses({coursesWithDetails, categoryInput, updateCategory}) {
 
-  const dispatch = useDispatch();
   const {searchTerm} = useSelector(state => state.searchTerm);
+  const {userData} = useSelector(state=>state.user);
   const {courses, loading} = useSelector(state => state.allCourses);
   const [displayDropdown, setDisplayDropdown] = useState(false);
   const [sortType, setSortType] = useState('Most Relevant');
@@ -23,7 +23,7 @@ export default function Courses({coursesWithDetails}) {
   const [categories, setCategories] = useState('');
   const [video_Duration, setVideo_Duration] = useState([]);
 
-
+  // HANDLING WHEN USER CHOOSES FILTER
   const handleUserFilterInput = (option, filterName, index)=>{
     switch(filterName){
       case 'Ratings':
@@ -48,11 +48,6 @@ export default function Courses({coursesWithDetails}) {
     }
   }
 
-  // WHEN COMPONENT FIRST MOUNTS, FOR EACH COURSE IT GETS ITS DETAILS AND STORES IT IN ARRAY
-  useEffect(() => {
-    
-  }, [courses, dispatch]);
-
   // FUNCTION THAT FILTERS COURSES WHEN DATA IS LOADED
   const updateFilteredCourses = () => {
     if (loading || coursesWithDetails.length === 0) {
@@ -65,22 +60,16 @@ export default function Courses({coursesWithDetails}) {
       );
     }
     if (ratings || price.length > 0 || categories || video_Duration.length > 0) {
-      console.log(categories)
       updatedArray = updatedArray.filter(course => {
         let matchesFilters = true;
         if(ratings && matchesFilters){
-          console.log(":)")
-          matchesFilters = course.rating >= ratings;
+          matchesFilters = course.rating_avg >= ratings;
         }
         if(price.length>0 && matchesFilters){
-          console.log(":)")
-          console.log(price)
           matchesFilters = course.price >= price[0] && course.price <= price[1];
         }
         if(categories && matchesFilters){
-          console.log(":)")
           const courseCategory = course.categories.map((cat)=>{return cat.name.toLowerCase()});
-          console.log(courseCategory);
           matchesFilters = courseCategory.includes(categories.toLowerCase());
         }
         if (video_Duration.length && matchesFilters){
@@ -94,10 +83,15 @@ export default function Courses({coursesWithDetails}) {
 
   // FILTERED COURSES ARRAY ALWAYS UPDATES WHENEVER FILTERS ARE TRIGGERED OR LOADING STATE CHANGES
   useEffect(() => {
-    if (!loading && coursesWithDetails.length > 0) {
-      updateFilteredCourses();
+    if (!loading && coursesWithDetails?.length == courses?.length) {
+      if(categoryInput){
+        setCategories(categoryInput.toLowerCase());
+        updateFilteredCourses();
+      }else{
+        updateFilteredCourses();
+      }
     }
-  }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails]);
+  }, [searchTerm, ratings, price, categories, video_Duration, loading, coursesWithDetails,categoryInput]);
   
   // FUNCTION THAT CLEARS FILTERS
   const handleClearFilters = ()=>{
@@ -107,6 +101,7 @@ export default function Courses({coursesWithDetails}) {
     setCategories('');
     setVideo_Duration([]);
     updateFilteredCourses();
+    updateCategory('');
   }
 
   // FUNCTION HANDLES WINDOW RESIZE FOR RESPONSIVE FILTER MENU
@@ -128,7 +123,9 @@ export default function Courses({coursesWithDetails}) {
   return (
     <div className='mt-5 mb-5'>
       <div className="container">
-        <h1 className='py-4 text-center'>1,000 Results for 'search term'</h1>
+        {
+          searchTerm && (<h1 className='py-4'>{filteredCourses.length} results for '{searchTerm}'</h1> )
+        }
         <div className='position-relative'>
             <div className='d-flex flex-wrap align-items-center'>
                 <button className={`sort-button-style mb-2 ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
@@ -145,14 +142,6 @@ export default function Courses({coursesWithDetails}) {
             
             {/* DISPLAY DROPDOWN CONDITION */}
             {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
-                    setSortType('Most relevant');
-                    setDisplayDropdown(!displayDropdown);
-                    }}>Most relevant</li>                                                                                                                                                                                                                                      
-                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
-                    setSortType('Most viewed');
-                    setDisplayDropdown(!displayDropdown);
-                    }}>Most viewed</li>
                 <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
                     setSortType('Highest rated');
                     setDisplayDropdown(!displayDropdown);
@@ -183,7 +172,7 @@ export default function Courses({coursesWithDetails}) {
                     <div className="container-fluid">
                         <div className="row row gy-2">
                         {
-                          loading  ? (
+                          loading || coursesWithDetails.length == 0 ? (
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
@@ -215,7 +204,7 @@ export default function Courses({coursesWithDetails}) {
                     <div className="container-fluid">
                         <div className="row gy-2">
                         {
-                          loading ? (
+                          loading || coursesWithDetails.length == 0 ? (
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (

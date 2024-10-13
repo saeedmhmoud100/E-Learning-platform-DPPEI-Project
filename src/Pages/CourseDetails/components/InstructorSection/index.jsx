@@ -16,7 +16,10 @@ export default function InstructorSection({instructor}) {
       <h1 className="h4 fw-bolder mb-2">Instructor</h1>
       <div className="instructor-card">
         <div className="instructor-info">
-          <Link className="instructor-name fs-5" to="/inst-profile">{instructor?.user?.username}</Link>
+          <Link className="instructor-name fs-5" to={{
+    pathname: '/inst-profile',
+    search: `?id=${instructor.id}`,
+  }}>{instructor?.user?.username}</Link>
           <p className="instructor-tagline text-muted">{instructor?.user?.title}</p>
         
             <div className="instructorimg  me-3 ">

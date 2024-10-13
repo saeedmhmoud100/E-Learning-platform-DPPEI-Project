@@ -1,4 +1,5 @@
     import React, { useState } from "react";
+    import { useParams } from "react-router-dom";
     import myVideo from "./images/video1.mp4";
     import CourseSidebar from "./component/CourseSidebar/CourseSidebar";
     import { LearningTools } from "./component/LearningTools";
@@ -16,6 +17,9 @@ import Review from "./component/Review";
     const [isAnnouncementsOpen, setIsAnnouncementsOpen] = useState(false);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
     const [isLearningToolOpen, setIsLearningToolOpen] = useState(false);
+    
+
+    const {id} = useParams();
     return (
         <>
         <div className="container-fluide mb-5">
@@ -130,7 +134,7 @@ import Review from "./component/Review";
                 </div>
             </div>
             <div className="col-md-4 col-sm-12 mt-2 vh-100">
-                <CourseSidebar />
+                <CourseSidebar courseId={id} />
             </div>
             </div>
         </div>
