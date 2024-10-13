@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CourseCards from '../../components/CourseCards';
 import Footer from '../../components/Footer/index.jsx';
 import './Home.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
+import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
+import { Slide } from 'react-toastify';
+import SliderForCourseCards from '../../components/SliderForCourseCards/SliderForCourseCards.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
@@ -26,6 +32,7 @@ export default function Home() {
             <img src={userData.profile_image} alt="user picture" className='w-100 h-100 rounded-circle' />
             </div>
             <div className="text-cont ps-4">
+                <h2>Welcome back, {userData.username}</h2>
                 <h2>Welcome back, {userData.username}</h2>
                 {/* <a href='#'>add occupations and interest</a> */}
             </div>
@@ -95,6 +102,8 @@ export default function Home() {
         {/* END - HEADER */}
         
         {/* START - THIRD SECTION WITH COURSE CARDS */}
+        <div className="container-fluid position-relative p-0">
+            <SliderForCourseCards/>
         <div className="container-fluid position-relative p-0">
             <SliderForCourseCards/>
         </div>

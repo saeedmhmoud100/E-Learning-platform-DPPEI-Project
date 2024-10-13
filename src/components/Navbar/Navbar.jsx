@@ -6,6 +6,12 @@ import { useEffect } from "react";
 import { getToken, removeToken } from "../../hooks/myToken.js";
 import { logOut } from "../../store/actions/userActions.js";
 
+import { useDispatch, useSelector } from "react-redux";
+import { updatesearchTerm } from "../../store/actions/searchActions.js";
+import { useEffect } from "react";
+import { getToken, removeToken } from "../../hooks/myToken.js";
+import { logOut } from "../../store/actions/userActions.js";
+
 
 export const Navbar = ({updateCategory}) => {
     const navigate = useNavigate()
@@ -79,11 +85,24 @@ export const Navbar = ({updateCategory}) => {
                             <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
                                 <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search"
                                        aria-label="Search" onChange={handleSearchInput}/>
+                                       aria-label="Search" onChange={handleSearchInput}/>
                             </form>
                         </li>
                     </ul>
 
                     <ul className="navbar-nav flex-row ms-auto">
+                        {getToken() && (
+                            <>
+                            <li className="nav-item me-3 ms-md-3">
+                                <Link className="nav-link active" aria-current="page" to="/"><i
+                                    className="fa-regular fa-heart"></i></Link>
+                            </li>
+                            <li className="nav-item me-3 ">
+                                <Link className="nav-link active" to="/cart"><i
+                                    className="fa-solid fa-cart-shopping"></i></Link>
+                            </li>
+                            </> 
+                        )}
                         {getToken() && (
                             <>
                             <li className="nav-item me-3 ms-md-3">

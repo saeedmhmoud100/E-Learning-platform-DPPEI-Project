@@ -1,4 +1,4 @@
-    import axios from "axios";
+/*     import axios from "axios";
     import React, { useEffect, useState } from "react";
     import "./style.css";
 
@@ -30,12 +30,12 @@
                         <p className="card-text">{course.courseDesc}</p>
                     </div>
                 </div>
-                {/* <div className="card bg-info p-5 m-1 ">
+                {<div className="card bg-info p-5 m-1 ">
                     <h4>Course Name : {course.courseName}</h4>
                     <h4>instructor Name : {course.instructorName}</h4>
                     <h4>desc Name : {course.courseDesc}</h4>
                     <h4>Course price : {course.coursePrice}</h4>
-                </div> */}
+                </div>}
                 </div>
             );
             })}
@@ -43,3 +43,4 @@
         </div>
     );
     }
+ */

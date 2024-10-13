@@ -1,78 +1,36 @@
-    import React, { useState } from 'react';
-    
-    import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourseSections } from '../../../../store/actions/courseSectionsActions'; // Update the import path as needed
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-    
-    const courseData = [
-    {
-        title: 'Section 1: Installing Vue.JS',
-        progress: '0/3',
-        duration: '15min',
-        items: [
-        'What is VueJS',
-        'Introduction to VueJS'
-        ]
-    },
-    {
-        title: 'Section 2: Installing Vue.JS',
-        progress: '0/3',
-        duration: '15min',
-        items: [
-        'Using VueJS without installation',
-        'Installing and running VueJS',
-        'File and Folder overview'
-        ]
-    },
-    {
-        title: 'Section 3: Installing Vue.JS',
-        progress: '0/3',
-        duration: '15min',
-        items: [
-        'What is VueJS',
-        'Introduction to VueJS'
-        ]
-    },
-    {
-        title: 'Section 4: Installing Vue.JS',
-        progress: '0/3',
-        duration: '15min',
-        items: [
-        'What is VueJS',
-        'Introduction to VueJS'
-        ]
-    },
-    {
-        title: 'Section 5: Installing Vue.JS',
-        progress: '0/3',
-        duration: '15min',
-        items: [
-        'What is VueJS',
-        'Introduction to VueJS'
-        ]
-    },
-    {
-        title: 'Section 6: Installing Vue.JS',
-        progress: '0/3',
-        duration: '15min',
-        items: [
-        'What is VueJS',
-        'Introduction to VueJS'
-        ]
-    },
-    
-    ];
+function CourseSidebar({ courseId }) {
+    const dispatch = useDispatch();
+    const sections = useSelector((state) => state.sections.sections || []);
+    console.log(sections);
 
-    function CourseSidebar() {
+    useEffect(() => {
+        const fetchSections = async () => {
+            console.log('Fetching sections for course:', courseId);
+            if (courseId) {
+                await dispatch(getCourseSections(courseId));
+            }
+        };
+
+        fetchSections();
+    }, [courseId, dispatch]);
+
     return (
         <div className="course-sidebar">
-        {courseData.map((section, index) => (
-            <Section key={index} {...section} />
-        ))}
+            {sections && sections.length > 0 && (
+                sections.map((section, index) => (
+                    <Section key={index} {...section} />
+                ))
+            )}
         </div>
     );
-    }
+}
 
-    function Section({ title, progress, duration, items }) {
+function Section({ title, total_duration, lectures_count }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -81,29 +39,27 @@
 
     return (
         <div className="section dropdownUl pb-3">
-        <h3 className="section-title " onClick={toggleDropdown}>
-            {title} <span className="caret">{isOpen ? '▼' : '▲'}</span>
-        </h3>
-        <p className="section-progress">{progress} | {duration}</p>
-        {isOpen && <Dropdown items={items} />}
+            <h3 className="section-title" onClick={toggleDropdown}>
+                {title} <span className="caret">{isOpen ? '▼' : '▲'}</span>
+            </h3>
+            <p className="section-progress"> {total_duration}</p>
+            {isOpen && <Dropdown items={lectures_count} />}
         </div>
     );
-    }
+}
 
-    function Dropdown({ items }) {
-        return (
-          <ul className="section-items dropdown bg-light">
+function Dropdown({ items }) {
+    return (
+        <ul className="section-items dropdown bg-light">
             {items.map((item, index) => (
-              <SectionItem key={index}>{item}</SectionItem>
+                <SectionItem key={index}>{item}</SectionItem>
             ))}
-          </ul>
-        );
-      }
-      
+        </ul>
+    );
+}
 
-    function SectionItem({ children }) {
-        return <li className="section-item">{children}</li>;
-      }
-      
+function SectionItem({ children }) {
+    return <li className="section-item">{children}</li>;
+}
 
-    export default CourseSidebar;
+export default CourseSidebar;

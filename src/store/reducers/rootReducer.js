@@ -7,6 +7,7 @@ import cartReducer from './cartReducer'
 import adminReducer from './adminReducer'
 import orderReducer from './orderReducer'
 import profileReducer from './profileReducer'
+import courseSectionReducer from './courseSectionsReducer'
 
 export default combineReducers ({
     allCourses:coursesReducer,
@@ -17,4 +18,5 @@ export default combineReducers ({
     orders:orderReducer,
     cart:cartReducer,
     admin:adminReducer,
+    sections:courseSectionReducer
 })
