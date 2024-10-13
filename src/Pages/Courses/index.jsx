@@ -48,11 +48,6 @@ export default function Courses({coursesWithDetails}) {
     }
   }
 
-  // WHEN COMPONENT FIRST MOUNTS, FOR EACH COURSE IT GETS ITS DETAILS AND STORES IT IN ARRAY
-  useEffect(() => {
-    
-  }, [courses, dispatch]);
-
   // FUNCTION THAT FILTERS COURSES WHEN DATA IS LOADED
   const updateFilteredCourses = () => {
     if (loading || coursesWithDetails.length === 0) {
@@ -65,22 +60,16 @@ export default function Courses({coursesWithDetails}) {
       );
     }
     if (ratings || price.length > 0 || categories || video_Duration.length > 0) {
-      console.log(categories)
       updatedArray = updatedArray.filter(course => {
         let matchesFilters = true;
         if(ratings && matchesFilters){
-          console.log(":)")
           matchesFilters = course.rating >= ratings;
         }
         if(price.length>0 && matchesFilters){
-          console.log(":)")
-          console.log(price)
           matchesFilters = course.price >= price[0] && course.price <= price[1];
         }
         if(categories && matchesFilters){
-          console.log(":)")
           const courseCategory = course.categories.map((cat)=>{return cat.name.toLowerCase()});
-          console.log(courseCategory);
           matchesFilters = courseCategory.includes(categories.toLowerCase());
         }
         if (video_Duration.length && matchesFilters){
@@ -183,7 +172,7 @@ export default function Courses({coursesWithDetails}) {
                     <div className="container-fluid">
                         <div className="row row gy-2">
                         {
-                          loading  ? (
+                          loading || coursesWithDetails.length == 0 ? (
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
@@ -215,7 +204,7 @@ export default function Courses({coursesWithDetails}) {
                     <div className="container-fluid">
                         <div className="row gy-2">
                         {
-                          loading ? (
+                          loading || coursesWithDetails.length == 0 ? (
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (

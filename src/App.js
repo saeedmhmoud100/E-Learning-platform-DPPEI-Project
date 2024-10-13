@@ -59,22 +59,25 @@ function App() {
         }
     };
     
-
     useEffect(() => {
         if(getToken()){
             dispatch(getLoggedUserData(getToken()))
             dispatch(getAllCourses());
-            fetchCourseDetails();
-            setLoading(false);
         }else{
             navigate('/login');
-            setLoading(false)
         }
     },[]);
 
+    useEffect(()=>{
+        if(courses.length > 0 && userData){
+            setLoading(false);
+            fetchCourseDetails()
+        }
+    },[courses, userData])
+
     function ProtectedRoute ({children}){
         if(loading){
-            return <GeneralLoading />
+            return <GeneralLoading takeHeight={'vh-100'}/>
         }
         return getToken() ? children : <Navigate to={'/login'}/>
     }

@@ -11,14 +11,9 @@ import SliderForCourseCards from '../../components/SliderForCourseCards/SliderFo
 
 export default function Home() {
 
-    // FADEL:
-    // 1- Pagination
-    // 2- Implementing my learnings logic
-
     const dispatch = useDispatch()
-    const { courses, loading } = useSelector((state) => state.allCourses);
+    const { courses} = useSelector((state) => state.allCourses);
     const {userData} = useSelector(state=>state.user);
-
 
   return (
     
