@@ -1,15 +1,17 @@
 import {BarChart} from "../../Charts/barChart";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
 export const PublishedCourses = () => {
     const [barChartData, setBarChartData] = useState({})
-
+    const {loading, courses} = useSelector(state => state.admin)
     useEffect(() => {
         fetch('/data/admin/barChartData.json')
             .then(response => response.json())
             .then(data => {
                 setBarChartData(data)
             })
+
     },[])
 
     return (
@@ -27,24 +29,17 @@ export const PublishedCourses = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope='row'>1</th>
-                        <td>React</td>
-                        <td>2021-10-10</td>
-                        <td>John Doe</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>2</th>
-                        <td>Node</td>
-                        <td>2021-10-10</td>
-                        <td>John Doe</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>3</th>
-                        <td>Express</td>
-                        <td>2021-10-10</td>
-                        <td>John Doe</td>
-                    </tr>
+                    {
+                        courses?.results?.map((course, index) => (
+                            <tr key={index}>
+                                <th scope='row'>{index}</th>
+                                <td>{course.title}</td>
+                                <td>{course.created_at}</td>
+                                <td>{course.instructor_data.user.username}</td>
+                            </tr>
+                        ))
+                    }
+
                     </tbody>
                 </table>
                 </div>

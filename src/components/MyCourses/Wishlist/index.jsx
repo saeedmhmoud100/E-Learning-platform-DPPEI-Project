@@ -2,8 +2,11 @@ import React from 'react'
 import Footer from "../../Footer/index.jsx"
 import "./style.css"
 import {WishlistCard} from "../Cards/WishlistCard";
+import {useSelector} from "react-redux";
+import GeneralLoading from "../../Loading/GeneralLoading/GeneralLoading";
 
 export default function Wishlist() {
+    const { userData:{wishlist:courses},loading } = useSelector((state) => state.user);
 
 
 
@@ -24,14 +27,14 @@ export default function Wishlist() {
                     </div>
                 </div>
                 <div className="row my-4 g-2">
-                    <WishlistCard />
-                    <WishlistCard />
+                    {
+                        loading ? <GeneralLoading/> :
+                        courses?.length > 0 ? courses?.map(({course}, index) => (
+                            <WishlistCard key={index} course={course}/>
+                        )) : <h1>No courses in wishlist</h1>
+                    }
                 </div>
-
-
             </div>
-            <Footer/>
-
         </>
     );
 };

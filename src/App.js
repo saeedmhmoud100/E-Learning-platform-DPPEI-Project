@@ -1,12 +1,13 @@
 import '@popperjs/core';
 import 'jquery';
+import 'react-multi-carousel/lib/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
@@ -18,7 +19,7 @@ import Checkout from './Pages/Checkout/index';
 import Cart from './Pages/Cart/index';
 import NotFound from './Pages/NotFound/NotFound';
 import VedioPage from './components/VedioPage'
-import {useEffect, useState} from "react";
+import {Children, useEffect, useState} from "react";
 import InstProfile from "./components/InstProfile";
 import AddCourseForm from "./components/AddCourseForm";
 import Footer from "./components/Footer";
@@ -27,59 +28,122 @@ import UserProfile from "./Pages/UserProfile/UserProfile";
 import EditUserProfile from "./Pages/EditUserProfile/EditUserProfile";
 import UserCourses from "./components/MyCourses/UserCourses/UserCourses";
 import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
-import HelpSupport from "./HelpSupport/HelpSupport";
+import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
+import axios from "axios";
+import {getAllCourses} from "./store/actions/coursesAction";
+import {useDispatch,useSelector} from "react-redux";
+import CourseCardsLoading from './components/Loading/CourseCardsLoading/CourseCardsLoading';
+import { getToken, setToken } from './hooks/myToken';
+import useGetData from './ApiHooks/useGetData';
+import { getLoggedUserData } from './store/actions/userActions';
+import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 
 function App() {
-    const [userData, setUserData] = useState({});
+    const {userData, logged_in} = useSelector(state=>state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
-        fetch('/data/user/userData.json').then(response => response.json()).then(data => setUserData(data));
+        if(getToken()){
+            dispatch(getLoggedUserData(getToken()))
+            dispatch(getAllCourses());
+            setLoading(false)
+        }else{
+            navigate('/login');
+            setLoading(false)
+        }
     },[]);
 
-
-    function logout() {
-        setUserData({...userData, loggedIn: false, isAdmin: false})
-    }
-
-    function login(data) {
-        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
-    }
-
-    function changeRule() {
-        if (userData.isAdmin) {
-            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: true})
-        } else if (userData.isInstructor) {
-            setUserData({...userData, loggedIn: true, isAdmin: false, isInstructor: false})
-        } else {
-            setUserData({...userData, loggedIn: true, isAdmin: true, isInstructor: false})
+    function ProtectedRoute ({children}){
+        if(loading){
+            return <GeneralLoading />
         }
-    }
-
-    function handleRegister(data) {
-        setUserData({...userData, loggedIn: true, isAdmin: false, ...data})
+        return getToken() ? children : <Navigate to={'/login'}/>
     }
 
     return (<div className="App">
-        <Navbar changeRule={changeRule} login={login} logout={logout} userData={userData}/>
+        <Navbar/>
         <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/register" element={<Register handleRegister={handleRegister}/>}/>
-            <Route path="/login" element={<Login handleLogin={login}/>}/>
-            <Route path='/admin/*' element={<AdminPage/>}/>
-            <Route path="/inst-profile" element={<InstProfile/>}/>
-            <Route path="/inst-profile/all-courses" element={<InsCourses/>}/>
-            <Route path='add-course' element={<AddCourseForm/>}/>
-            <Route path='/course-details' element={<CourseDetails/>}/>
-            <Route path='/cart' element={<Cart/>}/>
-            <Route path='/checkout' element={<Checkout/>}/>
-            <Route path='/my-courses/*' element={<MyCourses />}/>
-            <Route path="/profile" element={<UserProfile/>} />
-            <Route path="videopage" element={<VedioPage/>} />
-            <Route path="/profile/edit" element={<EditUserProfile/>}/>
-            <Route path="/profile/purchase-history" element={<PurchaseHistory/>}/>
-            <Route path="/help-and-support" element={<HelpSupport/>}/>
-            <Route path='/courses' element={<Courses />}/>
+            <Route path="/" element={
+                <ProtectedRoute>
+                    <Home/>
+                </ProtectedRoute>
+            }/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path='/admin/*' element={
+                <ProtectedRoute>
+                    <AdminPage/>
+                </ProtectedRoute>
+            }/>
+            <Route path="/inst-profile" element={
+                <ProtectedRoute>
+                    <InstProfile/>
+                </ProtectedRoute>
+            }/>
+            <Route path="/inst-profile/all-courses" element={
+                <ProtectedRoute>
+                    <InsCourses/>
+                </ProtectedRoute>
+            }/>
+            <Route path='add-course' element={
+                <ProtectedRoute>
+                    <AddCourseForm/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/course-details/:id' element={
+                <ProtectedRoute>
+                    <CourseDetails/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/cart' element={
+                <ProtectedRoute>
+                    <Cart/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/checkout' element={
+                <ProtectedRoute>
+                    <Checkout/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/my-courses/*' element={
+                <ProtectedRoute>
+                    <MyCourses />
+                </ProtectedRoute>
+            }/>
+            <Route path="/profile" element={
+                <ProtectedRoute>
+                    <UserProfile/>
+                </ProtectedRoute>
+            } />
+            <Route path="videopage" element={
+                <ProtectedRoute>
+                    <VedioPage/>
+                </ProtectedRoute>
+            } />
+            <Route path="/profile/edit" element={
+                <ProtectedRoute>
+                    <EditUserProfile/>
+                </ProtectedRoute>
+            }/>
+            <Route path="/profile/purchase-history" element={
+                <ProtectedRoute>
+                    <PurchaseHistory/>
+                </ProtectedRoute>
+            }/>
+            <Route path="/help-and-support" element={
+                <ProtectedRoute>
+                    <HelpSupport/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/courses' element={
+                <ProtectedRoute>
+                    <Courses />
+                </ProtectedRoute>
+            }/>
          
             <Route path='/*' element={<NotFound/>}/>
         </Routes>
