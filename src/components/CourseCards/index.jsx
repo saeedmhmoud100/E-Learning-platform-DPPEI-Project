@@ -37,7 +37,7 @@ export default function CourseCards({course}) {
                         <h3 className='mb-2 text-truncate'>{course?.title}</h3>
                         <h4 className='text-muted h6 mb-2 text-truncate'>{course?.instructor_data?.title}</h4>
                         <div className="d-flex flex-row mb-2 align-items-center">
-                            <span className='pe-1'>{course.rating_avg ? course.rating_avg : 0}</span>
+                            <span className='pe-1'>{course?.rating_avg ? course.rating_avg : 0}</span>
                             {Array(5).fill(0).map((star, index) => {
                                 if (index < Math.floor(course?.rating_avg)) {
                                     return <i key={index} className="fa-solid fa-star star-icon"></i>;

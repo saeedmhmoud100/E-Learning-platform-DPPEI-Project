@@ -96,12 +96,8 @@ export default function Home() {
         {/* START - THIRD SECTION WITH COURSE CARDS */}
         <div className="container-fluid position-relative p-0">
             <SliderForCourseCards/>
-        <div className="container-fluid position-relative p-0">
-            <SliderForCourseCards/>
         </div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
-
-    </div>
     </div>
 
     </>
