@@ -31,7 +31,7 @@ import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
 import axios from "axios";
-import {getAllCourses, getCourseDetails} from "./store/actions/coursesAction";
+import {getAllCourses, getCourseDetails, getWishlist} from "./store/actions/coursesAction";
 import {useDispatch,useSelector} from "react-redux";
 import CourseCardsLoading from './components/Loading/CourseCardsLoading/CourseCardsLoading';
 import { getToken, setToken } from './hooks/myToken';
@@ -70,8 +70,9 @@ function App() {
     // WHEN COMPONENT FIRST RENDERS, CHECK FOR TOKEN AND GET USER DATA AND COURSES
     useEffect(() => {
         if(getToken()){
-            dispatch(getLoggedUserData(getToken()))
+            dispatch(getLoggedUserData(getToken()));
             dispatch(getAllCourses());
+            dispatch(getWishlist())
         }else{
             navigate('/login');
         }

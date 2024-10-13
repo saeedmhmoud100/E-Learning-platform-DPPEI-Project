@@ -1,7 +1,8 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
+import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST} from '../type'
 import useGetData from '../../ApiHooks/useGetData'
 import usePostData from "../../ApiHooks/usePostData";
 import { GET_THIS_COURSE_INCLUDES } from '../type';
+import useDeleteData from '../../ApiHooks/useDeleteData';
 
 //get all category
 export const getAllCourses = (limit) => async (dispatch) => {
@@ -128,6 +129,54 @@ export const getCourseRequirments = (course_id) => async (dispatch) => {
             type:GET_THIS_COURSE_REQUIRMENTS,
             payload: response,
             loading: true
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + e,
+        })
+    }
+}
+
+export const getWishlist = (token) => async (dispatch) => {
+    try {
+        const response = await useGetData(`wishlist/`);
+        dispatch({
+            type:ADD_TO_WISHLIST,
+            payload: response,
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + e,
+        })
+    }
+}
+
+export const addToWishlist = (course_id) => async (dispatch) => {
+    try {
+        const response = await usePostData(`wishlist/add/`,{course_id});
+        dispatch({
+            type:ADD_TO_WISHLIST,
+            payload: response,
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + e,
+        })
+    }
+}
+
+export const removeFromWishlist = (course_id) => async (dispatch) => {
+    try {
+        const response = await useDeleteData(`wishlist/remove/`,{course_id});
+        dispatch({
+            type:REMOVE_FROM_WISHLIST,
+            payload: response,
         })
 
     } catch (e) {
