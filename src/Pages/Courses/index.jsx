@@ -124,7 +124,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
     <div className='mt-5 mb-5'>
       <div className="container">
         {
-          searchTerm && (<h1 className='py-4'>{filteredCourses.length} results for {searchTerm}</h1> )
+          searchTerm && (<h1 className='py-4'>{filteredCourses.length} results for '{searchTerm}'</h1> )
         }
         <div className='position-relative'>
             <div className='d-flex flex-wrap align-items-center'>
