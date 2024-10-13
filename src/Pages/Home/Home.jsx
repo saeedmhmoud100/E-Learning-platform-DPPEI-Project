@@ -26,7 +26,6 @@ export default function Home() {
             </div>
             <div className="text-cont ps-4">
                 <h2>Welcome back, {userData.username}</h2>
-                <h2>Welcome back, {userData.username}</h2>
                 {/* <a href='#'>add occupations and interest</a> */}
             </div>
         </div>
