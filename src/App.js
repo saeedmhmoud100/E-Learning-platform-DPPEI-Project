@@ -69,102 +69,105 @@ function App() {
     },[]);
 
     useEffect(()=>{
-        if(courses.length > 0 && userData){
+        if(courses?.length > 0 && userData){
             setLoading(false);
             fetchCourseDetails()
         }
     },[courses, userData])
 
     function ProtectedRoute ({children}){
-        if(loading){
-            return <GeneralLoading takeHeight={'vh-100'}/>
-        }
         return getToken() ? children : <Navigate to={'/login'}/>
     }
 
     return (<div className="App">
         <Navbar/>
-        <Routes>
-            <Route path="/" element={
-                <ProtectedRoute>
-                    <Home/>
-                </ProtectedRoute>
-            }/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path='/admin/*' element={
-                <ProtectedRoute>
-                    <AdminPage/>
-                </ProtectedRoute>
-            }/>
-            <Route path="/inst-profile" element={
-                <ProtectedRoute>
-                    <InstProfile/>
-                </ProtectedRoute>
-            }/>
-            <Route path="/inst-profile/all-courses" element={
-                <ProtectedRoute>
-                    <InsCourses/>
-                </ProtectedRoute>
-            }/>
-            <Route path='add-course' element={
-                <ProtectedRoute>
-                    <AddCourseForm/>
-                </ProtectedRoute>
-            }/>
-            <Route path='/course-details/:id' element={
-                <ProtectedRoute>
-                    <CourseDetails/>
-                </ProtectedRoute>
-            }/>
-            <Route path='/cart' element={
-                <ProtectedRoute>
-                    <Cart/>
-                </ProtectedRoute>
-            }/>
-            <Route path='/checkout' element={
-                <ProtectedRoute>
-                    <Checkout/>
-                </ProtectedRoute>
-            }/>
-            <Route path='/my-courses/*' element={
-                <ProtectedRoute>
-                    <MyCourses />
-                </ProtectedRoute>
-            }/>
-            <Route path="/profile" element={
-                <ProtectedRoute>
-                    <UserProfile/>
-                </ProtectedRoute>
-            } />
-            <Route path="videopage" element={
-                <ProtectedRoute>
-                    <VedioPage/>
-                </ProtectedRoute>
-            } />
-            <Route path="/profile/edit" element={
-                <ProtectedRoute>
-                    <EditUserProfile/>
-                </ProtectedRoute>
-            }/>
-            <Route path="/profile/purchase-history" element={
-                <ProtectedRoute>
-                    <PurchaseHistory/>
-                </ProtectedRoute>
-            }/>
-            <Route path="/help-and-support" element={
-                <ProtectedRoute>
-                    <HelpSupport/>
-                </ProtectedRoute>
-            }/>
-            <Route path='/courses' element={
-                <ProtectedRoute>
-                    <Courses coursesWithDetails={coursesWithDetails}/>
-                </ProtectedRoute>
-            }/>
-         
-            <Route path='/*' element={<NotFound/>}/>
-        </Routes>
+        {
+            loading ? (
+                <GeneralLoading takeHeight={'vh-100'}/>
+            ):(
+                <Routes>
+                <Route path="/" element={
+                    <ProtectedRoute>
+                        <Home/>
+                    </ProtectedRoute>
+                }/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path='/admin/*' element={
+                    <ProtectedRoute>
+                        <AdminPage/>
+                    </ProtectedRoute>
+                }/>
+                <Route path="/inst-profile" element={
+                    <ProtectedRoute>
+                        <InstProfile/>
+                    </ProtectedRoute>
+                }/>
+                <Route path="/inst-profile/all-courses" element={
+                    <ProtectedRoute>
+                        <InsCourses/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='add-course' element={
+                    <ProtectedRoute>
+                        <AddCourseForm/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='/course-details/:id' element={
+                    <ProtectedRoute>
+                        <CourseDetails/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='/cart' element={
+                    <ProtectedRoute>
+                        <Cart/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='/checkout' element={
+                    <ProtectedRoute>
+                        <Checkout/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='/my-courses/*' element={
+                    <ProtectedRoute>
+                        <MyCourses />
+                    </ProtectedRoute>
+                }/>
+                <Route path="/profile" element={
+                    <ProtectedRoute>
+                        <UserProfile/>
+                    </ProtectedRoute>
+                } />
+                <Route path="videopage" element={
+                    <ProtectedRoute>
+                        <VedioPage/>
+                    </ProtectedRoute>
+                } />
+                <Route path="/profile/edit" element={
+                    <ProtectedRoute>
+                        <EditUserProfile/>
+                    </ProtectedRoute>
+                }/>
+                <Route path="/profile/purchase-history" element={
+                    <ProtectedRoute>
+                        <PurchaseHistory/>
+                    </ProtectedRoute>
+                }/>
+                <Route path="/help-and-support" element={
+                    <ProtectedRoute>
+                        <HelpSupport/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='/courses' element={
+                    <ProtectedRoute>
+                        <Courses coursesWithDetails={coursesWithDetails}/>
+                    </ProtectedRoute>
+                }/>
+             
+                <Route path='/*' element={<NotFound/>}/>
+            </Routes>
+            )
+        }
         <Footer />
 
         <ToastContainer/>

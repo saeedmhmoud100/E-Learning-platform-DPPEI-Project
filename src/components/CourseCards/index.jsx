@@ -35,7 +35,7 @@ export default function CourseCards({course}) {
                 <div className="course-card">
                     <Link className='text-decoration-none text-dark' to={`/course-details/${course?.id}`}>
                         <h3 className='mb-2 text-truncate'>{course?.title}</h3>
-                        <h4 className='text-muted h6 mb-2 text-truncate'>Course instructor</h4>
+                        <h4 className='text-muted h6 mb-2 text-truncate'>{course?.instructor_data?.title}</h4>
                         <div className="d-flex flex-row mb-2 align-items-center">
                             <span className='pe-1'>5</span>
                             <i className="fa-solid fa-star star-icon"></i>

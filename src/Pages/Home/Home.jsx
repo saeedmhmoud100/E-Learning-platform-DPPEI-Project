@@ -12,7 +12,7 @@ import SliderForCourseCards from '../../components/SliderForCourseCards/SliderFo
 export default function Home() {
 
     const dispatch = useDispatch()
-    const { courses} = useSelector((state) => state.allCourses);
+    const {courses} = useSelector((state) => state.allCourses);
     const {userData} = useSelector(state=>state.user);
 
   return (
@@ -23,7 +23,7 @@ export default function Home() {
         {/* START - FIRST SECTION WITH IMAGES AND WELCOME MESSAGE */}
         <div className="d-flex justify-content-start align-items-center py-3">
             <div className="img-cont">
-            <img src={userData.profile_image} alt="user picture" className='w-100 h-100 rounded-pill ' />
+            <img src={userData.profile_image} alt="user picture" className='w-100 h-100 rounded-circle' />
             </div>
             <div className="text-cont ps-4">
                 <h2>Welcome back, {userData.username}</h2>
@@ -45,33 +45,42 @@ export default function Home() {
         {/* START - SECOND SECTION WITH MY LEARNINGS */}
         <div className="">
             <div className="d-flex justify-content-between align-items-center py-5">
-                <h2 className='fw-bold'>Let's start learning!</h2>
+                <h2 className='fw-bold'>Resume your learning!</h2>
                 <Link to='/my-courses/*'>My learning</Link>
             </div>
             <div className="container-fluid p-0">
                 <div className="row g-3">
-                    <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
-                        <div className="d-flex justify-content-between align-items-center h-100">
-                            <div className="position-relative w-75 h-100">
-                                <div className="overlay-for-home"></div>
-                                <Link to={'/course-details'}>
-                                    <img
-                                        src="/images/coursePhoto.jpg"
-                                        className="w-100 h-100"
-                                        alt="React - The Complete Guide"
-                                    />
-                                </Link>
-                                <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
-                            </div>
-                            <div className="course-text-cont">
-                                <div className="">
-                                    <h3 className='h6 text-muted'>CourseName</h3>
-                                    <h4>1. Chapter</h4>
-                                </div>
-                                <h5 className='h6 text-muted'>Lecture . 6m</h5>
-                            </div>
-                        </div>
-                    </div>  
+                    {
+                        userData.courses_enrolled.length > 0 ? (
+                            userData.courses_enrolled.map((course)=>{
+                                return <div className="col-12 col-md-6 col-lg-4 custom-dimensions">
+                                    <div className="d-flex justify-content-between align-items-center h-100">
+                                        <div className="position-relative w-75 h-100">
+                                            <div className="overlay-for-home"></div>
+                                            <Link to={`/course-details/${course.id}`}>
+                                                <img
+                                                    src={course?.thumbnail_link}
+                                                    className="w-100 h-100"
+                                                    alt={`EduVerse ${course?.title} course`}
+                                                />
+                                            </Link>
+                                            <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
+                                        </div>
+                                        <div className="course-text-cont">
+                                            <div className="">
+                                                <h3 className='h6 text-muted'>{course.title}</h3>
+                                                <h4>1. Chapter</h4>
+                                            </div>
+                                            <h5 className='h6 text-muted'>Lecture . 6m</h5>
+                                        </div>
+                                    </div>
+                                </div>  
+                            })
+                        ):(
+                            <h3>No courses enrolled.<Link to='/courses'> Start learning</Link></h3>
+                        )
+                    }
+                    
 
                 </div>
             </div>

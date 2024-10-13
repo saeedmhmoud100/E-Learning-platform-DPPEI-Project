@@ -63,7 +63,7 @@ export default function Courses({coursesWithDetails}) {
       updatedArray = updatedArray.filter(course => {
         let matchesFilters = true;
         if(ratings && matchesFilters){
-          matchesFilters = course.rating >= ratings;
+          matchesFilters = course.rating_avg >= ratings;
         }
         if(price.length>0 && matchesFilters){
           matchesFilters = course.price >= price[0] && course.price <= price[1];
