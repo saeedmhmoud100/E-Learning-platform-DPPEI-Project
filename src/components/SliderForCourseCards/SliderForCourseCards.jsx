@@ -6,10 +6,13 @@ import Carousel from 'react-multi-carousel';
 import { getAllCourses } from '../../store/actions/coursesAction.js';
 import { Link } from 'react-router-dom';
 import './SliderForCourseCards.css'
+import { addToWishlist, getWishlist, removeFromWishlist } from '../../store/actions/coursesAction';
 
 export default function SliderForCourseCards() {
 
     const { courses, loading } = useSelector((state) => state.allCourses);
+    const {wishlist} = useSelector(state=>state.allCourses);
+    const dispatch = useDispatch()
 
     const responsive = {
         large: {
@@ -26,9 +29,20 @@ export default function SliderForCourseCards() {
         },
     };
     
-    const [addedToWishlist, setAddToWishlist] = useState(false);
-    function addToWishlist(){
-        setAddToWishlist(!addedToWishlist);
+    async function handleWishlistBtn(e,id){
+        if(e.target.classList.contains('fa-solid')){
+            try {
+                await dispatch(removeFromWishlist(id)); 
+            } catch (error) {
+                console.error("Error removing wishlist:", error);
+            }
+        }else{
+            try {
+                await dispatch(addToWishlist(id)); 
+            } catch (error) {
+                console.error("Error adding to wishlist:", error);
+            }
+        }
     }
 
   return (
@@ -47,7 +61,7 @@ export default function SliderForCourseCards() {
                         <div key={index} className={`d-flex justify-content-center align-items-center flex-column w-100 h-100 px-4`}>
                         <div className="position-relative w-100 h-50">
                             <div className='overlay-for-course-cards'></div>
-                            <i class={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart add-to-wishlist-icon`} onClick={addToWishlist}></i>
+                            <i class={`${wishlist.some(item => item.course.id == course.id) ? 'fa-solid' : 'fa-regular'} fa-heart add-to-wishlist-icon`} onClick={(e)=>handleWishlistBtn(e,course.id)}></i>
                             <div className='course-img-cont'>
                                 <Link to={`/course-details/`}>
                                     <img
@@ -65,12 +79,12 @@ export default function SliderForCourseCards() {
                                 <div className="d-flex flex-row mb-2 align-items-center">
                                     <span className='pe-1'>{course.rating_avg ? course.rating_avg : 0}</span>
                                     {Array(5).fill(0).map((star, index) => {
-                                        if (index < Math.floor(course?.rating_avg)) {
+                                        if (index < course?.rating_avg) {
                                             return <i key={index} className="fa-solid fa-star star-icon"></i>;
                                         } else if (index < course?.rating_avg) {
                                             return <i key={index} className="fa-regular fa-star-half-stroke star-icon"></i>;
                                         } else {
-                                            return <i key={index} className="fa-regular fa-star star-icon"></i>; // Empty star
+                                            return <i key={index} className="fa-regular fa-star star-icon"></i>;
                                         }
                                     })}
                                 </div>
