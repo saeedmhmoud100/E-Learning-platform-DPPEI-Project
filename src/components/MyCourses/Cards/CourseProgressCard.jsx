@@ -1,9 +1,12 @@
 import './style.css';
 import {Link} from "react-router-dom";
-
+import {motion} from "framer-motion";
 function CourseProgressCard({ courseName, instructorName, image }) {
     return (
-        <div className="col-sm-6 col-md-4 col-lg-3">
+        <motion.div initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: false }}
+                    className="col-sm-6 col-md-4 col-lg-3">
             <div className="card bg-transparent h-100" style={{width:90+'%'}}>
                 <Link to={'/course-details'}>
                     <div className="img">
@@ -19,7 +22,7 @@ function CourseProgressCard({ courseName, instructorName, image }) {
                     <p>20% completed</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

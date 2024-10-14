@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
-
+import {motion} from "framer-motion";
 export const ArchivedCourseCard = ({course,progress}) => {
 
     const [addedToWishlist, setAddToWishlist] = useState(false);
@@ -9,7 +9,9 @@ export const ArchivedCourseCard = ({course,progress}) => {
         setAddToWishlist(!addedToWishlist);
     }
     return (
-        <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
+        <motion.div initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: false }} className="col-sm-6 col-md-4 col-lg-3 mb-3">
 
             <div className="card custom-card">
                 <div className="wishlist-icon" onClick={addToWishlist}>
@@ -31,6 +33,6 @@ export const ArchivedCourseCard = ({course,progress}) => {
                     <p>Continue Course</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
