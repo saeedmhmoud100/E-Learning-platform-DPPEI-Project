@@ -48,7 +48,7 @@ export default function Home() {
                             userData.courses_enrolled.map((course)=>{
                                 return(
                                 <>
-                                <div className="d-flex justify-content-between align-items-center py-5">
+                                <div key={course.id} className="d-flex justify-content-between align-items-center py-5">
                                     <h2 className='fw-bold'>Resume your learning!</h2>
                                     <Link to='/my-courses/*'>My learning</Link>
                                 </div>

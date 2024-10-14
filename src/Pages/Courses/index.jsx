@@ -6,6 +6,7 @@ import FilterCourseSection from '../../components/FilterCourseSection';
 import {useDispatch, useSelector} from "react-redux";
 import { getCourseDetails } from '../../store/actions/coursesAction';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
+import { number } from 'joi';
 
 export default function Courses({coursesWithDetails, categoryInput, updateCategory}) {
 
@@ -22,6 +23,9 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
   const [price, setPrice] = useState([]);
   const [categories, setCategories] = useState('');
   const [video_Duration, setVideo_Duration] = useState([]);
+  let [numberOfPages,setNumberOfPages] = useState(0);
+  const coursesPerPage = 3;
+  let [currentPage, setCurrentPage] = useState(1);
 
   // HANDLING WHEN USER CHOOSES FILTER
   const handleUserFilterInput = (option, filterName, index)=>{
@@ -120,6 +124,33 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
       setDisplayFilterMenu(false);
   }
 
+  // FUNCTION HANDLES PAGINATION
+  function handlePagination(btnRef){
+    if (btnRef === 'Previous') {
+        let newPage = currentPage;
+        newPage -= 1;
+        setCurrentPage(newPage)
+    } else if (btnRef === 'Next'){
+      let newPage = currentPage;
+      newPage += 1;
+      setCurrentPage(newPage)
+    } else{
+      let newPage = currentPage;
+      newPage = btnRef;
+      setCurrentPage(newPage);
+    }
+  }
+
+  // UPDATING NUMBER OF PAGES WHEN FILTEREDCOURSES ARRAY IS UPDATED
+  useEffect(()=>{
+    if (filteredCourses.length === 0) {
+      setNumberOfPages(0);
+    } else {
+      let newNumberOfPages = Math.ceil(filteredCourses?.length / 3);
+      setNumberOfPages(newNumberOfPages);
+    }
+  },[filteredCourses])
+
   return (
     <div className='mt-5 mb-5'>
       <div className="container">
@@ -176,7 +207,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
-                              filteredCourses.map((course, index) => {
+                              filteredCourses.slice((currentPage-1)*3,(currentPage-1)*3+3).map((course, index) => {
                                 return <CourseCards key={index} course={course} />;
                               })
                             ) : (
@@ -208,7 +239,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                             <CourseCardsLoading />
                           ) : (
                             filteredCourses.length > 0 ? (
-                              filteredCourses.map((course, index) => {
+                              filteredCourses.slice((currentPage-1)*3,(currentPage-1)*3+3).map((course, index) => {
                                 return <CourseCards key={index} course={course} />;
                               })
                             ) : (
@@ -221,7 +252,48 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
               </div>
           </div>
         )}
-        
+        {
+          filteredCourses.length!=0  && (
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  {
+                    currentPage != 1 ? (
+                      <a className="page-btn" aria-label="Previous" onClick={() => handlePagination('Previous')}>
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    ):(
+                      <a className="page-btn opacity-25" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    )
+                  }
+                </li>
+                {numberOfPages > 1 && (
+                  Array(numberOfPages)
+                    .fill().map((page, i) => (
+                      <li key={i} className="page-item">
+                        <a className="page-btn" onClick={()=>{handlePagination(i+1)}}>{i + 1}</a>
+                      </li>
+                    ))
+                )}
+                <li class="page-item">
+                {
+                    currentPage != numberOfPages ? (
+                      <a className="page-btn" aria-label="Next" onClick={()=>handlePagination('Next')}>
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    ):(
+                      <a className="page-btn opacity-25" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    )
+                }
+                </li>
+              </ul>
+            </nav>
+          )
+        }
       </div>
     </div>
   )

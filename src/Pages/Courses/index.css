@@ -75,6 +75,20 @@
     color: var(--thirdColor);
 }
 
+.page-btn{
+    color: var(--mainColor);
+    background-color: transparent;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+
+.page-btn:hover{
+    color: white;
+    background-color: var(--thirdColor);
+}
+
 
 @media (width <= 370px){
     .show-filter-menu-to-side{

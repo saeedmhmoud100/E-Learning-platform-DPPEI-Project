@@ -44,7 +44,7 @@ function App() {
     const {courses, loading} = useSelector(state=>state.allCourses);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [pageLoading, setPageLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true);
     const [coursesWithDetails,setCoursesWithDetails] = useState([]);
     const [categoryInput,setCategoryInput] = useState('');
 
@@ -69,13 +69,16 @@ function App() {
 
     // WHEN COMPONENT FIRST RENDERS, CHECK FOR TOKEN AND GET USER DATA AND COURSES
     useEffect(() => {
-        if(getToken()){
-            dispatch(getLoggedUserData(getToken()));
-            dispatch(getAllCourses());
-            dispatch(getWishlist())
-        }else{
-            navigate('/login');
+        async function fetchData(){
+            if(getToken()){
+                await dispatch(getLoggedUserData(getToken()));
+                await dispatch(getAllCourses());
+                await dispatch(getWishlist())
+            }else{
+                navigate('/login');
+            }
         }
+        fetchData()
     },[]);
 
     // WHEN ALL COURSES FETCHED AND USER DATA, GET DETAILS FOR EACH COURSE AND SET LOADING FALSE

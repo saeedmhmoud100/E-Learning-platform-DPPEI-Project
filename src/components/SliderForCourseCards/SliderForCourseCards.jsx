@@ -47,17 +47,18 @@ export default function SliderForCourseCards() {
 
   return (
     <div>
-        <Carousel 
+        {
+            loading ? (
+                <CourseCardsLoading /> 
+            ):(
+                <Carousel 
                 responsive={responsive} 
                 keyBoardControl={true}
                 containerClass="carousel-container" 
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {
-                    loading 
-                    ? <CourseCardsLoading /> 
-                    : courses?.map((course, index) => (
+                 {courses?.map((course, index) => (
                         <div key={index} className={`d-flex justify-content-center align-items-center flex-column w-100 h-100 px-4`}>
                         <div className="position-relative w-100 h-50">
                             <div className='overlay-for-course-cards'></div>
@@ -93,9 +94,10 @@ export default function SliderForCourseCards() {
                             </Link>
                         </div>
                     </div>
-                    ))
-                }
+                    ))}
             </Carousel>
+            )
+        }
     </div>
   )
 }
