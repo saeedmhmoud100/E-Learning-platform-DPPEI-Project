@@ -29,7 +29,7 @@ function CourseSidebar({ courseId }) {
     );
 }
 
-function Section({ title, total_duration, lectures_count }) {
+function Section({ title, total_duration, lectures }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -42,7 +42,7 @@ function Section({ title, total_duration, lectures_count }) {
                 {title} <span className="caret">{isOpen ? '▼' : '▲'}</span>
             </h3>
             <p className="section-progress"> {total_duration}</p>
-            {isOpen && <Dropdown items={lectures_count} />}
+            {isOpen && <Dropdown items={lectures} />}
         </div>
     );
 }
@@ -51,7 +51,7 @@ function Dropdown({ items }) {
     return (
         <ul className="section-items dropdown bg-light">
             {items.map((item, index) => (
-                <SectionItem key={index}>{item}</SectionItem>
+                <SectionItem key={index}>{item.title}</SectionItem>
             ))}
         </ul>
     );
