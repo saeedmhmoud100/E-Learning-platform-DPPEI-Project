@@ -67,17 +67,18 @@ function App() {
         }
     };
 
+    async function fetchData(){
+        if(getToken()){
+            await dispatch(getLoggedUserData(getToken()));
+            await dispatch(getAllCourses());
+            await dispatch(getWishlist())
+        }else{
+            navigate('/login');
+        }
+    }
+
     // WHEN COMPONENT FIRST RENDERS, CHECK FOR TOKEN AND GET USER DATA AND COURSES
     useEffect(() => {
-        async function fetchData(){
-            if(getToken()){
-                await dispatch(getLoggedUserData(getToken()));
-                await dispatch(getAllCourses());
-                await dispatch(getWishlist())
-            }else{
-                navigate('/login');
-            }
-        }
         fetchData()
     },[]);
 
@@ -113,7 +114,7 @@ function App() {
                     </ProtectedRoute>
                 }/>
                 <Route path="/register" element={<Register/>}/>
-                <Route path="/login" element={<Login/>}/>
+                <Route path="/login" element={<Login fetchData={fetchData}/>}/>
                 <Route path='/admin/*' element={
                     <ProtectedRoute>
                         <AdminPage/>

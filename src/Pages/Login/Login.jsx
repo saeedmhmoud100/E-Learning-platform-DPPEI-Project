@@ -8,7 +8,7 @@ import { errorNotification } from '../../hooks/Notification';
 import Joi, { valid } from 'joi';
 import { getUserData } from '../../store/actions/userActions';
 
-export default function Login() {
+export default function Login({fetchData}) {
     const dispatch = useDispatch();
     const [userData, setUserData] = useState({
         email : '',
@@ -62,6 +62,7 @@ export default function Login() {
             errorNotification(error.response.data.detail);
         }else{
             setToken(token);
+            fetchData();
             navigate('/')
         }
     }
