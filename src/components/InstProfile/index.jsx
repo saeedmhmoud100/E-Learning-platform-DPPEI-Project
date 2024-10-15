@@ -1,13 +1,13 @@
-import React, {useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 /* import insPhoto from "./images/instractorPhoto.png";
 import Courses from "./Courses"; */
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import {getInstructorProfile} from '../../store/actions/instructorAction'
+import { getInstructorProfile } from '../../store/actions/instructorAction'
 
 import "./style.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const open = {
     overflow: "hidden",
@@ -19,31 +19,29 @@ const imageStyle = {
     width: '150px',
     height: '150px',
     objectFit: 'cover',
-  };
+};
 
 export default function InstProfile() {
-    const {id} = useParams();
+    const { id } = useParams();
     let [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
-    const {instructor} = useSelector(state => state.instructor)
+    const { instructor } = useSelector(state => state.instructor)
     useEffect(() => {
         const fetchData = async () => {
-          if (id) {           
-             await dispatch(getInstructorProfile(id)); 
-    
-            
-        }
+            if (id) {
+                await dispatch(getInstructorProfile(id));
+            }
         };
         fetchData();
-}, [id, dispatch]);
+    }, [id, dispatch]);
 
 
 
 
 
 
-    
-    
+
+
     return (
         <div className="container w-85 mt-5  ">
             <div className="container w-85 d-flex ">
@@ -93,16 +91,16 @@ export default function InstProfile() {
                                 {isOpen ? "read less..." : "read more.."}
                             </button>
                         </div>
-                        {}
+                        { }
                         <Link to='/inst-profile/all-courses' className='text-decoration-none'>
-                            <button  className='btn btn-dark m-auto d-block my-4'>All Courses</button>
+                            <button className='btn btn-dark m-auto d-block my-4'>All Courses</button>
                         </Link>
                     </div>
                 </div>
 
                 <div className="col-md-4  ">
                     <div className="">
-                        <img src={instructor?.user?.profile_image} className="rounded-circle" style={imageStyle} alt="ins-photo"/>
+                        <img src={instructor?.user?.profile_image} className="rounded-circle" style={imageStyle} alt="ins-photo" />
                     </div>
                     <div className="social-btn d-flex flex-wrap  ">
                         <div className=" w-100 ms-3 mt-2 border-1 mb-2   ">
