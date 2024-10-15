@@ -86,7 +86,7 @@ export const Navbar = ({updateCategory}) => {
                         {getToken() && (
                             <>
                             <li className="nav-item me-3 ms-md-3">
-                                <Link className="nav-link active" aria-current="page" to="/"><i
+                                <Link className="nav-link active" aria-current="page" to="/my-courses/wishlist"><i
                                     className="fa-regular fa-heart"></i></Link>
                             </li>
                             <li className="nav-item me-3 ">

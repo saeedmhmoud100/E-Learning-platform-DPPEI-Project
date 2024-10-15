@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import GeneralLoading from "../../Loading/GeneralLoading/GeneralLoading";
 
 export default function Wishlist() {
-    const { userData:{wishlist:courses},loading } = useSelector((state) => state.user);
+    const { userData:{wishlist},loading } = useSelector((state) => state.user);
 
 
 
@@ -29,7 +29,7 @@ export default function Wishlist() {
                 <div className="row my-4 g-2">
                     {
                         loading ? <GeneralLoading/> :
-                        courses?.length > 0 ? courses?.map(({course}, index) => (
+                        wishlist?.length > 0 ? wishlist?.map(({course}, index) => (
                             <WishlistCard key={index} course={course}/>
                         )) : <h1>No courses in wishlist</h1>
                     }

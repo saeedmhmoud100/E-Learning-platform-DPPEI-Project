@@ -31,12 +31,12 @@ import PurchaseHistory from "./Pages/PurchaseHistory/PurchaseHistory";
 import HelpSupport from "./Pages/HelpSupport/HelpSupport";
 import InsCourses from "./Pages/InsCourses";
 import axios from "axios";
-import {getAllCourses, getCourseDetails, getWishlist} from "./store/actions/coursesAction";
+import {getAllCourses, getCourseDetails} from "./store/actions/coursesAction";
 import {useDispatch,useSelector} from "react-redux";
 import CourseCardsLoading from './components/Loading/CourseCardsLoading/CourseCardsLoading';
 import { getToken, setToken } from './hooks/myToken';
 import useGetData from './ApiHooks/useGetData';
-import { getLoggedUserData } from './store/actions/userActions';
+import { getLoggedUserData, getWishlist } from './store/actions/userActions';
 import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 
 function App() {

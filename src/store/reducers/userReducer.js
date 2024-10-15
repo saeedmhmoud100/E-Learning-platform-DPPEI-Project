@@ -1,4 +1,4 @@
-import {GET_ERROR, GET_LOGGED_USER_DATA, GET_USER_DATA, LOGOUT, SET_USER_LOADING} from "../type";
+import {GET_ERROR, GET_LOGGED_USER_DATA, GET_USER_DATA, LOGOUT, SET_USER_LOADING, ADD_TO_WISHLIST, GET_WISHLIST, REMOVE_FROM_WISHLIST} from "../type";
 
 const initialState = {
     userData : {},
@@ -38,6 +38,30 @@ export const userReducer = (state = initialState, action)=>{
                 toke : '',
                 error : '',
             }
+            case GET_WISHLIST:
+                return{
+                    ...state,
+                    userData : {
+                        ...state.userData,
+                        wishlist : action.payload,
+                    }
+                }
+            case ADD_TO_WISHLIST:
+                return{
+                    ...state,
+                    userData: {
+                        ...state.userData,
+                        wishlist: action.payload, 
+                    }
+                }
+            case REMOVE_FROM_WISHLIST:
+                return{
+                    ...state,
+                    userData: {
+                        ...state.userData,
+                        wishlist: action.payload,
+                    },
+                }
         case GET_ERROR:
             return{
                 ...state,
