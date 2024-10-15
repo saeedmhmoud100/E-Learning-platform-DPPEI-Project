@@ -8,18 +8,7 @@ import { getLoggedUserData } from '../../store/actions/userActions';
 function EditUserProfile() {
     const [phone, setPhone] = useState('');
 
-    const dispatch = useDispatch();
-    const {profile,loading} = useSelector((state)=>state.profile);
-    // const {userData} = useSelector(state=>state.user);
-
-    useEffect(()=>{
-        dispatch(getProfileData(16));
-        console.log(profile);
-    },[])
-    // useEffect(() => {
-    //     dispatch(getLoggedUserData())
-    //     console.log(userData);
-    // })
+    const {userData,loading} = useSelector((state)=>state.user);
 
     return (<div className="container my-5">
         <div className="row my-5 justify-content-center">
@@ -27,7 +16,7 @@ function EditUserProfile() {
                 <h1 className="mb-4">Edit Profile</h1>
                 <div className='border h-50 d-flex flex-column align-items-center justify-content-center'>
                     <div className="img h-100 w-50 bg-primary rounded-pill my-5">
-                        <img src={profile.profile_image} alt="user picture" className='h-100 w-100 rounded-pill' />
+                        <img src={userData.profile_image} alt="user picture" className='h-100 w-100 rounded-pill' />
                     </div>
                     <div className="uploadImg w-50 mb-5">
                         <input class="form-control" type="file" id="formFile" />
@@ -35,16 +24,16 @@ function EditUserProfile() {
                 </div>
                 <div className="row mt-4 g-4">
                     <div className="col-md-6">
-                        <label className='form-label' htmlFor="first">First Name:</label>
-                        <input className='form-control' type="text" id='first' value={'John'} />
+                        <label className='form-label' htmlFor="first">User Name:</label>
+                        <input className='form-control' type="text" id='first' value={userData.userName} />
                     </div>
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                         <label className='form-label' htmlFor="last">Last Name:</label>
                         <input className='form-control' type="text" id='last' value={'Doe'} />
-                    </div>
+                    </div> */}
                     <div className="col-md-6">
                         <label className='form-label' htmlFor="email">Email Address:</label>
-                        <input className='form-control' type="text" id='email' value={profile.email} />
+                        <input className='form-control' type="text" id='email' value={userData.email} />
                     </div>
                     <div className="col-md-6">
                         <label className='form-label' htmlFor="birth">Birth Date:</label>
@@ -68,7 +57,7 @@ function EditUserProfile() {
                     </div>
                     <div className="col-md-12">
                     <label className='form-label' htmlFor="bio">Bio:</label>
-                    <textarea className='form-control' rows={5} id='bio' value={profile.description} />
+                    <textarea className='form-control' rows={5} id='bio' value={userData.description} />
                     </div>
                 </div>
                 <div className="safeBtn mt-5 h-25 d-flex">

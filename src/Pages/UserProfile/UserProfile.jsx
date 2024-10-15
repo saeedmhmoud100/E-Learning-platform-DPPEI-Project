@@ -9,8 +9,7 @@ import GeneralLoading from '../../components/Loading/GeneralLoading/GeneralLoadi
 import { motion } from "framer-motion"
 function UserProfile() {
 
-    const dispatch = useDispatch();
-    const {profile,loading} = useSelector((state)=>state.profile);
+    const {userData,loading} = useSelector((state)=>state.user);
     
     const images = [
         '/images/certificate.png',
@@ -25,10 +24,6 @@ function UserProfile() {
         '/images/certificate.png',
         '/images/certificate.png',
     ]
-    useEffect(()=>{
-        dispatch(getProfileData(16));
-        // console.log(profile);
-    },[])
     
     return (
         <>{loading==false?<><div className="container my-5">
@@ -50,13 +45,13 @@ function UserProfile() {
             >
                 <div className="col-md-3">
                     <div className="img rounded-pill">
-                        <img src={profile.profile_image} alt="user picture" className='w-100 rounded-pill ' />
+                        <img src={userData.profile_image} alt="user picture" className='w-100 rounded-pill ' />
                     </div>
                 </div>
                 <div className="col-md-4">
                     <div className="userName">
-                        <h2>{profile.username}</h2>
-                        <p>{profile.description}</p>
+                        <h2>{userData.username}</h2>
+                        <p>{userData.description}</p>
                         <div className='socialLinks'>
                             <i className="socialIcon fa-brands fa-linkedin"></i>
                             <i className="socialIcon fa-brands fa-github"></i>
@@ -74,7 +69,7 @@ function UserProfile() {
                     <h1 className='text-center mb-4'>My Courses</h1>
                     <Link className='seeAll' to={'/profile/courses'}>See All<i className="fa-solid fa-chevron-right fs-6"></i></Link>
                 </div>
-                {profile.courses_enrolled.map((course,i)=>(<CourseProgressCard key={i} courseName={course.title} instructorName={course.instructor} image={course.thumbnail_link} />))}
+                {userData.courses_enrolled.map((course,i)=>(<CourseProgressCard key={i} courseName={course.title} instructorName={course.instructor} image={course.thumbnail_link} />))}
                 {/* <CourseProgressCard courseName={'Advanced React'} instructorName={'Jane Smith'} progress={50} />
                 <CourseProgressCard courseName={'JavaScript Essentials'} instructorName={'Mark Lee'} progress={80} />
                 <CourseProgressCard courseName={'CSS Mastery'} instructorName={'Sarah Jones'} progress={95} /> */}
