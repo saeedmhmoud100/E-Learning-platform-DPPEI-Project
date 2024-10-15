@@ -13,8 +13,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
   const {searchTerm} = useSelector(state => state.searchTerm);
   const {userData} = useSelector(state=>state.user);
   const {courses, loading} = useSelector(state => state.allCourses);
-  const [displayDropdown, setDisplayDropdown] = useState(false);
-  const [sortType, setSortType] = useState('Most Relevant');
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filtersCleared, setFiltersCleared] = useState(false);
@@ -24,7 +22,6 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
   const [categories, setCategories] = useState('');
   const [video_Duration, setVideo_Duration] = useState([]);
   let [numberOfPages,setNumberOfPages] = useState(0);
-  const coursesPerPage = 3;
   let [currentPage, setCurrentPage] = useState(1);
 
   // HANDLING WHEN USER CHOOSES FILTER
@@ -159,29 +156,20 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
         }
         <div className='position-relative'>
             <div className='d-flex flex-wrap align-items-center'>
-                <button className={`sort-button-style mb-2 ${displayDropdown && 'change-btn-style'}`} onClick={()=>{
-                    setDisplayDropdown(!displayDropdown)}}>
-                        Sort by {sortType}
-                        <i class="fa-solid fa-chevron-down ms-2"></i></button>
-                <button className={`filter-button-style mb-2 d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
+                <button className={`filter-button-style me-2 d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
                     setDisplayFilterMenu(!displayFilterMenu)}}>
                         Filters</button>
-                <button className='clear-filter-btn' onClick={()=>{handleClearFilters()}}>
+                {
+                  ratings || price.length > 0 || categories || video_Duration.length > 0 ? (
+                    <button className='clear-filter-btn-active me-2' onClick={()=>{handleClearFilters()}}>
                         Clear filters</button>
+                  ):(
+                    <button className='clear-filter-btn-non-active opacity-25 me-2' cursor='none'>
+                        Clear filters</button>
+                  )
+                }
             </div>
             
-            
-            {/* DISPLAY DROPDOWN CONDITION */}
-            {displayDropdown && (<ul className='dropdown-style'>
-                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>{
-                    setSortType('Highest rated');
-                    setDisplayDropdown(!displayDropdown);
-                    }}>Highest rated</li>
-                <li className='list-style-none p-2 text-center w-100' role='button' onClick={()=>
-                    {setSortType('Newest');
-                    setDisplayDropdown(!displayDropdown);
-                    }}>Newest</li>
-            </ul>)}
         </div>
         <hr />
 
@@ -211,7 +199,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                                 return <CourseCards key={index} course={course} />;
                               })
                             ) : (
-                              <div>Course not Found</div>
+                              <div className='text-center fs-2'>Course not Found</div>
                             )
                           )
                         }
@@ -243,7 +231,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                                 return <CourseCards key={index} course={course} />;
                               })
                             ) : (
-                              <div>Course not Found</div>
+                              <div className='text-center fs-2'>Course not Found</div>
                             )
                           )
                         }

@@ -44,42 +44,43 @@ export default function Home() {
         {/* START - SECOND SECTION WITH MY LEARNINGS */}
         <div className="">
                     {
-                        userData?.courses_enrolled?.length > 0 ? (
-                            userData.courses_enrolled.map((course)=>{
-                                return(
-                                <>
-                                <div key={course.id} className="d-flex justify-content-between align-items-center py-5">
+                        userData?.courses_enrolled?.length > 0 ? (<>
+                            <div className="d-flex justify-content-between align-items-center py-5">
                                     <h2 className='fw-bold'>Resume your learning!</h2>
                                     <Link to='/my-courses/*'>My learning</Link>
-                                </div>
-                                <div className="container-fluid p-0">
-                                <div className="row g-3">
+                            </div>
+                            <div className="container-fluid p-0">
+                            <div className="row g-3">
+                            {userData.courses_enrolled.map((course)=>{
+                                return(
+                                <>
                                 <div key={course.id} className="col-12 col-md-6 col-lg-4 custom-dimensions">
                                     <div className="d-flex justify-content-between align-items-center h-100">
                                         <div className="position-relative w-75 h-100">
                                             <div className="overlay-for-home"></div>
-                                            <Link to={`/course-details/${course.id}`}>
+                                            <Link to={`/videopage/${course?.id}`}>
                                                 <img
                                                     src={course?.thumbnail_link}
                                                     className="w-100 h-100"
                                                     alt={`EduVerse ${course?.title} course`}
                                                 />
                                             </Link>
-                                            <button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button>
+                                            <Link to={`/videopage/${course?.id}`}><button className="play-btn-style d-flex justify-content-center align-items-center"><i className="fa-solid fa-play "></i></button></Link>
                                         </div>
                                         <div className="course-text-cont">
                                             <div className="">
                                                 <h3 className='h6 text-muted'>{course.title}</h3>
-                                                <h4>1. Chapter</h4>
+                                                <h4>1. Chapter 1</h4>
                                             </div>
-                                            <h5 className='h6 text-muted'>Lecture . 6m</h5>
+                                            <h5 className='h6 text-muted'>Lecture . {course?.total_duration}</h5>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                </div>
                                 </>  
-                            )})
+                            )})}
+                            </div>
+                            </div>
+                            </>
                         ):(
                             <h3 className='text-center p-4'>It seems you have yet to explore our courses.<Link to='/courses' className='my-learning-btn'> Start learning!</Link></h3>
                         )
