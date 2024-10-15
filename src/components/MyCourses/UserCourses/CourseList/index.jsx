@@ -17,6 +17,10 @@ function CoursesList() {
                             <CourseProgressCard
                                 key={index}
                                 course={course}
+                                instructorName={course.instructor_data.username}
+                                courseName={course.title}
+                                image={course.thumbnail_link}
+                                courseDescription={course.description}
                                 progress={Math.trunc(Math.random() * 101)}
                             />
                         )) : <h3 align='center'>No courses enrolled</h3>
