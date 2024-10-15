@@ -118,6 +118,11 @@ export const Navbar = ({updateCategory}) => {
                                     </li>
                                     <li><Link className="dropdown-item" to="/my-courses">My
                                         Courses</Link></li>
+                                        {
+                                            userData?.is_admin && (
+                                                <li><Link className="dropdown-item" to="/admin">Admin</Link></li>
+                                            )
+                                        }
                                     <li><Link className="dropdown-item"
                                               to="/profile/purchase-history">Purchase History</Link></li>
                                     <li onClick={logout}><Link className="dropdown-item" to="/login">Logout</Link></li>
