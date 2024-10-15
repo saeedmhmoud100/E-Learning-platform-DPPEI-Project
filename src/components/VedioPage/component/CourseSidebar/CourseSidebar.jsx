@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourseSections } from '../../../../store/actions/courseSectionsActions'; // Update the import path as needed
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 function CourseSidebar({ courseId }) {
     const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function Dropdown({ items }) {
 }
 
 function SectionItem({ children }) {
-    return <li className="section-item">{children}</li>;
+    return <li className="section-item"><Link >{children}</Link></li>;
 }
 
 export default CourseSidebar;
