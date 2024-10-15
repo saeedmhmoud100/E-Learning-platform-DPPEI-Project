@@ -1,18 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileData } from '../../store/actions/profileAction';
+import { getLoggedUserData } from '../../store/actions/userActions';
 function EditUserProfile() {
     const [phone, setPhone] = useState('');
+
+    const dispatch = useDispatch();
+    const {profile,loading} = useSelector((state)=>state.profile);
+    // const {userData} = useSelector(state=>state.user);
+
+    useEffect(()=>{
+        dispatch(getProfileData(16));
+        console.log(profile);
+    },[])
+    // useEffect(() => {
+    //     dispatch(getLoggedUserData())
+    //     console.log(userData);
+    // })
+
     return (<div className="container my-5">
         <div className="row my-5 justify-content-center">
             <div className="col-md-8 bg-white p-5 d-flex flex-column my-3">
                 <h1 className="mb-4">Edit Profile</h1>
                 <div className='border h-50 d-flex flex-column align-items-center justify-content-center'>
-                    <div className="img h-75">
-                        <img src="/images/pfp.png" alt="user picture" className='h-100' />
+                    <div className="img h-100 w-50 bg-primary rounded-pill my-5">
+                        <img src={profile.profile_image} alt="user picture" className='h-100 w-100 rounded-pill' />
                     </div>
-                    <div className="uploadImg w-50">
+                    <div className="uploadImg w-50 mb-5">
                         <input class="form-control" type="file" id="formFile" />
                     </div>
                 </div>
@@ -27,7 +44,7 @@ function EditUserProfile() {
                     </div>
                     <div className="col-md-6">
                         <label className='form-label' htmlFor="email">Email Address:</label>
-                        <input className='form-control' type="text" id='email' value={'johndoe@gmail.com'} />
+                        <input className='form-control' type="text" id='email' value={profile.email} />
                     </div>
                     <div className="col-md-6">
                         <label className='form-label' htmlFor="birth">Birth Date:</label>
@@ -51,7 +68,7 @@ function EditUserProfile() {
                     </div>
                     <div className="col-md-12">
                     <label className='form-label' htmlFor="bio">Bio:</label>
-                    <textarea className='form-control' rows={5} id='bio' value={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorum consequuntur aliquid architecto culpa beatae.'} />
+                    <textarea className='form-control' rows={5} id='bio' value={profile.description} />
                     </div>
                 </div>
                 <div className="safeBtn mt-5 h-25 d-flex">
