@@ -43,7 +43,7 @@ function PurchaseHistory() {
                     <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Course Name</th>
+                            {/* <th scope="col">Course Name</th> */}
                             <th scope="col">Date</th>
                             <th scope="col">Total Price</th>
                             <th scope="col">Payment Type</th>
@@ -56,7 +56,7 @@ function PurchaseHistory() {
                         {orders.results.map((order, i) => (
                             <tr key={i}>
                                 <th scope="row"><i className="fa-solid fa-cart-shopping"></i></th>
-                                <td>{order.courseName}</td>
+                                {/* <td>{order.courseName}</td> */}
                                 <td>{formatDate(order.created_at)}</td>
                                 <td>{order.total_price}</td>
                                 <td>{order.payment_method}</td>
