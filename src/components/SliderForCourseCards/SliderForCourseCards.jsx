@@ -7,6 +7,7 @@ import { getAllCourses } from '../../store/actions/coursesAction.js';
 import { Link } from 'react-router-dom';
 import './SliderForCourseCards.css'
 import { addToWishlist, getWishlist, removeFromWishlist } from '../../store/actions/userActions';
+import { motion } from 'framer-motion';
 
 export default function SliderForCourseCards() {
 
@@ -31,12 +32,14 @@ export default function SliderForCourseCards() {
     
     async function handleWishlistBtn(e,id){
         if(e.target.classList.contains('fa-solid')){
+            e.target.classList.replace('fa-solid','fa-regular');
             try {
                 await dispatch(removeFromWishlist(id)); 
             } catch (error) {
                 console.error("Error removing wishlist:", error);
             }
         }else{
+            e.target.classList.replace('fa-regular','fa-solid');
             try {
                 await dispatch(addToWishlist(id)); 
             } catch (error) {
@@ -46,7 +49,10 @@ export default function SliderForCourseCards() {
     }
 
   return (
-    <div>
+    <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false }}>
         {
             loading ? (
                 <CourseCardsLoading /> 
@@ -58,7 +64,7 @@ export default function SliderForCourseCards() {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                 {courses?.map((product, index) => (
+                 {courses?.slice(0,4).map((product, index) => (
                         <div key={index} className={`d-flex justify-content-center align-items-center flex-column w-100 h-100 px-4`}>
                         <div className="position-relative w-100 h-50">
                             <div className='overlay-for-course-cards'></div>
@@ -98,6 +104,6 @@ export default function SliderForCourseCards() {
             </Carousel>
             )
         }
-    </div>
+    </motion.div>
   )
 }

@@ -92,12 +92,31 @@
     padding: 10px;
     cursor: pointer;
     transition: all 0.5s;
-    border-radius: 10px;
+}
+
+.page-btn-active{
+    color: var(--mainColor);
+    background-color: transparent;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.page-btn-active::after{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 0.1rem;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--mainColor);
 }
 
 .page-btn:hover{
     color: white;
-    background-color: var(--thirdColor);
+    background-color: var(--mainColor);
 }
 
 

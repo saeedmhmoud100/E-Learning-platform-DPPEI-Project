@@ -51,7 +51,7 @@ export default function Home() {
                             </div>
                             <div className="container-fluid p-0">
                             <div className="row g-3">
-                            {userData.courses_enrolled.map((course)=>{
+                            {userData.courses_enrolled.slice(0,2).map((course)=>{
                                 return(
                                 <>
                                 <div key={course.id} className="col-12 col-md-6 col-lg-4 custom-dimensions">

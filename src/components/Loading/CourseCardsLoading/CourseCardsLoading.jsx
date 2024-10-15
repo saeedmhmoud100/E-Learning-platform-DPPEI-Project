@@ -16,13 +16,14 @@ export default function CourseCardsLoading() {
                     </div>
                 </div>
                 <div className="course-card">
-                    <div className='text-decoration-none text-dark'>
-                        <h3 className='mb-2 empty-fill w-25'></h3>
-                        <h4 className='text-muted h6 mb-2 empty-fill w-50'></h4>
-                        <div className="d-flex flex-row mb-2 align-items-center">
-                            <div className='empty-fill w-75'></div>
+                    <div className='text-decoration-none text-dark placeholder-glow'>
+                        <h3 className='mb-2 empty-fill w-25 placeholder'></h3>
+                        <br/>
+                        <h4 className='text-muted h6 mb-2 empty-fill w-50 placeholder'></h4>
+                        <div className="d-flex flex-row mb-2 align-items-center placeholder-glow">
+                            <div className='empty-fill w-75 placeholder'></div>
                         </div>
-                        <div className='mb-2 empty-fill w-50'></div>
+                        <div className='mb-2 empty-fill w-50 placeholder'></div>
                     </div>
                 </div>
             </div>

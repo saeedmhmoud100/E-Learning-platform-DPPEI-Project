@@ -145,6 +145,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
     } else {
       let newNumberOfPages = Math.ceil(filteredCourses?.length / 3);
       setNumberOfPages(newNumberOfPages);
+      setCurrentPage(1)
     }
   },[filteredCourses])
 
@@ -164,7 +165,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                     <button className='clear-filter-btn-active me-2' onClick={()=>{handleClearFilters()}}>
                         Clear filters</button>
                   ):(
-                    <button className='clear-filter-btn-non-active opacity-25 me-2' cursor='none'>
+                    <button className='clear-filter-btn-non-active opacity-25 me-2'>
                         Clear filters</button>
                   )
                 }
@@ -261,7 +262,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                   Array(numberOfPages)
                     .fill().map((page, i) => (
                       <li key={i} className="page-item">
-                        <a className="page-btn" onClick={()=>{handlePagination(i+1)}}>{i + 1}</a>
+                        <a className={`page-btn ${i+1==currentPage && 'page-btn-active'}`} onClick={()=>{handlePagination(i+1)}}>{i + 1}</a>
                       </li>
                     ))
                 )}

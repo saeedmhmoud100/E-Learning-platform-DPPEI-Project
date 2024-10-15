@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, getWishlist, removeFromWishlist } from '../../store/actions/userActions';
+import {motion} from "framer-motion";
 
 export default function CourseCards({course}) {
 
@@ -10,14 +11,17 @@ export default function CourseCards({course}) {
     const dispatch = useDispatch()
     const product = course;
 
+    // FUNCTION TO HANDLE WISHLIST
     async function handleWishlistBtn(e,id){
         if(e.target.classList.contains('fa-solid')){
+            e.target.classList.replace('fa-solid','fa-regular');
             try {
                 await dispatch(removeFromWishlist(id)); 
             } catch (error) {
                 console.error("Error removing wishlist:", error);
             }
         }else{
+            e.target.classList.replace('fa-regular','fa-solid');
             try {
                 await dispatch(addToWishlist(id)); 
             } catch (error) {
@@ -29,7 +33,11 @@ export default function CourseCards({course}) {
   return (
       <>
     
-    <div className="col-12 col-sm-6 col-lg-4 card-hover" role='button'>
+    <motion.div
+     initial={{ opacity: 0 }}
+     whileInView={{ opacity: 1 }}
+     viewport={{ once: false }}
+     className="col-12 col-sm-6 col-lg-4 card-hover" role='button'>
             <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
                 <div className="position-relative w-100 h-50">
                     
@@ -69,7 +77,7 @@ export default function CourseCards({course}) {
                     </Link>
                 </div>
             </div>
-      </div>
+      </motion.div>
       </>
 
       
