@@ -59,6 +59,7 @@ export const getCourseDetails = (id) => async (dispatch) => {
 export const getCourseReviews = (id) => async (dispatch) => {
     try {
         const response = await useGetData(`courses/${id}/reviews`);
+        console.log(response)
         dispatch({
             type: GET_COURSE_REVIEWS,
             payload: response,

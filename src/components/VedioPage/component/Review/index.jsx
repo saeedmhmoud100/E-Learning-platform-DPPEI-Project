@@ -1,7 +1,8 @@
-    import React from "react";
+/*     import React from "react";
     import CourseReviewCard from "../../../../Pages/CourseDetails/components/CourseReviewCard";
 
-    export default function Review() {
+    export default function Review({review}) {
+        const visableReviews = review?review:[]
     return (
         <>
         <div className="container ms-5">
@@ -116,8 +117,13 @@
 
             </>
             </div>
-            <CourseReviewCard />
+            {visableReviews?.map((review,i)=>{
+                return(
+                <CourseReviewCard review={review} key={i} />
+            )})}
+            
         </div>
         </>
     );
     }
+ */

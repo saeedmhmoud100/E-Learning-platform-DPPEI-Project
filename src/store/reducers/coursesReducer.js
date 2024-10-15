@@ -8,7 +8,7 @@ const inital = {
     whatYouWillLearnData: [],
     course:[],
     requirments:[],
-    reviews:[],
+    reviews:null,
     wishlist : [],
 }
 const coursesReducer = (state = inital, action) => {

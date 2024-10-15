@@ -1,4 +1,4 @@
-    import React, { useState } from "react";
+    import React, { useEffect, useState } from "react";
     import { useParams } from "react-router-dom";
     import myVideo from "./images/video1.mp4";
     import CourseSidebar from "./component/CourseSidebar/CourseSidebar";
@@ -6,20 +6,32 @@
     import Overview from "./component/OverView";
     import Questions from "./component/Questions";
     import Search from "./component/Search";
+    import CourseReviewCard from "../../Pages/CourseDetails/components/CourseReviewCard";
 import Announcements from "./component/Announcement";
-import Review from "./component/Review";
+import { useSelector, useDispatch } from "react-redux";
+import {getCourseReviews} from '../../store/actions/coursesAction'
 
     export default function VideoPage() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isOverViewOpen, setIsOverViewOpen] = useState(true);
     const [isQ_A_Open, setIsQ_A_Open] = useState(false);
-    const [isNotesOpen, setIsNotesOpen] = useState(false);
     const [isAnnouncementsOpen, setIsAnnouncementsOpen] = useState(false);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
     const [isLearningToolOpen, setIsLearningToolOpen] = useState(false);
     
-
     const {id} = useParams();
+    const review = useSelector(state => state.allCourses.reviews   )
+    const dispatch =useDispatch();
+    useEffect(()=>{
+        if (!review){
+            const fetchCourseReviews = async()=>{
+                await dispatch(getCourseReviews(id))
+            }
+            fetchCourseReviews()
+
+        }
+       
+    },[id,review, dispatch])
     return (
         <>
         <div className="container-fluide mb-5">
@@ -36,7 +48,6 @@ import Review from "./component/Review";
                         setIsSearchOpen(true);
                         setIsAnnouncementsOpen(false);
                         setIsLearningToolOpen(false);
-                        setIsNotesOpen(false);
                         setIsQ_A_Open(false);
                         setIsOverViewOpen(false);
                         setIsReviewOpen(false);
@@ -52,7 +63,6 @@ import Review from "./component/Review";
                         setIsAnnouncementsOpen(false);
                         setIsSearchOpen(false);
                         setIsLearningToolOpen(false);
-                        setIsNotesOpen(false);
                         setIsQ_A_Open(false);
                         setIsOverViewOpen(true);
                         setIsReviewOpen(false);
@@ -68,7 +78,6 @@ import Review from "./component/Review";
                         setIsAnnouncementsOpen(false);
                         setIsSearchOpen(false);
                         setIsLearningToolOpen(false);
-                        setIsNotesOpen(false);
                         setIsQ_A_Open(true);
                         setIsOverViewOpen(false);
                         setIsReviewOpen(false);
@@ -77,9 +86,9 @@ import Review from "./component/Review";
                     Q&A
                     </button>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <button className="nav-link">Notes</button>
-                </li>
+                </li> */}
                 <li className="nav-item">
                     <button
                     className="nav-link"
@@ -87,7 +96,6 @@ import Review from "./component/Review";
                         setIsAnnouncementsOpen(true);
                         setIsSearchOpen(false);
                         setIsLearningToolOpen(false);
-                        setIsNotesOpen(false);
                         setIsQ_A_Open(false);
                         setIsOverViewOpen(false);
                         setIsReviewOpen(false);
@@ -96,17 +104,16 @@ import Review from "./component/Review";
                     Announcements
                     </button>
                 </li>
-                <li className="nav-item">
+              {  <li className="nav-item">
                     <button className="nav-link" onClick={() => {
                         setIsAnnouncementsOpen(false);
                         setIsSearchOpen(false);
                         setIsLearningToolOpen(false);
-                        setIsNotesOpen(false);
                         setIsQ_A_Open(false);
                         setIsOverViewOpen(false);
                         setIsReviewOpen(true);
                     }}>Reviews</button>
-                </li>
+                </li>}
                 <li className="nav-item">
                     <button
                     className="nav-link"
@@ -114,7 +121,6 @@ import Review from "./component/Review";
                         setIsAnnouncementsOpen(false);
                         setIsSearchOpen(false);
                         setIsLearningToolOpen(true);
-                        setIsNotesOpen(false);
                         setIsQ_A_Open(false);
                         setIsOverViewOpen(false);
                         setIsReviewOpen(false);
@@ -130,7 +136,9 @@ import Review from "./component/Review";
                     {isOverViewOpen && <Overview />}
                     {isAnnouncementsOpen && <Announcements />}
                     {isLearningToolOpen && <LearningTools />}
-                    {isReviewOpen &&<Review />}
+                    {isReviewOpen && review?.map((review,i)=>{
+                        return(<CourseReviewCard review={review} key={i}/>)
+                    })}
                 </div>
             </div>
             <div className="col-md-4 col-sm-12 mt-2 vh-100">

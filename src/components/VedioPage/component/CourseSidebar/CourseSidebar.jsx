@@ -8,15 +8,18 @@ function CourseSidebar({ courseId }) {
     const {results:sections} = useSelector((state) => state.sections.sections || []);
 
     useEffect(() => {
-        const fetchSections = async () => {
-            console.log('Fetching sections for course:', courseId);
-            if (courseId) {
-                await dispatch(getCourseSections(courseId));
-            }
-        };
-
-        fetchSections();
-    }, [courseId, dispatch]);
+        if(!sections){
+            const fetchSections = async () => {
+                console.log('Fetching sections for course:', courseId);
+                if (courseId) {
+                    await dispatch(getCourseSections(courseId));
+                }
+            };
+    
+            fetchSections();
+        }
+   
+    }, [courseId, dispatch,sections]);
 
     return (
         <div className="course-sidebar">
