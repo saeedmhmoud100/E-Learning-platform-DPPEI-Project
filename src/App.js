@@ -74,6 +74,7 @@ function App() {
             await dispatch(getWishlist())
         }else{
             navigate('/login');
+            setPageLoading(false);
         }
     }
 
