@@ -4,8 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function CheckoutSummary({totalPrice,itemscount}) {
   const navigate= useNavigate();
   const handleCheckoutClick = () => {
+
    navigate("/checkout");  // Navigate to the checkout page
  };
+
 
   return (
    <>  <div className="priceDetails d-flex flex-column  ">

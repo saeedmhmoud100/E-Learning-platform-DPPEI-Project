@@ -2,6 +2,7 @@
 import React, { useState ,useEffect} from 'react';
 import { Link , useParams} from 'react-router-dom';
 import "./style.css"
+import {useNavigate} from "react-router-dom";
 import GeneralLoading from "../../components/Loading/GeneralLoading/GeneralLoading.jsx"
 import InstructorSection from './components/InstructorSection';
 import  CourseCards from '../../components/CourseCards/index.jsx'
@@ -10,11 +11,12 @@ import   StudentAlsoBoughtCard from "./components/StudentsAlsoBoughtCard/index.j
 import {useDispatch, useSelector} from "react-redux";
 import { getCourseWhatYouWillLearn,getCourseIncludes,getCourseDetails,getCourseRequirments,getAllCourses,getCourseReviews} from '../../store/actions/coursesAction.js';
 import { getInstructorProfile } from '../../store/actions/instructorAction.js';
-
+import {addtoCart}  from '../../store/actions/cartAction.js';
 export default function CourseDetails({coursesWithDetails}) {
 
   let {id}=useParams();
-  
+  const dispatch=useDispatch();
+  const navigate = useNavigate()
   const [showFullDescription, setShowFullDescription] = useState(false);
  
   
@@ -83,7 +85,10 @@ const [loadingPage, setloadingPage] = useState(true)
   let courseRating = CurrentCourse?.rating_count || 0;
   let starsCount = new Array(courseRating).fill(0);
   let review=CurrentCourse?.review
-  
+  const handleCart = async () => {
+    await dispatch(addtoCart({ course_id: id }));
+    navigate('/cart')
+  };
   return (
     (loading || loadingPage) ? (
       <GeneralLoading />
@@ -318,7 +323,7 @@ const [loadingPage, setloadingPage] = useState(true)
     <hr />
     <p className="text-center">or</p>
     <h3 className="text-center">{CurrentCourse?.price} EGP</h3>
-    <button className="btn btn-outline-dark w-100 mb-3 btn-info">Add to cart</button>
+    <button type="submit" className="btn btn-outline-dark w-100 mb-3 btn-info"onClick={handleCart}>Add to cart</button>
    
   </div>
 </div>
