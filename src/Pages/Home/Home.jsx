@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import CourseCards from '../../components/CourseCards';
-import Footer from '../../components/Footer/index.jsx';
 import './Home.css'
-import { getAllCoursesPage } from '../../store/actions/coursesAction.js';
-import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
-import { Slide } from 'react-toastify';
 import SliderForCourseCards from '../../components/SliderForCourseCards/SliderForCourseCards.jsx';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 
 
 export default function Home() {
-
-    const dispatch = useDispatch()
-    const {courses} = useSelector((state) => state.allCourses);
     const {userData} = useSelector(state=>state.user);
 
   return (<>
-    <div className='container my-5'>
+    <motion.div
+    initial={{ x: -100, opacity: 0 }}  
+    animate={{ x: 0, opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className='container my-5'>
 
         {/* START - FIRST SECTION WITH IMAGES AND WELCOME MESSAGE */}
-        <div className="d-flex justify-content-start align-items-center py-3">
+        <motion.div
+        initial={{ x: -100, opacity: 0 }}  
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="d-flex justify-content-start align-items-center py-3">
             <div className="img-cont">
             <img src={userData.profile_image} alt="user picture" className='w-100 h-100 rounded-circle' />
             </div>
@@ -28,9 +29,13 @@ export default function Home() {
                 <h2>Welcome back, {userData.username}</h2>
                 {/* <a href='#'>add occupations and interest</a> */}
             </div>
-        </div>
+        </motion.div>
 
-        <div className="py-5 position-relative">
+        <motion.div
+        initial={{ x: -100, opacity: 0 }}  
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="py-5 position-relative">
             <div className="w-100 h-100">
                 <img src="/images/1.jpg" alt="EduVerse" className='w-100 h-100' />
             </div>
@@ -38,11 +43,15 @@ export default function Home() {
                 <h2 className='mb-3 fw-bold'>Learning that gets you</h2>
                 <h3 className='h5'>Skills for your present (and your future). Get started with us.</h3>
             </div>
-        </div>
+        </motion.div>
         {/* END - FIRST SECTION WITH IMAGES AND WELCOME MESSAGE */}
 
         {/* START - SECOND SECTION WITH MY LEARNINGS */}
-        <div className="">
+        <motion.div
+        initial={{ x: -100, opacity: 0 }}  
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="">
                     {
                         userData?.courses_enrolled?.length > 0 ? (<>
                             <div className="d-flex justify-content-between align-items-center py-5">
@@ -85,21 +94,29 @@ export default function Home() {
                             <h3 className='text-center p-4'>It seems you have yet to explore our courses.<Link to='/courses' className='my-learning-btn'> Start learning!</Link></h3>
                         )
                     }
-        </div>
+        </motion.div>
         {/* END - SECOND SECTION WITH MY LEARNINGS */}
 
         {/* START - HEADER */}
-        <div className="pt-5 pb-4">
+        <motion.div
+        initial={{ x: -100, opacity: 0 }}  
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="pt-5 pb-4">
             <h2 className='fw-bold'>Recommended for you</h2>
-        </div>
+        </motion.div>
         {/* END - HEADER */}
         
         {/* START - THIRD SECTION WITH COURSE CARDS */}
-        <div className="container-fluid position-relative p-0">
+        <motion.div
+        initial={{ x: -100, opacity: 0 }}  
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="container-fluid position-relative p-0">
             <SliderForCourseCards/>
-        </div>
+        </motion.div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
-    </div>
+    </motion.div>
 
     </>
   )

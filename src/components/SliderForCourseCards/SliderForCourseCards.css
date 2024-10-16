@@ -45,6 +45,14 @@
     opacity: 1;
 }
 
+.react-multi-carousel-item:hover .heart-icon-circle, 
+.react-multi-carousel-item:hover .heart-icon-circle-loading,
+.react-multi-carousel-item:hover .add-to-wishlist-icon,
+.react-multi-carousel-item:hover .heart-icon-circle span,
+.react-multi-carousel-item:hover .heart-icon-circle-loading span {
+    opacity: 1;
+}
+
 .overlay-for-course-cards{
     background-color: rgba(0,0,0,0.5);
     width: 100%;
@@ -56,11 +64,9 @@
 }
 
 .add-to-wishlist-icon{
-    border: 2px solid white;
     color: white;
     font-size: 1.5rem;
     padding: 13px;
-    border-radius: 50px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -68,5 +74,41 @@
     transform: translate(-50%,-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+}
+
+.heart-icon-circle, .heart-icon-circle-loading{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.heart-icon-circle span{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50px;
+    border: 2px solid white;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.heart-icon-circle-loading span{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.heart-icon-circle-loading span{
+    animation: rotateAnimation 2s linear infinite;
 }
 
