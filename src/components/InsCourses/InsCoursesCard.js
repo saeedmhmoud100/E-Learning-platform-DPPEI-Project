@@ -54,7 +54,7 @@ export default function InsCoursesCard({course}){
                         </p>
 
                         <div className="buttons d-flex justify-content-center justify-content-lg-start">
-                            <Link to='/course-details' className='text-decoration-none'><button className="btn btn-primary">View Course</button></Link>
+                            <Link to={'/course-details/' + course.id } className='text-decoration-none'><button className="btn btn-primary">View Course</button></Link>
                             <button className="btn btn-danger mx-2">Delete Course</button>
                             <button className="btn btn-warning">Edit Course</button>
                         </div>
