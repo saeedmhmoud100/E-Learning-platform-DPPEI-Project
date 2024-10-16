@@ -25,7 +25,7 @@ function EditUserProfile() {
                 <div className="row mt-4 g-4">
                     <div className="col-md-6">
                         <label className='form-label' htmlFor="first">User Name:</label>
-                        <input className='form-control' type="text" id='first' value={userData.userName} />
+                        <input className='form-control' type="text" id='first' value={userData.username} />
                     </div>
                     {/* <div className="col-md-6">
                         <label className='form-label' htmlFor="last">Last Name:</label>
