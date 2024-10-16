@@ -2,23 +2,27 @@ import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {createOrders, getOrders} from '../../store/actions/orderAction';
+import { getCart } from '../../store/actions/cartAction.js'
 import { useEffect,useState } from 'react';
 import GeneralLoading from '../../components/Loading/GeneralLoading/GeneralLoading';
 import {useNavigate} from "react-router-dom";
 export default function Checkout() {
-  const {orders,loading}=useSelector(state=>state.orders);
+ 
   const dispatch=useDispatch();
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate()
+  const {cart,loading}=useSelector(state => state.cart);
+
+
   useEffect(() => {
-    // Only dispatch getOrders if orders are not already fetched
-    if (!orders || !orders.results || orders.results.length === 0) {
-      dispatch(getOrders());
-    }
-  }, []);
+    dispatch(getCart());
+ 
+},[])
+const CartCourses = [...(cart?.cart_items || [])];
 
 
-  const orderItems = orders?.results?.[0] || [];
+
+  
 
     const handleCheckout = async () => {
       await dispatch(createOrders())
@@ -99,14 +103,14 @@ export default function Checkout() {
             <h5>Order details</h5>
             <ul className="list-group">
          {
-          orderItems?.items?.map((order,i)=>(
+          CartCourses.map((cartcourse,i)=>(
             <li className="list-group-item d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-              <img src={order?.course?.thumbnail_link} className="checkout-course-img me-2 " />
-              <h6 className="mb-0 fw-bolder">  {order?.course?.title}</h6>
+              <img src={cartcourse?.course?.thumbnail_link} className="checkout-course-img me-2 " />
+              <h6 className="mb-0 fw-bolder">  {cartcourse?.course?.title}</h6>
             </div>
              
-              <span>{order?.price} L.E</span>
+              <span>{cartcourse?.course?.price} L.E</span>
             </li>
           ))
          }
@@ -122,12 +126,12 @@ export default function Checkout() {
    <p className='fs-3 fw-bold'> Summary</p>          
    <p className=" d-flex justify-content-between">
                 <strong>Original Price:</strong>
-                <span> {orderItems?.total_price}L.E</span>
+                <span> {cart?.total_price}L.E</span>
               </p>
               <hr />
               <p className=" d-flex justify-content-between">
                 <strong>Total:</strong>
-                <span> {orderItems?.total_price}L.E</span>
+                <span> {cart?.total_price}L.E</span>
               </p>
               <small className="form-text text-muted my-3">
                 By completing your purchase you agree to these <a href="#">Terms of Service</a>.

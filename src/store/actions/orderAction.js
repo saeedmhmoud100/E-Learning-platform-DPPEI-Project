@@ -20,7 +20,7 @@ export const getOrders = () => async (dispatch) => {
 
 export const createOrders = () => async (dispatch) => {
     try {
-        const response = await usePostData(`orders`);
+        const response = await usePostData(`/orders/`);
         dispatch({
             type: CREATE_ORDERS,
             payload: response,

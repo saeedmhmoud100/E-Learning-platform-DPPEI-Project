@@ -16,6 +16,7 @@ export default function Cart(){
  
 },[])
 const CartCourses = [...(cart?.cart_items || [])];
+console.log (CartCourses)
 
 
   return (
@@ -36,7 +37,7 @@ const CartCourses = [...(cart?.cart_items || [])];
    {
     CartCourses?.length > 0 ? (
       CartCourses.map((course, index) => (
-        <CourseItem key={index} course={course} />
+        <CourseItem key={index} cartcourse={course} />
       ))
     ) : (
       <div className="text-center">
