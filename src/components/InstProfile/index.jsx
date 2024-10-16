@@ -44,8 +44,45 @@ export default function InstProfile() {
 
     return (
         <div className="container w-85 mt-5  ">
-            <div className="container w-85 d-flex ">
-                <div className="col-md-8  ">
+            <div className="container w-85 d-flex flex-wrap">
+                <div className="col-sm-12 col-md-4 order-md-2  ">
+                    <div className="">
+                        <img src={instructor?.user?.profile_image} className="rounded-circle" style={imageStyle} alt="ins-photo" />
+                    </div>
+                    <div className="social-btn d-flex flex-wrap  ">
+                        <div className=" w-100 row  ms-3 mt-2 border-1 mb-2   ">
+                            <Link to="#" className="btn  btn-outline-secondary col-sm-12 col-md-6  ">
+                                <i className="fa-solid fa-link me-2"></i>
+                                Website
+                            </Link>
+                        </div>
+                        <div className=" w-100 row ms-3 mt-2 border-1 mb-2 ">
+                            <Link to="#" className="btn  btn-outline-secondary col-sm-12 col-md-6">
+                                <i class="fa-brands fa-twitter me-3"></i>
+                                Twitter
+                            </Link>
+                        </div>
+                        <div className=" w-100 row ms-3 mt-2 border-1 mb-2 ">
+                            <Link to="#" className="btn  btn-outline-secondary col-sm-12 col-md-6">
+                                <i class="fa-brands fa-facebook me-3"></i>
+                                Facebook
+                            </Link>
+                        </div>
+                        <div className=" w-100 row ms-3 mt-2 border-1 mb-2 ">
+                            <Link to="#" className="btn  btn-outline-secondary col-sm-12 col-md-6">
+                                <i class="fa-brands fa-linkedin me-3"></i>
+                                Linkedin
+                            </Link>
+                        </div>
+                        <div className=" w-100 row ms-3 mt-2 border-1 mb-2 ">
+                            <Link to="#" className="btn  btn-outline-secondary col-sm-12 col-md-6">
+                                <i class="fa-brands fa-youtube me-3"></i>
+                                Youtube
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-sm-12 col-md-8 order-md-1  ">
                     <div className="">
                         <h5>Instructor</h5>
                         <h1 className="font-size-40">{instructor?.user?.username}</h1>
@@ -98,43 +135,7 @@ export default function InstProfile() {
                     </div>
                 </div>
 
-                <div className="col-md-4  ">
-                    <div className="">
-                        <img src={instructor?.user?.profile_image} className="rounded-circle" style={imageStyle} alt="ins-photo" />
-                    </div>
-                    <div className="social-btn d-flex flex-wrap  ">
-                        <div className=" w-100 ms-3 mt-2 border-1 mb-2   ">
-                            <Link to="#" className="btn  btn-outline-secondary w-50">
-                                <i className="fa-solid fa-link me-2"></i>
-                                Website
-                            </Link>
-                        </div>
-                        <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <Link to="#" className="btn  btn-outline-secondary w-50">
-                                <i class="fa-brands fa-twitter me-3"></i>
-                                Twitter
-                            </Link>
-                        </div>
-                        <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <Link to="#" className="btn  btn-outline-secondary w-50">
-                                <i class="fa-brands fa-facebook me-3"></i>
-                                Facebook
-                            </Link>
-                        </div>
-                        <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <Link to="#" className="btn  btn-outline-secondary w-50">
-                                <i class="fa-brands fa-linkedin me-3"></i>
-                                Linkedin
-                            </Link>
-                        </div>
-                        <div className=" w-100 ms-3 mt-2 border-1 mb-2 ">
-                            <Link to="#" className="btn  btn-outline-secondary w-50">
-                                <i class="fa-brands fa-youtube me-3"></i>
-                                Youtube
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     );
