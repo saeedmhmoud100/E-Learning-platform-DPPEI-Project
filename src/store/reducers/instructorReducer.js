@@ -2,7 +2,7 @@ import { GET_INSTRUCTOR_PROFILE } from "../type";
 
 const initalstate = {
    
-    instructor:[],
+    instructor:null,
     loading: true,
    
 }

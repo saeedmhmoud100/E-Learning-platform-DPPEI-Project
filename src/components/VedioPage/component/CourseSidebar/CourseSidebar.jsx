@@ -4,32 +4,39 @@ import { getCourseSections } from '../../../../store/actions/courseSectionsActio
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
+const bgColor = {
+    backgroundColor: "#1abc9c",
+}
+
 function CourseSidebar({ courseId }) {
     const dispatch = useDispatch();
-    const {results:sections} = useSelector((state) => state.sections.sections || []);
+    const { results: sections } = useSelector((state) => state.sections.sections || []);
 
     useEffect(() => {
-        if(!sections){
+        if (!sections) {
             const fetchSections = async () => {
                 console.log('Fetching sections for course:', courseId);
                 if (courseId) {
                     await dispatch(getCourseSections(courseId));
                 }
             };
-    
+
             fetchSections();
         }
-   
-    }, [courseId, dispatch,sections]);
+
+    }, [courseId, dispatch, sections]);
 
     return (
-        <div className="course-sidebar">
-            {sections && sections.length > 0 && (
-                sections.map((section, index) => (
-                    <Section key={index} {...section} />
-                ))
-            )}
+        <div className="d-flex justify-content-center">
+            <div className="course-sidebar bg-white rounded w-100 " >
+                {sections && sections.length > 0 && (
+                    sections.map((section, index) => (
+                        <Section key={index} {...section} />
+                    ))
+                )}
+            </div>
         </div>
+
     );
 }
 
@@ -41,7 +48,7 @@ function Section({ title, total_duration, lectures }) {
     };
 
     return (
-        <div className="section dropdownUl pb-3">
+        <div className="section dropdownUl rounded me-3 " style={bgColor}>
             <h3 className="section-title" onClick={toggleDropdown}>
                 {title} <span className="caret">{isOpen ? '▼' : '▲'}</span>
             </h3>
@@ -53,7 +60,7 @@ function Section({ title, total_duration, lectures }) {
 
 function Dropdown({ items }) {
     return (
-        <ul className="section-items dropdown bg-light">
+        <ul className="section-items dropdown bg-white">
             {items.map((item, index) => (
                 <SectionItem key={index}>{item.title}</SectionItem>
             ))}
@@ -62,7 +69,7 @@ function Dropdown({ items }) {
 }
 
 function SectionItem({ children }) {
-    return <li className="section-item"><Link >{children}</Link></li>;
+    return <li className="section-item rounded mb-1 list-unstyled"><Link >{children}</Link></li>;
 }
 
 export default CourseSidebar;
