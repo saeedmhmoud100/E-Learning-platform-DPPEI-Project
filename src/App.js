@@ -40,7 +40,7 @@ import { getLoggedUserData, getWishlist } from './store/actions/userActions';
 import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 
 function App() {
-    const {userData, logged_in} = useSelector(state=>state.user);
+    const {userData, logged_in, userData:{wishlist}} = useSelector(state=>state.user);
     const {courses, loading} = useSelector(state=>state.allCourses);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -92,7 +92,7 @@ function App() {
 
     // SETTING LOADING AFTER ALL NEEDED DATA HAS BEEN FETCHED
     useEffect(()=>{
-        if(courses?.length>0 && userData){
+        if(courses?.length>0 && userData && coursesWithDetails.length>0 && wishlist.length>0){
             setPageLoading(false);
         }
     },[courses,userData])
