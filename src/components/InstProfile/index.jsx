@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-/* import insPhoto from "./images/instractorPhoto.png";
-import Courses from "./Courses"; */
+
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { getInstructorProfile } from '../../store/actions/instructorAction'
 
 import "./style.css";
@@ -27,13 +25,16 @@ export default function InstProfile() {
     const dispatch = useDispatch();
     const { instructor } = useSelector(state => state.instructor)
     useEffect(() => {
-        const fetchData = async () => {
-            if (id) {
-                await dispatch(getInstructorProfile(id));
-            }
-        };
-        fetchData();
-    }, [id, dispatch]);
+        if (!instructor) {
+            const fetchData = async () => {
+                if (id) {
+                    await dispatch(getInstructorProfile(id));
+                }
+            };
+            fetchData();
+        }
+
+    }, [id, dispatch, instructor]);
 
 
 

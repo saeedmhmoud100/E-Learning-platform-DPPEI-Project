@@ -2,7 +2,7 @@ import {GET_COURSE_SECTIONS, GET_VIDEO_ERROR} from "../type";
 
 const initialstate = {
     pagenation :{},
-    sections: []
+    sections: null
 };
 
 const courseSectionReducer = (state = initialstate, action) => {

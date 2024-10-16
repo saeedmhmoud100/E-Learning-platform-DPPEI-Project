@@ -2,7 +2,7 @@ import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, 
 
 const inital = {
    
-    courses: null,
+    courses: [],
     courseIncludesData: [],
     loading: true,
     whatYouWillLearnData: [],

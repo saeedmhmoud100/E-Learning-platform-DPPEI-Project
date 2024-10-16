@@ -10,25 +10,28 @@ export default function CourseCards({course}) {
     const {userData:{wishlist}} = useSelector(state=>state.user);
     const dispatch = useDispatch()
     const product = course;
+    const [loading,setLoading] = useState(false)
 
     // FUNCTION TO HANDLE WISHLIST
     async function handleWishlistBtn(e,id){
+        setLoading(true)
         if(e.target.classList.contains('fa-solid')){
-            e.target.classList.replace('fa-solid','fa-regular');
             try {
-                await dispatch(removeFromWishlist(id)); 
+                await dispatch(removeFromWishlist(id));
+                setLoading(false); 
             } catch (error) {
                 console.error("Error removing wishlist:", error);
             }
         }else{
-            e.target.classList.replace('fa-regular','fa-solid');
             try {
                 await dispatch(addToWishlist(id)); 
+                setLoading(false);
             } catch (error) {
                 console.error("Error adding to wishlist:", error);
             }
         }
     }
+
 
   return (
       <>
@@ -41,8 +44,11 @@ export default function CourseCards({course}) {
             <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
                 <div className="position-relative w-100 h-50">
                     
-                    
                     <div className='course-img-cont'>
+                    <div
+                     className={`${loading ? 'heart-icon-circle-loading' : 'heart-icon-circle'}`}>
+                        <span></span>
+                    </div>
                     <i class={`${wishlist?.some(item => item.course.id == product.id) ? 'fa-solid' : 'fa-regular'} fa-heart add-to-wishlist-icon`} onClick={(e)=>handleWishlistBtn(e,product.id)}></i>
                         <Link to={`/course-details/${product?.id}`}>
                         <div className='overlay-for-course-cards'></div>
@@ -54,7 +60,6 @@ export default function CourseCards({course}) {
                         </Link>
                     </div>
                   
-
                 </div>
                 <div className="course-card">
                     <Link className='text-decoration-none text-dark' to={`/course-details/${product?.id}`}>

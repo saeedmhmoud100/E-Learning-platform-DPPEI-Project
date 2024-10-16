@@ -14,6 +14,7 @@ export default function SliderForCourseCards() {
     const { courses, loading } = useSelector((state) => state.allCourses);
     const {userData:{wishlist}} = useSelector(state=>state.user);
     const dispatch = useDispatch()
+    const [heartloading,setHeartLoading] = useState(false)
 
     const responsive = {
         large: {
@@ -31,17 +32,20 @@ export default function SliderForCourseCards() {
     };
     
     async function handleWishlistBtn(e,id){
+        setHeartLoading(true)
         if(e.target.classList.contains('fa-solid')){
-            e.target.classList.replace('fa-solid','fa-regular');
+            // e.target.classList.replace('fa-solid','fa-regular');
             try {
-                await dispatch(removeFromWishlist(id)); 
+                await dispatch(removeFromWishlist(id));
+                setHeartLoading(false) 
             } catch (error) {
                 console.error("Error removing wishlist:", error);
             }
         }else{
-            e.target.classList.replace('fa-regular','fa-solid');
+            // e.target.classList.replace('fa-regular','fa-solid');
             try {
                 await dispatch(addToWishlist(id)); 
+                setHeartLoading(false) 
             } catch (error) {
                 console.error("Error adding to wishlist:", error);
             }
@@ -67,10 +71,14 @@ export default function SliderForCourseCards() {
                  {courses?.slice(0,4).map((product, index) => (
                         <div key={index} className={`d-flex justify-content-center align-items-center flex-column w-100 h-100 px-4`}>
                         <div className="position-relative w-100 h-50">
-                            <div className='overlay-for-course-cards'></div>
-                            <i class={`${wishlist.some(item => item?.course?.id == product?.id) ? 'fa-solid' : 'fa-regular'} fa-heart add-to-wishlist-icon`} onClick={(e)=>handleWishlistBtn(e,product.id)}></i>
-                            <div className='course-img-cont'>
-                                <Link to={`/course-details/`}>
+                        <div className='course-img-cont'>
+                            <div
+                            className={`${heartloading ? 'heart-icon-circle-loading' : 'heart-icon-circle'}`}>
+                                <span></span>
+                            </div>
+                            <i class={`${wishlist?.some(item => item.course.id == product.id) ? 'fa-solid' : 'fa-regular'} fa-heart add-to-wishlist-icon`} onClick={(e)=>handleWishlistBtn(e,product.id)}></i>
+                                <Link to={`/course-details/${product?.id}`}>
+                                <div className='overlay-for-course-cards'></div>
                                     <img
                                         src={product?.thumbnail_link}
                                         className="w-100 h-100"

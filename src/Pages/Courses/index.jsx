@@ -6,12 +6,11 @@ import FilterCourseSection from '../../components/FilterCourseSection';
 import {useDispatch, useSelector} from "react-redux";
 import { getCourseDetails } from '../../store/actions/coursesAction';
 import CourseCardsLoading from '../../components/Loading/CourseCardsLoading/CourseCardsLoading.jsx';
-import { number } from 'joi';
+import { motion } from 'framer-motion';
 
 export default function Courses({coursesWithDetails, categoryInput, updateCategory}) {
 
   const {searchTerm} = useSelector(state => state.searchTerm);
-  const {userData} = useSelector(state=>state.user);
   const {courses, loading} = useSelector(state => state.allCourses);
   const [displayFilterMenu, setDisplayFilterMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -150,12 +149,24 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
   },[filteredCourses])
 
   return (
-    <div className='mt-5 mb-5'>
-      <div className="container">
+    <motion.div
+    initial={{ x: -100, opacity: 0 }}  
+    animate={{ x: 0, opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className='mt-5 mb-5'>
+      <motion.div
+      initial={{ x: -100, opacity: 0 }}  
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="container">
         {
           searchTerm && (<h1 className='py-4'>{filteredCourses.length} results for '{searchTerm}'</h1> )
         }
-        <div className='position-relative'>
+        <motion.div
+         initial={{ x: -100, opacity: 0 }}  
+         animate={{ x: 0, opacity: 1 }}
+         transition={{ duration: 0.5 }}
+         className='position-relative'>
             <div className='d-flex flex-wrap align-items-center'>
                 <button className={`filter-button-style me-2 d-lg-none ${displayFilterMenu && 'change-btn-style'}`} onClick={()=>{
                     setDisplayFilterMenu(!displayFilterMenu)}}>
@@ -171,7 +182,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                 }
             </div>
             
-        </div>
+        </motion.div>
         <hr />
 
         {windowWidth <= 992 ? (
@@ -283,7 +294,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
             </nav>
           )
         }
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
