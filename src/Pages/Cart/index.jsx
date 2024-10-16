@@ -34,9 +34,16 @@ const CartCourses = [...(cart?.cart_items || [])];
    <div className="col-lg-9 col-sm-12">
 
    {
-    CartCourses?.map((cartcourse,i)=>(
-   <CourseItem cartcourse={cartcourse} key={i}/>
-    ))
+    CartCourses?.length > 0 ? (
+      CartCourses.map((course, index) => (
+        <CourseItem key={index} course={course} />
+      ))
+    ) : (
+      <div className="text-center">
+        <h4>No Courses in Cart</h4>
+        <Link to="/courses" className="btn btn-primary">Continue Shopping</Link>
+      </div>
+    )
   }
        
          

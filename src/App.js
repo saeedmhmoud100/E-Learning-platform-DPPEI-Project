@@ -92,7 +92,7 @@ function App() {
 
     // SETTING LOADING AFTER ALL NEEDED DATA HAS BEEN FETCHED
     useEffect(()=>{
-        if(courses?.length>0 && userData && coursesWithDetails?.length>0 && wishlist?.length>0){
+        if(courses?.length>0 && userData && coursesWithDetails?.length>0 && wishlist){
             setPageLoading(false);
         }
     },[courses,userData])

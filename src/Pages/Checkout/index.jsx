@@ -1,14 +1,15 @@
 import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../../store/actions/orderAction';
+import {createOrders, getOrders} from '../../store/actions/orderAction';
 import { useEffect,useState } from 'react';
 import GeneralLoading from '../../components/Loading/GeneralLoading/GeneralLoading';
+import {useNavigate} from "react-router-dom";
 export default function Checkout() {
   const {orders,loading}=useSelector(state=>state.orders);
   const dispatch=useDispatch();
   const [successMessage, setSuccessMessage] = useState('');
-
+  const navigate = useNavigate()
   useEffect(() => {
     // Only dispatch getOrders if orders are not already fetched
     if (!orders || !orders.results || orders.results.length === 0) {
@@ -18,11 +19,11 @@ export default function Checkout() {
 
 
   const orderItems = orders?.results?.[0] || [];
- 
-    console.log(orderItems)
-  
-    const handleCheckout = () => {
+
+    const handleCheckout = async () => {
+      await dispatch(createOrders())
       setSuccessMessage('You have successfully checked out!');
+      navigate('/my-courses')
     };
 
   return (

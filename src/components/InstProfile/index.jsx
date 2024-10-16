@@ -6,6 +6,8 @@ import { getInstructorProfile } from '../../store/actions/instructorAction'
 
 import "./style.css";
 import { Link } from "react-router-dom";
+import Courses from "./Courses";
+import CourseCards from "../CourseCards";
 
 const open = {
     overflow: "hidden",
@@ -129,10 +131,18 @@ export default function InstProfile() {
                                 {isOpen ? "read less..." : "read more.."}
                             </button>
                         </div>
-                        { }
+                            <div className={'row'}>
+                        {
+                            instructor?.courses?.length > 0 ?
+                                instructor?.courses?.map(course => (
+                                    <CourseCards key={course.id} course={course} />
+                                ))
+                                : null
+                        }
                         <Link to='/inst-profile/all-courses' className='text-decoration-none'>
                             <button className='btn btn-dark m-auto d-block my-4'>All Courses</button>
                         </Link>
+                            </div>
                     </div>
                 </div>
 

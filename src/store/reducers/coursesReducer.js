@@ -36,7 +36,9 @@ const coursesReducer = (state = inital, action) => {
                 loading: false
             }
         case GET_ERROR:
+            console.log(action.payload)
             return {
+                ...state,
                 loading: true,
             }
         case GET_ALL_WHAT_YOU_WILL_LEARN:
