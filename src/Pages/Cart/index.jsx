@@ -5,10 +5,10 @@ import CourseItem from './components/CourseItem'
 import CheckoutSummary from './components/CheckoutSummary'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCart } from '../../store/actions/cartAction.js'
-
+import GeneralLoading from '../../components/Loading/GeneralLoading/GeneralLoading.jsx'
 export default function Cart(){
 
-  const {cart}=useSelector(state => state.cart);
+  const {cart,loading}=useSelector(state => state.cart);
   const dispatch=useDispatch();
 
   useEffect(() => {
@@ -19,6 +19,11 @@ const CartCourses = [...(cart?.cart_items || [])];
 
 
   return (
+    
+
+    (loading ) ? (
+      <GeneralLoading />
+    ) :
 
     <div className="container my-5">
       <div className="cart text-dark">

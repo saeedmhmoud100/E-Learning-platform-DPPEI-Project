@@ -19,8 +19,8 @@ export default function InstructorSection({instructor}) {
           <Link className="instructor-name fs-5" to={{
     pathname: '/inst-profile',
     search: `?id=${instructor.id}`,
-  }}>{instructor?.user?.username}</Link>
-          <p className="instructor-tagline text-muted">{instructor?.user?.title}</p>
+  }}>{instructor?.title}</Link>
+          <p className="instructor-tagline text-muted">{instructor?.title}</p>
         
             <div className="instructorimg  me-3 ">
                 <img src={instructor?.user?.profile_image}className="w-100 h-100" alt="Instructor" />

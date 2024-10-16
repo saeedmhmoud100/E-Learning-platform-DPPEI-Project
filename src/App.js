@@ -138,7 +138,7 @@ function App() {
                 }/>
                 <Route path='/course-details/:id' element={
                     <ProtectedRoute>
-                        <CourseDetails/>
+                        <CourseDetails coursesWithDetails={coursesWithDetails}/>
                     </ProtectedRoute>
                 }/>
                 <Route path='/cart' element={

@@ -1,14 +1,45 @@
 import React from 'react';
 import './style.css';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrders } from '../../store/actions/orderAction';
+import { useEffect,useState } from 'react';
+import GeneralLoading from '../../components/Loading/GeneralLoading/GeneralLoading';
 export default function Checkout() {
+  const {orders,loading}=useSelector(state=>state.orders);
+  const dispatch=useDispatch();
+  const [successMessage, setSuccessMessage] = useState('');
+
+  useEffect(() => {
+    // Only dispatch getOrders if orders are not already fetched
+    if (!orders || !orders.results || orders.results.length === 0) {
+      dispatch(getOrders());
+    }
+  }, []);
+
+
+  const orderItems = orders?.results?.[0] || [];
+ 
+    console.log(orderItems)
+  
+    const handleCheckout = () => {
+      setSuccessMessage('You have successfully checked out!');
+    };
+
   return (
+    (loading ) ? (
+      <GeneralLoading />
+    ) :
     <div className="container mt-5">
       <div className="row">
         {/* Left Column: Billing Address and Payment Method */}
         <div className="col-md-8">
           <h1 className='my-3'>Checkout</h1>
+       {/* Success Message */}
+            {successMessage && (
+            <div className="alert alert-success" role="alert">
+              {successMessage}
+            </div>
+          )}
 
           {/* Billing Address */}
           <div className="mb-5">
@@ -66,30 +97,19 @@ export default function Checkout() {
           <div className="mb-4">
             <h5>Order details</h5>
             <ul className="list-group">
+         {
+          orderItems?.items?.map((order,i)=>(
             <li className="list-group-item d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
-                <img src="https://via.placeholder.com/40" alt="AJAX Development" className="checkout-course-img me-2" />
-                <h6 className="mb-0 fw-bolder">AJAX Development</h6>
-              </div>
-             <span>E£699.99</span>
-             </li>
-
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
-                <img src="https://via.placeholder.com/40" alt="Learn C# Programming" className="checkout-course-img me-2" />
-                <h6 className="mb-0 fw-bolder"> Learn C# Programming (In Ten Easy Steps)</h6>
-              </div>
-               
-                <span>E£899.99</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
-                <img src="https://via.placeholder.com/40" alt=" Typescript: The Complete Developer's Guide" className="checkout-course-img me-2" />
-                <h6 className="mb-0 fw-bolder">  Typescript: The Complete Developer's Guide</h6>
-              </div>
-               
-                <span>E£2,499.99</span>
-              </li>
+            <div className="d-flex align-items-center">
+              <img src={order?.course?.thumbnail_link} className="checkout-course-img me-2 " />
+              <h6 className="mb-0 fw-bolder">  {order?.course?.title}</h6>
+            </div>
+             
+              <span>{order?.price} L.E</span>
+            </li>
+          ))
+         }
+             
             </ul>
           </div>
         </div>
@@ -101,18 +121,18 @@ export default function Checkout() {
    <p className='fs-3 fw-bold'> Summary</p>          
    <p className=" d-flex justify-content-between">
                 <strong>Original Price:</strong>
-                <span> E£5,799.96</span>
+                <span> {orderItems?.total_price}L.E</span>
               </p>
               <hr />
               <p className=" d-flex justify-content-between">
                 <strong>Total:</strong>
-                <span>E£5,799.96</span>
+                <span> {orderItems?.total_price}L.E</span>
               </p>
               <small className="form-text text-muted my-3">
                 By completing your purchase you agree to these <a href="#">Terms of Service</a>.
               </small>
             
-   <button type='submit' className='w-100 btn  btn-primary btn-lg ' > Complete Checkout</button>
+   <button type='submit' className='w-100 btn  btn-primary btn-lg  checkout-btn' onClick={handleCheckout} > Complete Checkout</button>
    <p className="mt-2 text-center">30-Day Money-Back Guarantee</p>
 
 

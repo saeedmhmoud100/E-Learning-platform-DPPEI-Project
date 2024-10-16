@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { getCourseWhatYouWillLearn,getCourseIncludes,getCourseDetails,getCourseRequirments,getAllCourses,getCourseReviews} from '../../store/actions/coursesAction.js';
 import { getInstructorProfile } from '../../store/actions/instructorAction.js';
 
-export default function CourseDetails() {
+export default function CourseDetails({coursesWithDetails}) {
 
   let {id}=useParams();
   
@@ -24,20 +24,16 @@ export default function CourseDetails() {
 
   };
   
-    const dispatch = useDispatch()
-  
+    
   const {
     course,
     courses,
-    whatYouWillLearnData,
-    courseIncludesData,
-    requirments,reviews,loading
+    loading
     
   } = useSelector(state => state.allCourses);
 
-  const{instructor}=useSelector(state => state.instructor)
-  let courseRating = course?.rating_count || 0;
-  let starsCount = new Array(courseRating).fill(0);
+  
+ 
 //state to handle reviews button
 const [showAllReviews, setShowAllReviews] = useState(false)
   const handleReviewsButton=()=>{
@@ -45,8 +41,8 @@ const [showAllReviews, setShowAllReviews] = useState(false)
  
   }
 
-  const visibleReviews = showAllReviews ? reviews : reviews?.slice(0, 4);
 
+const [loadingPage, setloadingPage] = useState(true)
 
  //to use in this-course-includes-section
 
@@ -59,42 +55,39 @@ const [showAllReviews, setShowAllReviews] = useState(false)
     "fa-solid fa-code",
     "fa-solid fa-trophy"
   ];
-  const firstResources = courseIncludesData?.slice(0, 3); // First 3 items
-  const secondResources = courseIncludesData?.slice(3,6);   // Remaining items
-  const instructorId=course?.instructor
-  console.log('Instructor ID:', instructorId, 'Course ID:', id);
  
-
+ 
+ const [CurrentCourse, setCurrentCourse] = useState({})
   useEffect(() => {
-    const fetchCourseDetails = async () => {
-      if (id) {
-        // Fetch course details first
-        await dispatch(getCourseDetails(id));
-  
-        // After fetching course details, get the instructorId
-       
-        const instructorId = course?.instructor; 
-  
-        if (instructorId) {
-          // Now that you have the instructorId, fetch all related data
-          await Promise.all([
-            dispatch(getAllCourses(instructorId)),
-            dispatch(getInstructorProfile(instructorId)),
-            dispatch(getCourseWhatYouWillLearn(id)),
-            dispatch(getCourseIncludes(id)),
-            dispatch(getCourseRequirments(id)),
-            dispatch(getCourseReviews(id)),
-          ]);
+    
+    if(coursesWithDetails.length!=0){
+      setloadingPage(false)
+      console.log(coursesWithDetails)
+      coursesWithDetails.map((course,i)=>{
+        if(course?.id==id){
+          setCurrentCourse(course);
         }
-      }
-    };
-  
-    fetchCourseDetails();
-  }, [id, dispatch]);
-  
+      })
 
+    }
+    else{
+     setloadingPage(true)
+
+    }
+          
+    
+  }, [coursesWithDetails]);
+  let courseIncludesData=CurrentCourse?.this_course_includes;
+  let firstResources = courseIncludesData?.slice(0, 3); // First 3 items
+  let secondResources = courseIncludesData?.slice(3,6);   // Remaining items
+  const visibleReviews = showAllReviews ? CurrentCourse?.reviews :  CurrentCourse?.reviews?.slice(0, 4);
+  let instructor=CurrentCourse?.instructor_data;
+  let courseRating = CurrentCourse?.rating_count || 0;
+  let starsCount = new Array(courseRating).fill(0);
+  let review=CurrentCourse?.review
+  
   return (
-    (loading ) ? (
+    (loading || loadingPage) ? (
       <GeneralLoading />
     ) :
     <>
@@ -102,28 +95,25 @@ const [showAllReviews, setShowAllReviews] = useState(false)
       <div className="container-fluid bg-dark py-5">
         <header className="row">
           <div className="col-lg-8 col-md-10 col-sm-12 text-white p-4">
-            <h1 className="mb-3">{course?.title}</h1>
+            <h1 className="mb-3">{CurrentCourse?.title}</h1>
             <h2 className="h5">
-             {course?.brief_description}
+             {CurrentCourse?.brief_description}
             </h2>
 
             <div className="selling mt-4">
               <div className="ratings d-flex align-items-center">
-                <i className="me-1">{course?.rating_count}</i>
+                <i className="me-1">{CurrentCourse?.rating_count}</i>
                 <div className="stars me-2 mb-1">
                   { starsCount.map((star,i)=>( <i  className="fa-solid fa-star text-warning" key={i}></i>))}
                 </div>
                 <Link className="text-secondary me-2" to="#">
-                  ({course?.rating_count} ratings)
+                  ({CurrentCourse?.rating_count} ratings)
                 </Link>
-                <span className="me-2">{course?.students_count} student</span>
+                <span className="me-2">{CurrentCourse?.students_count} student</span>
               </div>
             </div>
             <p>
-              Created By: <Link className='me-1 text-info' to={{
-                  pathname: '/inst-profile',
-                  search: `?id=${instructor.id}`,
-                }} >{instructor?.title}</Link>
+              Created By: {CurrentCourse?.instructor_data?.title}
             </p>
             <div className='d-flex gap-3'>
               <div className="last-update">
@@ -132,12 +122,12 @@ const [showAllReviews, setShowAllReviews] = useState(false)
               </div>
               <div className="first-lang">
                 <i className="fa-solid fa-globe me-1"></i>
-                <span>{course?.main_language?.name}</span>
+                <span>{CurrentCourse?.main_language?.name}</span>
               </div>
               <div className="subtitles">
          <i className="fa-regular fa-closed-captioning me-1"></i>
 
-          {course?.languages?.map((language, i) => (
+          {CurrentCourse?.languages?.map((language, i) => (
             <span key={language.id}>{language.name} [auto],</span>
           ))}
         </div>
@@ -159,7 +149,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
     <div className="col-md-8 ">
       <ul className="list-unstyled">
         {
-            whatYouWillLearnData?.map((item,index)=>(
+            CurrentCourse?.what_you_will_learn?.map((item,index)=>(
               <li className="mb-2" key={index}>
                 <i className="fa-solid fa-check"></i> {item.description}
               </li>
@@ -208,7 +198,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
             <div className="requirements  my-5 p-2">
               <h3 className="mb-4">Requirements</h3>
               <ul>
-                {requirments?.map((requirment,i)=>(<li className="mb-2"key={i}>{requirment.description} </li>))}
+                {CurrentCourse?.requirements?.map((requirment,i)=>(<li className="mb-2"key={i}>{requirment.description} </li>))}
               
               </ul>
             </div>
@@ -219,14 +209,14 @@ const [showAllReviews, setShowAllReviews] = useState(false)
               {showFullDescription ? (
                 <>
                 <div>
-                  {course?.description}
+                  {CurrentCourse?.description}
                 </div>
                 </>
               ) : (
                 <>
                   {/* Truncated version of the description */}
                  <div>
-                  {course?.brief_description}
+                  {CurrentCourse?.brief_description}
                  </div>
                 </>
               )}
@@ -237,30 +227,16 @@ const [showAllReviews, setShowAllReviews] = useState(false)
               </button>
             </div>
 
-            {/* Who This Course is For Section */}
-            {showFullDescription && (
-              <div className="who-this-course-is-for  my-5 p-2">
-                <h3 className="mb-4">Who this course is for</h3>
-                <ul className="ps-4">
-                  <li className="mb-2">Web Designers looking to improve their skill set</li>
-                  <li className="mb-2">Programmers who need to learn Javascript for their web applications</li>
-                  <li className="mb-2">People looking to start programming and need a first programming language to learn</li>
-                  <li className="mb-2">Students who want to learn Javascript</li>
-                  <li className="mb-2">People who manage a website as a volunteer or as a hobby</li>
-                  <li className="mb-2">Bloggers—even if you use Wordpress or another CMS!</li>
-                  <li className="mb-2">Anyone else who wants to learn Javascript</li>
-                </ul>
-              </div>
-            )}
+          
             {/* students also bought section */}
             <h4 className="mb-4 fw-bold">Students also bought</h4>
-            {courses?.slice(0,3)?.map((course) => (
+            {coursesWithDetails?.slice(0,3)?.map((course) => (
             <div  key={course.id}>
               <StudentAlsoBoughtCard
                 title={course?.title}
                 price={course?.price}
                 thumbnail={course?.thumbnail_link}
-                instructor={course?.instructor}
+                // instructor={course?.instructor}
                 rating={course?.rating_count}
                 priceBeforeDiscount={course?.price_before_discount}
                 hours={course?.total_duration}
@@ -270,20 +246,20 @@ const [showAllReviews, setShowAllReviews] = useState(false)
               
             
             {/* instructor section */}
-
+ 
             <InstructorSection instructor={instructor}/>
-            {/* course Review */}
+           {/* course Review */}
          
             <div className="row g-3">
 <div className=' fw-bolder d-flex '>
   <div className="course-ratings">
   <i className="fa-solid fa-star text-warning me-2" ></i>
-  <span className='fs-4 me-3'>{course?.rating_avg}course rating
+  <span className='fs-4 me-3'>{CurrentCourse?.rating_avg} course rating
   </span>
   </div>
   <div className="overall-ratings">
   <i className="fa-solid fa-circle fa-xs text-secondary"></i> 
-  <span className='fs-4'> {course?.rating} ratings
+  <span className='fs-4'> {CurrentCourse?.rating_count} ratings
 
   </span>
   </div>
@@ -298,7 +274,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
    </div>  
    </div>
              </div>
-   {reviews?.length > 4 && (
+   {CurrentCourse?.reviews?.length > 4 && (
       <button className="btn btn-info my-2" onClick={handleReviewsButton}>
         {showAllReviews ? "Show Less" : "Show All Reviews"}
       </button>
@@ -307,7 +283,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
      
              {/* moreCourses by instructor */}
 
-             <h6 className='fs-4 fw-bolder my-3'> More Courses by <Link to="/inst-profile" className='text-decoration-none'> SkillSprints Inc.</Link></h6> 
+             <h6 className='fs-4 fw-bolder my-3'> More Courses by <Link to="/inst-profile" className='text-decoration-none'> {instructor.title}</Link></h6> 
              
              <div className="container">
                <div className="row">
@@ -317,7 +293,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
                   
                </div>  
              </div>      
-
+           
 
             <div className='end-of-sidebar'></div>
           </div>
@@ -326,7 +302,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
 <div className="p-3 border rounded bg-light sidebar" 
    >
   <img
-  src={course?.thumbnail_link}
+  src={CurrentCourse?.thumbnail_link}
   alt="Course Preview"
   className="w-100 mb-3"
 />
@@ -343,7 +319,7 @@ const [showAllReviews, setShowAllReviews] = useState(false)
     <p className="text-muted">Starting at 200.00 EGP per month after trial</p>
     <hr />
     <p className="text-center">or</p>
-    <h3 className="text-center">{course?.price} EGP</h3>
+    <h3 className="text-center">{CurrentCourse?.price} EGP</h3>
     <button className="btn btn-outline-dark w-100 mb-3 btn-info">Add to cart</button>
    
   </div>
