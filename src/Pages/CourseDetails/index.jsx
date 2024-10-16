@@ -113,7 +113,7 @@ const [loadingPage, setloadingPage] = useState(true)
               </div>
             </div>
             <p>
-              Created By: {CurrentCourse?.instructor_data?.title}
+              Created By: <Link to={"/inst-profile/" + instructor.id} className='text-decoration-none text-primary'>{CurrentCourse?.instructor_data?.title}</Link>
             </p>
             <div className='d-flex gap-3'>
               <div className="last-update">
@@ -283,7 +283,7 @@ const [loadingPage, setloadingPage] = useState(true)
      
              {/* moreCourses by instructor */}
 
-             <h6 className='fs-4 fw-bolder my-3'> More Courses by <Link to="/inst-profile" className='text-decoration-none'> {instructor.title}</Link></h6> 
+             <h6 className='fs-4 fw-bolder my-3'> More Courses by <Link to={"/inst-profile/" + instructor.id} className='text-decoration-none'> {instructor.title}</Link></h6>
              
              <div className="container">
                <div className="row">
