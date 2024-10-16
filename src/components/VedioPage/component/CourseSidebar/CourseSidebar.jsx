@@ -33,11 +33,11 @@ function CourseSidebar({ courseId }) {
                     <div className="accordion-item">
                         <h2 className="accordion-header" id={"section" + section.id}>
                             <button className="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSection1" aria-expanded="true" aria-controls="collapseSection1">
+                                    data-bs-target={"#collapseSection"+ section.id} aria-expanded="true" aria-controls={"collapseSection"+ section.id}>
                                 Section {index +1}: {section.title}
                             </button>
                         </h2>
-                        <div id="collapseSection1" className="accordion-collapse collapse show" aria-labelledby="section1"
+                        <div id={"collapseSection"+ section.id} className="accordion-collapse collapse show" aria-labelledby={"section"+ section.id}
                              data-bs-parent="#courseAccordion">
                             <div className="accordion-body">
                                 <ul className="list-group">
