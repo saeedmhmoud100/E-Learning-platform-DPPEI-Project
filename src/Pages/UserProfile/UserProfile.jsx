@@ -67,9 +67,9 @@ function UserProfile() {
             >
                 <div className="header d-flex justify-content-between">
                     <h1 className='text-center mb-4'>My Courses</h1>
-                    <Link className='seeAll' to={'/profile/courses'}>See All<i className="fa-solid fa-chevron-right fs-6"></i></Link>
+                    <Link className='seeAll' to={'/my-courses/all-courses'}>See All<i className="fa-solid fa-chevron-right fs-6"></i></Link>
                 </div>
-                {userData.courses_enrolled.map((course,i)=>(<CourseProgressCard key={i} courseName={course.title} instructorName={course.instructor} image={course.thumbnail_link} />))}
+                {userData.courses_enrolled.map((course,i)=>(<CourseProgressCard key={i} courseName={course.title} instructorName={course.instructor} image={course.thumbnail_link} course={course} />))}
                 {/* <CourseProgressCard courseName={'Advanced React'} instructorName={'Jane Smith'} progress={50} />
                 <CourseProgressCard courseName={'JavaScript Essentials'} instructorName={'Mark Lee'} progress={80} />
                 <CourseProgressCard courseName={'CSS Mastery'} instructorName={'Sarah Jones'} progress={95} /> */}
