@@ -161,7 +161,7 @@ function App() {
                         <UserProfile/>
                     </ProtectedRoute>
                 } />
-                <Route path="videopage/:id" element={
+                <Route path="videopage/:id/*" element={
                     <ProtectedRoute>
                         <VedioPage/>
                     </ProtectedRoute>

@@ -27,49 +27,40 @@ function CourseSidebar({ courseId }) {
     }, [courseId, dispatch, sections]);
 
     return (
-        <div className="d-flex justify-content-center">
-            <div className="course-sidebar bg-white rounded w-100 " >
-                {sections && sections.length > 0 && (
-                    sections.map((section, index) => (
-                        <Section key={index} {...section} />
-                    ))
-                )}
-            </div>
-        </div>
+        <>
+            {sections && sections.length > 0 && (
+                sections.map((section, index) => (
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id={"section" + section.id}>
+                            <button className="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSection1" aria-expanded="true" aria-controls="collapseSection1">
+                                Section {index +1}: {section.title}
+                            </button>
+                        </h2>
+                        <div id="collapseSection1" className="accordion-collapse collapse show" aria-labelledby="section1"
+                             data-bs-parent="#courseAccordion">
+                            <div className="accordion-body">
+                                <ul className="list-group">
+
+                                    {section?.lectures?.length ? section?.lectures?.map((lecture, index) => (
+                                        <li className="list-group-item" key={index}>
+                                            <Link to={`/videopage/${courseId}/section/${section.id}/lecture/${lecture.id}`}>{lecture.title}</Link>
+                                        </li>
+                                    )) : (
+                                        <li className="list-group-item">No lectures found</li>
+                                    )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            )}
+        </>
+
+
 
     );
-}
-
-function Section({ title, total_duration, lectures }) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
-    return (
-        <div className="section dropdownUl rounded me-3 " style={bgColor}>
-            <h3 className="section-title" onClick={toggleDropdown}>
-                {title} <span className="caret">{isOpen ? '▼' : '▲'}</span>
-            </h3>
-            <p className="section-progress"> {total_duration}</p>
-            {isOpen && <Dropdown items={lectures} />}
-        </div>
-    );
-}
-
-function Dropdown({ items }) {
-    return (
-        <ul className="section-items dropdown bg-white">
-            {items.map((item, index) => (
-                <SectionItem key={index}>{item.title}</SectionItem>
-            ))}
-        </ul>
-    );
-}
-
-function SectionItem({ children }) {
-    return <li className="section-item rounded mb-1 list-unstyled"><Link >{children}</Link></li>;
 }
 
 export default CourseSidebar;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import myVideo from "./images/video1.mp4";
+import {Route, Routes, useParams} from "react-router-dom";
 import CourseSidebar from "./component/CourseSidebar/CourseSidebar";
 import { LearningTools } from "./component/LearningTools";
 import Overview from "./component/OverView";
@@ -9,7 +8,9 @@ import Search from "./component/Search";
 import CourseReviewCard from "../../Pages/CourseDetails/components/CourseReviewCard";
 import Announcements from "./component/Announcement";
 import { useSelector, useDispatch } from "react-redux";
-import { getCourseReviews, getCourseDetails } from '../../store/actions/coursesAction'
+import {getCourseReviews, getCourseDetails} from '../../store/actions/coursesAction'
+import Video from "./component/Video";
+import {getLecture} from "../../store/actions/lecturesAction";
 
 export default function VideoPage() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -41,7 +42,7 @@ export default function VideoPage() {
                 await dispatch(getCourseDetails(id))
             }
             fetchCoursedata()
-
+            // dispatch(getLecture())
         }
 
     }, [id, course, dispatch])
@@ -52,7 +53,10 @@ export default function VideoPage() {
                 <div className="row ">
                     <div className="col-md-8 col-sm-12 ">
                         <div>
-                            <video className=" mt-2 w-100" controls src={myVideo}></video>
+                            <Routes>
+                                <Route path="/section/:section_id/lecture/:lecture_id" element={<Video />} />
+                                {/*<Route path="*" element={<video className=" mt-2 w-100" controls src={myVideo}></video>} />*/}
+                            </Routes>
                         </div>
                         <ul className="nav nav-tabs text-dark ms-5 mt-3">
                             <li className="nav-item">
@@ -156,7 +160,11 @@ export default function VideoPage() {
                         </div>
                     </div>
                     <div className="col-md-4 col-sm-12 mt-2 vh-100">
-                        <CourseSidebar courseId={id} />
+                        <h2>Course Sections</h2>
+
+                        <div className="accordion" id="courseAccordion">
+                            <CourseSidebar courseId={id} />
+                        </div>
                     </div>
                 </div>
             </div>
