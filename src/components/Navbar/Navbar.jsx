@@ -120,7 +120,10 @@ export const Navbar = ({updateCategory}) => {
                                         Courses</Link></li>
                                         {
                                             userData?.is_admin && (
-                                                <li><Link className="dropdown-item" to="/admin">Admin</Link></li>
+                                                <>
+                                                    <li><Link className="dropdown-item" to="/admin">Admin</Link></li>
+                                                    <li><Link className="dropdown-item" to={"/inst-profile/" + userData.id}>Instructor Profile</Link></li>
+                                                </>
                                             )
                                         }
                                     <li><Link className="dropdown-item"

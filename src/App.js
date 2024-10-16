@@ -121,7 +121,7 @@ function App() {
                         <AdminPage/>
                     </ProtectedRoute>
                 }/>
-                <Route path="/inst-profile" element={
+                <Route path="/inst-profile/:id" element={
                     <ProtectedRoute>
                         <InstProfile/>
                     </ProtectedRoute>
