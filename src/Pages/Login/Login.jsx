@@ -59,7 +59,7 @@ export default function Login({fetchData}) {
         return
     }else{
         if(error){
-            errorNotification(error.response.data.detail);
+            errorNotification(error?.response?.data?.detail);
         }else{
             setToken(token);
             fetchData();
