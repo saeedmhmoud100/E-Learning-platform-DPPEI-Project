@@ -4,7 +4,7 @@ import './Home.css'
 import SliderForCourseCards from '../../components/SliderForCourseCards/SliderForCourseCards.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-
+import { TypeAnimation } from 'react-type-animation';
 
 export default function Home() {
     const {userData} = useSelector(state=>state.user);
@@ -26,8 +26,15 @@ export default function Home() {
             <img src={userData.profile_image} alt="user picture" className='w-100 h-100 rounded-circle' />
             </div>
             <div className="text-cont ps-4">
-                <h2>Welcome back, {userData.username}</h2>
-                {/* <a href='#'>add occupations and interest</a> */}
+            <TypeAnimation
+            sequence={[
+                `Welcome back, ${userData.username}`,
+                1000,
+            ]}
+            speed={50}
+            style={{ fontSize: '2em' }}
+            repeat={Infinity}
+            />
             </div>
         </motion.div>
 
@@ -63,7 +70,12 @@ export default function Home() {
                             {userData.courses_enrolled.slice(0,2).map((course)=>{
                                 return(
                                 <>
-                                <div key={course.id} className="col-12 col-md-6 col-lg-4 custom-dimensions">
+                                <motion.div
+                                initial={{ x: -100, opacity: 0 }}  
+                                whileInView={{ x: 0, opacity: 1 }}
+                                viewport={{ once: true,amount: 0.5 }}
+                                transition={{ duration: 1 }}
+                                key={course.id} className="col-12 col-md-6 col-lg-4 custom-dimensions">
                                     <div className="d-flex justify-content-between align-items-center h-100">
                                         <div className="position-relative w-75 h-100">
                                             <div className="overlay-for-home"></div>
@@ -84,14 +96,18 @@ export default function Home() {
                                             <h5 className='h6 text-muted'>Lecture . {course?.total_duration}</h5>
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                                 </>  
                             )})}
                             </div>
                             </div>
                             </>
                         ):(
-                            <h3 className='text-center p-4'>It seems you have yet to explore our courses.<Link to='/courses' className='my-learning-btn'> Start learning!</Link></h3>
+                            <motion.h3 initial={{ scale:0.5 }}  
+                            whileInView={{ scale:1 }}
+                            viewport={{ once: true,amount: 0.5 }}
+                            transition={{ duration: 1 }}
+                            className='text-center p-4'>It seems you have yet to explore our courses.<Link to='/courses' className='my-learning-btn'> Start learning!</Link></motion.h3>
                         )
                     }
         </motion.div>
@@ -108,13 +124,10 @@ export default function Home() {
         {/* END - HEADER */}
         
         {/* START - THIRD SECTION WITH COURSE CARDS */}
-        <motion.div
-        initial={{ x: -100, opacity: 0 }}  
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        <div
         className="container-fluid position-relative p-0">
             <SliderForCourseCards/>
-        </motion.div>
+        </div>
         {/* END - THIRD SECTION WITH COURSE CARDS */}
     </motion.div>
 

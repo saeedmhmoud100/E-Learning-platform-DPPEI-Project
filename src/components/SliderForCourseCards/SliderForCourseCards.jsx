@@ -54,9 +54,10 @@ export default function SliderForCourseCards() {
 
   return (
     <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: false }}>
+    initial={{ x: -100, opacity: 0 }}  
+    whileInView={{ x: 0, opacity: 1 }}
+    viewport={{ once: true,amount: 0.5 }}
+    transition={{ duration: 1 }}>
         {
             loading ? (
                 <CourseCardsLoading /> 
