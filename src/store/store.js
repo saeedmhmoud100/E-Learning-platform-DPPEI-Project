@@ -6,6 +6,6 @@ const initailState = {}
 
 const meddleware = [thunk]
 
-const store = createStore(rootReducer, initailState, composeWithDevTools(applyMiddleware(...meddleware)))
+const store = createStore(rootReducer, initailState, applyMiddleware(...meddleware))
 
 export default store
