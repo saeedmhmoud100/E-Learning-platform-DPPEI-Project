@@ -201,7 +201,13 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
             <div className="row">
                 <div className="col-lg-8 py-4">
                     <div className="container-fluid">
-                        <div className="row row gy-2">
+                        <motion.div
+                          key={`${filteredCourses.length}-${currentPage}`}
+                         initial={{ x:-100,opacity: 0 }}
+                         whileInView={{ x:0,opacity: 1 }}
+                         viewport={{ once: false }}
+                         transition={{ duration: 0.5, ease: "easeInOut" }}
+                         className="row row gy-2">
                         {
                           loading || coursesWithDetails.length == 0 ? (
                             <CourseCardsLoading />
@@ -215,7 +221,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                             )
                           )
                         }
-                        </div>  
+                        </motion.div>  
                     </div>
                 </div>
             </div>
@@ -233,7 +239,13 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
 
               <div className="col-lg-9 py-4">
                     <div className="container-fluid">
-                        <div className="row gy-2">
+                        <motion.div
+                         key={`${filteredCourses}-${currentPage}`}
+                         initial={{ x:-100,opacity: 0 }}
+                         whileInView={{ x:0,opacity: 1 }}
+                         viewport={{ once: false }}
+                         transition={{ duration: 0.5, ease: "easeInOut" }}
+                         className="row gy-2">
                         {
                           loading || coursesWithDetails.length == 0 ? (
                             <CourseCardsLoading />
@@ -247,7 +259,7 @@ export default function Courses({coursesWithDetails, categoryInput, updateCatego
                             )
                           )
                         }
-                        </div>
+                        </motion.div>
                     </div>
               </div>
           </div>

@@ -36,10 +36,7 @@ export default function CourseCards({course}) {
   return (
       <>
     
-    <motion.div
-     initial={{ opacity: 0 }}
-     whileInView={{ opacity: 1 }}
-     viewport={{ once: false }}
+    <div
      className="col-12 col-sm-6 col-lg-4 card-hover" role='button'>
             <div className="d-flex justify-content-center align-items-center flex-column w-100 h-100">
                 <div className="position-relative w-100 h-50">
@@ -82,7 +79,7 @@ export default function CourseCards({course}) {
                     </Link>
                 </div>
             </div>
-      </motion.div>
+      </div>
       </>
 
       
