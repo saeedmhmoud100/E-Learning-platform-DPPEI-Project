@@ -30,7 +30,7 @@ export default function Video() {
         }
 
 
-    }, [section_id,lecture_id,dispatch])
+    }, [lecture_id])
     const embedUrl = lecture?.video_url.replace('watch?v=', 'embed/');
     return(
         <>

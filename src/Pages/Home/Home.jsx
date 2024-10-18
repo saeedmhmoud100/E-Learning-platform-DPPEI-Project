@@ -47,7 +47,19 @@ export default function Home() {
                 <img src="/images/1.jpg" alt="EduVerse" className='w-100 h-100' />
             </div>
             <div className="img-1-text-content">
-                <h2 className='mb-3 fw-bold'>Learning that gets you</h2>
+                <TypeAnimation
+                    sequence={[
+                        `Learning that gets you`,
+                        1000,
+                        `Learning that`,
+                        100,
+                        `Learning that gets you`,
+                        1000,
+                    ]}
+                    speed={50}
+                    style={{ fontSize: '2em' }}
+                    repeat={Infinity}
+                />
                 <h3 className='h5'>Skills for your present (and your future). Get started with us.</h3>
             </div>
         </motion.div>

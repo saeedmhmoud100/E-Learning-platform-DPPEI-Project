@@ -11,7 +11,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {getCourseReviews, getCourseDetails} from '../../store/actions/coursesAction'
 import Video from "./component/Video";
 import {getLecture} from "../../store/actions/lecturesAction";
-
+import {AnimatePresence} from "framer-motion";
+import {motion} from "framer-motion";
 export default function VideoPage() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isOverViewOpen, setIsOverViewOpen] = useState(true);
@@ -24,6 +25,19 @@ export default function VideoPage() {
     const review = useSelector(state => state.allCourses.reviews)
     const course = useSelector(state => state.allCourses.course)
     const dispatch = useDispatch();
+
+
+
+    function AddAnimation({children,side}) {
+        return <motion.div
+            initial={{ [side]: -10, opacity: 0 }}
+            animate={{ [side]: 0, opacity: 1 }}
+            exit={{ [side]: 10, opacity: 0 }}
+            transition={{ duration: 0.4 }}
+        > {children} </motion.div>
+    }
+
+
     useEffect(() => {
         if (!review) {
             const fetchCourseReviews = async () => {
@@ -47,6 +61,7 @@ export default function VideoPage() {
 
     }, [id, course, dispatch])
 
+
     return (
         <>
             <div className="container-fluide mb-5">
@@ -54,7 +69,7 @@ export default function VideoPage() {
                     <div className="col-md-8 col-sm-12 ">
                         <div>
                             <Routes>
-                                <Route path="/section/:section_id/lecture/:lecture_id" element={<Video />} />
+                                <Route path="/section/:section_id/lecture/:lecture_id" element={<AddAnimation side={'y'}><Video /></AddAnimation>} />
                                 {/*<Route path="*" element={<video className=" mt-2 w-100" controls src={myVideo}></video>} />*/}
                             </Routes>
                         </div>
@@ -149,14 +164,16 @@ export default function VideoPage() {
                             </li>
                         </ul>
                         <div>
-                            {isQ_A_Open && <Questions />}
-                            {isSearchOpen && <Search />}
-                            {isOverViewOpen && <Overview course={course} />}
-                            {isAnnouncementsOpen && <Announcements />}
-                            {isLearningToolOpen && <LearningTools />}
-                            {isReviewOpen && review?.map((review, i) => {
-                                return (<CourseReviewCard review={review} key={i} />)
-                            })}
+                            <AnimatePresence mode="wait">
+                                    {isQ_A_Open && <AddAnimation side={'x'}><Questions /></AddAnimation>}
+                                    {isSearchOpen &&<AddAnimation side={'x'}> <Search /></AddAnimation>}
+                                    {isOverViewOpen && <AddAnimation side={'x'}><Overview course={course} /></AddAnimation>}
+                                    {isAnnouncementsOpen && <AddAnimation side={'x'}><Announcements /></AddAnimation>}
+                                    {isLearningToolOpen && <AddAnimation side={'x'}><LearningTools /></AddAnimation>}
+                                    {isReviewOpen && review?.map((review, i) => {
+                                        return (<AddAnimation side={'x'}><CourseReviewCard review={review} key={i} /></AddAnimation>)
+                                    })}
+                            </AnimatePresence>
                         </div>
                     </div>
                     <div className="col-md-4 col-sm-12 mt-2 vh-100">
