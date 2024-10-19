@@ -1,6 +1,7 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
+import {GET_ALL_Courses, DELETE_COURSE, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
 import useGetData from '../../ApiHooks/useGetData'
 import usePostData from "../../ApiHooks/usePostData";
+import useDeleteData from '../../ApiHooks/useDeleteData';
 import { GET_THIS_COURSE_INCLUDES } from '../type';
 
 
@@ -91,6 +92,33 @@ export const createCourse = (formData) => async (dispatch) => {
         })
     }
 }
+
+
+export const deleteCourse = (course_id) => async (dispatch) =>{
+    try {
+        const response = await useDeleteData(`courses/`, course_id);
+        dispatch({
+            type: DELETE_COURSE,
+            payload: response,
+            loading: true
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ERROR,
+            payload: "Error " + e,
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
 export const getCourseWhatYouWillLearn = (course_id) => async (dispatch) => {
     try {
         const response = await useGetData(`courses/${course_id}/what-you-will-learn`);

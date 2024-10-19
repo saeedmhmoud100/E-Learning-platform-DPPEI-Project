@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import {createCourse} from "../../store/actions/coursesAction";
-import {useDispatch} from "react-redux";
-import {successNotification} from "../../hooks/Notification";
+import { createCourse } from "../../store/actions/coursesAction";
+import { useDispatch } from "react-redux";
+import { successNotification } from "../../hooks/Notification";
+
+import CourseTable from '../CourseTable'
 
 function AddCourses() {
     const titleRef = useRef();
@@ -15,11 +17,11 @@ function AddCourses() {
     const [submitData, setSubmitData] = useState({});
     const dispatch = useDispatch();
     useEffect(() => {
-        if(submitData?.title) {
+        if (submitData?.title) {
             dispatch(createCourse(submitData));
             successNotification('Course added successfully');
         }
-    }, [submitData]);
+    }, [submitData, dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,84 +39,96 @@ function AddCourses() {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="container my-5 p-3"
-        >
-            <h2 className="text-center mb-4">Add New Course</h2>
-            <form onSubmit={handleSubmit} className="bg-light p-4 rounded shadow-sm">
-                <div className="mb-3">
-                    <label className="form-label">Title</label>
-                    <motion.input
-                        type="text"
-                        ref={titleRef}
-                        required
-                        className="form-control"
-                        whileFocus={{ scale: 1.05 }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Description</label>
-                    <motion.input
-                        type="text"
-                        ref={descriptionRef}
-                        required
-                        className="form-control"
-                        whileFocus={{ scale: 1.05 }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Price</label>
-                    <motion.input
-                        type="text"
-                        ref={priceRef}
-                        required
-                        className="form-control"
-                        whileFocus={{ scale: 1.05 }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Thumbnail Link</label>
-                    <motion.input
-                        type="text"
-                        ref={thumbnailLinkRef}
-                        required
-                        className="form-control"
-                        whileFocus={{ scale: 1.05 }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Brief Description</label>
-                    <motion.input
-                        type="text"
-                        ref={briefDescriptionRef}
-                        required
-                        className="form-control"
-                        whileFocus={{ scale: 1.05 }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Price Before Discount</label>
-                    <motion.input
-                        type="text"
-                        ref={priceBeforeDiscountRef}
-                        required
-                        className="form-control"
-                        whileFocus={{ scale: 1.05 }}
-                    />
-                </div>
-                <motion.button
-                    type="submit"
-                    className="btn btn-primary w-100"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+        <>
+            <div className='d-flex flex-wrap'>
+            <div className='w-50 '>
+                <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="container my-2 p-3"
                 >
-                    Add Course
-                </motion.button>
-            </form>
-        </motion.div>
+                    <h2 className="text-center mb-4">Add New Course</h2>
+                    <form onSubmit={handleSubmit} className="bg-light p-4 rounded shadow-sm">
+                        <div className="mb-3">
+                            <label className="form-label">Title</label>
+                            <motion.input
+                                type="text"
+                                ref={titleRef}
+                                required
+                                className="form-control"
+                                whileFocus={{ scale: 1.05 }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Description</label>
+                            <motion.input
+                                type="text"
+                                ref={descriptionRef}
+                                required
+                                className="form-control"
+                                whileFocus={{ scale: 1.05 }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Price</label>
+                            <motion.input
+                                type="text"
+                                ref={priceRef}
+                                required
+                                className="form-control"
+                                whileFocus={{ scale: 1.05 }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Thumbnail Link</label>
+                            <motion.input
+                                type="text"
+                                ref={thumbnailLinkRef}
+                                required
+                                className="form-control"
+                                whileFocus={{ scale: 1.05 }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Brief Description</label>
+                            <motion.input
+                                type="text"
+                                ref={briefDescriptionRef}
+                                required
+                                className="form-control"
+                                whileFocus={{ scale: 1.05 }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Price Before Discount</label>
+                            <motion.input
+                                type="text"
+                                ref={priceBeforeDiscountRef}
+                                required
+                                className="form-control"
+                                whileFocus={{ scale: 1.05 }}
+                            />
+                        </div>
+                        <motion.button
+                            type="submit"
+                            className="btn btn-primary w-100"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            Add Course
+                        </motion.button>
+                    </form>
+                </motion.div>
+            </div>
+            <div className='w-50 my-2 p-3 '>
+                <h2 className='text-center '>Courses List</h2>
+                <CourseTable />
+            </div>
+            </div>
+        
+        </>
+
     );
 }
 
