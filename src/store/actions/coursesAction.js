@@ -99,7 +99,7 @@ export const deleteCourse = (course_id) => async (dispatch) =>{
         const response = await useDeleteData(`courses/`, course_id);
         dispatch({
             type: DELETE_COURSE,
-            payload: response,
+            payload: course_id,
             loading: true
         })
 

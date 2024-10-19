@@ -28,7 +28,7 @@ const CourseTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {courses.map((course) => (
+                    {courses?.map((course) => (
                         <tr key={course.id}>
                             <td>{course.id}</td>
                             <td>{course.title}</td>
