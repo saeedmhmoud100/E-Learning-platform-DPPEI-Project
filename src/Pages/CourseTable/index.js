@@ -21,7 +21,7 @@ const CourseTable = () => {
                     <th>Course ID</th>
                     <th>Course Name</th>
                     <th>Price</th>
-                    <th>Instructor Name</th>
+                    <th>Instructor Id</th>
                     <th>Course Image</th>
                     <th>Actions</th>
                 </tr>
@@ -32,7 +32,7 @@ const CourseTable = () => {
                         <td>{course.id}</td>
                         <td>{course.title}</td>
                         <td>${course.price}</td>
-                        <td>{course.instructorName}</td>
+                        <td>{course.instructorId}</td>
                         <td>
                             <img
                                 src={course.thumbnail_link}

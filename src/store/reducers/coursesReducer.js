@@ -1,4 +1,4 @@
-import {GET_ALL_Courses, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_INCLUDES, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
+import {GET_ALL_Courses,DELETE_COURSE, GET_ERROR, CREATE_Course, GET_ALL_WHAT_YOU_WILL_LEARN, GET_COURSE_DETAILS, GET_THIS_COURSE_INCLUDES, GET_THIS_COURSE_REQUIRMENTS, GET_COURSE_REVIEWS} from '../type'
 
 const inital = {
    
@@ -58,6 +58,10 @@ const coursesReducer = (state = inital, action) => {
                 ...state,
                requirments: action.payload.results,
                 loading: false
+            }
+        case DELETE_COURSE:
+            return{
+                courses: action.payload.results
             }
         default:
             return state;
