@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourseSections } from '../../../../store/actions/courseSectionsActions'; // Update the import path as needed
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 const bgColor = {
     backgroundColor: "#1abc9c",
@@ -11,12 +11,14 @@ const bgColor = {
 function CourseSidebar({ courseId }) {
     const dispatch = useDispatch();
     const { results: sections } = useSelector((state) => state.sections.sections || []);
+    const {course} = useSelector(state => state.allCourses)
+    const { id } = useParams();
 
     useEffect(() => {
-        if (!sections) {
+        if (course.id != id) {
             const fetchSections = async () => {
                 if (courseId) {
-                    await dispatch(getCourseSections(courseId));
+                    await dispatch(getCourseSections(id));
                 }
             };
 

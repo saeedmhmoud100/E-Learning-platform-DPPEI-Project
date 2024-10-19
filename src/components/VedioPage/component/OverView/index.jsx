@@ -46,9 +46,12 @@
             <p className="">
             Skill level: Beginner Level <br />
             Students: {course.students_count} <br />
-            Languages:{/*  {course?.languages?.map((language,i)=>{
-                return(<span key={i}>{language}</span>)
-            })} */} <br />
+            Languages:{course?.languages?.map((language,i) =>
+                <span key={i}>{language.name + (i+1 !== course?.languages.length ? ', ' :'')}</span>
+            )
+
+            }
+                <br />
             Captions: Yes <br />
             </p>
             </div>

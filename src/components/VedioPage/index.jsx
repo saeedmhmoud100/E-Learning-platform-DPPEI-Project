@@ -23,7 +23,7 @@ export default function VideoPage() {
 
     const { id } = useParams();
     const review = useSelector(state => state.allCourses.reviews)
-    const course = useSelector(state => state.allCourses.course)
+    const {course} = useSelector(state => state.allCourses)
     const dispatch = useDispatch();
 
 
@@ -51,15 +51,15 @@ export default function VideoPage() {
 
 
     useEffect(() => {
-        if (!course) {
-            const fetchCoursedata = async () => {
-                await dispatch(getCourseDetails(id))
+        const fetchCoursedata = async () => {
+            if (!course || course.id != id) {
+                await dispatch(getCourseDetails(id));
             }
-            fetchCoursedata()
-            // dispatch(getLecture())
-        }
+        };
 
-    }, [id, course, dispatch])
+        fetchCoursedata();
+
+    }, [id,dispatch]);
 
 
     return (
