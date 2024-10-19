@@ -56,15 +56,19 @@ const coursesReducer = (state = inital, action) => {
         case  GET_THIS_COURSE_REQUIRMENTS:
             return {
                 ...state,
-               requirments: action.payload.results,
+                requirments: action.payload.results,
                 loading: false
             }
         case DELETE_COURSE:
-            return{
-                courses: action.payload.results
-            }
+                return {
+                    ...state,
+                    courses: state.courses.filter(course => course.id !== action.payload.id),
+                    loading: false,
+                }
         default:
             return state;
     }
 }
+
+
 export default coursesReducer
