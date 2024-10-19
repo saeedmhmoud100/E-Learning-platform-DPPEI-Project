@@ -38,6 +38,7 @@ import { getToken, setToken } from './hooks/myToken';
 import useGetData from './ApiHooks/useGetData';
 import { getLoggedUserData, getWishlist } from './store/actions/userActions';
 import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
+import AddCourse from "./Pages/AddCourse";
 
 function App() {
     const {userData, logged_in, userData:{wishlist}} = useSelector(state=>state.user);
@@ -133,7 +134,7 @@ function App() {
                 }/>
                 <Route path='add-course' element={
                     <ProtectedRoute>
-                        <AddCourseForm/>
+                        <AddCourse/>
                     </ProtectedRoute>
                 }/>
                 <Route path='/course-details/:id' element={

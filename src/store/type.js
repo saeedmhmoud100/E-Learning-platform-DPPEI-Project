@@ -39,3 +39,6 @@ export const GET_WISHLIST = "GET_WISHLIST"
 export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST"
 export const GET_LECTURE = "GET_LECTURE"
 export const ADD_TO_CART="ADD_TO_CART"
+
+
+export const DELETE_COURSE= "DELETE_COURSE"
