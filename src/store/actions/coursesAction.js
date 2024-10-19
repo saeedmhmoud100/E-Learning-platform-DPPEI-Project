@@ -96,7 +96,7 @@ export const createCourse = (formData) => async (dispatch) => {
 
 export const deleteCourse = (course_id) => async (dispatch) =>{
     try {
-        const response = await useDeleteData(`courses/`, course_id);
+        const response = await useDeleteData(`courses/`+course_id);
         dispatch({
             type: DELETE_COURSE,
             payload: course_id,
