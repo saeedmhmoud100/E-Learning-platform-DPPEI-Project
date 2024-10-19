@@ -126,7 +126,7 @@ function AddCourses() {
                 <CourseTable />
             </div>
             </div>
-           
+        
         </>
 
     );
