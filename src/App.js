@@ -39,6 +39,7 @@ import useGetData from './ApiHooks/useGetData';
 import { getLoggedUserData, getWishlist } from './store/actions/userActions';
 import GeneralLoading from './components/Loading/GeneralLoading/GeneralLoading';
 import AddCourse from "./Pages/AddCourse";
+import {errorNotification, infoNotification, warningNotification} from "./hooks/Notification";
 
 function App() {
     const {userData, logged_in, userData:{wishlist}} = useSelector(state=>state.user);
@@ -48,7 +49,7 @@ function App() {
     const [pageLoading, setPageLoading] = useState(true);
     const [coursesWithDetails,setCoursesWithDetails] = useState([]);
     const [categoryInput,setCategoryInput] = useState('');
-
+    const [unauthorized,setUnauthorized] = useState(false);
     //FUNCTION TO SET CATEGORY USER INPUT FROM NAVBAR TO BE PASSED ON TO COURSES PAGE
     const updateCategory = (category)=>{
         setCategoryInput(category);
@@ -98,9 +99,27 @@ function App() {
         }
     },[courses,userData])
 
+    useEffect(()=>{
+        if(unauthorized){
+            warningNotification('You are not authorized to view this page')
+            setUnauthorized(false);
+        }
+    },[unauthorized])
+
     // PROTECTED-ROUTE FOR AUTHORIZATION
     function ProtectedRoute ({children}){
         return getToken() ? children : <Navigate to={'/login'}/>
+    }
+    function ProtectedAdminRoute ({children}){
+        if(getToken()) {
+            if(userData?.is_admin === true){
+                return children;
+            }else{
+                setUnauthorized(true)
+                return <Navigate to={'/'}/>
+            }
+        }else
+            return <Navigate to={'/login'}/>
     }
 
     return (<div className="App">
@@ -118,9 +137,9 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login fetchData={fetchData}/>}/>
                 <Route path='/admin/*' element={
-                    <ProtectedRoute>
+                    <ProtectedAdminRoute>
                         <AdminPage/>
-                    </ProtectedRoute>
+                    </ProtectedAdminRoute>
                 }/>
                 <Route path="/inst-profile/:id" element={
                     <ProtectedRoute>
@@ -128,14 +147,14 @@ function App() {
                     </ProtectedRoute>
                 }/>
                 <Route path="/inst-profile/all-courses" element={
-                    <ProtectedRoute>
+                    <ProtectedAdminRoute>
                         <InsCourses/>
-                    </ProtectedRoute>
+                    </ProtectedAdminRoute>
                 }/>
                 <Route path='add-course' element={
-                    <ProtectedRoute>
+                    <ProtectedAdminRoute>
                         <AddCourse/>
-                    </ProtectedRoute>
+                    </ProtectedAdminRoute>
                 }/>
                 <Route path='/course-details/:id' element={
                     <ProtectedRoute>
