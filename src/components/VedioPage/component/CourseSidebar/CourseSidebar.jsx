@@ -15,7 +15,7 @@ function CourseSidebar({ courseId }) {
     const { id } = useParams();
 
     useEffect(() => {
-        if (course.id != id) {
+        if (course.id != id || !sections?.length) {
             const fetchSections = async () => {
                 if (courseId) {
                     await dispatch(getCourseSections(id));
