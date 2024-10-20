@@ -5,7 +5,7 @@ export const AdminSidebar = () => {
 
     const adminPages = [
         {
-            name: 'profile',
+            name: 'dashboard',
             url: '/admin/profile'
         },
         {
