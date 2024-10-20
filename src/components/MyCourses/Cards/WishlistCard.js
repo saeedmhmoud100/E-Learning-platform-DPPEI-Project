@@ -1,11 +1,12 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
+import {removeFromWishlist} from "../../../store/actions/userActions";
+import {useDispatch} from "react-redux";
 export const WishlistCard = ({course}) => {
-    const [addedToWishlist, setAddToWishlist] = useState(false);
-
-    function addToWishlist(){
-        setAddToWishlist(!addedToWishlist);
+     const dispatch = useDispatch();
+    async function handleWishlistBtn(e){
+        await dispatch(removeFromWishlist(e));
     }
     return (
         <motion.div initial={{ opacity: 0 }}
@@ -13,8 +14,8 @@ export const WishlistCard = ({course}) => {
                     viewport={{ once: false }} className="col-sm-6 col-md-4 col-lg-3 mb-3">
 
             <div className="card custom-card">
-                <div className="wishlist-icon" onClick={addToWishlist}>
-                    <i className={`${addedToWishlist ? 'fa-regular' : 'fa-solid'} fa-heart`}></i>
+                <div className="wishlist-icon" onClick={_=>{handleWishlistBtn(course.id)}}>
+                    <i className={`fa-solid fa-heart`}></i>
                 </div>
                 <Link to={'/course-details/' + course.id}>
                 <img

@@ -1,7 +1,7 @@
 import './style.css';
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
-function CourseProgressCard({ courseName, instructorName, image,course,l=true }) {
+function CourseProgressCard({ courseName, instructorName, image,course,l=true,progress=20 }) {
     return (
         <motion.div initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -16,10 +16,10 @@ function CourseProgressCard({ courseName, instructorName, image,course,l=true })
                 <div className="content p-2">
                     <h5>{courseName}</h5>
                     <h6>{instructorName}</h6>
-                    <div className="progress mt-2" role="progressbar" aria-label="Progress" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style={{ height: '5px' }}>
-                        <div className="progress-bar" style={{ width: `20%` }}></div>
+                    <div className="progress mt-2" role="progressbar" aria-label="Progress" aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100" style={{ height: '5px' }}>
+                        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                     </div>
-                    <p>20% completed</p>
+                    <p>{progress}% completed</p>
                 </div>
             </div>
         </motion.div>
